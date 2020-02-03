@@ -1,0 +1,295 @@
+<div id="fakeloader"></div>
+		<div class="edufair-container">
+			
+			<div class="edufair-header edufair-course-header">	
+				<nav class="navbar navbar-expand-lg edufair-nav">
+					<div class="container">	
+						<div class="container-fluid">
+							<div class="navbar-header">
+								<button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false" style="float: right;margin-top: 10px;">
+									<span class="sr-only">Toggle navigation</span>				
+									<i class="fas fa-align-right fa-2"></i>
+								</button>
+								<a class="navbar-brand edufair-brand edufair-light" routerLink="/" routerLinkActive="active"><img src="assets/images/logo-white.svg" alt="Logo"></a>
+								<a class="navbar-brand edufair-brand edufair-dark" routerLink="/" routerLinkActive="active"><img src="assets/images/logo-black.svg" alt="Logo"></a>
+							</div>
+							
+							<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+								
+								<div class="edufair-cart" >
+									<div class="box" >
+										<a href="#"  *ngIf="!isLogin" data-toggle="modal" data-target="#Login" style="margin-right: 15px;"><i class="fas fa-lock"></i><b class="op-menu"> Iniciar Sesión</b></a>
+										<a href="#" *ngIf="!isLogin" data-toggle="modal" data-target="#Registrar" id="popup"><i class="fas fa-user"></i><b class="op-menu"> Registrar</b></a>
+									</div> 
+									<ul class="nav navbar-nav justify-content-end" style="margin-right: 0px;text-align: right;" *ngIf="isLogin">
+										<li class="nav-item"><a class="nav-link" routerLink="/panel" routerLinkActive="active"><i class="fas fa-window-restore"></i> Panel de Control</a></li>
+											<li class="nav-item dropdown">
+												<a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+													<div class="media-img-wrap" style="float: left;margin-top: -6px;">
+														<div class="avatar">
+															<img src="{{imagenUsuario}}" alt="user" class="avatar-img rounded-circle">
+														</div>
+													</div>
+													<b>{{usuarioAutenticado}}</b>
+												</a>
+												<div class="dropdown-menu">
+													<h6 class="dropdown-header">Bienvenido</h6>
+													<a class="dropdown-item" routerLink="/panel" routerLinkActive="active"><i class="fas fa-user-edit" style="margin: 0;padding: 0;color: #262626;font-size: 1rem;margin-right: 1rem;vertical-align: -17%;"></i> Mi Perfil</a>
+													<a class="dropdown-item" type="button"  (click)="SalirSesion()"><i class="fas fa-door-open" style="margin: 0;padding: 0;color: #262626;font-size: 1rem;margin-right: 1rem;vertical-align: -17%;"></i> Salir</a>
+												</div>
+											</li>
+									</ul>
+								</div>
+
+							</div>
+
+						</div>
+					</div>
+				</nav>
+
+				<div id="carousel-example-generic" class="carousel slide edufair-slide carousel-fade" data-ride="carousel">
+					<div class="carousel-inner edufair-inner single-inner" role="listbox">
+						<div class="edufair-overlay">
+							<img src="assets/images/productos/prod-01.jpg" alt="slide 1" class="edufair-slider-image edufair-single-image">
+							<div class="carousel-caption edufair-caption edufair-single-caption">
+								<div class="container edufair-slider-text" style="top: 30%;left: -6.6%;position: absolute;">
+									<h2 style="white-space: nowrap;text-overflow: ellipsis;overflow: hidden;" >{{producto?.nombre}}</h2>
+									<ol class="breadcrumb edufair-single-breadcrumbs" style="width: 100%;">
+										<li class="breadcrumb-item"><a routerLink="/" routerLinkActive="active">Inicio</a></li>
+										<li class="breadcrumb-item active"><a routerLink="/" routerLinkActive="active">Bienes</a></li>
+										<li class="breadcrumb-item active"><a href="#">{{producto?.nombre}}</a></li>
+									</ol>										
+								</div>
+							</div>				  
+						</div>
+					</div>
+				</div>
+		
+			</div>
+
+			<div class="edufair-blog-1x">
+				<div class="container">
+					<div class="row">
+						<div class="col-md-12 sticky-body">
+							<h2 class="edufair-main-title" >
+								{{producto?.nombre}}
+								<b style="font-size: 16px;color: #696969;">|</b>
+								<b style="font-size: 16px;color: #696969;">{{rubro?.nombre}}</b>
+							</h2>
+						</div>
+
+						<div class="col-md-9 sticky-body">
+							<div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+								<div class="carousel-inner">
+
+									<div class="preview-single-labels">
+										<div class="clearfix">
+											<div class="label-black pull-left">
+												<h3>{{departamento?.nombre}}, Perú</h3>
+												<p>
+													<a>{{producto?.nombre}}</a> <span class="delimiter-inline-alt"></span>
+
+												</p>
+											</div>
+											<div class="label-white pull-right">
+												<div *ngIf="tipoProducto==='1' || tipoProducto==='2' || tipoProducto==='3'" class="listing-price">S/. {{producto?.presupuesto}} <span class="small">/Presupuesto</span></div>
+												<div *ngIf="tipoProducto==='4'" class="listing-price">S/. {{producto?.sueldo}} <span class="small">/Sueldo</span></div>
+											</div>
+										</div>
+										<div class="label-color">
+											<h3 class="no-margin text-uppercase" >{{usuario?.nombre}}</h3>
+										</div>
+									</div>
+									<ng-container *ngIf="!mostrarIMG">
+									<div class="carousel-item active carousel-inner">
+										<img src="assets/images/productos/prod-01.jpg" class="d-block w-100" alt="Producto">
+									</div>
+									<div class="carousel-item carousel-inner">
+										<img src="assets/images/productos/prod-02.jpg" class="d-block w-100" alt="Producto">
+									</div>
+									<div class="carousel-item carousel-inner">
+										<img src="assets/images/productos/prod-03.jpg" class="d-block w-100" alt="Producto">
+									</div>
+									</ng-container>
+									
+									<ng-container *ngIf="mostrarIMG">
+										<div class="carousel-item active carousel-inner">
+											<img src="{{producto?.imagenprincipal}}" class="d-block w-100" alt="Producto">
+										</div>
+										<div class="carousel-item carousel-inner" *ngFor="let item of imagenes">
+											<img src="{{item.nombre}}" class="d-block w-100" alt="Producto" >
+										</div>
+									</ng-container>
+								</div>
+								<a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+									<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+									<span class="sr-only">Previous</span>
+								</a>
+								<a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+									<span class="carousel-control-next-icon" aria-hidden="true"></span>
+									<span class="sr-only">Next</span>
+								</a>
+							</div>
+
+							<div class="row" style="padding: 30px 0;">
+								<div class="col-md-2">
+									<!--<img src="assets/images/productos/prod-04.jpg" class="img-fluid">-->
+									<i class="fas fa-angle-right datos_col2"></i> <b>Descripción:</b>
+								</div>
+								<div class="col-md-10" style="text-align: justify;">
+									{{producto?.descripcion}}
+								</div>
+							</div>
+
+							<h2 *ngIf="tipoProducto==='1' || tipoProducto==='2'" class="edufair-main-title">Detalles del Requerimiento</h2>
+							<h2 *ngIf="tipoProducto==='3'" class="edufair-main-title">Detalles de la Liquidación</h2>
+							<h2 *ngIf="tipoProducto==='4'" class="edufair-main-title">Detalles Recursos Humanos</h2>
+							<ul class="list-checkbox">
+								<!--<li><i class="fas fa-angle-right datos_col2"></i> <b>Unidad:</b> Unidad(s)</li>
+								<li><i class="fas fa-angle-right datos_col2"></i> <b>Cantidad:</b> 200</li>-->
+								<li><i class="fas fa-angle-right datos_col2"></i> <b>Forma de Pago:</b> Al Contado</li>
+								<li><i class="fas fa-angle-right datos_col2"></i> <b>Tipo de Moneda:</b> Soles</li>
+								<li><i class="fas fa-angle-right datos_col2"></i> <b>Tiempo de Entrega:</b> Inmediato</li>
+								<li><i class="fas fa-angle-right datos_col2"></i> <b>Expira:</b> {{producto?.fecha_final}}</li>
+								<!--<li><i class="fas fa-angle-right datos_col2"></i> <b>Garantia (meses):</b> 5</li>
+								<li><i class="fas fa-angle-right datos_col2"></i> <b>Soporte Técnico (meses):</b> 5</li>-->
+								<!--<li><i class="fas fa-angle-right datos_col2"></i> <b>Incluye I.G.V.:</b> Si</li>
+								<li><i class="fas fa-angle-right datos_col2"></i> <b>Envio:</b> Si</li>-->
+							</ul>
+
+							<h2 class="edufair-main-title">Archivos Adjuntos</h2>
+							<div class="row" style="margin-bottom: 22px;">
+								<div class="col-md-6">
+									<a href="#" class="edufair-component-button button-large btn-block">
+										<i class="fas fa-images" style="font-size: 24px;"></i><br>
+										Descargar Imagen
+									</a>
+								</div>
+								<div class="col-md-6">
+									<a (click)="descargarArchivo()"  type="button"  class="edufair-component-button button-large btn-block text-white" download>
+										<i class="fas fa-file-invoice" style="font-size: 24px;"></i><br>
+										Descargar Documento
+									</a>
+								</div>
+							</div>
+
+							<h2  *ngIf="tipoProducto==='1' || tipoProducto==='2' || tipoProducto==='3'" class="edufair-main-title">Ofertar</h2>
+							<h2 *ngIf="tipoProducto==='4'" class="edufair-main-title">Postular</h2>
+							<div class="edufair-subscription-form-1x">							
+								<form action="#" method="POST">
+									<div class="form-group row">
+										<div class="col-md-6">
+											<input name="" type="text" class="form-control" placeholder="Nombre" required #nombreUsuario>
+										</div>
+										<div class="col-md-6">
+											<input name="" type="text" class="form-control" placeholder="Correo" required #emailUsuario>
+										</div>
+										<div class="col-md-6">
+											<select [(ngModel)]="selectedDepartamento" name="dpto" type="text" class="form-control" placeholder="Ciudad" required>
+												<option *ngFor="let item of all_departamento"[value]="item.key" ng-selected="selectedDepartamento == item.key">{{item.value.nombre}}</option>
+											</select>
+										</div>
+										<div class="col-md-6">
+											<select [(ngModel)]="selectedEntrega" name="entrega" type="text" class="form-control" placeholder="Entrega" required >
+												<option *ngFor="let item of entrega" [value]="item.key" ng-selected="selectedEntrega == item.key">{{item.value.nombre}}</option>
+											</select>
+										</div>
+										<div class="col-md-6">
+											<input name="" type="number" max="9" oninput="this.value = this.value.replace(/[^0-9.]/g, ''); this.value = this.value.replace(/(\..*)\./g, '$1');" onKeyPress="if(this.value.length==1) return false;" class="form-control" placeholder="Garantia (años)" required #garantiaAnio>
+										</div>
+										<div class="col-md-6">
+											<input name="" type="number" max="99" oninput="this.value = this.value.replace(/[^0-9.]/g, ''); this.value = this.value.replace(/(\..*)\./g, '$1');" onKeyPress="if(this.value.length==2) return false;" class="form-control" placeholder="Soporte (meses)" required #soporteMeses>
+										</div>
+										<div class="col-md-6">
+											<input name="" type="number" oninput="this.value = this.value.replace(/[^0-9.]/g, ''); this.value = this.value.replace(/(\..*)\./g, '$1');" class="form-control" placeholder="Presupuesto" required #presupuestoUsuario>
+										</div>
+										<div class="col-md-6">
+											<select [(ngModel)]="selectedMoneda" name="moneda" type="text" class="form-control" placeholder="Ciudad" required>
+												<option *ngFor="let item of all_moneda" [value]="item.key" ng-selected="selectedMoneda == item.key">{{item.value.nombre}}</option>
+											</select>
+										</div>
+									</div>
+									<h5>Imagenes y Documentos</h5>
+									<div class="row" style="margin-bottom: 22px;">
+										<div class="col-md-6">
+											<div class="file-upload">
+												<div class="MultiFile-wrap" id="MultiFile1">
+													<input type="file" name="files[]" class="file-upload-input with-preview MultiFile-applied" multiple="" title="Agregue las Imagenes" maxlength="5" (change)="cargarImage($event)" accept="gif|jpg|png" id="MultiFile1" value="">
+												</div>
+												<span style="color: #ad4790;"><i class="fas fa-images"></i> Agregar Imagenes</span>
+											</div>
+										</div>
+										<div class="col-md-6">
+											<div class="file-upload">
+												<div class="MultiFile-wrap" id="MultiFile1">
+													<input type="file" name="files[]" class="file-upload-input with-preview MultiFile-applied" multiple="" title="Agregue las Imagenes" maxlength="10" accept="gif|jpg|png" id="MultiFile1" value="">
+												</div>
+												<span style="color: #ad4790;"><i class="fas fa-file-invoice"></i> Agregar Documentos</span>
+											</div>
+										</div>
+										<div class="col-md-12" style="text-align: center;margin: 15px 0 25px 0;">
+											<div class="custom-control custom-checkbox custom-control-inline">
+												<input type="checkbox" class="custom-control-input" id="customCheck1" (change)="validarBox($event,1)">
+												<label class="custom-control-label" for="customCheck1">Acepto Negociación</label>
+											</div>
+											<div class="custom-control custom-checkbox custom-control-inline">
+												<input type="checkbox" class="custom-control-input" id="customCheck2" (change)="validarBox($event,2)">
+												<label class="custom-control-label" for="customCheck2">Precio incluye I.G.V.</label>
+											</div>
+											<div class="custom-control custom-checkbox custom-control-inline">
+												<input type="checkbox" class="custom-control-input" id="customCheck3" (change)="validarBox($event,3)">
+												<label class="custom-control-label" for="customCheck3">Incluye Envio</label>
+											</div>
+										</div>
+										<div class="col-md-12" style="text-align: center;">
+											<a type="button" (click)="ofertar(tipoProducto)" class="edufair-component-button button-medium btn-block active text-white">Ofertar</a>
+										</div>
+									</div>
+								</form>	
+							</div>		
+
+						</div>
+						<div class="col-md-3 sticky-sidebar">
+							<div class="latest-post-right-sidebar">
+								<h3>Datos</h3>
+								<div class="single-post-category">						
+									<ul>
+										<li><a href="#"><i class="fas fa-angle-right datos_col2"></i> Empresa: <span class="detalle_col2">{{usuario?.nombre}}</span></a> </li>																																											
+										<li><a href="#"><i class="fas fa-angle-right datos_col2"></i> Creado: <span class="detalle_col2">{{producto?.fecha_publicacion}}</span></a> </li>																																											
+										<li><a href="#"><i class="fas fa-angle-right datos_col2"></i> Ubicación: <span class="detalle_col2">{{departamento?.nombre}}</span></a> </li>																																											
+										<li><a href="#"><i class="fas fa-angle-right datos_col2"></i> Tipo: <span class="detalle_col2">{{tipo?.nombre}}</span></a> </li>
+										<li><a href="#"><i class="fas fa-angle-right datos_col2"></i> Rubro: <span class="detalle_col2"	>{{rubro?.nombre}}</span></a> </li>																																											
+									</ul>
+								</div>
+							</div>
+
+							<div class="latest-post-right-sidebar">
+								<h3>Tags</h3>
+
+								<div class="blog-share-tag">
+									<div class="blog-description-tag">						
+										<ul>																	
+											<li class="tag_detalle"><a href="#"> Arequipa</a> </li>																																											
+											<li class="tag_detalle"><a href="#"> Unidad</a> </li>																																											
+											<li class="tag_detalle"><a href="#"> Bienes</a> </li>																																											
+											<li class="tag_detalle"><a href="#"> Soluciones Online</a> </li>																																											
+											<li class="tag_detalle"><a href="#"> Queso</a> </li>																																											
+										</ul>
+									</div>									
+								</div>
+							</div>
+			
+							<div class="latest-post-right-sidebar">
+								<h2>Publicidad</h2>
+								<img src="assets/images/app.jpg" class="img-fluid" style="margin-bottom: 15px;">
+								<img src="assets/images/tcompra-suscripcion.jpg" class="img-fluid" style="margin-bottom: 15px;">
+							</div>
+						</div>
+
+					</div>
+
+				</div>
+			</div>
+
+			<div class="margin-bottom-large"></div>
+		</div>

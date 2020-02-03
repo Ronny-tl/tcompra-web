@@ -1,0 +1,5557 @@
+/*
+Theme Name: edufair
+Theme URI: https://banyanthemes.com/
+Author: Underscores.me
+Author URI: https://banyanthemes.com/
+Description: edufair is a Powerful, Responsive & Raw Multi-Purpose Multi-Page & One-Page HTML5 Template. Build whatever you like with this Template. Be it Business, Corporate, Agency, Media Agency, Portfolio, Magazine, Single Product, Blog, App or Single Product Showcase, just everything is possible with edufair. We have included 15+ ready-to-use Homepages & 45+ HTML Files with the Package. Amazing flexibility, Super Shortcodes, Raw Bootstrap & Scalable Responsive Features makes edufair standout from the crowd.
+Version: 1.0
+License: GNU General Public License v2 or later
+License URI: https://banyanthemes.com/
+
+*/
+
+/*--------------------------------------------------------------
+>>> TABLE OF CONTENTS:
+----------------------------------------------------------------
+# Normalize
+# Typography
+# Elements
+# Forms
+# Navigation
+	## Links
+	## Menus
+# Accessibility
+# Alignments
+# Clearings
+# Widgets
+# Content
+	## Posts and pages
+	## Comments
+# Infinite scroll
+# Media
+	## Captions
+	## Galleries
+--------------------------------------------------------------*/
+
+/*--------------------------------------------------------------
+# Normalize
+--------------------------------------------------------------*/
+html {
+	-webkit-text-size-adjust: 100%;
+	-ms-text-size-adjust:     100%;
+}
+
+body {
+	margin: 0;	
+	display: none;
+}
+
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+main,
+menu,
+nav,
+section,
+summary {
+	display: block;
+}
+
+audio,
+canvas,
+progress,
+video {
+	display: inline-block;
+	vertical-align: baseline;
+}
+
+audio:not([controls]) {
+	display: none;
+	height: 0;
+}
+
+[hidden],
+template {
+	display: none;
+}
+
+a {
+	background-color: transparent;
+}
+
+a:active,
+a:hover {
+	outline: 0;
+}
+
+abbr[title] {
+	border-bottom: 1px dotted;
+}
+
+b,
+strong {
+	font-weight: bold;
+}
+
+dfn {
+	font-style: italic;
+}
+
+h1 {
+	font-size: 2.5em;
+	margin: 0.67em 0;
+}
+
+mark {
+	background: #ff0;
+	color: #000;
+}
+
+small {
+	font-size: 80%;
+}
+
+sub,
+sup {
+	font-size: 75%;
+	line-height: 0;
+	position: relative;
+	vertical-align: baseline;
+}
+
+sup {
+	top: -0.5em;
+}
+
+sub {
+	bottom: -0.25em;
+}
+
+img {
+	border: 0;
+	  width:100%;
+  max-width:100%;
+}
+
+svg:not(:root) {
+	overflow: hidden;
+}
+
+figure {
+	margin: 1em 40px;
+}
+
+hr {
+	box-sizing: content-box;
+	height: 0;
+}
+
+pre {
+	overflow: auto;
+}
+
+code,
+kbd,
+pre,
+samp {
+	font-family: monospace, monospace;
+	font-size: 1em;
+}
+
+button,
+input,
+optgroup,
+select,
+textarea {
+	color: inherit;
+	font: inherit;
+	margin: 0;
+}
+
+button {
+	overflow: visible;
+}
+
+button,
+select {
+	text-transform: none;
+}
+
+button,
+html input[type="button"],
+input[type="reset"],
+input[type="submit"] {
+	-webkit-appearance: button;
+	cursor: pointer;
+}
+
+button[disabled],
+html input[disabled] {
+	cursor: default;
+}
+
+button::-moz-focus-inner,
+input::-moz-focus-inner {
+	border: 0;
+	padding: 0;
+}
+
+input {
+	line-height: normal;
+}
+
+input[type="checkbox"],
+input[type="radio"] {
+	box-sizing: border-box;
+	padding: 0;
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+	height: auto;
+}
+
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-decoration {
+	-webkit-appearance: none;
+}
+
+fieldset {
+	border: 1px solid #c0c0c0;
+	margin: 0 2px;
+	padding: 0.35em 0.625em 0.75em;
+}
+
+legend {
+	border: 0;
+	padding: 0;
+}
+
+textarea {
+	overflow: auto;
+}
+
+optgroup {
+	font-weight: bold;
+}
+
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+td,
+th {
+	padding: 0;
+}
+
+/*--------------------------------------------------------------
+# Typography
+--------------------------------------------------------------*/
+body,
+button,
+input,
+select,
+textarea {
+	color: #404040;
+	font-family: sans-serif;
+	font-size: 16px;
+	font-size: 1rem;
+	line-height: 1.5;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	clear: both;
+}
+
+p {
+	margin-bottom: 1.5em;
+}
+
+dfn,
+cite,
+em,
+i {
+	font-style: italic;
+}
+
+blockquote {
+	margin: 0 1.5em;
+}
+
+address {
+	margin: 0 0 1.5em;
+}
+
+pre {
+	background: #eee;
+	font-family: "Courier 10 Pitch", Courier, monospace;
+	font-size: 15px;
+	font-size: 0.9375rem;
+	line-height: 1.6;
+	margin-bottom: 1.6em;
+	max-width: 100%;
+	overflow: auto;
+	padding: 1.6em;
+}
+
+code,
+kbd,
+tt,
+var {
+	font-family: Monaco, Consolas, "Andale Mono", "DejaVu Sans Mono", monospace;
+	font-size: 15px;
+	font-size: 0.9375rem;
+}
+
+abbr,
+acronym {
+	border-bottom: 1px dotted #666;
+	cursor: help;
+}
+
+mark,
+ins {
+	background: #fff9c0;
+	text-decoration: none;
+}
+
+big {
+	font-size: 125%;
+}
+
+/*--------------------------------------------------------------
+# Elements
+--------------------------------------------------------------*/
+html {
+	box-sizing: border-box;
+}
+
+*,
+*:before,
+*:after { /* Inherit box-sizing to make it easier to change the property for components that leverage other behavior; see http://css-tricks.com/inheriting-box-sizing-probably-slightly-better-best-practice/ */
+	box-sizing: inherit;
+}
+
+body {
+	background: #ffffff; /* Fallback for when there is no custom background color defined. */
+	font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+    line-height: 24px;
+    color: #7a7a7a;
+    font-weight: 400;
+    overflow-x: hidden!important;
+    -webkit-font-smoothing: antialiased;
+}
+
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+	content: "";
+}
+
+blockquote,
+q {
+	quotes: "" "";
+}
+
+
+
+blockquote {
+	font-size: 15px;
+	line-height: 25px;
+	letter-spacing: 0.2px;
+	color: #333333;
+	font-family: 'Roboto', sans-serif;
+	font-weight: 700;
+	text-align: center;
+	border: 0;
+	padding: 70px 0;
+}
+blockquote:before {
+	content: "\f10d";
+	font-family: FontAwesome;
+	font-size: 70px;
+	color: #dddddd;
+	margin-bottom: 30px;
+	display: block;
+	text-align: center;
+}
+
+
+hr {
+	background-color: #ccc;
+	border: 0;
+	height: 1px;
+	margin-bottom: 1.5em;
+}
+
+ul,
+ol {
+	margin: 0 0 15px 0;
+}
+
+ul {
+	list-style: disc;
+}
+
+ol {
+	list-style: decimal;
+}
+
+li > ul,
+li > ol {
+	margin-bottom: 0;
+	margin-left: 1.5em;
+}
+
+dt {
+	font-weight: bold;
+}
+
+dd {
+	margin: 0 1.5em 1.5em;
+}
+
+img {
+	height: auto; /* Make sure images are scaled correctly. */
+	max-width: 100%; /* Adhere to container width. */
+}
+
+figure {
+	margin: 1em 0; /* Extra wide images within figure tags don't overflow the content area. */
+}
+
+table {
+	margin: 0 0 1.5em;
+	width: 100%;
+}
+
+/*--------------------------------------------------------------
+# Forms
+--------------------------------------------------------------*/
+button,
+input[type="button"],
+input[type="reset"],
+input[type="submit"] {
+	border: 1px solid #262626;
+	border-radius: 2px;
+	background: #262626;
+	color: rgba(0, 0, 0, .8);
+	font-size: 12px;
+	font-size: 0.75rem;
+	line-height: 1;
+	padding: .6em 1em .4em;
+}
+
+button:hover,
+input[type="button"]:hover,
+input[type="reset"]:hover,
+input[type="submit"]:hover {
+	border-color: #ad4790;
+}
+
+button:focus,
+input[type="button"]:focus,
+input[type="reset"]:focus,
+input[type="submit"]:focus,
+button:active,
+input[type="button"]:active,
+input[type="reset"]:active,
+input[type="submit"]:active {
+	border-color: #262626;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="url"],
+input[type="password"],
+input[type="search"],
+input[type="number"],
+input[type="tel"],
+input[type="range"],
+input[type="date"],
+input[type="month"],
+input[type="week"],
+input[type="time"],
+input[type="datetime"],
+input[type="datetime-local"],
+input[type="color"],
+textarea {
+	color: #262626;
+	border: 1px solid #dddddd;
+	border-radius: 0;
+	padding: 10px;
+	border-radius: 2px;
+}
+
+select {
+	color: #8c8c8c;
+	border: 1px solid #dddddd;
+	border-radius: 0;
+	padding: 10px;
+	border-radius: 2px;
+
+    width: 100%;
+    height: 40px;
+    padding: 0px 7px;
+    font-size: 14px;
+    margin: 10px 0;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="url"]:focus,
+input[type="password"]:focus,
+input[type="search"]:focus,
+input[type="number"]:focus,
+input[type="tel"]:focus,
+input[type="range"]:focus,
+input[type="date"]:focus,
+input[type="month"]:focus,
+input[type="week"]:focus,
+input[type="time"]:focus,
+input[type="datetime"]:focus,
+input[type="datetime-local"]:focus,
+input[type="color"]:focus,
+textarea:focus,
+textarea.form-control:focus{
+	border-color: #ad4790;
+    box-shadow: 0 0px 0px #ad4790 inset, 0 0 0px #ad4790;
+}
+
+textarea {
+	width: 100%;
+}
+
+/*--------------------------------------------------------------
+# Navigation
+--------------------------------------------------------------*/
+/*--------------------------------------------------------------
+## Links
+--------------------------------------------------------------*/
+a {
+	color: #7a7a7a;
+}
+
+a:visited {
+	color: #262626;
+}
+
+a:hover,
+a:focus,
+a:active {
+	color: #ad4790;
+	text-decoration: none;
+}
+
+a:focus {
+	outline: none;
+}
+
+a:hover,
+a:active {
+	outline: 0;
+}
+.modal{
+	z-index: 999999;
+}
+/*--------------------------------------------------------------
+## Common CSS code
+--------------------------------------------------------------*/
+
+/* text selector */
+::-moz-selection {
+    background: #ad4790;
+    color: #ffffff;
+    text-shadow: none;
+}
+::selection {
+    background: #ad4790;
+    color: #ffffff;
+    text-shadow: none;
+}
+/* Default padding and margin */
+.no-padding{
+	padding: 0;
+}
+.margin-top-large{
+	margin-top: 80px;
+}
+.margin-top-middle{
+	margin-top: 0px;
+}
+.margin-top-small{
+	margin-top: 20px;
+}
+
+.margin-bottom-middle{
+	margin-top: 40px;
+}
+.padding-top-large{
+	padding-top: 30px;
+}
+.padding-top-middle{
+	padding-top: 35px;
+}
+
+.margin-bottom-large{
+	margin-bottom: 80px;
+}
+.margin-bottom-middle{
+	margin-bottom: 40px;
+}
+.padding-bottom-large{
+	padding-bottom: 70px;
+}
+.padding-bottom-middle{
+	padding-bottom: 35px;
+}
+.padding-top-small{
+	padding-top: 20px;
+}
+
+/*--------------------------------------------------------------
+## edufair button style
+--------------------------------------------------------------*/
+/* Round button */
+.edufair-btn-round-full {
+	background: #ffffff;
+	color: #262626;
+	border-radius: 50%;
+	width: 50px;
+	height: 50px;
+	border: 0;
+	-moz-transition: all .5s ease;
+	-o-transition: all .5s ease;
+	-webkit-transition: all .5s ease;
+	transition: all .5s ease;
+}
+.edufair-btn-round-full:hover{
+	border: 0px solid #eee;
+	-webkit-box-shadow: 0px 0px 115px -8px rgba(0,0,0,1);
+	-moz-box-shadow: 0px 0px 115px -8px rgba(0,0,0,1);
+	box-shadow: 0px 0px 115px -8px rgba(0,0,0,1);
+}
+/* large button style */
+.edufair-btn-larg,
+a.edufair-btn-larg {
+    border-radius: 2px;
+    display: inline-block;
+    font-size: 13px;
+	text-align: center;
+	font-weight: 700;
+    padding: 13px 30px;
+    position: relative;
+    text-transform: uppercase;
+    z-index: 1;
+}
+.edufair-btn-larg i,
+a.edufair-btn-larg i {
+	padding-left: 5px;
+	position: relative;
+	top: 1px;
+}
+.edufair-btn-larg:hover,
+a.edufair-btn-larg:hover {
+	text-decoration: none;
+	color: #262626;
+}
+.edufair-btn-larg:before,
+a.edufair-btn-larg:before {
+	background: #ad4790;
+	color: #262626;
+	content: "";
+	height: 0;
+	bottom: 0;
+	position: absolute;
+	left: 0;
+	width: 100%;
+	z-index: -1;
+	-moz-transition: all .3s ease;
+	-o-transition: all .3s ease;
+	-webkit-transition: all .3s ease;
+	transition: all .3s ease;
+}
+.edufair-contact-form .edufair-btn-larg{
+    background: #ad4790;
+    color: #f1f1f1;
+}
+.edufair-contact-form .edufair-btn-larg:before{
+    background: #262626;
+}
+.kindergarten-1x .edufair-subscription-1x .edufair-btn-larg{
+    background: #EA7066;
+    color: #f1f1f1;
+}
+.kindergarten-1x .edufair-countdown-timer-1x a.edufair-btn-larg:before{
+	background: #b5d56a;
+}
+.edufair-btn-larg:hover:before,
+a.edufair-btn-larg:hover:before {
+	height: 100%;
+	color: #262626;
+}
+.events-1x .edufair-btn-larg,
+.university-1x a.edufair-btn-larg{
+	background: #ad4790 ;
+    color: #f1f1f1;
+}
+.events-1x  a.edufair-btn-larg:hover:before,
+.university-1x a.edufair-btn-larg:hover:before,
+.university-1x a.edufair-btn-larg:hover {
+	background: #0e504b ;
+    color: #f1f1f1;
+}
+
+/* large border radius button style */
+.edufair-btn-larg-round,
+a.edufair-btn-larg-round {
+	background: #262626 ;
+    border-radius: 2px;
+    color: #eeeeee;
+    display: inline-block;
+    font-size: 13px;
+	font-weight: 700;
+    padding: 10px 25px;
+    position: relative;
+    text-transform: uppercase;
+    z-index: 1;
+}
+.high-school-1x a.edufair-btn-larg-round ,
+.kindergarten-1x a.edufair-btn-larg-round {
+	background: #EA7066;
+}
+
+.edufair-btn-larg-round i,
+a.edufair-btn-larg-round i {
+	padding-left: 5px;
+	position: relative;
+	top: 1px;
+}
+.kindergarten-1x .edufair-btn-larg-round:hover,
+a.edufair-btn-larg-round:hover {
+	color: #EA7066;
+}
+.edufair-btn-larg-round:hover,
+a.edufair-btn-larg-round:hover {
+	text-decoration: none;
+	color: #262626;
+}
+.edufair-btn-larg-round:before,
+a.edufair-btn-larg-round:before {
+	background: #ad4790;
+	color: #262626;
+	content: "";
+	width: 0;
+	bottom: 0;
+	position: absolute;
+	left: 0;
+	height: 100%;
+	z-index: -1;
+	-moz-transition: all .3s ease;
+	-o-transition: all .3s ease;
+	-webkit-transition: all .3s ease;
+	transition: all .3s ease;
+}
+
+.high-school-1x a.edufair-btn-larg-round:before,
+.kindergarten-1x a.edufair-btn-larg-round:before {
+	background: #fff;
+}
+.university-2x a.edufair-btn-larg-round ,
+.university-1x a.edufair-btn-larg-round {
+    color: #f1f1f1;
+    font-weight: 500;
+    background: #ad4790;
+}
+.university-2x a.edufair-btn-larg-round:hover,
+.university-1x a.edufair-btn-larg-round:hover {
+   color: #262626 !important;
+}
+.university-2x a.edufair-btn-larg-round::before ,
+.university-1x a.edufair-btn-larg-round::before {
+    background: #f1f1f1;
+	
+}
+
+
+
+.edufair-btn-larg-round:hover:before,
+a.edufair-btn-larg-round:hover:before {
+	width: 100%;
+	color: #262626;
+	border-radius: 2px;
+}
+
+.edufair-btn-middle,
+.edufair-btn-middle{
+	background:#feea0e;	
+	border: 1px solid #ad4790;
+	border-radius: 1px;
+	padding: 10px 30px;	
+	text-transform: uppercase;
+	color: #000;
+	font-size: 13px;
+	font-weight: 700;
+	letter-spacing: .5px;
+	opacity: 1;
+}
+.edufair-btn-middle:hover{
+ opacity: .5;
+}
+
+/* Common title */
+.common-divider{
+	padding: 30px 0;
+}
+.edufair-sub-title{
+    font-size: 16px;
+    font-weight: 400;
+    color: #262626;
+	line-height: 25px;
+}
+.edufair-main-title{
+	position: relative;
+    font-size: 30px;    
+    font-weight: 700;
+    color: #262626;
+	margin-bottom: 50px;
+}
+.edufair-main-title:before { 
+	content: "";
+    position: absolute;
+    left: 0;
+    bottom: -20px;
+    width: 70px;
+    border-bottom: 3px solid #ad4790;
+    transform: scaleX(1);
+    transition: all .3s ease-in-out;
+}
+
+.edufair-pricing-table-1x:hover .edufair-main-title:before,
+.edufair-related-course-1x:hover .edufair-main-title:before,
+.edufair-shop-1x:hover .edufair-main-title:before,
+.edufair-blog-1x:hover .edufair-main-title:before,
+.edufair-portfolio:hover .edufair-main-title:before,
+.edufair-events-1x:hover .edufair-main-title:before,
+.edufair-countdown-timer-1x:hover .edufair-main-title:before,
+.edufair-course-1x:hover .edufair-main-title:before{
+	width: 70px;
+	border-bottom: 3px solid #ad4790;
+    transform: scaleX(1);
+}
+.edufair-pricing-table-1x:hover .edufair-main-title:before {
+    left: 45%;
+	width: 10%;
+}
+/***************************************************************
+				Start main style
+***************************************************************/
+
+.edufair-header{
+    clear: both;
+    position: relative;
+}
+
+
+/*--------------------------------------------------------------
+## Bootstrap Menus
+--------------------------------------------------------------*/
+.edufair-nav{
+	position: absolute;
+	width:100%;
+	z-index: 9999;
+	background: transparent;
+	margin-bottom: 0;
+	margin-top: 20px;
+	border: 1px solid transparent;
+	border-radius: 0;
+	padding: 10px 0;
+	-moz-transition: all 0.2s ease;
+    -o-transition: all  0.2s ease;
+    -webkit-transition: all  0.2s ease;
+    transition: all  0s ease;
+}
+.edufair-brand > img{
+	margin-top: -15px;
+	max-width: 230px;
+}
+.edufair-nav .navbar-right{
+	margin-right: 85px;
+}
+.edufair-nav .navbar-nav>li>a,
+.edufair-nav .navbar-brand{
+	color: #f1f1f1;
+    font-family: 'Roboto', sans-serif;
+    text-transform: uppercase;
+    font-weight: 500;
+    font-size: 15px;
+}
+.edufair-nav > .container .navbar-brand{
+	font-size: 20px;
+	font-weight: 900;
+	
+	margin-left: -32px;
+	margin-top: -5px;
+}
+
+.edufair-nav .navbar-nav > li > a:focus,
+.edufair-nav .navbar-nav > li > a:hover,
+.edufair-nav .navbar-nav > li > a:visited,
+.edufair-navt .navbar-nav > .open > a,
+.edufair-nav .navbar-nav > .open > a:focus,
+.edufair-nav .navbar-nav > .open > a:hover,
+.edufair-nav .navbar-nav>.active>a,
+.edufair-nav .navbar-nav>.active>a:focus,
+.edufair-nav .navbar-nav>.active>a:hover{
+	color: #f1f1f1;
+    background-color: transparent;
+    border: 0;
+}
+.edufair-nav .dropdown-menu{
+	box-shadow: none;
+	border: 1px solid #ffffff;
+	min-width: 220px;
+	max-height: 90vh;
+	overflow: auto;
+	padding: 10px 5px;
+}
+
+.edufair-nav .dropdown-menu>li>a, 
+.dropdown-menu>li>a{
+	-moz-transition: all .3s ease;
+    -o-transition: all  .3s ease;
+    -webkit-transition: all  .3s ease;
+    transition: all  .3s ease;
+    color: #333;
+	font-weight: 400;
+    padding: 7px 20px;
+	
+}
+.edufair-nav .dropdown-menu>li>a:focus,
+.dropdown-menu>li>a:hover{
+	background-color: transparent;
+	color: #ad4790;
+	padding-left: 25px;
+	
+}
+.edufair-nav .dropdown-menu>li>a:hover:before,
+.dropdown-menu>li>a:hover:before{
+	content: "\2192";
+	color: #262626;
+	padding-right: 5px;
+}
+.edufair-nav  li.dropdown  i{
+	color: #fff;
+	margin-left: 3px;
+}
+.is-sticky .edufair-nav  li.dropdown  i,
+.kindergarten-1x .edufair-nav  li.dropdown  i,
+.high-school-1x .edufair-nav  li.dropdown  i{
+	color: #262626;
+}
+.is-sticky .edufair-nav .navbar-nav > li > a:focus,
+.is-sticky .edufair-nav .navbar-nav > li > a:hover,
+.is-sticky .edufair-nav .navbar-nav > .open > a:focus{
+	color: #262626 !important;
+}
+
+
+/* Nav Toggle */
+.edufair-nav .navbar-toggle{
+	border-color: #262626;
+	background-color: #262626;
+	color: #ad4790;
+	border-radius: 2px;
+	padding: 5px 10px;
+	font-size: 15px;
+}
+.edufair-nav .navbar-toggle:focus,
+.edufair-nav .navbar-toggle:hover{
+	border-color: #262626;
+	background-color: #262626;
+	color: #ad4790;
+}
+
+/* Is sticky */
+.is-sticky .edufair-nav{
+	background: #fff;
+	z-index: 99;
+	box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.05);
+}
+.high-school-1x .is-sticky .edufair-nav,
+.kindergarten-1x .is-sticky .edufair-nav{
+	background: #fff;
+	z-index: 99;
+}
+.is-sticky .edufair-cart i, 
+.is-sticky .edufair-cart a>span, 
+.is-sticky .edufair-nav .navbar-nav>li>a, 
+.is-sticky .edufair-nav .navbar-brand{
+	color: #262626;
+	font-size: 14px;
+}
+.edufair-nav .edufair-dark,
+.is-sticky .edufair-nav .edufair-light{
+	display: none;
+}
+.is-sticky .edufair-nav .edufair-dark,
+.edufair-nav .edufair-light{
+	display: initial;
+}
+.modal-backdrop.in {
+    z-index: 1 !important;
+}
+.is-sticky .modal .edufair-subscription-title-1x  h3{
+	color: #f1f1f1 !important;
+}
+/* Input form control */
+.form-control{
+	border-radius: 0;
+	height: 40px;
+	border: 1px solid #dddddd;
+	margin: 10px 0;	
+}
+
+/* Top menu */
+.top-menu{
+	background: #262626;
+	color: #f1f1f1;
+	padding: 15px 0;
+}
+.top-menu-left{}
+.top-menu-left b {
+    font-weight: 400;
+    font-size: 13px;
+}
+.top-menu-left p{
+	display: inline-block;
+	margin: 0;
+	font-weight: 500;
+}
+.top-menu-left i{
+	margin-left: 10px;
+    color: #f1f1f1;
+    margin-right: 5px;
+}
+.top-menu-right{
+	float: right;
+}
+.top-menu-right a{
+	color: #f1f1f1;
+    font-weight: 600;
+    font-size: 13px;
+    margin-left: 15px;
+    letter-spacing: 0.3px;
+}
+.top-menu-right a:hover{
+	color: #f1f1f1 !important;
+}
+/*--------------------------------------------------------------
+## edufair cart
+--------------------------------------------------------------*/
+.edufair-cart {
+    position: absolute;
+    right: 8%;
+    margin-top: 15px;
+    clear: both;
+    display: inline-flex;
+}
+.edufair-cart i{
+	padding-left: 15px;
+	color: #f1f1f1;
+}
+.edufair-cart a>span{
+	margin-top: -12px;
+	position: absolute;
+	font-weight: 700;
+	color: #f1f1f1;
+}
+.box{
+  right: 15px;
+  height: 40px;
+}
+
+.container-2{
+  vertical-align: middle;
+  white-space: nowrap;
+  position: relative;
+  
+}
+
+.container-2 input#search {
+ width: 30px;
+ height: 40px;
+ background: transparent;
+ border: 0;
+ font-size: 10pt;
+ float: right;
+ padding-left: 35px;
+ -webkit-border-radius: 0;
+ -moz-border-radius: 0;
+ border-radius: 0;
+ color: #ad4790;
+ font-family: 'Montserrat', sans-serif;
+ font-weight: 700;
+ -webkit-transition: .55s ease;
+ -moz-transition: .55s ease;
+ -ms-transition: .55s ease;
+ -o-transition: .55s ease;
+ transition: .55s ease;
+ margin-top: -8px;
+ border-radius: 3px;
+}
+
+.container-2 input#search::-webkit-input-placeholder {
+   color: #65737e;
+}
+ 
+.container-2 input#search:-moz-placeholder { / Firefox 18- /
+   color: #65737e;  
+}
+ 
+.container-2 input#search::-moz-placeholder {  / Firefox 19+ /
+   color: #65737e;  
+}
+ 
+.container-2 input#search:-ms-input-placeholder {  
+   color: #65737e;  
+}
+
+.container-2 .icon{
+  position: absolute;
+  margin-top: 1px;
+  top: 50%;
+  z-index: 1;
+  color: #4f5b66;
+  right: 10px;
+}
+
+.container-2 input#search:focus, 
+.container-2 input#search:active{
+  outline: none;
+  width: 767px;
+  border: 0;
+  background:#ffffff;
+}
+ 
+.container-2:hover input#search{
+  width: 767px;
+  background:#ffffff;
+}
+ 
+.container-2:hover .icon i{
+  color: #93a2ad;
+}
+/* Bootstrap core customization */
+.form-control{
+	border: 1px solid #eee;
+    box-shadow: none;
+}
+.form-control:focus{
+	border-color: #262626;
+	box-shadow: none;
+}
+
+/*--------------------------------------------------------------
+## Slider
+--------------------------------------------------------------*/
+.edufair-slide{
+	margin-top: -72px;
+}
+.edufair-inner{
+	z-index: 0;
+}
+.edufair-inner img{
+	width: 100%;
+    height: 60vh;
+    object-fit: cover;
+}
+.edufair-caption{
+	top: 40%;
+	text-shadow: none;
+	text-align: left;
+}
+.edufair-caption h4{
+    font-size: 20px;
+}
+.kindergarten-1x .edufair-caption h4,
+.kindergarten-1x .edufair-caption h2{
+	font-family: 'Dosis',sans-serif;
+}
+.edufair-caption h2{
+	
+    font-size: 50px;
+    font-weight: 700;
+	line-height: 60px;
+	padding-bottom: 15px;
+	/* typewriter animation */
+	overflow: hidden; /* Ensures the content is not revealed until the animation */
+	white-space: nowrap; /* Keeps the content on a single line */
+	animation: typing 2s steps(30, end), blink-caret .5s step-end infinite;
+}
+/* The typing effect */
+@keyframes typing {
+	from { width: 0 }
+	to { width: 100% }
+}
+/* The typewriter cursor effect */
+@keyframes blink-caret {
+	from, to { border-color: transparent }
+	50% { border-color: #ad4790 }
+}
+.animated {
+  animation-duration: 2s;
+  animation-fill-mode: both;
+}
+.edufair-control{
+	width: 7%;
+}
+.edufair-control.right,
+.edufair-control.left{
+	background-color: transparent;
+	background-image: none;
+}
+.edufair-control.right:hover,
+.edufair-control.left:hover{
+	cursor:e-resize;
+}
+
+
+.online-course-2x .edufair-controll-1x.right,
+.online-course-2x .edufair-controll-1x.left,
+.online-course-1x .edufair-controll-1x.right,
+.online-course-1x .edufair-controll-1x.left,
+.online-course-2x .edufair-course-controll-1x.right,
+.online-course-2x .edufair-course-controll-1x.left,
+.online-course-1x .edufair-course-controll-1x.right,
+.online-course-1x .edufair-course-controll-1x.left,
+.single-course-1x .edufair-course-controll-1x.right,
+.single-course-1x .edufair-course-controll-1x.left,
+.university-2x .edufair-controll-1x.right,
+.university-2x .edufair-controll-1x.left,
+.university-1x .edufair-controll-1x.right,
+.university-1x .edufair-controll-1x.left {
+    background-image: none;
+    display: inline-block;
+    width: 35px;
+    height: 35px;
+    text-align: center;
+    font-size: 15px;
+    color: rgb(38, 38, 38);
+    padding-top: 3px;
+    border-width: 1px;
+    border-style: solid;
+    border-color: rgb(38, 38, 38);
+    border-image: initial;
+    transition: 0.3s ease;
+	right: 15px;
+}
+
+.online-course-2x .edufair-shop-1x .carousel-control ,
+.online-course-1x .edufair-shop-1x .carousel-control ,
+.online-course-2x .edufair-related-course-1x .carousel-control ,
+.online-course-1x .edufair-related-course-1x .carousel-control ,
+.single-course-1x .edufair-related-course-1x .carousel-control ,
+.university-2x .edufair-shop-1x .carousel-control ,
+.university-2x .university-course-1x .carousel-control,
+.university-1x .edufair-shop-1x .carousel-control ,
+.university-1x .university-course-1x .carousel-control {
+    top: 58px;
+    margin-left: 92%;
+}
+
+.university-1x .edufair-controll-1x {
+}
+
+.edufair-overlay {
+    position: relative;
+	background: #000;
+}
+.edufair-slider-image {
+  opacity: 0.7;
+  display: block;
+  width: 100%;
+  height: auto;
+  transition: .5s ease;
+  backface-visibility: hidden;
+}
+.edufair-slider-middle { 
+  transition: .5s ease;
+  opacity: 0;
+  position: absolute;
+  top: 20%;
+  left: 48%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%)
+}
+.edufair-overlay:hover .edufair-slider-image {
+  opacity: 0.7;
+}
+.edufair-overlay .edufair-slider-middle {
+  opacity: 1;
+}
+.edufair-slider-text {
+  background-color: transparent;
+  color: white;
+  font-size: 16px;
+  padding: 16px 32px;
+}
+
+
+
+/* Start Carousel fade animation */
+.carousel-fade .carousel-inner .item {
+  opacity: 0;
+  transition-property: opacity;
+}
+.carousel-fade .carousel-inner .active {
+  opacity: 1;
+}
+.carousel-fade .carousel-inner .active.left,
+.carousel-fade .carousel-inner .active.right {
+  left: 0;
+  opacity: 0;
+  z-index: 1;
+}
+.carousel-fade .carousel-inner .next.left,
+.carousel-fade .carousel-inner .prev.right {
+  opacity: 1;
+}
+.carousel-fade .carousel-control {
+  z-index: 2;
+}
+/*
+  WHAT IS NEW IN 3.3: "Added transforms to improve carousel performance in modern browsers."
+  Need to override the 3.3 new styles for modern browsers & apply opacity
+*/
+@media all and (transform-3d), (-webkit-transform-3d) {
+    .carousel-fade .carousel-inner > .item.next,
+    .carousel-fade .carousel-inner > .item.active.right {
+      opacity: 0;
+      -webkit-transform: translate3d(0, 0, 0);
+              transform: translate3d(0, 0, 0);
+    }
+    .carousel-fade .carousel-inner > .item.prev,
+    .carousel-fade .carousel-inner > .item.active.left {
+      opacity: 0;
+      -webkit-transform: translate3d(0, 0, 0);
+              transform: translate3d(0, 0, 0);
+    }
+    .carousel-fade .carousel-inner > .item.next.left,
+    .carousel-fade .carousel-inner > .item.prev.right,
+    .carousel-fade .carousel-inner > .item.active {
+      opacity: 1;
+      -webkit-transform: translate3d(0, 0, 0);
+              transform: translate3d(0, 0, 0);
+    }
+}
+/* End Carousel fade animation */
+/*--------------------------------------------------------------
+##  Features
+--------------------------------------------------------------*/
+.edufair-features {
+    overflow: hidden;
+	padding-top: 100px;
+}
+/* University feature */
+.edufair-single-features {
+	background-size: cover;
+    background-repeat: no-repeat;
+	background-attachment: fixed;
+	position: relative;
+    padding: 15px 0px;
+    margin: 10px 0px;
+	transition: 0.3s all ease;
+}
+.edufair-single-features-1x{
+	background: linear-gradient(rgba(181,213,106, 0.9),rgba(181,213,106, 0.9)),url('../images/university/course1.jpg');
+}
+.edufair-single-features-2x{
+	background: linear-gradient(rgba(30, 166, 154, 0.9),rgba(30, 166, 154, 0.9)),url('../images/university/course2.jpg');
+}
+.edufair-single-features-3x{
+	background: linear-gradient(rgba(132,190,214, 0.9),rgba(132,190,214, 0.9)),url('../images/university/course5.jpg');
+}
+.edufair-single-features-4x{
+	background: linear-gradient(rgba(173, 71, 144, 0.8),rgba(173, 71, 144, 0.8)),url('../images/university/course4.jpg');
+}
+.edufair-single-features-5x{
+	background: linear-gradient(rgba(234,112,106, 0.9),rgba(234,112,106, 0.9)),url('../images/university/course5.jpg');
+}
+.edufair-single-features-6x{
+	background: linear-gradient(rgba(173, 71, 144, 0.8),rgba(173, 71, 144, 0.8)),url('../images/university/course6.jpg');
+}
+.edufair-single-features .media-left {
+    display: block;
+    float: left;
+    padding: 15px 20px;
+}
+.edufair-single-features .media-body {
+    padding-left: 15px;
+    padding-right: 15px;
+    text-align: center;
+}
+.edufair-single-features h4 {
+    font-size: 20px;
+    font-weight: 600;
+    color: #f1f1f1;
+    text-transform: uppercase;	
+    line-height: 30px;
+    margin: 0px 0px 5px;
+}
+.edufair-single-features a {
+    color: #f1f1f1;
+    font-size: 13px;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+/*--------------------------------------------------------------
+## course
+--------------------------------------------------------------*/
+.edufair-course-1x{
+	padding-top: 70px;
+}
+.edufair-single-course{
+	margin: 30px 0;
+}
+.edufair-course-overlay {
+    position: relative;
+	background: #000;
+}
+.edufair-course-image {  
+	opacity: 1;
+	display: inline-block;
+	width: 100%;
+	height: auto;
+	transition: .5s ease;
+	backface-visibility: hidden;
+}
+.edufair-course-middle {
+	transition: .5s ease;
+	opacity: 0;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	-ms-transform: translate(-50%, -50%);
+}
+.event-container-1x:hover .edufair-course-image,
+.edufair-course-overlay:hover .edufair-course-image {
+	opacity: 0.6;
+}
+.event-container-1x:hover .edufair-course-middle,
+.edufair-course-overlay:hover .edufair-course-middle {
+	opacity: 1;
+}
+a.edufair-course-text {
+    background-color: #ad4790;
+    color: #f1f1f1;
+    font-size: 12px;
+    text-transform: uppercase;
+    padding: 15px 20px;
+    font-weight: 700;
+    border-radius: 2px;
+	transition: all 0.3s ease;
+}
+a.edufair-course-text:hover{
+    background-color: #0e504b;
+}
+.course-content{
+	padding-top: 30px;
+    padding-left: 15px;
+    padding-right: 15px;
+    border: 1px solid #e7e7e7;
+}
+.course-content .media-left{
+	display: block;
+    float: left;
+}
+.course-content img{
+	width: 50px;
+	height: 50px;
+	border-radius: 50px;
+}
+.course-content h4.media-heading{
+	
+    color: #262626;
+    font-weight: 700;
+    font-size: 11px !important;
+    margin-top: 8px;
+    margin-bottom: 0;
+}
+.course-content span{
+    font-size: 11px !important;
+}
+.course-content h3 {
+    color: #262626;
+    font-size: 20px;
+    margin: 22px 0;
+    font-weight: 700;
+    line-height: 30px;
+}
+.edufair-single-course:hover h3{
+	color: #ad4790;
+}
+.course-footer {
+	border-top: 1px solid #e7e7e7;
+	padding: 10px 0;
+}
+.course-footer span{
+	margin-right: 15px;
+	margin-left: 3px;
+}
+.course-footer strong{
+	float: right;
+	color: #ad4790;
+}
+
+/*--------------------------------------------------------------
+## Count down timer
+--------------------------------------------------------------*/
+.edufair-countdown-timer-1x{
+	background: #000;
+	width: 100%;
+}
+.countdown-overlay {
+    position: relative;
+}
+.countdown-overlay-image {
+	opacity: 1;
+	display: block;
+	width: 100%;
+	height: 600px;
+	object-fit: cover;
+	transition: .5s ease;
+	backface-visibility: hidden;
+}
+.countdown-overlay-middle {
+	transition: .5s ease;
+	opacity: 0;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	-ms-transform: translate(-50%, -50%);
+}
+.countdown-overlay .countdown-overlay-image {
+	opacity: 0.5;
+}
+.countdown-overlay .countdown-overlay-middle {
+	opacity: 1;
+}
+.countdown-overlay-text {
+	color: #f1f1f1;
+	font-size: 16px;
+	padding: 16px 32px;
+}
+.edufair-countdown-timer-1x .edufair-main-title{
+	font-size: 70px;
+}
+.edufair-countdown-timer-1x .edufair-sub-title,
+.edufair-countdown-timer-1x .edufair-main-title{
+	color: #f1f1f1;
+}
+.edufair-countdown-timer-1x .edufair-main-title:before{
+	border-bottom: 3px solid #f1f1f1;
+	width:10%;
+}
+.edufair-countdown-timer-1x:hover .edufair-main-title:before{
+	border-bottom: 3px solid #ad4790;
+}
+.edufair-countdown {
+    text-align: center; 
+    margin-top: 5%;
+	margin-left: -30px;
+    left: -10px;
+	font-size: 50px;
+	font-weight: 700;
+}
+.countdown-single{
+	padding-right: 40px;
+	padding-left: 30px;	
+}
+.countdown-single:last-child{
+	border-right: 1px solid transparent;
+	margin-right: 0;
+}
+.edufair-countdown p{
+	font-size: 15px;
+	margin-top: 20px;
+	margin-bottom: 0;
+}
+.university-countdown-1x .edufair-slider-image {
+    opacity: 0.5;
+}
+.university-countdown-1x .edufair-main-title {
+    font-size: 45px !important;
+    text-transform: uppercase;
+}
+.university-countdown-1x .edufair-countdown {
+    text-align: center;
+    margin-top: 8%;
+    left: -10px;
+    font-size: 45px;
+    font-weight: 700;
+    display: block;
+}
+.university-countdown-1x .edufair-countdown {
+    text-align: center;
+    margin-top: 8%;
+    left: -10px;
+    font-size: 45px !important;
+    font-weight: 700;
+    display: block;
+}
+
+
+
+/*--------------------------------------------------------------
+## Subscription
+--------------------------------------------------------------*/
+.edufair-subscription-1x{
+	background: #ffffff;
+	overflow: hidden;
+	padding-bottom: 40px;
+}
+.edufair-subscription-title-1x {
+	background: #ad4790;
+	padding: 15px;
+	text-align: center;
+}
+.kindergarten-1x .edufair-subscription-title-1x {
+	background: #EA7066;
+	padding: 1px 0 20px 0;
+}
+.kindergarten-1x .edufair-subscription-title-1x  h3{
+	font-family: 'Dosis',sans-serif;
+}
+.edufair-subscription-title-1x  h3{
+	
+	font-weight: 700;
+	font-size: 40px;
+}
+.edufair-subscription-form-1x{
+	padding: 10px 5px;
+}
+/*--------------------------------------------------------------
+## Modal Register Login
+--------------------------------------------------------------*/
+.modal .edufair-subscription-title-1x{
+	padding: 0 !important;
+}
+.modal .edufair-subscription-title-1x  h3{
+	font-weight: 700;
+	font-size: 25px;
+    padding: 25px;
+    margin: 0;
+}
+
+.modal a.edufair-btn-larg{
+	margin-top: 10px;
+	background: #ad4790;
+	padding: 13px 0px;
+	color: #f1f1f1;
+}
+.modal .edufair-btn-larg:before,
+.modal a.edufair-btn-larg:before{
+	background: #262626;
+}
+.modal .edufair-btn-larg:before:hover,
+.modal a.edufair-btn-larg:before:hover{
+	color: #f1f1f1;
+	background: #262626;
+}
+.modal .edufair-subscription-form-1x p{
+	clear: both;
+	text-align: center;
+	color: #7a7a7a;
+	padding-top: 15px;
+}
+.online-course-2x .modal .edufair-subscription-form-1x i,
+.online-course-1x .modal .edufair-subscription-form-1x i{
+	font-size: 16px;
+    color: #fff;
+    font-weight: 400;
+    border: 0 solid #ad4790;
+    border-radius: 0;
+    padding: 0;
+    margin-right: 5px;
+}
+.modal .edufair-subscription-form-1x i{
+	padding-right: 5px;
+}
+.modal .edufair-subscription-form-1x h6{
+	text-align: center;
+	font-size: 10px;
+	color: #7a7a7a;	
+}
+.online-course-2x .modal .edufair-subscription-form-1x h6 a,
+.online-course-2x .modal .edufair-subscription-form-1x h6,
+.online-course-1x .modal .edufair-subscription-form-1x h6 a,
+.online-course-1x .modal .edufair-subscription-form-1x h6{
+	text-align: center;
+	font-size: 10px;
+	color: #7a7a7a;	
+}
+.online-course-2x .modal .edufair-subscription-form-1x .terms-condition a,
+.online-course-1x .modal .edufair-subscription-form-1x .terms-condition a{
+	font-weight: 400;
+	color: #ad4790 !important;
+}
+.modal .edufair-subscription-form-1x .terms-condition a{
+	color: #ad4790 !important;
+}
+
+.modal a.facebook-login{
+	background: #4267b2 ;
+	margin-bottom: 10px;
+}
+.modal a.facebook-login:before{
+	background: #4267b2 !important;
+}
+.modal a.google-login{
+	background: #db4437 ;
+	margin-bottom: 15px;
+}
+.modal a.google-login:before{
+	background: #db4437 !important;
+}
+/*--------------------------------------------------------------
+## Events
+--------------------------------------------------------------*/
+.event-container-1x {
+	overflow: hidden;
+	clear: both;
+	margin-top: 20px;
+    margin-bottom: 50px;
+    padding-bottom: 30px;
+    border-bottom: 1px solid #e7e7e7;	
+}
+.event-container-1x:last-child {
+    border-bottom: 0 solid #eeeeee;
+}
+.events-all-button{
+	float: right;
+	margin-top: 60px !important;
+}
+.event-container-1x :hover h4{
+	color: #ad4790; 
+}
+.kindergarten-1x .event-container-1x :hover h4{
+	color: #ffb606; 
+}
+.edufair-events-1x{
+	padding-top: 70px;
+}
+.single-events-1x b{
+	font-size: 40px;
+	color: #ad4790;
+	margin-right: 50px;
+}
+.university-1x .single-events-1x b{
+	color: #ad4790;
+	line-height: 30px;	
+}
+.kindergarten-1x .single-events-1x i,
+.kindergarten-1x .single-events-1x span,
+.kindergarten-1x .single-events-1x b{
+	color: #a1d626;
+	line-height: 30px;
+}
+.single-events-1x span{
+	font-size: 20px;
+	color: #ad4790;
+}
+.single-events-1x i{
+	font-size: 15px;
+	color: #ad4790;
+	padding-right: 5px;
+}
+.kindergarten-1x .single-events-1x i{
+	color: #ffb606;
+}
+.event-schedule{
+	font-weight: 700;
+}
+.single-events-1x p{
+	font-size: 15px;
+	margin-top: 30px;
+}
+.kindergarten-1x .single-events-1x h4{
+	font-family: 'Dosis',sans-serif;
+}
+.single-events-1x h4{	
+    color: #262626;
+    font-weight: 700;
+    font-size: 25px;
+	margin-bottom: 10px;
+	-moz-transition: all .3s ease;
+	-o-transition: all .3s ease;
+	-webkit-transition: all .3s ease;
+	transition: all .3s ease;
+}
+.event-cost b{
+	display: block;
+	font-size: 15px;
+	color: #262626;
+	margin-top: 40px;
+}
+.event-cost span{
+	color: #ad4790;
+	font-size: 15px;
+	font-weight: 700;
+}
+/*--------------------------------------------------------------
+## Portfolio section
+--------------------------------------------------------------*/
+.edufair-portfolio{}
+.edufair-portfolio-item{
+	margin-top: 3%;
+}
+.edufair-toolbar {
+	float: right;
+	padding: 2% 0;
+	position: relative;
+}
+.edufair-toolbar .active{
+	color: #ad4790;
+	transition: all .3s ease-in-out;
+}
+#edufair-portfolio {  
+	clear: both;
+    -webkit-column-count: 4; 
+    -moz-column-count: 4;
+    column-count: 4;
+    -webkit-column-gap: 1rem;
+    -moz-column-gap: 1rem;
+    column-gap: 1rem;
+    -webkit-column-width: 25%;
+    -moz-column-width: 25%;
+    column-width: 25%;
+}
+.tile { 
+	display: none;
+}
+.scale-anm {
+    width: 100%; 
+    border: 0px solid #eee;
+}
+.tile img {
+    max-width: 100%; 
+    height: auto;
+    display: block; 
+    width: 100%;
+}
+.masonry-blog-two{
+	padding: 15px;
+}
+
+
+/*--------------------------------------------------------------
+## Image hover effect
+--------------------------------------------------------------*/
+/*Image hover box border*/
+.hovereffect4 {
+  width: 100%;
+  height: 100%;
+  float: left;
+  overflow: hidden;
+  position: relative;
+  text-align: center;
+  cursor: default;
+  background: #ffffff;
+}
+
+.hovereffect4 .overlay {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  overflow: hidden;
+  top: 0;
+  left: 0;
+  padding: 3em;
+}
+
+.hovereffect4 img {
+  display: block;
+  position: relative;
+  max-width: none;
+  width: calc(100% + 60px);
+  -webkit-transition: opacity 0.35s, -webkit-transform 0.45s;
+  transition: opacity 0.35s, transform 0.45s;
+  -webkit-transform: translate3d(-40px,0,0);
+  transform: translate3d(-40px,0,0);
+}
+.hovereffect4 .overlay:before {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  bottom: 20px;
+  left: 20px;
+  border: 1px solid #eee;
+  content: '';
+  opacity: 0;
+  filter: alpha(opacity=0);
+  -webkit-transition: opacity 0.35s, -webkit-transform 0.45s;
+  transition: opacity 0.35s, transform 0.45s;
+  -webkit-transform: translate3d(-20px,0,0);
+  transform: translate3d(-20px,0,0);
+}
+
+.hovereffect4 a, .hovereffect4 p, .hovereffect4 h2{
+  color: #262626;
+  font-weight: 600;
+  text-decoration: none;
+  text-transform: capitalize;  
+  adding-top: 10%;
+  opacity: 0;
+  filter: alpha(opacity=0);
+  -webkit-transition: opacity 0.35s, -webkit-transform 0.45s;
+  transition: opacity 0.35s, transform 0.45s;
+  -webkit-transform: translate3d(-10px,0,0);
+  transform: translate3d(-10px,0,0);
+}
+
+.hovereffect4:hover img {
+  opacity: 0.1;
+  filter: alpha(opacity=60);
+  -webkit-transform: translate3d(0,0,0);
+  transform: translate3d(0,0,0);
+}
+
+.hovereffect4:hover .overlay:before,
+.hovereffect4:hover a, .hovereffect4:hover p, .hovereffect4:hover h2 {
+  opacity: 1;
+  filter: alpha(opacity=100);
+  -webkit-transform: translate3d(0,0,0);
+  transform: translate3d(0,0,0);  
+}
+.hovereffect4 a, .hovereffect p,
+.hovereffect4:hover a, .hovereffect4:hover p{
+  text-align: center;
+  color: #262626;
+  font-size: 12px;
+  font-weight: 700;
+  text-decoration: none;
+  text-transform: capitalize;
+}
+.hovereffect4 h2,
+.hovereffect4:hover h2 {
+  font-size: 16px;
+  font-weight: 700;
+  padding-top: 10%;
+}
+.hovereffect4 a i{
+	color: #262626;
+	padding: 5px 10px;
+}
+.hovereffect4 a i:hover{
+	color: #ad4790;
+}
+
+.kindergarten-1x .hovereffect4 h2{
+	font-family: 'Dosis', sans-serif;
+}
+
+/*--------------------------------------------------------------
+##  Testimonial
+--------------------------------------------------------------*/
+.edufair-testimonial{	
+	margin: 2% 0;
+	display: block;
+}
+.edufair-page-testimonial{
+	text-align: center;
+	margin: 7% 0 0;
+	overflow: hidden;
+}
+.edufair-page-testimonial p,
+.edufair-testimonial .edufair-testimonial-desc p{
+	font-size: 16px;
+    line-height: 27px;
+}
+.edufair-testimonial .edufair-testimonial-desc img{
+	width: auto;
+	margin: 0 auto 0 auto;
+}
+.edufair-testimonial-slider{
+	text-align: center;
+}
+.edufair-page-testimonial .edufair-page-client img,
+.edufair-testimonial-slider .edufair-col-center img{
+	object-fit: cover;
+    width: 100px;
+    height: 100px;
+	margin-bottom: 30px;
+}
+.edufair-col-center{
+	float: none;
+	margin: 0 auto;
+}
+
+
+/* testimonial */
+.edufair-testimonial-timer-1x{
+	background: #000;
+	margin-top: 60px;
+	width: 100%;
+}
+.testimonial-overlay {
+    position: relative;
+}
+.testimonial-overlay-image {
+	opacity: 1;
+	display: block;
+	width: 100%;
+	height: 600px;
+	object-fit: cover;
+	transition: .5s ease;
+	backface-visibility: hidden;
+}
+.testimonial-overlay-middle {
+	transition: .5s ease;
+	opacity: 0;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	-ms-transform: translate(-50%, -50%);
+}
+.testimonial-overlay .testimonial-overlay-image {
+	opacity: 0.5;
+}
+.testimonial-overlay .testimonial-overlay-middle {
+	opacity: 1;
+}
+.testimonial-overlay-text {
+	color: #f1f1f1;
+	font-size: 16px;
+	padding: 16px 32px;
+}
+.edufair-testimonial-timer-1x .edufair-main-title{
+	font-size: 35px;
+}
+.edufair-testimonial-timer-1x .edufair-sub-title,
+.edufair-testimonial-timer-1x .edufair-main-title{
+	text-align: center;
+	color: #f1f1f1;
+}
+.edufair-testimonial-timer-1x .edufair-main-title:before{
+	border-bottom: 3px solid #f1f1f1;
+	left: 47%;
+}
+.edufair-testimonial-timer-1x:hover .edufair-main-title:before{
+	border-bottom: 3px solid #ad4790;
+}
+
+.university-2x .edufair-testimonial-timer-1x .edufair-testimonial-slider b,
+.university-1x .edufair-testimonial-timer-1x .edufair-testimonial-slider b {
+    color: #ad4790;
+    font-size: 17px;
+}
+.university-2x .edufair-testimonial-timer-1x .edufair-testimonial-slider span,
+.university-1x .edufair-testimonial-timer-1x .edufair-testimonial-slider span {
+    color: #f1f1f1;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+
+/*--------------------------------------------------------------
+## Blog
+--------------------------------------------------------------*/
+.edufair-blog-1x{
+	padding-top: 70px;
+}
+.edufair-single-blog{
+	padding-bottom: 60px;
+}
+.edufair-blog-overlay {
+    position: relative;
+	background: #000;
+}
+.edufair-blog-image {  
+	opacity: 1;
+	display: inline-block;
+	width: 100%;
+	height: auto;
+	transition: .5s ease;
+}
+.edufair-blog-middle {
+	transition: .5s ease;
+	opacity: 0;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	-ms-transform: translate(-50%, -50%);
+}
+.event-container-1x:hover .edufair-blog-image,
+.edufair-blog-overlay:hover .edufair-blog-image {
+	opacity: 0.6;
+}
+.event-container-1x:hover .edufair-blog-middle,
+.edufair-blog-overlay:hover .edufair-blog-middle {
+	opacity: 1;
+}
+a.edufair-blog-text {}
+.blog-content{
+    padding: 20px 25px 0 25px;
+    border: 1px solid #f1f1f1;
+}
+.blog-content p{
+	margin: 0;
+}
+.blog-content h3 {
+    color: #262626;
+    font-size: 20px;
+	line-height: 25px;
+    margin: 20px 0;
+    font-weight: 700;
+	transition: all .3s ease;
+}
+.edufair-single-blog:hover h3{
+	color: #ad4790;
+}
+.kindergarten-1x .edufair-single-blog:hover h3{
+	color: #ffb606;
+}
+.blog-share{
+	text-align: right;
+}
+.blog-share ul{
+    list-style: none;
+	margin: 0;
+	padding: 0;
+}
+.blog-share ul li{
+	display: inline-block;
+	font-size: 15px;
+	font-weight: 400;	
+	margin-left: 20px !important;		
+	margin-top: 40px;		
+	color: #f1f1f1;
+	-moz-transition: all .3s ease;
+	-o-transition: all .3s ease;
+	-webkit-transition: all .3s ease;
+	transition: all .3s ease;	
+}
+.blog-share ul li a{
+	color: #f1f1f1;
+}
+.blog-share ul li:hover{
+	color: #ad4790;
+}
+.kindergarten-1x .blog-share ul li:hover{
+	color: #ffb606;
+}
+.blog-footer {
+	border-top: 1px solid #f1f1f1;
+    padding: 15px 0;
+	margin-top: 30px;
+	font-size: 11px;
+}
+.blog-footer span{
+	margin-right: 15px;
+	margin-left: 3px;
+}
+.blog-footer strong{
+	float: right;
+	font-weight: 400;
+}
+.blog-footer strong i{
+	margin-right: 5px;
+}
+
+/*--------------------------------------------------------------
+##  Video section
+--------------------------------------------------------------*/
+.edufair-video-section-1x{}
+/* Title left align */
+.edufair-modal-video-text h2{
+	
+    font-size: 35px;
+    font-weight: 700;
+    color: #f1f1f1;
+	margin-bottom: 25px;
+}
+.edufair-modal-video-text h4{
+    font-size: 20px;
+    font-weight: 700;
+    color: #f1f1f1;
+    position: relative;
+}
+.edufair-modal-video:hover .edufair-modal-video-text h4:before{
+	transform: scaleX(0);
+}
+.edufair-modal-video-text h4:before{ 
+	content: "";
+    position: absolute;
+    bottom: -14px;
+    left: 37%;
+    width: 25%;
+    border-bottom: 1px solid #f1f1f1;
+    transform: scaleX(1);
+    transition: all .3s ease-in-out;
+}
+
+.edufair-modal-video-text h2 {
+    font-size: 45px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: #f1f1f1;
+    margin-bottom: 25px;
+}
+/**********************************************************
+           Edufair video slider 
+**********************************************************/
+
+.edufair-modal-video {
+    position: relative;
+	background: #000;
+}
+.edufair-modal-video-image {
+  opacity: 1;
+  display: block;
+  width: 100%;
+  height: auto;
+  transition: .5s ease;
+  backface-visibility: hidden;
+}
+.edufair-modal-video-middle {
+  transition: .5s ease;
+  opacity: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%)
+}
+.edufair-modal-video .edufair-modal-video-image {
+	opacity: 0.8;
+    height: 500px;
+    object-fit: cover;
+}
+
+.edufair-modal-video:hover .edufair-modal-video-image {
+  opacity: 0.9;
+}
+
+.edufair-modal-video .edufair-modal-video-middle {
+  opacity: 1;
+}
+.edufair-modal-video:hover .edufair-modal-video-middle {
+  opacity: 1;
+}
+
+.edufair-modal-video-text {
+  color: #ffffff;
+  font-size: 16px;
+  padding: 16px 32px;
+  text-align: center;
+}
+.university-2x .edufair-modal-video-text {
+  padding: 0;
+
+}
+/* Bootrap modal */
+.modal-body{
+	padding: 0;
+}
+.modal-content{
+	background-color: #ad4790;
+	border-radius: 0 !important;
+}
+
+/*--------------------------------------------------------------
+## Shop
+--------------------------------------------------------------*/
+.edufair-shop-1x{
+	padding-top: 70px;
+}
+.edufair-single-shop{}
+.edufair-shop-overlay {
+    position: relative;
+	background: #000;
+	
+}
+.edufair-shop-image {  
+	opacity: 1;
+	display: block;
+	width: 100%;
+	height: auto;
+	transition: .5s ease;
+	backface-visibility: hidden;
+}
+.edufair-shop-middle {
+	transition: .5s ease;
+	opacity: 0;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	-ms-transform: translate(-50%, -50%);
+}
+.event-container-1x:hover .edufair-shop-image,
+.edufair-shop-overlay:hover .edufair-shop-image {
+	opacity: 0.6;
+}
+.event-container-1x:hover .edufair-shop-middle,
+.edufair-shop-overlay:hover .edufair-shop-middle {
+	opacity: 1;
+}
+a.edufair-shop-text {
+    background-color: #ad4790;
+    color: #f1f1f1;
+    font-size: 12px;
+    text-transform: uppercase;
+    padding: 12px 20px;
+    font-weight: 700;
+    border-radius: 2px;
+}
+.shop-content{
+	margin: 30px 0;
+}
+.shop-content p{
+	margin: 0;
+}
+.edufair-single-shop .media{
+	margin: 15px 0;
+}
+.shop-content .media-left{
+	display: block;
+    float: left;
+}
+
+.shop-content .media-left a{	
+	font-size: 16px;
+    color: #262626;
+    font-weight: 500;
+	transition: .5s ease;
+}
+.shop-content .media-left a:hover{
+    color: #ad4790;
+}
+.shop-content h4 {
+    
+    font-size: 14px;	
+    font-weight: 700;
+    margin-top: 10px;
+}
+a.edufair-shop-cart{
+	float: right;
+	
+	font-size: 20px;
+    color: #262626;
+    font-weight: 700;
+	transition: .5s ease;
+}
+a.edufair-shop-cart:hover{
+    color: #ad4790;
+}
+.edufair-single-shop:hover .shop-content .media-left a{
+	color: #ad4790;
+}
+
+/*--------------------------------------------------------------
+##  Bottom to top
+--------------------------------------------------------------*/
+.backtotop {
+	position: relative;
+	font-size: 20px;
+	margin-right: 15px;
+    margin-bottom: 15px;
+	background: #262626;
+	padding: 7px 12px;
+	color: #eee;
+	border-radius: 1px;
+	-moz-transition: all .3s ease;
+	-o-transition: all .3s ease;
+	-webkit-transition: all .3s ease;
+	transition: all .3s ease;
+}
+.backtotop:hover{
+	background: #ad4790;
+	color: #f1f1f1;
+}
+.high-school-1x .backtotop:hover,
+.kindergarten-1x .backtotop:hover{
+	background: #FF6962;
+	color: #f1f1f1;
+}
+
+/*--------------------------------------------------------------
+##  Footer 1x
+--------------------------------------------------------------*/
+.edufair-footer-1x{
+	background: linear-gradient(rgba(0, 0, 0, 0.7),rgba(0, 0, 0, 0.7)),url(../images/online-course/slider0.jpg);
+	background-position: bottom;
+	width: 100%;
+	color: #f1f1f1;
+	padding-top: 70px;
+
+}
+.edufair-footer-content{}
+.edufair-footer-address{
+
+}
+.edufair-footer-address img{
+	max-width: 100%;
+	margin-bottom: 0px;
+}
+.edufair-footer-address p{}
+.high-school-1x .edufair-footer-address i{
+	color: #FF6962;
+}
+.edufair-footer-address i{
+    color: #ad4790;
+    margin-right: 15px;
+}
+.kindergarten-1x .edufair-footer-address i{
+    color: #FF6962;
+}
+.edufair-footer-content h5{
+	font-family: 'Dosis',sans-serif;
+	font-size: 15px;
+	font-weight: 700;
+	text-transform: uppercase;	
+}
+.high-school-1x .edufair-footer-content h5,
+.kindergarten-1x .edufair-footer-content h5{
+	color: #FF6962;
+}
+.edufair-footer-content ul{
+    list-style: none;
+    margin-top: 30px;
+    padding: 0;
+}
+.edufair-footer-content ul li{}
+.edufair-footer-content ul li a{
+    font-size: 13px;
+    color: #f1f1f1;
+    line-height: 35px;
+    font-weight: 400;
+	opacity: .5;
+}
+.edufair-footer-content ul li a:hover{
+	transition: .5s ease;
+	color: #ad4790;
+	opacity: 1;
+}
+.kindergarten-1x .edufair-footer-content ul li a:hover{
+	transition: .5s ease;
+	color: #ffb606;
+	opacity: 1;
+}
+.footer-info{
+	border-top: 1px solid #404040;
+	margin-top: 0px;
+	padding: 15px 0;
+} 
+.footer-info-left p{
+	font-size: 13px;
+	color: #f1f1f1;
+	font-weight: 400;
+} 
+.footer-info-left a{
+	color: #ad4790;
+	transition: all 0.3s ease;
+} 
+.footer-info-left a:hover{
+	color: #f1f1f1;
+}
+.high-school-1x .footer-info-left a,
+.kindergarten-1x .footer-info-left a{
+	color: #FF6962;
+}
+.footer-info-right{
+	text-align: right;
+	color: #f1f1f1;
+	font-weight: 400;
+}
+.footer-info-right ul{
+    list-style: none;
+	margin: 0;
+}
+.footer-info-right ul li{
+	display: inline-block;
+	font-size: 15px;
+	font-weight: 400;	
+	margin-right: 10px;		
+	background: #262626;	
+	outline: none;
+	border-radius: 50%;
+	width: 33px;
+	height: 33px;
+	text-align: center;
+	-moz-transition: all .3s ease;
+	-o-transition: all .3s ease;
+	-webkit-transition: all .3s ease;
+	transition: all .3s ease;	
+}
+.footer-info-right ul li a{
+	outline: none;
+
+}
+.footer-info-right ul li a,
+.footer-info-right ul li a:hover{
+	color: #f1f1f1;
+}
+.footer-info-right ul li:last-child{
+	margin-right: 0;
+}
+.footer-info-right ul li:hover{
+	background: #ad4790;	
+}
+
+.app-button{
+    margin-left: 45px;
+}
+.high-school-1x .footer-info-right ul li:hover,
+.kindergarten-1x .footer-info-right ul li:hover{
+	color: #f1f1f1;
+	background: #FF6962;	
+}
+/*--------------------------------------------------------------
+##  Footer 2x
+--------------------------------------------------------------*/
+.edufair-footer-2x{
+	background: #fff;
+	width: 100%;
+	color: #7a7a7a;
+	padding-top: 70px;
+}
+.edufair-footer-2x .edufair-footer-content ul li a{
+    font-size: 13px;
+    color: #7a7a7a;
+    line-height: 35px;
+    font-weight: 400;
+	transition: all 0.3s ease;
+	opacity: 1;
+}
+.edufair-footer-2x .edufair-footer-content ul li a:hover{
+    color: #ad4790;
+}
+.edufair-footer-2x .edufair-footer-content h5{
+	color: #262626;
+}
+.edufair-footer-2x .footer-info {
+    border-top: 1px solid #ddd;
+}
+.edufair-footer-2x .footer-info {
+    border-top: 1px solid #ddd;
+}
+.edufair-footer-2x .footer-info-right ul li {
+    background: #fff; 
+    color: #7a7a7a;
+    border: 1px solid #7a7a7a;
+	padding-top: 0;
+}
+.edufair-footer-2x .footer-info-right ul li:hover{
+	color: #f1f1f1;
+	background: #ad4790;
+	border: none;	
+}
+.edufair-footer-2x .footer-info-right ul li:hover i{
+	color: #f1f1f1;	
+}
+.edufair-footer-2x .edufair-footer-address i {
+    color: #7a7a7a;
+}
+.edufair-footer-2x .footer-info-left p{
+	color: #7a7a7a;
+}
+.edufair-footer-2x .footer-info-left a{
+	color: #ad4790;
+	transition: all 0.3s ease;
+}
+.edufair-footer-2x .footer-info-left a:hover{
+	color: #262626;
+}
+/*--------------------------------------------------------------
+##  Single course description
+--------------------------------------------------------------*/
+.edufair-course-header{
+    clear: both;
+    position: relative;
+}
+.single-inner {
+	width: 100%;
+	max-height: 400px;
+	object-fit: cover;
+}
+.edufair-single-caption{
+	top: 15%;	
+}
+.edufair-single-caption h2{
+    font-size: 50px;
+	animation: none;
+	border-right: 0px solid #ad4790;
+	padding-bottom: 15px;
+}
+.edufair-single-breadcrumbs{
+	background: transparent;	
+}
+.edufair-single-breadcrumbs{
+	margin: 0;
+	padding: 0;
+	margin-left: 8px;
+}
+.edufair-single-breadcrumbs li{}
+.edufair-single-breadcrumbs li a{
+	color: #f1f1f1;
+	font-size: 15px;
+}
+.edufair-single-breadcrumbs .active{
+	color: #f1f1f1;
+	font-size: 15px;
+}
+.course-details-title{
+	margin-bottom: 50px;
+	margin-top: 25px;
+}
+.course-details-title h4{
+	
+    font-size: 30px;
+    font-weight: 700;
+    color: #262626;
+    margin-bottom: 40px;	
+}
+.course-teacher-details{
+	border-right: 1px solid #eee;	
+	padding-left: 0;
+}
+.course-teacher-details .media-left{
+	display: block;
+    float: left;
+}
+.course-teacher-details img{
+	width: 50px;
+	height: 50px;
+	border-radius: 50px;
+	margin-right: 10px;
+}
+.course-teacher-details span{
+	font-size: 12px;
+	font-weight: 700;
+}
+.course-teacher-details a{
+	font-size: 15px;
+	margin-top: 6px;
+	color: #262626;
+	font-weight: 700;
+	transition: all .3s ease;
+}
+.course-teacher-details a:hover{
+	color: #ad4790;
+}
+.course-details-price strong{
+	float: right;
+	font-size: 30px;
+	color: #ad4790;
+	font-weight: 700;
+	padding-top: 15px;
+}
+.course-review{
+	border-right: 1px solid #eee;
+	padding-left: 30px;	
+}
+.course-review span{
+	font-size: 12px;
+	font-weight: 700;
+}
+.course-review i{
+	font-size: 15px;
+	margin-top: 6px;
+	color: #ad4790;
+}
+.course-banner{}
+.course-banner img{
+	width: 100%;
+	height: 400px;
+	object-fit: cover;
+	margin-bottom: 40px;
+}
+.related-course-content .course-review{
+	padding-left: 0;
+	margin-bottom: 20px;
+	margin-top: -10px;
+}
+.course-teacher-1x .course-review{
+	padding-left: 0;
+	margin-top: 11px;
+	border: 0;
+}
+
+/*********** Tab *******************/
+.course-description-nav{}
+.course-description-nav{}
+.course-description-nav ul{}
+.course-description-nav ul li{}
+.course-description-nav>li>a>i{
+	padding-right: 5px ;
+}
+.course-description-nav>li>a:focus,
+ .course-description-nav>li>a:hover{
+	background: none ;
+}
+.course-description-nav>li>a{
+	color: #262626;
+	font-weight: 700;
+	border-bottom: 0 solid #eee !important;
+}
+.course-description-nav>li.active>a{
+	background: #ad4790 !important;
+}
+.course-description-nav>.active>a{
+	color: #f1f1f1 !important;
+}
+
+.course-description-nav ul li a{}
+.course-description-tab{
+	border: 1px solid #eee;
+	padding: 0 30px;
+	margin-bottom: 50px;
+}
+.course-description-tab-left{
+	margin-top: 30px;
+	margin-bottom: 30px;
+	border-right: 1px solid #eee;
+}
+.course-description-tab-left h2{
+	
+    font-size: 20px;
+    font-weight: 700;
+    color: #262626;
+    margin-bottom: 20px;
+}
+.course-description-tab-left p{
+    font-size: 15px;
+    font-weight: 400;
+    margin-bottom: 35px;
+}
+.course-description-tab-outcomes ul{
+    list-style: none;
+	margin: 0;
+	padding: 0;
+	margin-bottom: 50px;
+}
+.course-description-tab-outcomes ul li{
+   font-size: 15px;
+   font-weight: 400;
+   line-height: 30px;
+}
+.course-description-tab-outcomes ul li i{
+	font-size: 15px;
+	color: #ad4790;
+	margin-right: 10px;
+}
+.course-description-tab-share{
+	text-align: left;
+	margin-bottom: 20px;
+}
+.course-description-tab-share ul{
+    list-style: none;
+	margin: 0;
+	padding: 0;
+}
+.course-description-tab-share ul li{
+	display: inline-block;
+	font-size: 15px;
+	font-weight: 400;	
+	margin-right: 10px !important;		
+	background: #ad4790;
+	border: 1px solid #ad4790;
+	border-radius: 50%;
+	width: 33px;
+	height: 33px;
+	text-align: center;
+	padding-top: 4px;
+	-moz-transition: all .3s ease;
+	-o-transition: all .3s ease;
+	-webkit-transition: all .3s ease;
+	transition: all .3s ease;	
+}
+.course-description-tab-share ul li a{
+	color: #f1f1f1;
+}
+.course-description-tab-share ul li:last-child{
+	margin-right: 0;
+}
+.course-description-tab-share ul li:hover{
+	color: #f1f1f1;
+	background: #262626;
+	border: 1px solid #262626;
+}
+
+/*************** Tab right ********************/
+.course-description-tab-right{
+	margin-top: 30px;
+	padding-left: 30px;
+}
+.course-description-tab-right h2{
+	
+    font-size: 20px;
+    font-weight: 700;
+    color: #262626;
+    margin-bottom: 20px;
+}
+.course-description-tab-right ul{
+    list-style: none;
+	margin: 0;
+	padding: 0;
+	margin-bottom: 35px;
+}
+.course-description-tab-right ul li{
+   font-size: 15px;
+   font-weight: 400;
+   line-height: 30px;
+   border-bottom: 1px solid #eee;
+   padding: 15px 0;
+}
+.course-description-tab-right ul li a{
+	padding-left: 10px;
+	transition: all .3s ease;
+}
+.course-description-tab-right ul li a:hover i{
+	color: #262626;
+}
+.course-description-tab-right ul li:last-child{
+   border-bottom: 0 solid #eee;	
+}
+.course-description-tab-right ul li span{
+	float: right;
+   font-size: 15px;
+   font-weight: 700;
+   color: #262626;
+}
+.course-description-tab-right ul li i{
+	font-size: 15px;
+	color: #ad4790;
+	margin-right: 10px;
+}
+.curriculum-tab h2{
+	margin-top: 50px;
+}
+.instructors-tab{
+	padding: 50px 0 20px 0;
+	border-bottom: 1px solid #f1f1f1;
+}
+.instructors-tab .media{
+
+}
+.instructors-tab .media-left img{
+	width: 150px;
+}
+.instructors-tab .media-left{
+	display: block;
+    float: left;
+}
+.instructors-tab .media-body{}
+
+.instructors-tab .media-body a h4{
+	font-size: 20px;
+    font-weight: 700;
+    color: #262626;
+	transition: 0.3s ease;
+    margin: 10px 0 10px 30px;
+}
+.instructors-tab .media-body a h4:hover{
+	color: #ad4790;
+}
+.instructors-tab .media-body span{
+    font-size: 15px;
+    font-weight: 500;
+	margin-left: 30px;	
+}
+.instructors-tab .course-description-tab-share{
+	margin: 20px 0 0 30px;
+}
+.instructors-tab p{
+	margin-top: 30px;
+}
+.review-tab{}
+.review-tab h2{
+    
+    font-size: 20px;
+    font-weight: 700;
+    color: #262626;
+    margin-top: 50px;
+    margin-bottom: 20px;
+}
+.review-tab-top .media{
+	margin-top: 50px;
+}
+.review-tab-top  .media-left{
+	display: block;
+	float: left;
+	border: 1px solid #eee;
+	text-align: center;
+	padding: 80px;
+}
+.review-tab-top .media-left strong{
+    display: block;
+    font-size: 70px;
+    font-weight: 700;
+    color: #ad4790;
+    margin-bottom: 30px;
+}
+.review-tab-top  .media-left span{}
+.review-tab-top  .media-left span i{
+	color: #ad4790;
+}
+.review-tab-top .media-body{
+    padding: 30px 30px 10px 30px;
+}
+.review-progress-bar{}
+.single-progress-bar{
+	margin-bottom: 30px;
+}
+.single-progress-bar .progress{
+	height: 10px;
+}
+.single-progress-bar .progress-bar{
+	background: #ad4790;
+}
+.single-progress-bar span{
+    //float: right;
+}
+.single-progress-bar label{
+    float: left;
+    color: #262626;
+    padding-right: 30px;
+	margin-top: -7px;
+}
+.review-tab .instructors-tab a h4{
+	display: block;
+	margin-top: 30px;
+}
+.review-tab .instructors-tab strong{
+	padding-left: 30px;
+	color: #ad4790;
+}
+
+/**************** All Course*****************/
+.all-course{
+	margin-top: 30px;
+	padding-left: 30px;
+	border-left: 1px solid #eee;
+}
+.all-course h2{
+	
+	font-size: 20px;
+	font-weight: 700;
+	color: #f1f1f1;
+	margin-bottom: 20px;
+	background: #ad4790;
+	text-align: center;
+	padding: 20px 0;
+}
+.all-course ul{
+    list-style: none;
+	margin: 0;
+	padding: 0 10px;
+	margin-bottom: 35px;
+}
+.all-course ul li{
+   font-size: 15px;
+   font-weight: 400;
+   line-height: 30px;
+   border-bottom: 1px solid #eee;
+   padding: 15px 0;
+}
+.all-course ul li span{
+	float: right;
+   font-size: 15px;
+   font-weight: 700;
+   color: #262626;
+}
+.all-course ul li i{
+	font-size: 15px;
+	color: #ad4790;
+	margin-right: 10px;
+}
+
+/*--------------------------------------------------------------
+## Related course
+--------------------------------------------------------------*/
+.edufair-related-course-1x {
+    margin-top: 20px;
+    margin-bottom: 70px;
+}
+.edufair-related-course{
+	margin: 30px 0;
+}
+.single-course-1x .edufair-related-course{
+	margin-top: 0;
+}
+.edufair-related-course-overlay {
+    position: relative;
+	background: #000;
+}
+.edufair-related-course-image:hover {
+	opacity: .6;
+}
+.edufair-related-course-image {  
+	opacity: 1;
+	display: block;
+	width: 100%;
+	height: auto;
+	transition: .5s ease;
+	backface-visibility: hidden;
+}
+.edufair-related-course-middle {
+	transition: .5s ease;
+	opacity: 0;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	-ms-transform: translate(-50%, -50%);
+}
+.event-container-1x:hover .edufair-related-course-image,
+.edufair-course-overlay:hover .edufair-related-course-image {
+	opacity: 0.6;
+}
+.event-container-1x:hover .edufair-related-course-middle,
+.edufair-course-overlay:hover .edufair-related-course-middle {
+	opacity: 1;
+}
+a.edufair-related-course-text {
+    background-color: #ad4790;
+    color: #f1f1f1;
+    font-size: 12px;
+    text-transform: uppercase;
+    padding: 12px 20px;
+    font-weight: 700;
+    border-radius: 2px;
+}
+.related-course-content{
+	padding-top: 30px;
+    padding-left: 15px;
+    padding-right: 15px;
+    border: 1px solid #eee;
+}
+.related-course-content .media-left{
+	display: block;
+    float: left;
+}
+.related-course-content img{
+	width: 50px;
+	height: 50px;
+	border-radius: 50px;
+}
+.related-course-content h4.media-heading{
+    color: #262626;
+    font-weight: 700;
+    font-size: 13px !important;
+    margin-top: 8px;
+    margin-bottom: 0;
+}
+.related-course-content span{
+    font-size: 12px;
+    margin: 0;
+}
+.related-course-content h3 {
+    color: #262626;
+    font-size: 15px;
+    margin: 22px 0;
+    font-weight: 500;
+    line-height: 25px;
+    transition: all 0.3s ease;
+    padding-top: 15px;
+}
+.single-course-1x .related-course-content h3 {
+	padding-top: 0;
+}
+.edufair-related-course:hover h3{
+	color: #ad4790;
+}
+.related-course-footer {
+	border-top: 1px solid #eee;
+	padding: 10px 0;
+}
+.related-course-footer span{
+	margin-right: 15px;
+	margin-left: 3px;
+}
+.related-course-footer strong,
+.related-course-footer del{
+	float: right;
+	color: #ad4790;
+	margin-left: 10px;
+}
+.related-course-footer del{
+	color: #7a7a7a;
+}
+/*********************************************
+		blog single
+**********************************************/
+.edufair-blog-details-1x{
+	margin-top: 70px;
+}
+.blog-banner{}
+.blog-banner img{
+	width: 100%;
+	height: 400px;
+	object-fit: cover;
+	margin-bottom: 40px;
+}
+.blog-details-title{
+	margin-top: 30px;
+}
+.blog-details-title h4{
+	
+    font-size: 30px;
+    font-weight: 700;
+    color: #262626;
+	margin: 15px 0;
+}
+.blog-details-title span{
+	font-size: 14px;
+    color: #b5b5b5;
+}
+.blog-details-title span a{
+	font-size: 14px;
+    color: #b5b5b5;
+}
+.blog-details-title span a i{
+	font-size: 14px;
+    color: #b5b5b5;
+	padding-left: 10px;
+	padding-right: 5px;
+}
+.blog-description{
+	margin-top: 50px;
+}
+.blog-description span{
+	float: left;
+	color: #ad4790;
+	font-size: 75px;
+	line-height: 60px;
+	padding-top: 4px;
+	padding-right: 8px;
+	padding-left: 3px;
+}
+
+/* blog Share*/
+.blog-share-tag{
+	overflow: hidden;
+	margin: 50px 0;	.	
+}
+.blog-description-tab-share ul{
+    list-style: none;
+	margin: 0;
+	padding: 0;
+}
+.blog-description-tab-share ul li{
+	display: inline-block;	
+	margin-right: 10px !important;
+	color: #262626;	
+}
+.blog-description-tab-share ul li i{
+	color: #262626;	
+}
+.blog-description-tab-share ul li:last-child{
+	margin-right: 0;
+}
+.blog-description-tab-share ul li a{
+	font-size: 15px;
+	font-weight: 400;		
+	-moz-transition: all .3s ease;
+	-o-transition: all .3s ease;
+	-webkit-transition: all .3s ease;
+	transition: all .3s ease;
+}
+.blog-description-tab-share ul li a i:hover{
+	color: #ad4790;
+}
+
+/* blog Tag */
+.blog-description-tag ul{
+	float: right;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+.blog-description-tag ul li{
+	display: inline-block;
+	padding-left: 10px;
+}
+.blog-description-tag ul li a{
+	font-size: 14px;
+	font-weight: 700;
+	color: #262626;
+	transition: all .3s ease;;
+}
+.blog-description-tag ul li a:hover{
+	color: #ad4790;
+}
+
+/* blog Right Sidebar */
+.search-post{
+	margin-bottom: 50px;
+}
+.btn-search{
+	margin-top: 10px;
+    height: 40px;
+    background: #ad4790;
+	border-radius: 0;
+	border: 0;
+    color: #f1f1f1;
+}
+.single-post-category{
+	margin-bottom: 50px;
+}
+.single-post-category ul{
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+.single-post-category ul li{
+	display: block;
+}
+.single-post-category ul li a{
+	font-size: 14px;
+	font-weight: 700;
+	color: #262626;
+	line-height: 35px;
+	text-transform: uppercase;
+	transition: all .3s ease;;
+}
+.single-post-category ul li a:hover{
+	color: #ad4790;
+}
+.single-post-category ul li a span{
+	float: right;
+	font-size: 14px;
+	font-weight: 700;
+	color: #262626;
+}
+.latest-post-right-sidebar{
+	margin-bottom: 50px;
+}
+.latest-post-right-sidebar a{
+	text-transform: uppercase;
+	font-size: 14px;
+	font-weight: 700;
+	color: #ad4790;
+}
+.latest-post-right-sidebar a i{
+	margin-left: 7px;
+	font-weight: 700;
+}
+
+.latest-post-right-sidebar h2,
+.latest-post-right-sidebar h3{	
+    color: #262626;
+    font-weight: 700;
+    font-size: 25px;
+	margin-top: 0;
+	margin-bottom: 40px;
+	border-left: 5px solid #ad4790;
+	padding-left: 20px;
+}
+.high-school-1x .latest-post-right-sidebar h3{
+	border-left: 5px solid #ffb606;
+}
+.single-latest-post {
+    margin-top: 0;
+	margin-bottom: 10px;
+    border-bottom: 1px solid #e7e7e7;
+    padding-bottom: 20px;
+}
+.single-latest-post:last-child{
+    border-bottom: 0 solid #e7e7e7;
+}
+.single-latest-post .media-left{
+	display: block;
+    float: left;
+}
+.single-latest-post img{
+	width: 80px;
+	height: 80px;
+	margin-right: 10px;
+	object-fit: cover;
+}
+.single-latest-post .media-body a h4{
+	
+    color: #262626;
+    font-weight: 700;
+	text-transform: capitalize;
+    font-size: 14px;
+	margin-top: 0;
+	margin-bottom: 10px;
+	line-height: 25px;
+	transition: all .3s ease;
+	
+}
+.single-latest-post .media-body a h4:hover{
+	color: #ad4790;
+}
+.high-school-1x .single-latest-post .media-body i,
+.high-school-1x .single-latest-post .media-body a h4:hover{
+	color: #ffb606;
+}
+.single-latest-post .media-body span{
+	font-size: 14px;
+}
+.single-latest-post .media-body i{
+	color: #ad4790;
+	padding-right: 5px;
+}
+
+.latest-post-right-sidebar a {
+    text-transform: capitalize;
+    font-size: 15px;
+    font-weight: 500;
+    color: rgb(38, 38, 38);
+    transition: all 0.3s ease;
+}
+.latest-post-right-sidebar a:hover{
+	color: #ad4790;
+}
+a.latest-post-read-more {
+    text-transform: uppercase;
+    font-size: 14px;
+    font-weight: 500;
+    color: #ad4790;
+}
+
+/* Blog Author */
+.blog-author{
+	padding: 30px 0 0 0;
+    border-top: 1px solid #e7e7e7;
+    border-bottom: 1px solid #e7e7e7;
+}
+.blog-author .media-left{
+	display: block;
+    float: left;
+}
+.blog-author img{
+	width: 100px;
+	height: 100px;
+}
+.blog-author .media-body{
+	padding-left: 20px;
+}
+.blog-author h4.media-heading{
+	
+    color: #262626;
+    font-weight: 700;
+    font-size: 14px ;
+    margin-top: 10px;
+    margin-bottom: 5px;
+}
+.blog-author span{
+    font-size: 12px;
+}
+.blog-author h3 {
+    color: #262626;
+    font-size: 20px;
+    margin: 22px 0;
+    font-weight: 700;
+    line-height: 30px;
+}
+.blog-author-share ul{
+    list-style: none;
+	margin: 15px 0 0 0;
+	padding: 0;
+}
+.blog-author-share ul li{
+	display: inline-block;	
+	margin-right: 10px !important;
+	color: #262626;	
+}
+.blog-author-share ul li i{
+	color: #262626;	
+}
+.blog-author-share ul li:last-child{
+	margin-right: 0;
+}
+.blog-author-share ul li a{
+	font-size: 15px;
+	font-weight: 400;		
+	-moz-transition: all .3s ease;
+	-o-transition: all .3s ease;
+	-webkit-transition: all .3s ease;
+	transition: all .3s ease;
+}
+.blog-author-share ul li a i:hover{
+	color: #ad4790;
+}
+.blog-author p{
+	font-size: 14px;
+	font-weight: 400;
+	margin: 20px 0;
+}
+
+/* Blog Next Previous Post */
+.blog-prev-next{
+	overflow: hidden;
+    margin: 50px 0;
+}
+.previous-post{
+	float: left
+}
+.previous-post h4{
+	font-size: 14px;
+    color: #7a7a7a;
+}
+.previous-post a{
+	
+    font-size: 16px;
+    font-weight: 700;
+    color: #262626;
+	transition: all .3s ease;
+}
+.previous-post a:hover{
+    color: #ad4790;
+
+}
+.next-post{
+	text-align: right;
+}
+.next-post h4{
+	font-size: 14px;
+    color: #7a7a7a;
+}
+.next-post a{
+    
+    font-size: 16px;
+    font-weight: 700;
+    color: #262626;
+	transition: all .3s ease;
+}
+.next-post a:hover{
+    color: #ad4790;
+
+}
+
+/* Blog Related Post */
+.edufair-related-blog-1x{
+	margin: 0;
+	margin-bottom: 70px;
+	padding-top: 0;
+}
+
+/* Edufair Comment box */
+.edufair-comment-body{
+
+}
+.edufair-comment-body h2{
+	font-size: 25px;    
+    font-weight: 700;
+    color: #262626;
+}
+.edufair-comment-body .media img{
+	max-width: none;
+	width: 100px;
+	margin-right: 15px;
+}
+.edufair-comment-body .media .media-body span{
+	font-size: 12px;
+	margin-left: 15px;
+	margin-right: 15px;
+	color: #bbbbbb;
+	font-weight: 400;
+}
+.edufair-comment-body .media .media-body span i{
+	color: #ad4790;
+}
+.edufair-comment-body h4.media-heading{
+	color: #262626;
+	text-transform: uppercase;
+	font-size: 14px;
+	font-weight: 700;
+	margin-bottom: 15px;
+} 
+.edufair-comment-body ul{
+	margin: 0;
+	padding: 50px 0 0;
+}
+.edufair-comment-body ul ul{
+	padding: 50px 0 0 50px;
+}
+.edufair-contact-form{
+	margin-bottom: 70px;
+}
+.edufair-contact-form h2{
+	font-size: 25px;    
+    font-weight: 700;
+    color: #262626;
+	margin: 50px 0;
+}
+
+
+/*********************************************
+		Edufair Shop
+**********************************************/
+
+/* Shop image hover effect */
+.shop-category{
+	float: right;
+}
+.edufair-shop-container {
+    position: relative;
+    width: 100%;
+}
+.edufair-shop-image {
+  opacity: 1;
+  display: initial;
+  width: 100%;
+  height: auto;
+  transition: .5s ease;
+  backface-visibility: hidden;
+}
+
+.edufair-shop-middle {
+	transition: .5s ease;
+	opacity: 0;
+	position: absolute;
+	top: 50%;
+	left: 47%;
+	transform: translate(-45%, -45%);
+	-ms-transform: translate(-50%, -50%);
+}
+
+.edufair-shop-container:hover .edufair-shop-image {
+  opacity: 0.3;
+}
+
+.edufair-shop-container:hover .edufair-shop-middle {
+  opacity: 1;
+}
+
+.edufair-shop-text {
+	background-color: #ad4790;
+	font-size: 13px;
+	padding: 10px 20px;
+	text-transform: uppercase;
+	font-weight: 700;
+	border-radius: 3px;
+}
+.edufair-shop-text a{
+	color: #f1f1f1;
+}
+.edufair-shop-item-text{
+	clear: both;
+	margin-top: 25px;
+	margin-bottom: 50px;
+}
+.edufair-shop-item-text a{
+	font-size: 20px;
+	font-weight: 700;
+	color: #262626;
+	font-family: 'Montserrat', sans-serif;
+	-moz-transition: all .3s ease;
+	-o-transition: all .3s ease;
+	-webkit-transition: all .3s ease;
+	transition: all .3s ease;
+}
+.edufair-shop-item-text a:hover{
+	color: #ad4790;
+}
+.edufair-shop-item-text p{
+	margin: 0;
+}
+.edufair-shop-item-text b{
+	color: #262626;
+}
+.edufair-onsale {
+	position: absolute;
+	top: 0;
+	background: #ad4790;
+	color: #f1f1f1;
+	padding: 5px 15px;
+	font-weight: 700;
+	text-transform: uppercase;
+	font-size: 12px;
+}
+.edufair-nav-tabs > li{
+    float:none;
+    display:inline-block;
+    *display:inline; /* ie7 fix */
+     zoom:1; /* hasLayout ie7 trigger */
+}
+.edufair-nav-tabs {
+	text-align: center;
+	border: 0;
+	font-size: 12px;
+	text-transform: uppercase;
+	font-weight: 700;
+	letter-spacing: 1px;
+	margin-bottom: 30px;
+}
+.edufair-nav-tabs > li > a:hover,
+.edufair-nav-tabs > li > a,
+.edufair-nav-tabs > li.active > a{
+	background: none;
+	border: 3px solid #262626;
+	border-radius: 1px;
+}
+.edufair-nav-tabs > li.active > a,
+.edufair-nav-tabs > li.active > a:active,
+.edufair-nav-tabs > li.active > a:focus,
+.edufair-nav-tabs > li.active > a:hover{
+	border: 3px solid #ad4790;
+}
+.edufair-pagination{}
+.edufair-pagination > li.active > a:hover,
+.edufair-pagination > li.active > a {
+	background-color: #ad4790;
+	border: 0;	
+}
+.course-pagination {
+	overflow: hidden;
+	padding-top: 5px;
+	background: #f5f5f5;
+	border-radius: 1px;
+}
+.edufair-pagination > li > a{
+	color: #262626;
+	background-color: #ffffff;
+	border: 0 solid #ffffff;
+	margin: 2px;
+	border-radius: 3px;
+	font-size: 14px;
+	font-weight: 700;
+	transition: all 0.3s ease;
+}
+.edufair-pagination > li > a:hover{
+	color: #f1f1f1 !important;
+	background-color: #ad4790;
+}
+/*********************************************
+		Edufair Blog Right Sidebar
+**********************************************/
+.blog-content{}
+.blog-content span{
+    color: #b5b5b5;
+}
+.blog-content span a{
+	font-size: 14px;
+    color: #b5b5b5;
+}
+.blog-content span a i{
+    font-size: 14px;
+    color: #b5b5b5;
+    padding-left: 10px;
+    padding-right: 5px;
+}
+a.blog-right-sidebar-link h2{
+    
+    font-size: 30px;
+    font-weight: 700;
+    color: #262626;
+	line-height: 40px;
+    margin: 15px 0;
+	transition: all ease .3s;
+}
+a.blog-right-sidebar-link h2:hover{
+	color: #ad4790;
+}
+.blog-right-sidebar-date{
+    position: absolute;
+    margin-top: -68px;
+    background: #ad4790;
+    padding: 15px;
+	text-align: center;
+}
+.blog-right-sidebar-date span:nth-child(1){
+	color: #f1f1f1;
+	font-size: 35px;
+	font-weight: 700;
+	display: block;
+	padding-bottom: 10px;
+}
+.blog-right-sidebar-date span:nth-child(2){
+	color: #f1f1f1;
+	font-size: 15px;
+	font-weight: 600;
+
+}
+/*************************************************
+		University Home
+**************************************************/
+.edufair-about-university{
+	padding-top: 100px;
+}
+.edufair-about-university p{}
+.edufair-about-university a.edufair-course-text{
+    clear: both;
+    display: inline-block;
+	margin: 10px 0;
+	padding: 8px 20px;
+}
+.edufair-about-university .edufair-main-title{
+	margin-top: 0;
+}
+.edufair-about-university .latest-post-right-sidebar{
+	padding-left: 20px;
+}
+.about-university-img{}
+
+/* university Countdown Timer */
+.university-countdown-1x {}
+.university-countdown-1x .countdown-overlay-middle{
+	top: 48%;
+}
+.university-countdown{}
+.university-countdown-1x .countdown-overlay-image {
+    opacity: .5;
+    display: block;
+    width: 100%;
+    height: 500px;
+    object-fit: cover;
+    transition: .5s ease;
+    backface-visibility: hidden;
+}
+.university-countdown-1x .edufair-main-title {
+    font-size: 50px;
+}
+.university-countdown-1x .edufair-main-title:before {
+    border-bottom: 3px solid #f1f1f1;
+    left: 45%;
+}
+.university-countdown-1x:hover .edufair-main-title:before{
+	border-bottom: 3px solid #ad4790;
+	width: 10%;
+}
+.university-countdown-1x .edufair-countdown {
+    text-align: center;
+    margin-top: 8%;
+    left: -10px;
+    font-size: 35px;
+    font-weight: 700;
+    display: block;
+}
+.university-countdown-1x a.edufair-course-text {
+	display: inline-block;
+	margin-top: 50px;
+}
+/* University Course */
+.university-course-1x .blog-content span {
+	font-size: 15px;
+	font-weight: 500;
+	color: #7a7a7a;
+}
+.university-course-1x .blog-content h3 {
+	margin: 10px 0 20px 0;
+}
+.university-course-1x .blog-footer {
+	border-top: 0 solid #e7e7e7; 
+	padding: 10px 0 40px 0;
+	margin-top: 25px;
+}
+/***********************************************
+		Edufair Kinder Garten
+************************************************/
+
+.kindergarten-1x .edufair-nav .navbar-nav>li>a{
+	font-family: 'Dosis',sans-serif;
+	font-weight: 600;
+}
+.high-school-1x .edufair-nav .dropdown-menu>li>a:focus,
+.kindergarten-1x .edufair-nav .dropdown-menu>li>a:focus,
+.high-school-1x .dropdown-menu>li>a:hover,
+.kindergarten-1x .dropdown-menu>li>a:hover{
+	color: #EA77AD;
+}
+.high-school-1x .container-2 input#search,
+.kindergarten-1x .container-2 input#search{
+	color: #EA77AD;
+}
+.kid-top-menu{
+	background: #333;
+	padding: 25px 0;
+}
+.top-menu-left{}
+.top-menu-left .media{}
+.top-menu-left .media-left {}
+.kid-top-menu .kid-icon-2x i,
+.kid-top-menu .kid-icon-1x i{
+	font-size: 40px;
+    color: #EA7066;
+    border-right: 1px solid #474747;
+    padding-right: 15px;
+}
+.top-menu-left .media-body h3{
+    font-size: 13px;
+    font-weight: 500;
+    color: #f1f1f1;
+    margin: 0;
+    line-height: 25px;
+}
+.top-menu-left .media-body span{
+	color: #EA7066;
+	font-weight: 700;
+    text-transform: uppercase;
+}
+.high-school-1x  .edufair-course-text,
+.kindergarten-1x  .edufair-course-text{
+	float: right;
+	background: #EA7066;
+	padding: 7px 20px;
+	margin-top: 6px;
+	color: #fff;
+}
+.high-school-1x a.edufair-course-text:hover,
+.kindergarten-1x a.edufair-course-text:hover{
+	background: #fff;
+	color: #EA7066;
+}
+/* Kindergarten nav */
+.kid-nav{
+	background: #fff;
+}
+.high-school-1x .edufair-nav .navbar-nav > li > a,
+.kindergarten-1x .edufair-nav .navbar-nav > li > a,
+.kindergarten-1x .edufair-nav .navbar-nav > li > a,
+.kindergarten-1x .kid-nav .navbar-nav > li > a:focus,
+.kindergarten-1x .kid-nav .navbar-nav > li > a:hover,
+.kindergarten-1x .kid-nav .navbar-nav > li > a:visited,
+.kindergarten-1x .kid-nav .navbar-nav > .open > a,
+.kindergarten-1x .kid-nav .navbar-nav > .open > a:focus,
+.kindergarten-1x .kid-nav .navbar-nav > .open > a:hover,
+.kindergarten-1x .kid-nav .navbar-nav>.active>a,
+.kindergarten-1x .kid-nav .navbar-nav>.active>a:focus,
+.kindergarten-1x .kid-nav .navbar-nav>.active>a:hover{
+	color: #262626 !important;
+}
+/* Kid Cart & Search */
+.kid-cart i{
+	padding-left: 15px;
+	color: #262626;
+}
+.kid-cart .container-2:hover .icon i{
+  color: #262626;
+
+}
+.kid-cart a span.cart-no{
+    margin-top: -12px;
+    position: absolute;
+    font-weight: 700;
+    color: #262626 !important;
+}
+/* Edufair CTA */
+.edufair-cta-1x{	
+	background: linear-gradient(rgba(0, 0, 0, 0.5),rgba(0, 0, 0, 0.5)),url('../images/slide/slide-7.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+	background-attachment: fixed;
+	//position: relative;
+	color: #fff;	
+	padding: 30px 0;	
+}
+.cta-left{}
+.cta-left h4{
+    font-size: 15px;
+    font-weight: 500;
+    color: #f1f1f1;
+}
+.cta-left h3{
+    font-size: 25px;
+    font-weight: 700;
+    color: #f1f1f1;
+	margin-top: 12px;
+}
+.cta-right{}
+.cta-right .modal .edufair-btn-larg, a.edufair-btn-larg {
+    margin-top: 12px;
+}
+.kindergarten-1x .kid-contact-cta,
+.kid-contact-cta{
+    float: right;
+	right: 30px;
+    padding: 10px 30px;
+    background: #fff;
+    color: #262626;
+    margin-top: 17px;
+}
+.kindergarten-1x .kid-contact-cta:hover,
+.kid-contact-cta:hover{
+	color: #f1f1f1;
+}
+.high-school-1x .kid-contact-cta:before,
+.kindergarten-1x .kid-contact-cta:before{
+	background: #EA7066 ;
+}
+/* Pricing Table */
+.edufair-pricing-table-1x{
+	padding-top: 70px;
+}
+.edufair-kid-title{
+	text-align: center;
+}
+.edufair-kid-title .edufair-main-title:before {
+    left: 45%;
+}
+.edufair-single-pricing{
+	margin: 10% 0 0;
+	display: inline-block;
+}
+.edufair-pricing-box .pricing-box{
+    background-size: cover;
+    background-repeat: no-repeat;
+	position: relative;
+	text-align: center;
+	color: #fff;
+}
+.edufair-pricing-box .single-pricing-box-1x{
+	background: linear-gradient(rgba(132,190,214, 0.9),rgba(132,190,214, 0.9)),url('../images/kindergarten/slide1.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+	position: relative;
+	text-align: center;
+	color: #fff;
+}
+.edufair-pricing-box .single-pricing-box-2x{
+	background: linear-gradient(rgba(234,112,106, 0.92),rgba(234,112,106, 0.92)),url('../images/kindergarten/slide2.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+	position: relative;
+	text-align: center;
+	color: #fff;
+}
+.edufair-pricing-box .single-pricing-box-3x{
+	background: linear-gradient(rgba(181,213,106, 0.92),rgba(181,213,106, 0.92)),url('../images/kindergarten/slide3.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+	position: relative;
+	text-align: center;
+	color: #fff;
+}
+.edufair-pricing-box .single-pricing-box-4x{
+	background: linear-gradient(rgba(240,194,75, 0.92),rgba(240,194,75, 0.92)),url('../images/kindergarten/slide4.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+	position: relative;
+	text-align: center;
+	color: #fff;
+}
+
+.edufair-pricing-box .pricing-box h3{
+	color: #fff;
+	font-family: 'Dosis',sans-serif;
+	font-size: 2em;
+    font-weight: 700;
+    text-transform: capitalize; 
+    padding-top: 45px;
+    padding-bottom: 15px;
+}
+.edufair-pricing-box .pricing-box .edufair-price-in-table{
+	padding: 10% 0 5%;
+}
+sup.edufair-value,
+.edufair-pricing-box .pricing-box sup.edufair-value{
+	font-size: 30px;
+	top: -30px;
+}
+span.edufair-price,
+.edufair-pricing-box .pricing-box span.edufair-price{
+	color: #fff;
+	
+	font-size: 50px;
+    font-weight: 300;
+}
+span.edufair-mark,
+.edufair-pricing-box .pricing-box span.edufair-mark{
+	font-size: 14px;
+}
+.edufair-pricing-box .pricing-box ul {
+	padding: 7% 0 7%;
+	margin: 0;
+	list-style: none;
+	line-height: 30px;
+	font-size: 15px;
+	text-align: center;
+}
+.edufair-pricing-box .pricing-box ul del{
+	color: #fff;
+}
+.kid-pricing-table  a.kid-btn-large {
+    background: #fff;
+	margin-bottom: 8%;
+	color: #727272;
+	padding: 7px 20px;
+	transition: all 0.3s ease;
+}
+.pricing-box .kid-btn-large:before,
+.pricing-box a.kid-btn-large:before {
+	background: #2BE09E;
+	color: #f1f1f1;
+	transition: all 0.3s ease;
+}
+.pricing-box .kid-btn-large, a.kid-btn-large:hover {
+	background: #2BE09E;
+	color: #f1f1f1;
+}
+/*Feature plan*/
+.edufair-pricing-box .feature-plan {
+	position: absolute;
+	background: #2BE09E;
+	padding: 23px 15px;
+	border-radius: 50%;
+	font-size: 16px;
+	color: #fff;
+	
+	font-weight: 600;
+	text-transform: uppercase;
+	margin-top: -35px;
+	right: -5px;
+}
+.kindergarten-1x .blog-content h3{
+	line-height: 30px;
+	font-family: 'Dosis',sans-serif;
+}
+/*****************************************
+		High School 
+******************************************/
+
+/* High School Features */
+.edufair-high-school-features-1x{
+	background: #fff;
+	color: #f1f1f1;
+}
+.hs-single-features-left{
+    background: #FF6962;
+    padding-left: 50px !important;
+    padding-right: 15px !important;
+
+}
+.hs-single-features-left h4,
+.hs-single-features-left p,
+.hs-single-features-left i{
+	color: #f1f1f1 !important;
+}
+.high-school-single-features{
+	padding: 50px 30px 30px 30px;
+}
+.high-school-single-features .media{
+}
+.high-school-single-features .media-left{
+	display: block;
+	float: left;
+}
+.high-school-single-features .media-left i{
+    font-size: 50px;
+    color: #ad4790;
+    margin-right: 10px;
+}
+.high-school-single-features .media-body{}
+.high-school-single-features .media-body a h4{
+    
+    font-size: 20px;
+    font-weight: 700;
+    color: #f1f1f1;
+    line-height: 25px;
+    margin-top: 15px;
+    margin-left: 10px;
+    text-transform: uppercase;
+	transition: all .3s ease;
+}
+.high-school-single-features .media-body a:hover h4{
+    color: #f1f1f1;
+}
+.high-school-single-features p{
+    font-size: 16px;
+    font-weight: 400;
+    margin-top: 20px;
+}
+.hs-single-features-1x{
+	background: #84BED6;
+	padding-bottom: 41px;
+}
+.hs-single-features-2x{
+	background: #B5D56A;
+	padding-bottom: 41px;
+}
+.hs-single-features-3x{
+	background: #ffb606;
+	padding-bottom: 41px;
+}
+/* High School Extra Features */
+.edufair-high-school-extra-features-1x{}
+.high-school-single-extra-features{
+	padding: 70px 30px;
+}
+.high-school-single-extra-features h4{
+    font-size: 25px;
+    color: #262626;
+    font-weight: 500;
+    margin-bottom: 20px;
+    margin-top: 0;
+}
+.university-2x .high-school-single-extra-features h4 {
+    font-size: 20px;
+    color: #262626;
+    font-weight: 700;
+    text-transform: uppercase;
+    border-left: 5px solid #ad4790;
+    padding-left: 20px;
+    margin-bottom: 40px;
+	margin-top: 18px;
+}
+.high-school-fun-facts ul,
+.high-school-single-extra-features ul{
+	margin: 0;
+    padding: 0;
+    list-style: none;
+}
+.high-school-fun-facts ul li a,
+.high-school-single-extra-features ul li a{
+    font-size: 17px;
+    color: #262626;
+    line-height: 31px;
+	transition: all .3s ease;
+}
+.high-school-fun-facts ul li i,
+.high-school-single-extra-features ul li i{
+    font-size: 17px;
+    color: #262626;
+	margin-right: 10px;
+}
+.university-2x .high-school-single-extra-features ul li a:hover {
+    color: #ad4790;	
+}
+.high-school-fun-facts ul li a:hover,
+.high-school-single-extra-features ul li a:hover{
+	color: #ffb606;
+}
+
+.high-school-fun-facts ul li i:hover,
+.high-school-single-extra-features ul li i:hover{
+	color: #ffb606;
+}
+
+.university-2x .high-school-single-extra-features ul li,
+.university-2x .high-school-single-extra-features ul li a,
+.university-2x .high-school-single-extra-features ul li i{
+	color: #262626;
+}
+.hs-single-extra-features-left{
+    background: #fff;
+    padding-left: 50px;
+    padding-right: 15px;
+}
+.university-2x .hs-single-extra-features-left{ 
+    background: #ad4790;
+    overflow: hidden;
+	padding-left: 0;
+	padding-right: 0;
+	padding-top: 70px;
+    padding-bottom: 0;
+	margin-top: -50px;
+	z-index: 1;
+}
+.single-extra-feature{
+	text-align: center;
+	margin-bottom: 62px;
+}
+.single-extra-feature h3 {
+    font-size: 18px;
+    color: #f1f1f1;
+    margin-top: 10px;
+    font-weight: 400;
+}
+.single-extra-feature img{
+	max-width: 70px;
+}
+
+a.left-color-button{
+    display: block;
+    color: #f1f1f1;
+    font-size: 17px;
+    font-weight: 400;
+    text-transform: uppercase;
+    text-align: center;
+    margin-bottom: 10px;
+    padding: 14px 20px;
+    margin: 10px 0;
+    border-radius: 2px;
+}
+
+a.left-color-button-1x {
+    background: #A597E7;
+}
+a.left-color-button-2x{
+    background: #EA77AD;
+}
+
+/* High School Info Right */
+.high-school-info-right{
+	padding: 50px 30px 0 0;
+}
+.high-school-single-info{
+	margin-bottom: 30px;
+}
+.high-school-single-info img{}
+.high-school-single-info-body{
+	border: 1px solid #eee;
+	padding: 20px;
+}
+.high-school-single-info h3{
+    font-size: 20px;
+    color: #262626;
+    font-weight: 700;
+    text-transform: uppercase;
+    border-left: 5px solid #ad4790;
+    padding-left: 20px;
+    margin-bottom: 25px;
+}
+.high-school-1x .high-school-single-info h3{
+	border-left: 5px solid #ffb606;
+}
+.high-school-single-info h4{    
+    font-size: 18px;
+    font-weight: 700;
+    color: #262626;
+    line-height: 25px;
+	margin: 0 0 15px 0;
+	transition: all .3s ease;
+}
+.high-school-single-info a h4:hover{
+	color: #ad4790;
+}
+.high-school-1x .high-school-single-info a h4:hover{
+	color: #ffb606;
+}
+.high-school-single-info p{
+    font-size: 15px;
+    font-weight: 400;
+}
+.high-school-read-more{
+    font-size: 14px;
+	font-weight: 500;
+    text-transform: uppercase;
+    color: #ad4790 !important;
+}
+.high-school-1x .high-school-read-more{
+	color: #ffb606 !important;
+}
+
+/* Edufair enents fun facts and news */
+.edufair-events-news-fun{
+	padding-top: 100px;
+	
+}
+/*events*/
+.high-school-events{
+    border: 1px solid #eee;
+    padding: 30px;
+}
+
+.university-2x .high-school-fun-facts h3,
+.high-school-fun-facts h3,
+.university-2x .high-school-events h3,
+.high-school-events h3{    
+    color: #262626;
+    font-weight: 700;
+    font-size: 25px;
+    margin-top: 0;
+    margin-bottom: 40px;
+    border-left: 5px solid #ffb606;
+    padding-left: 20px;
+}
+.university-2x .high-school-fun-facts h3,
+.university-2x .high-school-events h3{
+	border-left: 5px solid #ad4790;
+}
+.high-school-events .media{
+    padding: 0 0 20px 0;
+}
+.high-school-events :last-child{
+    border-bottom: 0 solid #b5b5b5;
+}
+.high-school-events .media-left{
+    border: 2px solid #ffb606;
+    padding: 15px 10px;
+    display: inline-block;
+    float: left;
+    text-align: center;
+    margin-top: 10px;
+}
+
+.university-2x .high-school-events .media-left{
+    border: 2px solid #ad4790;
+}
+.high-school-events .media-left span:nth-child(1){
+    display: block;
+	font-size: 30px;
+    font-weight: 700;
+	color: #ffb606;
+}
+.high-school-events .media-left span:nth-child(2){
+	font-size: 15px;
+	font-weight: 700;
+	color: #ffb606;
+}
+.university-2x .high-school-fun-facts ul li a:hover,
+.university-2x .high-school-fun-facts ul li i:hover,
+.university-2x .high-school-events .media-body strong i,
+.university-2x .high-school-events .media-body span i,
+.university-2x .high-school-events .media-body a h4:hover,
+.university-2x .high-school-events .media-left span:nth-child(1),
+.university-2x .high-school-events .media-left span:nth-child(2){
+	color: #ad4790;
+}
+.high-school-events .media-body{
+    padding-left: 20px;
+}
+.high-school-events .media-body a h4{
+    
+    color: #262626;
+    font-size: 14px;
+	font-weight: 700;
+    text-transform: capitalize;
+	line-height: 25px;
+	transition: all .3s ease;
+
+}
+.high-school-events .media-body a h4:hover{
+	color: #ffb606;
+}
+.high-school-events .media-body span{
+	float: left;
+}
+.high-school-events .media-body strong{
+	float: right;
+	font-weight: 400;
+}
+.high-school-events .media-body strong i,
+.high-school-events .media-body span i{
+    color: #ffb606;
+    padding-right: 5px;
+}
+.high-school-fun-facts{
+    border: 1px solid #eee;
+    padding: 30px;	
+}
+.high-school-fun-facts h3{}
+.high-school-news{
+	border: 1px solid #eee;
+	padding: 0 30px;
+	margin-bottom: 100px;
+}
+.high-school-news h3{
+	margin-top: 30px;
+}
+.high-school-post{
+	border: none;
+}
+/* high school counter */
+.edufair-counter-1x{
+	background: #000;
+	margin-top: 0;
+}
+.university-countdown-1x .school-overlay-image {
+    height: 200px !important;
+	opacity: .5;
+	object-fit: cover;
+}
+
+.single-counter{
+	text-align: center;
+}
+.single-counter i{
+	font-size: 30px;
+	color: #f1f1f1;
+	margin-bottom: 20px;
+}
+span.counter{
+	color: #f1f1f1;
+	font-size: 30px;
+}
+.single-counter h6{
+	font-size: 15px;
+	margin-top: 20px;
+	color: #f1f1f1;
+}
+/*********************************************
+		Edufair kids 
+**********************************************/
+.edufair-kindergarten-features-1x{
+	padding-top: 70px;
+}
+.single-kindergarten-features{  
+    background-repeat: no-repeat;
+	position: relative;
+	text-align: center;
+	color: #fff;
+    text-align: center;
+	padding: 30px 15px;		
+}
+.single-kindergarten-features-1x{
+	background: linear-gradient(rgba(240,194,75, 0.9),rgba(240,194,75, 0.9)),url('../images/kindergarten/slide1.jpg');
+	background-size: cover;
+	transition: all 0.3s ease;
+}
+.single-kindergarten-features-2x{
+	background: linear-gradient(rgba(181,213,106, 0.9),rgba(181,213,106, 0.9)),url('../images/kindergarten/slide2.jpg');
+	background-size: cover;
+}
+.single-kindergarten-features-3x{
+	background: linear-gradient(rgba(234,112,106, 0.9),rgba(234,112,106, 0.9)),url('../images/kindergarten/slide3.jpg');
+	background-size: cover;
+}
+.single-kindergarten-features-4x{
+	background: linear-gradient(rgba(132,190,214, 0.9),rgba(132,190,214, 0.9)),url('../images/kindergarten/slide4.jpg');
+	background-size: cover;
+}
+.single-kindergarten-features-5x{
+	background: linear-gradient(rgba(165,151,235, 0.9),rgba(165,151,235, 0.9)),url('../images/kindergarten/slide2.jpg');
+	background-size: cover;
+}
+.single-kindergarten-features-6x{
+	background: linear-gradient(rgba(234,119,173, 0.9),rgba(234,119,173, 0.9)),url('../images/kindergarten/slide3.jpg');
+	background-size: cover;
+}
+/* Hover css */
+.single-kindergarten-features-1x:hover{
+	background: linear-gradient(rgba(240,194,75, 1),rgba(240,194,75, 1)),url('../images/kindergarten/slide1.jpg');
+}
+.single-kindergarten-features-2x:hover{
+	background: linear-gradient(rgba(181,213,106, 1),rgba(181,213,106, 1)),url('../images/kindergarten/slide2.jpg');
+}
+.single-kindergarten-features-3x:hover{
+	background: linear-gradient(rgba(234,112,106, 1),rgba(234,112,106, 1)),url('../images/kindergarten/slide3.jpg');
+}
+.single-kindergarten-features-4x:hover{
+	background: linear-gradient(rgba(132,190,214, 1),rgba(132,190,214, 1)),url('../images/kindergarten/slide4.jpg');
+}
+.single-kindergarten-features-5x:hover{
+	background: linear-gradient(rgba(165,151,235, 1),rgba(165,151,235, 1)),url('../images/kindergarten/slide2.jpg');
+}
+.single-kindergarten-features-6x:hover{
+	background: linear-gradient(rgba(234,119,173, 1),rgba(234,119,173, 1)),url('../images/kindergarten/slide3.jpg');
+}
+.single-kindergarten-features-6x img,
+.single-kindergarten-features-5x img,
+.single-kindergarten-features-4x img,
+.single-kindergarten-features-3x img,
+.single-kindergarten-features-2x img,
+.single-kindergarten-features-1x img{
+    width: 70px;
+}
+.single-kindergarten-features-6x h4,
+.single-kindergarten-features-5x h4,
+.single-kindergarten-features-4x h4,
+.single-kindergarten-features-3x h4,
+.single-kindergarten-features-2x h4,
+.single-kindergarten-features-1x h4{
+	font-family: 'Dosis', sans-serif;
+    font-size: 25px;
+    color: #f1f1f1;
+    padding: 5px 0;
+}
+.single-kindergarten-features p{
+    font-size: 15px;
+    color: #f1f1f1;
+}
+.kindergarten-read-more{
+    font-size: 14px;
+    font-weight: 500;
+    text-transform: uppercase;
+    color: #f1f1f1 !important;
+	transition: all .3s ease;
+}
+.kindergarten-read-more:hover {}
+.edufair-testimonial-timer-1x .edufair-testimonial span{
+	color: #ffb606;
+	font-size: 14px;
+	font-weight: 500;
+}
+.edufair-testimonial-timer-1x .edufair-testimonial b{
+	color: #b5d56a;
+	font-size: 17px;
+}
+.edufair-testimonial-timer-1x .kid-header-title  h4{
+	color: #f1f1f1;
+}
+
+.edufair-countdown-timer-1x .kid-header-title h2,
+.edufair-testimonial-timer-1x .kid-header-title h2{
+	color: #f1f1f1;
+	margin-bottom: 30px;
+}
+
+.edufair-countdown-timer-1x .kid-header-title span.heading-divider{
+	margin-left: 33px;
+}
+.edufair-testimonial-timer-1x .kid-header-title h4,
+.edufair-testimonial-timer-1x .kid-header-title h2,
+.edufair-countdown-timer-1x .kid-header-title h4,
+.edufair-countdown-timer-1x .kid-header-title h2{
+    font-family: 'Dosis',sans-serif;
+    font-weight: 700;
+}
+.edufair-countdown-timer-1x .kid-header-title h4,
+.edufair-countdown-timer-1x .kid-header-title h2{
+	text-align: left;
+}
+.edufair-testimonial-timer-1x .kid-header-title h4,
+.edufair-countdown-timer-1x .kid-header-title h4{
+	font-size: 20px;
+}
+.edufair-testimonial-timer-1x .kid-header-title h2,
+.edufair-countdown-timer-1x .kid-header-title h2{
+	font-size: 35px;
+}
+.kindergarten-1x .edufair-cta-1x{	
+	background: linear-gradient(rgba(0, 0, 0, 0.5),rgba(0, 0, 0, 0.5)),url('../images/kindergarten/slide2.jpg');	
+	background-attachment: fixed;
+	font-family: 'Dosis',sans-serif;
+}
+.edufair-pricing-table-1x .kid-header-title h4,
+.edufair-events-1x .kid-header-title h4,
+.edufair-blog-1x .kid-header-title h4{
+    font-size: 20px;
+    font-family: 'Dosis',sans-serif;
+    font-weight: 700;
+    color: #262626;
+}
+
+
+.edufair-kindergarten-features-1x .kid-header-title h2,
+.edufair-pricing-table-1x .kid-header-title h2,
+.edufair-events-1x .kid-header-title h2,
+.edufair-blog-1x .kid-header-title h2{
+    font-size: 35px;
+    font-family: 'Dosis',sans-serif;
+    font-weight: 700;
+    color: #FF6962;
+	margin-bottom: 30px;
+}
+
+.edufair-kindergarten-features-1x .kid-header-title strong,
+.edufair-testimonial-timer-1x .kid-header-title strong,
+.edufair-countdown-timer-1x .kid-header-title strong,
+.edufair-pricing-table-1x .kid-header-title strong,
+.edufair-events-1x .kid-header-title strong,
+.edufair-blog-1x .kid-header-title strong{
+	color: #ffb606;
+}
+span.heading-divider{
+	display: inline-block;
+    position: relative;
+    margin-bottom: 50px;
+}
+span.heading-divider:before{
+	position: absolute;
+    content: "";
+    width: 10px;
+    height: 10px;
+    background: #b5d56a;
+    left: 50%;
+    margin-left: -5px;
+    top: -4px;
+}
+span.heading-divider:after{
+	position: absolute;
+    content: "";
+    height: 3px;
+    width: 60px;
+    left: 50%;
+    margin-left: -30px;
+    top: -1px;
+    background: #b5d56a;
+}
+
+/***********************************************
+		University Two
+***********************************************/
+.university-2x .about-university{
+	padding-left: 30px;
+}
+.university-2x .about-university h2{
+	text-transform: uppercase;
+}
+/***********************************************
+		Online course One 
+***********************************************/
+.online-course-2x  .subscriber-form input[type="text"],
+.online-course-1x  .subscriber-form input[type="text"],
+.online-course-2x  .search-post input[type="text"],
+.online-course-1x  .search-post input[type="text"]{
+	height: 50px;
+	border-top-left-radius: 5px;
+	border-bottom-left-radius: 5px;
+}
+.online-course-2x  .btn-search,
+.online-course-1x  .btn-search{
+	margin-top: 10px;
+    height: 50px;
+	width: 50px;
+    background: #ad4790;
+	border-radius: 5px;
+	border: 0;
+    color: #f1f1f1;
+}
+.online-course-2x .subscriber-course-info,
+.online-course-2x  .online-course-info,
+.online-course-1x  .online-course-info{
+	clear: both;
+	padding-top: 30px;
+}
+.online-course-2x  .subscriber-course-info ul,
+.online-course-2x  .online-course-info ul,
+.online-course-1x  .online-course-info ul{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+.online-course-2x  .subscriber-course-info  ul li,
+.online-course-2x  .online-course-info ul li,
+.online-course-1x  .online-course-info ul li{
+	display: inline-block;
+    padding-right: 30px;
+	font-size: 16px;
+	color: #f1f1f1;
+}
+.online-course-2x  .online-course-info ul li:nth-child(1),
+.online-course-1x  .online-course-info ul li:nth-child(1){
+	color: #FE7D6F;
+}
+.online-course-2x  .online-course-info ul li:nth-child(2),
+.online-course-1x  .online-course-info ul li:nth-child(2){
+	color: #ecd06f;
+}
+.online-course-2x  .online-course-info ul li:nth-child(3),
+.online-course-1x  .online-course-info ul li:nth-child(3){
+	color: #03A9C1;
+}
+.online-course-2x  .subscriber-course-info ul li:last-child,
+.online-course-2x  .online-course-info ul li:last-child,
+.online-course-1x  .online-course-info ul li:last-child{
+    padding-right: 0;
+}
+.online-course-category-1x h2{
+    font-size: 35px;
+	
+    font-weight: 400;
+    color: #262626;
+    text-align: center;
+    margin-bottom: 50px;
+}
+.online-course-category-1x .single-kindergarten-features{
+	padding: 15px 5px;
+	border-radius: 5px;
+}
+.online-course-category-1x .single-kindergarten-features h4 a{
+	font-size: 20px;
+	font-family: 'Roboto', sans-serif;
+	color: #f1f1f1;
+	transition: all 0.3s ease;
+}
+
+
+.online-course-1x  .edufair-related-course {
+    margin: 0 0 30px 0;
+}
+.online-course-1x  .category-course-search h2{
+    font-size: 20px;
+    color: #262626;
+    font-weight: 700;
+    padding-top: 0;
+	padding-left: 15px;
+    margin-top: 0;
+    margin-bottom: 15px;
+    border-left: 5px solid #ad4790;
+
+}
+.all-course-left{
+	background: #f5f5f5;
+	padding: 20px;
+	border-radius: 2px;
+}
+.all-course-left .checkbox label,
+.radio label{
+	text-transform: uppercase;
+}
+.checkbox span{
+	padding-left: 10px;
+}
+
+.online-course-1x  .category-course-search .form-control {
+	height: 50px;
+	margin-bottom: 20px;
+}
+.online-course-1x  .advanced_seach{
+	margin-bottom: 45px;
+}
+.online-become-techer-1x{
+	background: linear-gradient(rgba(0, 0, 0, 0.5),rgba(0, 0, 0, 0.5)),url('../images/online-course/online-course-13.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+	background-attachment: fixed;
+	margin-top: 2%;
+}
+.become-techer{
+	border-right: 0;
+	border-left: 0;
+}
+.become-techer-left{}
+.become-techer-right{
+	padding: 66px 20px;
+}
+.become-techer-left img{
+	object-fit: cover;
+	//margin-top: -90px;
+}
+.become-techer-right h3,
+.become-techer-left h3 {
+	
+	font-size: 40px;
+	color: #f1f1f1;
+	font-weight: 600;
+	margin-bottom: 20px;
+}
+.become-techer-right p,
+.become-techer-left p {
+	font-size: 15px;
+	font-weight: 400;
+	color: #f1f1f1;
+	margin-bottom: 30px;
+}
+.online-course-1x .online-popular-category-1x{
+	background: linear-gradient(rgba(0, 0, 0, 0.6),rgba(0, 0, 0, 0.6)),url('../images/slide/slide-1.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;		
+}
+.online-popular-category-1x .related-course-content {
+	background: #fff;
+	padding-bottom: 30px;
+	border-bottom-left-radius: 10px;
+	border-bottom-right-radius: 10px;
+}
+.online-popular-category-1x .edufair-related-course-image,
+.online-popular-category-1x .edufair-related-course-overlay{
+	border-top-left-radius: 10px;
+	border-top-right-radius: 10px;	
+}
+.online-course-2x .related-course-content h3,
+.online-course-1x .related-course-content h3 {
+    margin-top: 0;
+}
+.online-course-1x .related-course-content p {}
+
+
+.online-course-1x .edufair-main-title {
+    font-size: 30px;
+    text-transform: capitalize;
+}
+.online-course-2x .edufair-shop-1x .carousel-control,
+.online-course-1x .edufair-shop-1x .carousel-control,
+ .online-course-2x .edufair-related-course-1x .carousel-control,
+ .online-course-1x .edufair-related-course-1x .carousel-control,
+ .single-course-1x .edufair-related-course-1x .carousel-control,
+ .university-2x .edufair-shop-1x .carousel-control,
+ .university-2x .university-course-1x .carousel-control,
+ .university-1x .edufair-shop-1x .carousel-control,
+ .university-1x .university-course-1x .carousel-control{
+	top: 20px;
+    margin-left: 92%;
+}
+.edufair-shop-1x .shop-content h5,
+.online-course-2x .edufair-shop-1x .shop-content h5,
+.online-course-1x .edufair-shop-1x .shop-content h5{
+    font-size: 17px;
+    color: #262626;
+    font-weight: 500;
+}
+.edufair-shop-1x .shop-content h6,
+.online-course-2x .edufair-shop-1x .shop-content h6,
+.online-course-1x .edufair-shop-1x .shop-content h6{
+    font-size: 12px;
+    color: #7a7a7a;
+    font-weight: 500;
+}
+.online-course-2x .edufair-shop-1x  .edufair-shop-middle,
+.online-course-1x .edufair-shop-1x  .edufair-shop-middle {
+	left: 0;
+	transform: none;
+}
+.online-course-1x .online-popular-category-1x .related-course-content h3 {
+    margin-top: 0;
+    padding-top: 0;
+}
+
+.online-course-2x .edufair-shop-1x .footer-info-right ul li,
+.online-course-1x .edufair-shop-1x .footer-info-right ul li{
+	border: 0;
+	padding-top: 4px;
+}
+/***********************************************
+		Online course Two 
+***********************************************/
+.online-course-1x .container-2,
+.online-course-2x .container-2,
+.online-course-1x .top-menu,
+.online-course-2x .top-menu {
+	display: none;
+}
+.high-school-1x .edufair-nav,
+.kindergarten-1x .edufair-nav{
+	margin-top: 0 !important;
+}
+.online-course-1x .edufair-nav,
+.online-course-2x .edufair-nav {
+	margin-top: 20px;
+}
+.is-sticky .edufair-nav,
+.online-course-1x .is-sticky .edufair-nav,
+.online-course-2x .is-sticky .edufair-nav {
+	margin-top: 0 !important;
+	
+}
+.online-course-1x .edufair-cart,
+.online-course-2x .edufair-cart {
+	color: #f1f1f1;
+    margin-top: 10px;
+}
+.online-course-1x .edufair-nav .navbar-right,
+.online-course-2x .edufair-nav .navbar-right {
+    margin-right: 200px;
+}
+.online-course-1x .box a,
+.online-course-2x .box a{
+	color: #f1f1f1;
+    font-family: 'Roboto', sans-serif;
+    text-transform: capitalize;
+    font-weight: 500;
+    font-size: 15px;
+}
+.online-course-1x .is-sticky .edufair-nav .box,
+.online-course-1x .is-sticky .edufair-nav .box a,
+.online-course-2x .is-sticky .edufair-nav .box,
+.online-course-2x .is-sticky .edufair-nav .box a{
+	color: #262626;
+}
+.online-course-1x .is-sticky .edufair-nav .box i,
+.online-course-2x .is-sticky .edufair-nav .box i{
+	border: 1px solid #ad4790;
+	color: ad4790;
+}
+.online-course-1x .is-sticky .modal,
+.online-course-2x .is-sticky .modal{
+	z-index: 999999;
+}
+.online-course-2x .is-sticky .edufair-subscription-1x a,
+.online-course-1x .is-sticky .edufair-subscription-1x a{
+	color: #f1f1f1 !important;
+}
+.online-course-2x .is-sticky .edufair-subscription-1x i,
+.online-course-1x .is-sticky .edufair-subscription-1x i{
+	border: none !important;
+}
+.single-events-1x .media-left{
+	padding-top: 5px;
+}
+
+.online-course-1x .box i,
+.online-course-2x .box i{
+	font-size: 10px;
+	color: #ad4790; 
+	font-weight: 700;
+	border: 1px solid #ad4790;
+    border-radius: 50px;
+    padding: 10px;
+    margin-right: 5px;
+	
+}
+.online-course-2x .edufair-main-title {
+    font-size: 30px;
+	text-transform: capitalize;
+}
+.online-course-2x .edufair-related-course-1x {
+    margin-bottom: 0;
+}
+.online-course-2x .edufair-featured-category-1x{}
+.online-course-2x .featured-category-container{}
+
+.online-course-2x .featured-category-container h2{
+    font-size: 35px;
+    
+    font-weight: 700;
+    color: #262626;
+	text-align: center;
+}
+
+.online-course-2x .single-featured-category{
+    text-align: center;
+}
+.online-course-2x .single-featured-category h4{
+	font-size: 25px;
+	font-weight: 600;
+	color: #262626;
+	margin-bottom: 20px;
+}
+.online-course-2x .single-featured-category p{}
+.online-course-2x .featured-category-img{
+    background: #ad4790;
+    border-radius: 50%;
+    height: 140px;
+    width: 140px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 30px;
+	margin-top: 70px;
+	border:5px solid #fff;
+}
+.online-course-2x .single-featured-category:hover .featured-category-img{
+    text-align: center;
+	height: 140px;
+    width: 140px;
+	background: #ad4790;
+	border-radius: 50%;
+	transition: 0.3s ease;
+	-webkit-box-shadow: 0px 0px 0px 3px #ad4790;
+	-moz-box-shadow: 0px 0px 0px 3px #ad4790;
+	box-shadow: 0px 0px 0px 3px #ad4790;
+}
+.online-course-2x .featured-category-img img{
+    display: block;
+    max-width: 80px;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 20px;
+}
+.online-course-2x .course-header-menu{
+	background: #f5f5f5;
+	overflow: hidden;
+	padding: 20px;
+	margin-bottom: 50px;
+}
+.online-course-2x .single-header-menu{
+	
+}
+.online-course-2x .single-header-menu i{
+	float: right;
+	font-size: 20px;
+	margin-left: 15px;
+	padding-top: 10px;
+}
+.online-course-2x .single-header-menu .form-control{
+	margin: 0; 
+	height: 35px;
+}
+.online-course-2x .edufair-related-course {
+    margin-top: 0;
+}
+.online-course-2x .online-course-nav{
+    float: right;
+	border: none;
+}
+.online-course-2x .online-course-nav li a{
+	padding: 0;
+	border: 0;
+	outline: none;
+}
+.online-course-2x .online-course-nav>li.active>a,
+.online-course-2x .online-course-nav>li.active>a:focus, 
+.online-course-2x .online-course-nav>li.active>a:hover{
+	border: none;
+	padding: 0;
+	color: #ad4790;
+}
+.online-course-2x .course-teacher-1x{}
+.online-course-2x .edufair-events-1x {
+    padding-top: 0;
+}
+.online-course-2x .course-teacher-1x .media{}
+.online-course-2x .course-teacher-1x .media-left{
+	display: block;
+}
+.online-course-2x .course-teacher-1x .media-left img{
+    width: 100px;
+    height: 100px;
+    border-radius: 5px;
+    object-fit: cover;
+}
+.online-course-2x .course-teacher-1x .media-body{
+	padding-top: 20px;
+}
+.online-course-2x .course-teacher-1x .media-body a h4{
+    font-size: 15px;
+    color: #262626;
+    font-weight: 700;
+}
+.online-course-2x .course-teacher-1x .media-body a span{
+    font-size: 12px;
+    color: #262626;
+    font-weight: 700;
+}
+.online-course-2x .single-events-1x .media-left{
+	padding-right: 0;
+}
+
+.online-course-2x .event-cost b {
+    margin-top: 25px;
+}
+.online-course-2x .single-events-1x h4 {
+    font-size: 20px;
+    margin-bottom: 15px;
+}
+.online-course-2x .single-events-1x p {
+    margin-top: 20px;
+}
+.footer-subscriber-1x{
+    background: linear-gradient(rgba(0,0,0, 0),rgba(0,0,0, 0)),url(../images/online-course/footer-bg.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+	background-attachment: fixed;
+}
+.online-course-1x .footer-subscriber-1x h2{
+	
+    font-size: 30px;
+    color: #262626;
+    font-weight: 700;
+    margin-bottom: 40px;	
+}
+.subscriber{
+	padding: 80px 0 0 0;
+}
+.subscriber-content{}
+.online-course-2x  .subscriber-course-info  ul li{
+	color: #f1f1f1;
+}
+.subscriber-content img{
+	width: auto;
+    margin-bottom: 40px;
+}
+.subscriber-content p{
+	max-width: 900px;
+    padding: 50px 0;
+    font-size: 15px;
+    font-weight: 400;
+	margin: 0 auto;
+}
+.subscriber-content .footer-info-right {
+	text-align: center;
+}
+.subscriber-content .footer-info-right img{
+	width: auto;
+    margin: 40px 15px 40px 0;
+}
+.subscriber-form{}
+.subscriber-form .form-control{}
+.footer-bottom{
+	padding: 50px 0 70px 0;
+}
+
+.footer-bootom-left{
+	float: left;
+}
+.footer-bootom-left p{
+	padding: 0;
+}
+
+
+.footer-bootom-left a{
+	color: #f1f1f1;
+	transition: all 0.3s ease;
+}
+.subscriber-content .footer-bootom-left a{
+	color: #7a7a7a;
+}
+.footer-bootom-left a:hover{
+	color: #ad4790;
+}
+.subscriber-content .footer-bootom-left a:hover{
+	color: #ad4790;
+}
+.footer-bootom-right{
+	float: right;
+}
+.footer-bootom-right ul{
+    padding: 0;
+    margin: 0;
+}
+.footer-bootom-right ul li{
+    display: inline-block;
+    padding-left: 30px;
+}
+.subscriber-content .footer-bootom-right ul li a{
+	color: #7a7a7a;
+}
+
+.footer-bootom-right ul li a{
+    font-size: 15px;
+    color: #f1f1f1;
+    transition: 0.3s ease;
+}
+.footer-subscriber-1x .footer-info-right ul li{
+	padding-top: 4px;
+}
+.footer-bootom-right ul li a:hover{
+	color: #ad4790;
+}
+
+
+.online-access-course-1x{
+	background: linear-gradient(rgba(0, 0, 0, 0.5),rgba(0, 0, 0, 0.5)),url('../images/online-course/slider-7.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+	background-attachment: fixed;
+	margin-top: 70px;
+}
+.access-course-content{
+	border: 0;
+}
+.access-course{
+	padding: 140px 20px;
+}
+.online-course-2x  .access-course h4{
+	font-size: 25px;
+    color: #f1f1f1;
+    font-weight: 600;
+    margin-bottom: 35px;
+    
+}
+.online-course-2x  .access-course h3{
+	font-size: 18px;
+    color: #f1f1f1;
+    font-weight: 400;
+    line-height: 30px;
+    margin-bottom: 5px;
+}
+.online-course-2x .access-course-img{
+	object-fit: cover;
+    margin-top: 139px;	
+}
+.online-course-2x .access-course img{
+	width: auto;
+    margin: 40px 10px 0 0;	
+}
+/***********************************/
+.online-course-new-container {
+    position: relative;
+    width: 100%;
+	top: -72px;
+}
+.online-course-new-middle input[type="text"]{
+	border: 0;
+	border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+.online-course-new-container .online-course-new-image {
+  opacity: 0.5;
+  display: block;
+  width: 100%;
+  height: 60vh;
+  object-fit: cover;
+  transition: .5s ease;
+  backface-visibility: hidden;
+}
+
+.online-course-new-middle {
+    transition: .5s ease;
+	opacity: 1;
+	position: absolute;
+	top: 55%;
+	width: 100%;
+	text-align: center;
+	transform: translateY(-50%);
+}
+
+.online-course-new-container:hover .online-course-new-image {
+  opacity: 0.5;
+}
+
+.online-course-new-container:hover .online-course-new-middle {
+  opacity: 1;
+}
+
+.online-course-new-text {
+  color: white;
+  font-size: 16px;
+}
+.online-course-new-text h2{
+	font-size: 50px;	
+	font-weight: 500;
+	color: #f1f1f1;
+	text-align: center;
+}
+.online-course-new-text h4{
+	font-size: 20px;
+	font-weight: 400;
+	color: #f1f1f1;
+	margin-bottom: 40px;
+	text-align: center;
+}
+.online-course-new-text .form-control{
+	height: 50px;
+}
+.online-course-2x .subscriber-course-info, .online-course-2x .online-course-info, .online-course-1x .online-course-info {
+    clear: both;
+    padding-top: 30px;
+    text-align: center;
+}
+
+/*********************************************
+				About Us 
+*********************************************/
+.edufair-notice-1x{}
+.notice-read-more{
+    float: right;
+    right: 30px;
+    padding: 10px 30px !important;
+    background: #ad4790 !important;
+    color: #f1f1f1 !important;
+    margin-top: 17px;
+}
+.notice-read-more:hover:before{
+	background: #262626 !important;
+}
+.notice-board-1x .single-events-1x h4 {
+    font-size: 22px;
+}
+.notice-board-1x .event-schedule {
+    font-weight: 500;
+}
+
+/*********************************************
+				Vice Chancellor 
+*********************************************/
+.vice-chancellor-contents img{
+    width: auto;
+    margin: 20px 15px 40px 0;
+}
+
+/*********************************************
+				Admission Apply 
+*********************************************/
+.admission-form-1x .edufair-subscription-form-1x {
+     padding: 0;
+	 padding-top: 50px;
+	 padding-left: 0;
+}
+.admission-form-1x .edufair-subscription-title-1x {
+	background: none;
+	padding: 0;
+    padding-left: 15px;
+    text-align: left;
+    border-left: 5px solid #ad4790;
+}
+.admission-form-1x .edufair-subscription-title-1x h3 {    
+    font-weight: 700;
+    font-size: 25px;
+    color: #262626;
+}
+.admission-form-1x textarea.form-control {
+    height: 200px;
+	border: 1px solid #dddddd;
+}
+.carrer-details-1x .notice-read-more ,
+.admission-form-1x .notice-read-more {
+     float: left;
+     right: 0;
+}
+
+/*********************************************
+				Contact us 
+*********************************************/
+.contact-us-header{}
+.contact-us-header h2{
+	font-size: 35px;
+    
+    font-weight: 700;
+    color: #262626;
+    text-align: center;
+}
+.contact-us-header h3{
+	font-size: 15px;
+    font-weight: 500;
+    color: #262626;
+    text-align: center;
+}
+.featured-category-img i{
+	font-size: 60px;
+	color: #f1f1f1;
+	margin-top: 35px;
+}
+.contact-us-1x .single-featured-category p {
+    font-size: 16px;
+}
+.contact-us-header .notice-read-more{
+	float: center;
+}
+.client_map{
+	margin-top: 50px;	
+	padding-right: 30px;
+}
+#map{
+	overflow:hidden;
+	width:100%;
+	height: 400px;
+}
+
+
+
+.kid-feature-container {
+    position: relative;
+    width: 100%;
+}
+
+.kid-feature-image {
+  opacity: 1;
+  display: inline-block;
+  width: 100%;
+  height: auto;
+  transition: .5s ease;
+  backface-visibility: hidden;
+}
+
+.kid-feature-middle {
+  transition: .5s ease;
+  opacity: 0.4;
+  position: absolute;
+  overflow: hidden;
+  top: 0%;
+  left: 0%;
+  
+  //transform: translate(-0%, -0%);
+  //-ms-transform: translate(-50%, -0%)
+  
+}
+
+.kid-feature-container:hover .kid-feature-image {
+  opacity: 1;
+}
+
+.kid-feature-container:hover .kid-feature-middle {
+  opacity: 1;
+}
+
+.kid-feature-text {
+  background-color: #4CAF50;
+  color: white;
+  font-size: 16px;
+  padding: 16px 32px;
+}
+
+
+/********************************************
+			Components Item
+/********************************************/
+.promotion-box {
+    background: #f9f9f9;
+    padding: 20px 20px 20px 30px;
+    border-left: 3px solid #FF6962;
+    margin-bottom: 30px;
+}
+.promotion-box  h4{
+	color: #262626;
+}
+.line-top {
+    padding: 30px;
+    border-left: 0;
+    border-top: 3px solid #FF6962;
+    margin-bottom: 30px;
+}
+.dropcaps span {
+    float: left;
+    color: #ad4790;
+    font-size: 75px;
+    line-height: 60px;
+    padding-top: 4px;
+    padding-right: 8px;
+    padding-left: 3px;
+}
+.dropcaps strong {
+    float: left;
+	background: #ad4790;
+    color: #f1f1f1;
+    font-size: 75px;
+    line-height: 60px;
+    padding: 10px;
+    margin-right: 10px;
+}
+.sticker-1x h4{
+	color: #262626;
+	font-size: 15px;
+	margin-right: 20px;
+}
+.sticker {
+    background: #333;
+    color: #fff;
+    padding: 2px 8px;
+    font-size: 12px;
+    font-weight: 400;
+    border-radius: 3px;
+    margin: 0 5px;
+}
+.red{
+	background: #FF6962;
+}
+.blue{
+	background: #ad4790;
+}
+.orange{
+	background: #ffb606;
+}
+.green{
+	background: #b5d56a;
+}
+i.sticker-icon {
+    font-size: 50px;
+    color: #333;
+    position: relative;
+    display: inline-block;
+    padding-right: 30px;
+}
+i.sticker-icon span {
+    position: absolute;
+    right: 5px;
+    top: 0;
+}
+span.highlight {
+    background: #f2405d;
+    padding: 0 10px;
+    border-radius: 3px;
+    color: #fff;
+}
+span.highlight-dark {
+    background: #333;
+    padding: 0 10px;
+    border-radius: 3px;
+    color: #fff;
+}
+.panel-title>a{
+	display: block;
+}
+/* large button style */
+.edufair-component-button,
+a.edufair-component-button {
+	background: #ad4790;
+	color: #f1f1f1;
+    border-radius: 2px;
+    display: inline-block;
+	text-align: center;
+	font-weight: 700;   
+    position: relative;
+    text-transform: uppercase;
+    z-index: 1;
+}
+
+.button-large{
+	padding: 13px 30px;
+	font-size: 13px;
+}
+.button-medium{
+	padding: 8px 20px;
+	font-size: 12px;
+}
+.button-small{
+	padding: 4px 10px;
+	font-size: 10px;
+}
+
+.edufair-component-button i,
+a.edufair-component-button i {
+	padding-left: 5px;
+	position: relative;
+	top: 1px;
+}
+.edufair-component-button:hover,
+a.edufair-btn-larg:hover {
+	text-decoration: none;
+	color: #f1f1f1;
+}
+.edufair-component-button:before,
+a.edufair-component-button:before {
+	background: #8c206e;
+	color: #f1f1f1;
+	content: "";
+	height: 0;
+	bottom: 0;
+	position: absolute;
+	left: 0;
+	width: 100%;
+	z-index: -1;
+	-moz-transition: all .3s ease;
+	-o-transition: all .3s ease;
+	-webkit-transition: all .3s ease;
+	transition: all .3s ease;
+}
+.edufair-component-button:hover:before,
+a.edufair-component-button:hover:before {
+	height: 100%;
+	color: #8c206e;
+}
+/************************************************
+				404 page	
+*************************************************/
+.edufair-404-page-1x{}
+.page-404-content{
+    text-align: center;
+    overflow: hidden;
+    padding-top: 150px;
+}
+.page-404-content span{
+    font-size: 170px;
+    color: #ad4790;
+    font-weight: 700;
+    letter-spacing: 30px;
+    overflow: hidden;
+}
+.page-404-content h2{
+	font-size: 70px;
+	font-weight: 400;
+	color: #262626;
+	text-transform: uppercase;
+	margin-top: 70px
+}
+.page-404-content h3{
+	font-size: 25px;
+	font-weight: 300;
+	color: #262626;
+	margin-bottom: 50px
+}
+.page-404-content h3 a{
+	color: #ad4790;	
+	transition: all 0.3s ease;
+}
+.page-404-content h3 a:hover{
+	color: #0e504b;	
+}
+.comming-soon-1x .edufair-slider-image{
+	height: 100vh;
+	object-fit: cover;
+}
+
+/********************************************/
+
+.titulo-foo:before {
+    content: "";
+    position: absolute;
+    bottom: 135px;
+    width: 40px;
+    border-bottom: 3px solid #fff;
+    transform: scaleX(1);
+    transition: all .3s ease-in-out;
+}
+
+.titulo-foo2:before {
+    content: "";
+    position: absolute;
+    bottom: 100px;
+    width: 40px;
+    border-bottom: 3px solid #fff;
+    transform: scaleX(1);
+    transition: all .3s ease-in-out;
+}
