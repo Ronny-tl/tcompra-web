@@ -39,6 +39,9 @@ import {RegistroUsuarioService} from './servicios/registro-usuario.service';
 import { DatePipe } from '@angular/common';
 import { ErrorComponent } from './componentes/error/error.component';
 import {NgxPaginationModule} from 'ngx-pagination';
+import { LoginComponent } from './componentes/login/login.component';
+import { PanelComponent } from './componentes/panel/panel.component';
+import { AuthGuard} from './guards/auth.guard';
 
 @NgModule({
   declarations: [
@@ -56,7 +59,9 @@ import {NgxPaginationModule} from 'ngx-pagination';
     ComoVenderComponent,
     ComoComprarComponent,
     BlogComponent,
-    ErrorComponent
+    ErrorComponent,
+    LoginComponent,
+    PanelComponent
   ],
   imports: [
     BrowserModule,
@@ -74,7 +79,7 @@ import {NgxPaginationModule} from 'ngx-pagination';
     AngularFireStorageModule
 
   ],
-  providers: [AuthService, ItemService, AngularFireDatabase, ModalServiceService,FormBuilder,RegistroUsuarioService,DatePipe],
+  providers: [AuthService, ItemService, AngularFireDatabase, ModalServiceService,FormBuilder,RegistroUsuarioService,DatePipe,AuthGuard],
   bootstrap: [AppComponent],
   exports: [BsDropdownModule, TooltipModule, ModalModule]
 })

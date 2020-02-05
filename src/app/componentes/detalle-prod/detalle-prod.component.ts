@@ -6,11 +6,16 @@ import { AuthService } from '../../servicios/auth.service';
 import {Router,ActivatedRoute} from '@angular/router';
 import {AngularFireList } from 'angularfire2/database';
 import { saveAs } from 'file-saver';
-import { Subscription } from 'rxjs';
+import { Subscription, Observable } from 'rxjs';
 import { HttpClient, HttpHandler } from '@angular/common/http';
 import { NgForm } from '@angular/forms';
-//import { ofertaRequerimiento } from '../../models/ofertaRequerimientos'
+import { ofertaRequerimiento } from '../../models/ofertaRequerimientos'
 import {AngularFireStorage} from '@angular/fire/storage'
+import { finalize } from 'rxjs/operators';
+import { DatePipe } from '@angular/common';
+import {RegistroOfertasService} from '../../servicios/registro-ofertas.service';
+import { ofertaLiquidacion } from 'src/app/models/ofertaLiquidacion';
+import { ofertaTrabajo } from 'src/app/models/ofertaTrabajo';
 
 @Component({
   selector: 'app-detalle-prod',
@@ -18,14 +23,17 @@ import {AngularFireStorage} from '@angular/fire/storage'
   styleUrls: ['./detalle-prod.component.css']
 })
 export class DetalleProdComponent implements OnInit {
+  idMiOferta:string;
+  isOfertaste:boolean = false;
+  myDate = new Date();
   @ViewChild('nombreUsuario', { static: false }) nombreUsuario: ElementRef;
   @ViewChild('emailUsuario', { static: false }) emailUsuario: ElementRef;
   @ViewChild('garantiaAnio', { static: false }) garantiaAnio: ElementRef;
   @ViewChild('soporteMeses', { static: false }) soporteMeses: ElementRef;
   @ViewChild('presupuestoUsuario', { static: false }) presupuestoUsuario: ElementRef;
-  aceptoNegociacion:boolean = false;
-  incluyeIGV:boolean=false;
-  incluyeEnvio:boolean=false;
+  aceptoNegociacion:number = 0;
+  incluyeIGV:number=0;
+  incluyeEnvio:number=0;
   idProducto:string;
   tipoProducto:string;
   producto= undefined;
@@ -42,12 +50,17 @@ export class DetalleProdComponent implements OnInit {
   selectedEntrega: string = '-LjS6ygVTMvasGPrdtqp';
   selectedMoneda: string = '-LjS7G05dji2dWV2Gft1';
   loginService: Subscription;
-  isLogin: boolean;
+  isLogin: boolean = false;
   usuarioAutenticado:string;
   uidUsuario:string;
   imagenUsuario:string ="assets/images/avatar.jpg";
   urlLogout:string;
   imagenesCargadas:any;
+  fileCargado:any;
+  urlImage: Observable<string>;
+  tipoUsuario:number;
+  cantImagenes:number = 0;
+  cantFile:number = 0;
   constructor(
     private register: RegistroUsuarioService,
     private router: Router,
@@ -55,7 +68,9 @@ export class DetalleProdComponent implements OnInit {
     private items: ItemService,
     private http: HttpClient,
     private storage: AngularFireStorage,
-    public authService: AuthService
+    public authService: AuthService,
+    private datePipe: DatePipe,
+    private registroOferta: RegistroOfertasService
   ) { }
   ngOnInit() {
     //alert(post.id);
@@ -63,6 +78,7 @@ export class DetalleProdComponent implements OnInit {
       //this.router.navigate(['/']);
     //}
     //alert('DETALLE PRODUCTO: '+this.register.getId());
+    //this.estadoProducto();
     this.verificarAutenticacion();
     this.idProducto = this.route.snapshot.paramMap.get('id');
     this.tipoProducto = this.route.snapshot.paramMap.get('tipo');
@@ -90,6 +106,7 @@ iniciarUsuario(){
     data.forEach(item =>{
     if(item.key == this.uidUsuario){
       this.usuarioAutenticado = item.data.nombre;
+      this.tipoUsuario =0;
       if(item.data.imagen != "default"){
         this.imagenUsuario = item.data.imagen;
       }
@@ -99,7 +116,8 @@ iniciarUsuario(){
   this.authService.getUsuario_Persona().subscribe(data => {
     data.forEach(item =>{
     if(item.key == this.uidUsuario){
-      this.usuarioAutenticado = item.data;
+      this.usuarioAutenticado = item.data.nombre;
+      this.tipoUsuario =1;
       if(item.data.imagen != "default"){
         this.imagenUsuario = item.data.imagen;
       }
@@ -114,10 +132,44 @@ verificarAutenticacion(){
       this.isLogin= true;
       this.uidUsuario = auth.uid;
       this.iniciarUsuario();
+      this.verificarOferta();
     }else{
       this.isLogin=false;
     }
   })
+}
+verificarOferta(){
+  this.isOfertaste=false;
+  if(this.tipoProducto==="1" || this.tipoProducto=="2"){
+    this.items.getOferta_Requerimiento().subscribe(data => {
+      data.forEach(x=>{
+        if(x.data.usuario===this.uidUsuario && x.data.id_requerimiento===this.idProducto){
+          this.isOfertaste = true;
+          this.idMiOferta = x.key;
+        }
+      });
+    });
+  }
+  if(this.tipoProducto==="3"){
+    this.items.getOferta_Liquidacion().subscribe(data => {
+      data.forEach(x=>{
+        if(x.data.usuario===this.uidUsuario && x.data.id_requerimiento===this.idProducto){
+          this.isOfertaste = true;
+          this.idMiOferta = x.key;
+        }
+      });
+    });
+  }
+  if(this.tipoProducto==="4"){
+    this.items.getOferta_Puesto_Trabajo().subscribe(data => {
+      data.forEach(x=>{
+        if(x.data.usuario===this.uidUsuario && x.data.id_requerimiento===this.idProducto){
+          this.isOfertaste = true;
+          this.idMiOferta = x.key;
+        }
+      });
+    });
+  }
 }
 mostrarRequerimientos(){
   this.items.listarRequerimientos2(this.idProducto).subscribe(data =>{
@@ -235,12 +287,9 @@ mostrarPuestoTrabajo(){
   }
   allDepartamento(){
     this.items.getDepartamento().subscribe(data => {
-      data.forEach(x =>{
-        this.all_departamento.push({
-          key: x.key,
-          value: x.data
-        });
-      });     
+      this.all_departamento = data;
+      //console.log(data);
+      //this.buscarForm.controls.departamento.setValue(this.departamentos[0].data.nombre);      
     });
   }
 
@@ -256,53 +305,228 @@ mostrarPuestoTrabajo(){
   }
 
   ofertar(id){
-    if(this.isLogin)
+    if(this.isLogin){
     //alert(id+' - '+ this.selectedDepartamento);
-        if(id==="1"){
-          //alert(this.nombreUsuario.nativeElement.value);
-          //if(this.nombreUsuario.nativeElement.value===""){alert("Ingrese el nombre de la oferta"); return '';}
-          //if(this.emailUsuario.nativeElement.value===""){alert("Ingrese correo"); return'';}
-          //if(this.garantiaAnio.nativeElement.value===""){alert("Ingrese garantia en años"); return '';}
-          //if(this.soporteMeses.nativeElement.value===""){alert("Ingrese Soporte en meses"); return '';}
-          //if(this.presupuestoUsuario.nativeElement.value===""){alert("Ingrese un presupuesto"); return '';}
-          //if(this.selectedDepartamento===0){alert("Seleccione un departamento"); return '';}
-          //if(this.selectedMoneda==='-LjS7G05dji2dWV2Gft1'){alert("Seleccione un tipo de moneda"); return '';}
-          //if(this.selectedEntrega==='-LjS6ygVTMvasGPrdtqp'){alert("Seleccione un tiempo de entrega"); return '';}
-          this.subirImage();
-          for(let x of this.imagenesCargadas){
-            console.log(x);
-          }
+        if(this.nombreUsuario.nativeElement.value===""){alert("Ingrese el nombre de la oferta"); return '';}
+        if(this.emailUsuario.nativeElement.value===""){alert("Ingrese correo"); return'';}
+        if(this.presupuestoUsuario.nativeElement.value===""){alert("Ingrese un presupuesto"); return '';}
+        if(this.selectedDepartamento===0){alert("Seleccione un departamento"); return '';}
+        if(this.selectedMoneda==='-LjS7G05dji2dWV2Gft1'){alert("Seleccione un tipo de moneda"); return '';}
+
+        if(id==="1" || id==="2"){
+          if(this.garantiaAnio.nativeElement.value===""){alert("Ingrese garantia en años"); return '';}
+          if(this.soporteMeses.nativeElement.value===""){alert("Ingrese Soporte en meses"); return '';}
+          if(this.selectedEntrega==='-LjS6ygVTMvasGPrdtqp'){alert("Seleccione un tiempo de entrega"); return '';}
+          //this.subirImage();
+          const dataOferta = new ofertaRequerimiento(
+            this.emailUsuario.nativeElement.value,
+            this.selectedEntrega,
+            this.incluyeEnvio,
+            this.datePipe.transform(this.myDate,'dd-MM-yyyy').toString(),
+            Number(this.garantiaAnio.nativeElement.value),
+            this.idProducto,
+            this.incluyeIGV,
+            this.selectedMoneda,
+            this.aceptoNegociacion,
+            this.nombreUsuario.nativeElement.value,
+            this.usuarioAutenticado,
+            Number(this.presupuestoUsuario.nativeElement.value),
+            Number(this.soporteMeses.nativeElement.value),
+            Number(this.tipoProducto),
+            this.tipoUsuario,
+            Number(this.selectedDepartamento),
+            this.uidUsuario
+            );
+            var key = this.registroOferta.addOferta(dataOferta,this.tipoProducto,this.idProducto);
+            this.subirImage(key);
+            this.subirFile(key);
+            this.verificarOferta();
+            alert("Su oferta ha sido registrado satisfactoriamente");
         }
-        if(id==="2"){
-          alert(id+' - '+ this.selectedDepartamento)
+        if(id==="3"){
+          if(this.selectedEntrega==='-LjS6ygVTMvasGPrdtqp'){alert("Seleccione un tiempo de entrega"); return '';}
+          const dataOfertaLiqui = new ofertaLiquidacion(
+            this.emailUsuario.nativeElement.value,
+            this.selectedEntrega,
+            this.datePipe.transform(this.myDate,'dd-MM-yyyy').toString(),
+            this.idProducto,
+            this.selectedMoneda,
+            this.nombreUsuario.nativeElement.value,
+            this.usuarioAutenticado,
+            Number(this.presupuestoUsuario.nativeElement.value),
+            Number(this.tipoProducto),
+            this.tipoUsuario,
+            Number(this.selectedDepartamento),
+            this.uidUsuario
+          );
+            var key = this.registroOferta.addOferta(dataOfertaLiqui,this.tipoProducto,this.idProducto);
+            this.verificarOferta();
+            alert("Su oferta ha sido registrado satisfactoriamente");
         }
+        if(id==="4"){
+          if(this.selectedEntrega==='-LjS6ygVTMvasGPrdtqp'){alert("Seleccione la Disponibilidad"); return '';}
+          const dataOfertaTrabajo = new ofertaTrabajo(
+            this.emailUsuario.nativeElement.value,
+            this.selectedEntrega,
+            this.datePipe.transform(this.myDate,'dd-MM-yyyy').toString(),
+            this.idProducto,
+            this.selectedMoneda,
+            this.aceptoNegociacion,
+            this.nombreUsuario.nativeElement.value,
+            this.usuarioAutenticado,
+            Number(this.presupuestoUsuario.nativeElement.value),
+            Number(this.tipoProducto),
+            this.tipoUsuario,
+            Number(this.selectedDepartamento),
+            this.uidUsuario
+          );
+            var key = this.registroOferta.addOferta(dataOfertaTrabajo,this.tipoProducto,this.idProducto);
+            this.subirImage(key);
+            this.subirFile(key);
+            this.verificarOferta();
+            alert("Se ha postulado satisfactoriamente");
+        }
+      }
     else{
       alert("Necesitas estar logueado para ofertar");
     }
 
   }
+
+
  validarBox(values:any,id:number){
-  console.log(values.currentTarget.checked);
-  if(id===1){ this.aceptoNegociacion = values.currentTarget.checked;}
-  if(id===2){ this.incluyeIGV = values.currentTarget.checked;}
-  if(id===3){ this.incluyeEnvio = values.currentTarget.checked;}
+  //console.log(values.currentTarget.checked);
+  if(id===1){
+     if(values.currentTarget.checked){
+      this.aceptoNegociacion = 1;
+     }else{
+      this.aceptoNegociacion = 0;
+     }
   }
+  if(id===2){
+     if(values.currentTarget.checked){
+      this.incluyeIGV=1;
+     }else{
+      this.incluyeIGV=0;
+     }
+    }
+  if(id===3){
+     if(values.currentTarget.checked){
+      this.incluyeEnvio = 1;
+     }else{
+      this.incluyeEnvio = 0;
+     }
+    }
+  }
+
   cargarImage(data){
     //console.log(data.path[0].files);
+    this.cantImagenes = data.path[0].files.length;
     if(data.path[0].files.length>5){
       alert("Cantidad de imagenes permitidas son 5");
       return '';
     }
     this.imagenesCargadas = data.target.files;
-    //for(let x of data.path[0].files){
-     // console.log(x.name);
-    //}
   }
-  subirImage(){
+  cargarFile(data){
+    //console.log(data.path[0].files);
+    this.cantFile = data.path[0].files.length;
+    if(data.path[0].files.length>1){
+      alert("Maximo de archivos es 1");
+      return '';
+    }
+    //console.log(data.path[0].files)
+    this.fileCargado = data.target.files[0];
+  }
 
+  subirImage(id){
+    if(this.cantImagenes>0){
+      let cont = 0;
+      for(let x of this.imagenesCargadas){
+        //console.log(x);
+        if(this.tipoProducto==="1" || this.tipoProducto==="2"){
+          const ref = this.storage.ref('Oferta_Requerimiento/Imagenes/'+cont+'-'+id);
+          const task = this.storage.upload('Oferta_Requerimiento/Imagenes/'+cont+'-'+id,x);
+          task.snapshotChanges().pipe(finalize(() => {
+                      ref.getDownloadURL().subscribe(downloadURL => {
+                          this.registroOferta.updateImagen(downloadURL,1,id);
+                      });
+                })
+            ).subscribe();
+        }
+        if(this.tipoProducto==="3"){
+          const ref = this.storage.ref('Oferta_Liquidacion/Imagenes/'+cont+'-'+id);
+          const task = this.storage.upload('Oferta_Requerimiento/Imagenes/'+cont+'-'+id,x);
+          task.snapshotChanges().pipe(finalize(() => {
+                      ref.getDownloadURL().subscribe(downloadURL => {
+                          this.registroOferta.updateImagen(downloadURL,3,id);
+                      });
+                })
+            ).subscribe();
+        }
+        if(this.tipoProducto==="4"){
+          const ref = this.storage.ref('Oferta_Trabajo/Imagenes/'+cont+'-'+id);
+          const task = this.storage.upload('Oferta_Trabajo/Imagenes/'+cont+'-'+id,x);
+          task.snapshotChanges().pipe(finalize(() => {
+                      ref.getDownloadURL().subscribe(downloadURL => {
+                          this.registroOferta.updateImagen(downloadURL,4,id);
+                      });
+                })
+            ).subscribe();
+        }
+        cont++;
+      }
+    }else{
+      //console.log("sin imagenes");
+  }
+  }
+
+  subirFile(id){
+    if(this.cantFile>0){
+        if(this.tipoProducto==="1" || this.tipoProducto==="2"){
+          //alert("entro");
+          const ref = this.storage.ref('Oferta_Requerimiento/Documentos/'+id);
+          const task = this.storage.upload('Oferta_Requerimiento/Documentos/'+id,this.fileCargado);
+          task.snapshotChanges().pipe(finalize(() => {
+                      ref.getDownloadURL().subscribe(downloadURL => {
+                          this.registroOferta.updateFile(downloadURL,1,id);
+                      });
+                })
+            ).subscribe();
+        }
+        if(this.tipoProducto==="3"){
+          const ref = this.storage.ref('Oferta_Liquidacion/Documentos/'+id);
+          const task = this.storage.upload('Oferta_Liquidacion/Documentos/'+id,this.fileCargado);
+          task.snapshotChanges().pipe(finalize(() => {
+                      ref.getDownloadURL().subscribe(downloadURL => {
+                          this.registroOferta.updateFile(downloadURL,3,id);
+                      });
+                })
+            ).subscribe();
+        }
+        if(this.tipoProducto==="4"){
+          const ref = this.storage.ref('Oferta_Trabajo/Documentos/'+id);
+          const task = this.storage.upload('Oferta_Trabajo/Documentos/'+id,this.fileCargado);
+          task.snapshotChanges().pipe(finalize(() => {
+                      ref.getDownloadURL().subscribe(downloadURL => {
+                          this.registroOferta.updateFile(downloadURL,4,id);
+                      });
+                })
+            ).subscribe();
+        }
+
+    }else{
+      //console.log("sin archivos");
+  }
+  }
+
+  eliminarOferta(){
+    this.registroOferta.eliminarOferta(this.idMiOferta,this.tipoProducto,this.idProducto);
+    this.isOfertaste = false;
   }
 
   SalirSesion(){
     this.authService.logout();
   }
+  
 }

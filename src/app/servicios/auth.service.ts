@@ -8,6 +8,7 @@ import { map } from 'rxjs/operators';
 //import { UserInterface } from '../models/user';
 import { auth } from 'firebase/app';
 
+
 @Injectable({
   providedIn: 'root'
 })
@@ -16,8 +17,8 @@ export class AuthService {
   user: Observable<firebase.User>;
 
   constructor(
-    private afAuth: AngularFireAuth,
-    private db: AngularFireDatabase
+    public afAuth: AngularFireAuth,
+    public db: AngularFireDatabase
   ) {
   
    }

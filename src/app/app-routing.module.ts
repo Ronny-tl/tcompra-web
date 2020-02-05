@@ -13,6 +13,8 @@ import {ComoVenderComponent} from './componentes/como-vender/como-vender.compone
 import {ComoComprarComponent} from './componentes/como-comprar/como-comprar.component';
 import {BlogComponent} from './componentes/blog/blog/blog.component';
 import {ErrorComponent} from './componentes/error/error.component';
+import {AuthGuard} from './guards/auth.guard';
+import { PanelComponent } from './componentes/panel/panel.component';
 
 const routes: Routes = [
   {path:'', component: HomePageComponent},
@@ -27,6 +29,7 @@ const routes: Routes = [
   {path:'como-vender', component: ComoVenderComponent},
   {path:'como-comprar', component: ComoComprarComponent},
   {path:'blog', component: BlogComponent},
+  {path:'panel', component: PanelComponent,canActivate:[AuthGuard]},
   {path:'**',component: ErrorComponent}
 ];
 
