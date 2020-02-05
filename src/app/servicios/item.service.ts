@@ -23,7 +23,19 @@ productList: any;
     ) {
     //this.req = this.afs.collection('Requerimientos').valueChanges();
    }
-
+   getOferta_Requerimiento() {
+    this.markersRef = this.db.list('Oferta_Requerimiento');
+    return this.editMarkers(this.markersRef);
+  }
+  getOferta_Liquidacion() {
+    this.markersRef = this.db.list('Oferta_Liquidacion');
+    return this.editMarkers(this.markersRef);
+  }
+  getOferta_Puesto_Trabajo() {
+    this.markersRef = this.db.list('Oferta_Trabajo');
+    return this.editMarkers(this.markersRef);
+  }
+  
   listarRequerimientos() {
     this.appsRef = this.db.list('Requerimientos');
     return this.appsRef;

@@ -1,0 +1,24 @@
+
+        <div class="box" >
+            <a href="#"  *ngIf="!isLogin" data-toggle="modal" data-target="#Login" style="margin-right: 15px;"><i class="fas fa-lock"></i><b class="op-menu"> Iniciar Sesión</b></a>
+            <a href="#" *ngIf="!isLogin" data-toggle="modal" data-target="#Registrar" id="popup"><i class="fas fa-user"></i><b class="op-menu"> Registrar</b></a>
+        </div> 
+        <ul class="nav navbar-nav justify-content-end" style="margin-right: 0px;text-align: right;" *ngIf="isLogin">
+            <li class="nav-item"><a class="nav-link" routerLink="/panel" routerLinkActive="active"><i class="fas fa-window-restore"></i> Panel de Control</a></li>
+                <li class="nav-item dropdown">
+                    <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                        <div class="media-img-wrap" style="float: left;margin-top: -6px;">
+                            <div class="avatar">
+                                <img src="{{imagenUsuario}}" alt="user" class="avatar-img rounded-circle">
+                            </div>
+                        </div>
+                        <b>{{nombreUsuario}}</b>
+                    </a>
+                    <div class="dropdown-menu">
+                        <h6 class="dropdown-header">Bienvenido</h6>
+                        <a class="dropdown-item" routerLink="/panel" routerLinkActive="active"><i class="fas fa-user-edit" style="margin: 0;padding: 0;color: #262626;font-size: 1rem;margin-right: 1rem;vertical-align: -17%;"></i> Mi Perfil</a>
+                        <a class="dropdown-item" routerLink="/"  (click)="SalirSesion()"><i class="fas fa-door-open" style="margin: 0;padding: 0;color: #262626;font-size: 1rem;margin-right: 1rem;vertical-align: -17%;"></i> Salir</a>
+                    </div>
+                </li>
+        </ul>
+

@@ -205,7 +205,7 @@ export class HomePageComponent implements OnInit {
         this.authService.getUsuario_Persona().subscribe(data => {
           data.forEach(item =>{
           if(item.key == this.uid){
-            this.nombreUsuario = item.data;
+            this.nombreUsuario = item.data.nombre;
             if(item.data.imagen != "default"){
               this.imagenUsuario = item.data.imagen;
             }

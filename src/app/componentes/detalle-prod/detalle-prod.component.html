@@ -172,12 +172,17 @@
 									</a>
 								</div>
 							</div>
-
+							<ng-container *ngIf="isOfertaste">
+								<h2  *ngIf="tipoProducto==='1' || tipoProducto==='2'" class="edufair-main-title"><img src="assets/images/productos/check.png" class="img-fluid" style="width: 80px ;height: 80px">  Ya Ofertaste este requerimiento</h2>
+								<h2  *ngIf="tipoProducto==='3'" class="edufair-main-title"><img src="assets/images/productos/check.png" class="img-fluid" style="width: 80px ;height: 80px">  Ya Ofertaste esta liquidación</h2>
+								<h2  *ngIf="tipoProducto==='4'" class="edufair-main-title"><img src="assets/images/productos/check.png" class="img-fluid" style="width: 80px ;height: 80px">  Ya postulaste a este puesto de trabajo </h2>
+							</ng-container>
+							<ng-container *ngIf="!isOfertaste">
 							<h2  *ngIf="tipoProducto==='1' || tipoProducto==='2' || tipoProducto==='3'" class="edufair-main-title">Ofertar</h2>
 							<h2 *ngIf="tipoProducto==='4'" class="edufair-main-title">Postular</h2>
 							<div class="edufair-subscription-form-1x">							
 								<form action="#" method="POST">
-									<div class="form-group row">
+									<div class="form-group row" >
 										<div class="col-md-6">
 											<input name="" type="text" class="form-control" placeholder="Nombre" required #nombreUsuario>
 										</div>
@@ -186,7 +191,7 @@
 										</div>
 										<div class="col-md-6">
 											<select [(ngModel)]="selectedDepartamento" name="dpto" type="text" class="form-control" placeholder="Ciudad" required>
-												<option *ngFor="let item of all_departamento"[value]="item.key" ng-selected="selectedDepartamento == item.key">{{item.value.nombre}}</option>
+												<option *ngFor="let item of all_departamento"[value]="item.key" ng-selected="selectedDepartamento == item.key">{{item.data.nombre}}</option>
 											</select>
 										</div>
 										<div class="col-md-6">
@@ -194,14 +199,14 @@
 												<option *ngFor="let item of entrega" [value]="item.key" ng-selected="selectedEntrega == item.key">{{item.value.nombre}}</option>
 											</select>
 										</div>
-										<div class="col-md-6">
-											<input name="" type="number" max="9" oninput="this.value = this.value.replace(/[^0-9.]/g, ''); this.value = this.value.replace(/(\..*)\./g, '$1');" onKeyPress="if(this.value.length==1) return false;" class="form-control" placeholder="Garantia (años)" required #garantiaAnio>
+										<div class="col-md-6" *ngIf="tipoProducto==='2' || tipoProducto==='1'">
+											<input  name="" type="number" max="9" oninput="this.value = this.value.replace(/[^0-9.]/g, ''); this.value = this.value.replace(/(\..*)\./g, '$1');" onKeyPress="if(this.value.length==1) return false;" class="form-control" placeholder="Garantia (años)" required #garantiaAnio>
 										</div>
-										<div class="col-md-6">
+										<div class="col-md-6" *ngIf="tipoProducto==='2' || tipoProducto==='1'">
 											<input name="" type="number" max="99" oninput="this.value = this.value.replace(/[^0-9.]/g, ''); this.value = this.value.replace(/(\..*)\./g, '$1');" onKeyPress="if(this.value.length==2) return false;" class="form-control" placeholder="Soporte (meses)" required #soporteMeses>
 										</div>
 										<div class="col-md-6">
-											<input name="" type="number" oninput="this.value = this.value.replace(/[^0-9.]/g, ''); this.value = this.value.replace(/(\..*)\./g, '$1');" class="form-control" placeholder="Presupuesto" required #presupuestoUsuario>
+											<input name="" type="number" oninput="this.value = this.value.replace(/[^0-9.]/g, ''); this.value = this.value.replace(/(\..*)\./g, '$1');" class="form-control" [placeholder]="tipoProducto==='4' ? 'Sueldo' : 'Presupuesto'" required #presupuestoUsuario>
 										</div>
 										<div class="col-md-6">
 											<select [(ngModel)]="selectedMoneda" name="moneda" type="text" class="form-control" placeholder="Ciudad" required>
@@ -209,44 +214,55 @@
 											</select>
 										</div>
 									</div>
-									<h5>Imagenes y Documentos</h5>
+									<h5 *ngIf="tipoProducto==='2' || tipoProducto==='1' || tipoProducto==='4'">Imagenes y Documentos</h5>
 									<div class="row" style="margin-bottom: 22px;">
-										<div class="col-md-6">
-											<div class="file-upload">
-												<div class="MultiFile-wrap" id="MultiFile1">
-													<input type="file" name="files[]" class="file-upload-input with-preview MultiFile-applied" multiple="" title="Agregue las Imagenes" maxlength="5" (change)="cargarImage($event)" accept="gif|jpg|png" id="MultiFile1" value="">
+										<ng-container *ngIf="tipoProducto==='2' || tipoProducto==='1' || tipoProducto==='4'">
+											<div class="col-md-6">
+												<div class="file-upload">
+													<div class="MultiFile-wrap" id="MultiFile1">
+														<input type="file" name="file" class="file-upload-input with-preview MultiFile-applied" multiple="" title="Agregue las Imagenes" maxlength="5" (change)="cargarImage($event)" accept="gif|jpg|png" id="MultiFile1" value="">
+													</div>
+													<span style="color: #ad4790;"><i class="fas fa-images"></i> Agregar Imagenes</span>
 												</div>
-												<span style="color: #ad4790;"><i class="fas fa-images"></i> Agregar Imagenes</span>
 											</div>
-										</div>
-										<div class="col-md-6">
-											<div class="file-upload">
-												<div class="MultiFile-wrap" id="MultiFile1">
-													<input type="file" name="files[]" class="file-upload-input with-preview MultiFile-applied" multiple="" title="Agregue las Imagenes" maxlength="10" accept="gif|jpg|png" id="MultiFile1" value="">
+											<div class="col-md-6">
+												<div class="file-upload">
+													<div class="MultiFile-wrap" id="MultiFile1">
+														<input type="file" name="files" class="file-upload-input with-preview MultiFile-applied" multiple="" title="Agregue Archivo" maxlength="1" (change)="cargarFile($event)" accept="application/pdf" id="MultiFile2" value="">
+													</div>
+													<span style="color: #ad4790;"><i class="fas fa-file-invoice"></i> Agregar Documentos</span>
 												</div>
-												<span style="color: #ad4790;"><i class="fas fa-file-invoice"></i> Agregar Documentos</span>
 											</div>
-										</div>
-										<div class="col-md-12" style="text-align: center;margin: 15px 0 25px 0;">
-											<div class="custom-control custom-checkbox custom-control-inline">
-												<input type="checkbox" class="custom-control-input" id="customCheck1" (change)="validarBox($event,1)">
-												<label class="custom-control-label" for="customCheck1">Acepto Negociación</label>
+										</ng-container>
+											<div class="col-md-12" style="text-align: center;margin: 15px 0 25px 0;">
+												<div class="custom-control custom-checkbox custom-control-inline" *ngIf="tipoProducto==='2' || tipoProducto==='1' || tipoProducto==='4'">
+													<input type="checkbox" class="custom-control-input" id="customCheck1" (change)="validarBox($event,1)">
+													<label class="custom-control-label" for="customCheck1">Acepto Negociación</label>
+												</div>
+												<div class="custom-control custom-checkbox custom-control-inline" *ngIf="tipoProducto==='2' || tipoProducto==='1'">
+													<input type="checkbox" class="custom-control-input" id="customCheck2" (change)="validarBox($event,2)">
+													<label class="custom-control-label" for="customCheck2">Precio incluye I.G.V.</label>
+												</div>
+												<div class="custom-control custom-checkbox custom-control-inline" *ngIf="tipoProducto==='2' || tipoProducto==='1'">
+													<input type="checkbox" class="custom-control-input" id="customCheck3" (change)="validarBox($event,3)">
+													<label class="custom-control-label" for="customCheck3">Incluye Envio</label>
+												</div>
 											</div>
-											<div class="custom-control custom-checkbox custom-control-inline">
-												<input type="checkbox" class="custom-control-input" id="customCheck2" (change)="validarBox($event,2)">
-												<label class="custom-control-label" for="customCheck2">Precio incluye I.G.V.</label>
-											</div>
-											<div class="custom-control custom-checkbox custom-control-inline">
-												<input type="checkbox" class="custom-control-input" id="customCheck3" (change)="validarBox($event,3)">
-												<label class="custom-control-label" for="customCheck3">Incluye Envio</label>
-											</div>
-										</div>
+										
 										<div class="col-md-12" style="text-align: center;">
 											<a type="button" (click)="ofertar(tipoProducto)" class="edufair-component-button button-medium btn-block active text-white">Ofertar</a>
 										</div>
 									</div>
 								</form>	
-							</div>		
+							</div>	
+							
+						</ng-container>
+						<div class="col-md-12" style="text-align: center;" *ngIf="isOfertaste && tipoProducto==='1' || tipoProducto==='2' || tipoProducto==='3'">
+							<a type="button" (click)="eliminarOferta(tipoProducto)" class="edufair-component-button button-medium btn-block btn-danger active text-white">Eliminar mi Oferta</a>
+						</div>
+						<div class="col-md-12" style="text-align: center;" *ngIf="isOfertaste && tipoProducto==='4'">
+							<a type="button" (click)="eliminarOferta(tipoProducto)" class="edufair-component-button button-medium btn-block btn-danger active text-white">Eliminar mi Postulación</a>
+						</div>
 
 						</div>
 						<div class="col-md-3 sticky-sidebar">
