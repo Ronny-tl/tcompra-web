@@ -219,7 +219,7 @@ export class HomePageComponent implements OnInit {
     let s = this.itemService.listarRequerimientos(); 
     s.snapshotChanges().subscribe(data => { 
       this.requerimientos_bien = [];
-      this.requerimientos_servicio = []
+      this.requerimientos_servicio = [];
       data.forEach(item => {
         //console.log(item);
         //let a= item.payload.toJSON(); 

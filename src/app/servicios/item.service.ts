@@ -23,7 +23,7 @@ productList: any;
     ) {
     //this.req = this.afs.collection('Requerimientos').valueChanges();
    }
-   getOferta_Requerimiento() {
+  getOferta_Requerimiento() {
     this.markersRef = this.db.list('Oferta_Requerimiento');
     return this.editMarkers(this.markersRef);
   }
@@ -50,6 +50,10 @@ productList: any;
   }   
   getItems(){
     return this.req;
+  }
+  getRequerimientosPanel() {
+    this.markersRef = this.db.list('Requerimientos');
+    return this.editMarkers(this.markersRef);
   }
   getDepartamento() {
     this.markersRef = this.db.list('Departamento');
@@ -102,6 +106,9 @@ productList: any;
   }
   getTipo(id) {
     return this.db.object('/Tipo/' + id).snapshotChanges();
+  }
+  getAntiguedad2(id) {
+    return this.db.object('/Antiguedad/' + id).snapshotChanges();
   }
 
   editMarkers(marker: AngularFireList<any>) {
