@@ -1174,14 +1174,14 @@ a.edufair-btn-larg-round:hover:before {
 ## Slider
 --------------------------------------------------------------*/
 .edufair-slide{
-	margin-top: -74px;
+	/* margin-top: -74px; */
 }
 .edufair-inner{
 	z-index: 0;
 }
 .edufair-inner img{
 	width: 100%;
-    height: 60vh;
+    height: 44vh;
     object-fit: cover;
 }
 .edufair-caption{

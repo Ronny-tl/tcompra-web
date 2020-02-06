@@ -50,9 +50,9 @@
 				<div id="carousel-example-generic" class="carousel slide edufair-slide carousel-fade" data-ride="carousel">
 					<div class="carousel-inner edufair-inner single-inner" role="listbox">
 						<div class="edufair-overlay">
-							<img src="assets/images/productos/prod-01.jpg" alt="slide 1" class="edufair-slider-image edufair-single-image">
+							<img src="assets/images/slider/slider-01.jpg" alt="slide 1" class="edufair-slider-image edufair-single-image">
 							<div class="carousel-caption edufair-caption edufair-single-caption">
-								<div class="container edufair-slider-text" style="top: 30%;left: -6.6%;position: absolute;">
+								<div class="container edufair-slider-text" style="top: 48%;left: -6.6%;position: absolute;">
 									<h2 style="white-space: nowrap;text-overflow: ellipsis;overflow: hidden;" >{{producto?.nombre}}</h2>
 									<ol class="breadcrumb edufair-single-breadcrumbs" style="width: 100%;">
 										<li class="breadcrumb-item"><a routerLink="/" routerLinkActive="active">Inicio</a></li>
@@ -74,7 +74,7 @@
 							<h2 class="edufair-main-title" >
 								{{producto?.nombre}}
 								<b style="font-size: 16px;color: #696969;">|</b>
-								<b style="font-size: 16px;color: #696969;">{{rubro?.nombre}}</b>
+								<b style="font-size: 16px;color: #696969;margin-left: 7px;">{{rubro?.nombre}}</b>
 							</h2>
 						</div>
 
@@ -172,11 +172,28 @@
 									</a>
 								</div>
 							</div>
+
 							<ng-container *ngIf="isOfertaste">
-								<h2  *ngIf="tipoProducto==='1' || tipoProducto==='2'" class="edufair-main-title"><img src="assets/images/productos/check.png" class="img-fluid" style="width: 80px ;height: 80px">  Ya Ofertaste este requerimiento</h2>
+								<h2 class="edufair-main-title">Ofertar</h2>
+								<div *ngIf="tipoProducto==='1' || tipoProducto==='2'" class="edufair-subscription-form-1x" style="background: #f5f5f5;padding: 30px 10px;border-radius: 6px;">
+									<p style="text-align: center;">
+										<i class="fas fa-clipboard-check fa-5x" style="color: #0B9A96;"></i>
+									</p>
+									<p style="text-align: center;margin-bottom: 1em;">
+										<b style="color: #000;font-size: 28px;">Ya ofertaste este requerimiento</b>
+									</p>
+									<p style="text-align: center;">
+										Si quieres borrar tu oferta pulsa eliminar.
+									</p>
+									<p style="text-align: center;margin-bottom: 0em;" *ngIf="isOfertaste && tipoProducto==='1' || tipoProducto==='2' || tipoProducto==='3'">
+										<a href="#" (click)="eliminarOferta(tipoProducto)" class="edufair-component-button button-medium"><i class="fas fa-trash" style="top: 0;padding-left: 0;padding-right: 4px;"></i> Eliminar mi Oferta</a>
+									</p>
+								</div>
+								<!-- <h2  *ngIf="tipoProducto==='1' || tipoProducto==='2'" class="edufair-main-title"><img src="assets/images/productos/check.png" class="img-fluid" style="width: 80px ;height: 80px">  Ya Ofertaste este requerimiento</h2> -->
 								<h2  *ngIf="tipoProducto==='3'" class="edufair-main-title"><img src="assets/images/productos/check.png" class="img-fluid" style="width: 80px ;height: 80px">  Ya Ofertaste esta liquidación</h2>
 								<h2  *ngIf="tipoProducto==='4'" class="edufair-main-title"><img src="assets/images/productos/check.png" class="img-fluid" style="width: 80px ;height: 80px">  Ya postulaste a este puesto de trabajo </h2>
 							</ng-container>
+
 							<ng-container *ngIf="!isOfertaste">
 							<h2  *ngIf="tipoProducto==='1' || tipoProducto==='2' || tipoProducto==='3'" class="edufair-main-title">Ofertar</h2>
 							<h2 *ngIf="tipoProducto==='4'" class="edufair-main-title">Postular</h2>
@@ -257,9 +274,9 @@
 							</div>	
 							
 						</ng-container>
-						<div class="col-md-12" style="text-align: center;" *ngIf="isOfertaste && tipoProducto==='1' || tipoProducto==='2' || tipoProducto==='3'">
+						<!-- <div class="col-md-12" style="text-align: center;" *ngIf="isOfertaste && tipoProducto==='1' || tipoProducto==='2' || tipoProducto==='3'">
 							<a type="button" (click)="eliminarOferta(tipoProducto)" class="edufair-component-button button-medium btn-block btn-danger active text-white">Eliminar mi Oferta</a>
-						</div>
+						</div> -->
 						<div class="col-md-12" style="text-align: center;" *ngIf="isOfertaste && tipoProducto==='4'">
 							<a type="button" (click)="eliminarOferta(tipoProducto)" class="edufair-component-button button-medium btn-block btn-danger active text-white">Eliminar mi Postulación</a>
 						</div>
