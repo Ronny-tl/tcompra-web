@@ -45,20 +45,20 @@
 		});	
 		
 		// Masonry portfolio
-		$('#edufair-portfolio').mixItUp({
-			selectors: {
-				target: '.tile',
-				filter: '.filter',
-				sort: '.sort-btn'
-			},		  
-			animation: {
-			animateResizeContainer: false,
-			effects: 'fade scale'
-			}
-		});	
+		//$('#edufair-portfolio').mixItUp({
+			//selectors: {
+				//target: '.tile',
+				//filter: '.filter',
+				//sort: '.sort-btn'
+			//},		  
+			//animation: {
+			//animateResizeContainer: false,
+			//effects: 'fade scale'
+			//}
+		//});	
 		
 		// Initilize wow js
-		new WOW().init();
+		//new WOW().init();
 		
 		//bootstap tooltip
 		$(function () {

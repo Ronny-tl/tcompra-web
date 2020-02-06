@@ -28,4 +28,27 @@ export class RegistroUsuarioService {
   getId(){
     return this.id;
   }
+  updateUsuario(data,tipoUser,uid){
+    if(tipoUser==="EMPRESA"){
+      //console.log(data);
+      this.af.list('/Empresa/'+uid+'/').query.ref.update(data);
+      alert("Datos actualizados correctamente!!");
+      }else{
+      //console.log(data);
+      this.af.list('/Persona/'+uid+'/').query.ref.update(data);
+      alert("Datos actualizados correctamente!!");
+      }
+  }
+  
+  updateImageUsuario(url,tipo,uidUsuario){
+      if(tipo==="EMPRESA"){
+        this.af.list('/Empresa/'+uidUsuario).query.ref.update({imagen: url});
+        alert("Imagen actualizado correctamente!!");
+      }
+      if(tipo==="PERSONA"){
+        this.af.list('/Persona/'+uidUsuario).query.ref.update({imagen: url});
+        alert("Imagen actualizado correctamente!!");
+      }
+  }
+  
 }
