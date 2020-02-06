@@ -464,54 +464,18 @@
 															</tr>
 														</thead> 
 														<tbody> 
-															<tr>
-																<th scope="row">Atún Campomar En Aceite Vegetal</th> 
-																<td>Alimentos y Bebidas</td>
-																<td>Arequipa</td>
-																<td>S/. 200.00</td>
-																<td><h5 style="margin: 0;line-height: 0;"><span class="badge badge-success">Publicado</span></h5></td>
-															</tr>
-															<tr>
-																<th scope="row">Pack de 150, Don Vittorio</th> 
-																<td>Alimentos y Bebidas</td>
-																<td>Arequipa</td>
-																<td>S/. 200.00</td>
-																<td><h5 style="margin: 0;line-height: 0;"><span class="badge badge-info">Atendido</span></h5></td>
-															</tr>
-															<tr> 
-																<th scope="row">Requiero Departamento</th> 
-																<td>Inmobiliaria</td>
-																<td>Arequipa</td>
-																<td>S/. 200.00</td>
-																<td><h5 style="margin: 0;line-height: 0;"><span class="badge badge-primary">Culminado</span></h5></td>
-															</tr>
-															<tr> 
-																<th scope="row">Atún Campomar En Aceite Vegetal</th> 
-																<td>Alimentos y Bebidas</td>
-																<td>Arequipa</td>
-																<td>S/. 200.00</td>
-																<td><h5 style="margin: 0;line-height: 0;"><span class="badge badge-light">Desierto</span></h5></td>
-															</tr>
-															<tr> 
-																<th scope="row">Pack de 150, Don Vittorio</th> 
-																<td>Alimentos y Bebidas</td>
-																<td>Arequipa</td>
-																<td>S/. 200.00</td>
-																<td><h5 style="margin: 0;line-height: 0;"><span class="badge badge-secondary">Expirado</span></h5></td>
-															</tr>
-															<tr>
-																<th scope="row">Requiero Departamento</th> 
-																<td>Inmobiliaria</td>
-																<td>Arequipa</td>
-																<td>S/. 200.00</td>
-																<td><h5 style="margin: 0;line-height: 0;"><span class="badge badge-warning">Cancelado</span></h5></td>
-															</tr>
-															<tr> 
-																<th scope="row">Requiero Departamento</th> 
-																<td>Inmobiliaria</td>
-																<td>Arequipa</td>
-																<td>S/. 200.00</td>
-																<td><h5 style="margin: 0;line-height: 0;"><span class="badge badge-danger">Eliminado</span></h5></td>
+															<tr *ngFor="let item of requerimiento_liquidacion">
+																<th scope="row">{{item.nombre}}</th> 
+																<td>{{item.rubro}}</td>
+																<td>{{item.departamento}}</td>
+																<td>S/. {{item.presupuesto}}</td>
+																<td *ngIf="item.estado===1"><h5 tyle="margin: 0;line-height: 0;"><span class="badge badge-success">Publicado</span></h5></td>
+																<td *ngIf="item.estado===2"><h5 style="margin: 0;line-height: 0;"><span class="badge badge-info">Atendido</span></h5></td>
+																<td *ngIf="item.estado===3"><h5 style="margin: 0;line-height: 0;"><span class="badge badge-primary">Culminado</span></h5></td>
+																<td *ngIf="item.estado===4"><h5 style="margin: 0;line-height: 0;"><span class="badge badge-light">Desierto</span></h5></td>
+																<td *ngIf="item.estado===5"><h5 style="margin: 0;line-height: 0;"><span class="badge badge-secondary">Expirado</span></h5></td>
+																<td *ngIf="item.estado===6"><h5 style="margin: 0;line-height: 0;"><span class="badge badge-warning">Cancelado</span></h5></td>
+																<td *ngIf="item.estado===7"><h5 style="margin: 0;line-height: 0;"><span class="badge badge-danger">Eliminado</span></h5></td>
 															</tr>
 														</tbody> 
 													</table>
@@ -559,59 +523,23 @@
 																<th>Nombre <i class="fad fa-sort-up"></i></th>
 																<th>Rubro <i class="fad fa-sort-up"></i></th>
 																<th>Departamento <i class="fad fa-sort-up"></i></th>
-																<th>Presupuesto <i class="fad fa-sort-up"></i></th>
+																<th>Sueldo <i class="fad fa-sort-up"></i></th>
 																<th>Estado <i class="fad fa-sort-up"></i></th>
 															</tr>
 														</thead> 
 														<tbody> 
-															<tr>
-																<th scope="row">Atún Campomar En Aceite Vegetal</th> 
-																<td>Alimentos y Bebidas</td>
-																<td>Arequipa</td>
-																<td>S/. 200.00</td>
-																<td><h5 style="margin: 0;line-height: 0;"><span class="badge badge-success">Publicado</span></h5></td>
-															</tr>
-															<tr>
-																<th scope="row">Pack de 150, Don Vittorio</th> 
-																<td>Alimentos y Bebidas</td>
-																<td>Arequipa</td>
-																<td>S/. 200.00</td>
-																<td><h5 style="margin: 0;line-height: 0;"><span class="badge badge-info">Atendido</span></h5></td>
-															</tr>
-															<tr> 
-																<th scope="row">Requiero Departamento</th> 
-																<td>Inmobiliaria</td>
-																<td>Arequipa</td>
-																<td>S/. 200.00</td>
-																<td><h5 style="margin: 0;line-height: 0;"><span class="badge badge-primary">Culminado</span></h5></td>
-															</tr>
-															<tr> 
-																<th scope="row">Atún Campomar En Aceite Vegetal</th> 
-																<td>Alimentos y Bebidas</td>
-																<td>Arequipa</td>
-																<td>S/. 200.00</td>
-																<td><h5 style="margin: 0;line-height: 0;"><span class="badge badge-light">Desierto</span></h5></td>
-															</tr>
-															<tr> 
-																<th scope="row">Pack de 150, Don Vittorio</th> 
-																<td>Alimentos y Bebidas</td>
-																<td>Arequipa</td>
-																<td>S/. 200.00</td>
-																<td><h5 style="margin: 0;line-height: 0;"><span class="badge badge-secondary">Expirado</span></h5></td>
-															</tr>
-															<tr>
-																<th scope="row">Requiero Departamento</th> 
-																<td>Inmobiliaria</td>
-																<td>Arequipa</td>
-																<td>S/. 200.00</td>
-																<td><h5 style="margin: 0;line-height: 0;"><span class="badge badge-warning">Cancelado</span></h5></td>
-															</tr>
-															<tr> 
-																<th scope="row">Requiero Departamento</th> 
-																<td>Inmobiliaria</td>
-																<td>Arequipa</td>
-																<td>S/. 200.00</td>
-																<td><h5 style="margin: 0;line-height: 0;"><span class="badge badge-danger">Eliminado</span></h5></td>
+															<tr *ngFor="let item of requerimiento_trabajo">
+																<th scope="row">{{item.nombre}}</th> 
+																<td>{{item.rubro}}</td>
+																<td>{{item.departamento}}</td>
+																<td>S/. {{item.sueldo}}</td>
+																<td *ngIf="item.estado===1"><h5 tyle="margin: 0;line-height: 0;"><span class="badge badge-success">Publicado</span></h5></td>
+																<td *ngIf="item.estado===2"><h5 style="margin: 0;line-height: 0;"><span class="badge badge-info">Atendido</span></h5></td>
+																<td *ngIf="item.estado===3"><h5 style="margin: 0;line-height: 0;"><span class="badge badge-primary">Culminado</span></h5></td>
+																<td *ngIf="item.estado===4"><h5 style="margin: 0;line-height: 0;"><span class="badge badge-light">Desierto</span></h5></td>
+																<td *ngIf="item.estado===5"><h5 style="margin: 0;line-height: 0;"><span class="badge badge-secondary">Expirado</span></h5></td>
+																<td *ngIf="item.estado===6"><h5 style="margin: 0;line-height: 0;"><span class="badge badge-warning">Cancelado</span></h5></td>
+																<td *ngIf="item.estado===7"><h5 style="margin: 0;line-height: 0;"><span class="badge badge-danger">Eliminado</span></h5></td>
 															</tr>
 														</tbody> 
 													</table>

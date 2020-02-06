@@ -184,24 +184,50 @@ export class PanelComponent implements OnInit {
               presupuesto: x.data.presupuesto,
               estado: x.data.estado
             }
-            this.requerimiento_liquidacion.push(datareq);
-          }
-          if(x.data.tipo===4){
-            const datareq = {
-              key: x.key,
-              nombre: x.data.nombre,
-              rubro: this.findRubros(x.data.rubro).data.nombre,
-              departamento: this.findDepartamento(x.data.departamento).data.nombre,
-              presupuesto: x.data.presupuesto,
-              estado: x.data.estado
-            }
-            this.requerimiento_trabajo.push(datareq);
+            this.requerimiento_servicio.push(datareq);
           }
       }
       })
     })
-    //console.log(this.requerimiento_bien);
+    this.item.getLiquidacionPanel().subscribe(data =>{
+      this.requerimiento_liquidacion =[];
+      data.forEach(x => {
+        if(x.data.usuario === this.uidUsuario){
+          const datareq = {
+            key: x.key,
+            nombre: x.data.nombre,
+            rubro: this.findRubros(x.data.rubro).data.nombre,
+            departamento: this.findDepartamento(x.data.departamento).data.nombre,
+            presupuesto: x.data.presupuesto,
+            estado: x.data.estado
+          }
+          this.requerimiento_liquidacion.push(datareq);
+        }
+      })
+    })
+
+    this.item.getTrabajoPanel().subscribe(data =>{
+      this.requerimiento_trabajo =[];
+      data.forEach(x => {
+        if(x.data.usuario === this.uidUsuario){
+          const datareq = {
+            key: x.key,
+            nombre: x.data.nombre,
+            rubro: this.findRubros(x.data.rubro).data.nombre,
+            departamento: this.findDepartamento(x.data.departamento).data.nombre,
+            sueldo: x.data.sueldo,
+            estado: x.data.estado
+          }
+          this.requerimiento_trabajo.push(datareq);
+        }
+      })
+    })
   }
+
+  get_mis_ofertas(){
+
+  }
+  
   getDepartamento(){
     this.item.getDepartamento().subscribe(data => {
       this.departamentos = data;

@@ -55,6 +55,14 @@ productList: any;
     this.markersRef = this.db.list('Requerimientos');
     return this.editMarkers(this.markersRef);
   }
+  getLiquidacionPanel() {
+    this.markersRef = this.db.list('Liquidacion');
+    return this.editMarkers(this.markersRef);
+  }
+  getTrabajoPanel() {
+    this.markersRef = this.db.list('Puesto_Trabajo');
+    return this.editMarkers(this.markersRef);
+  }
   getDepartamento() {
     this.markersRef = this.db.list('Departamento');
     return this.editMarkers(this.markersRef);
