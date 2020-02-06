@@ -1,48 +1,7 @@
 
-		<div id="fakeloader"></div>
-		
-		<div class="edufair-container">
-			
-			<div class="edufair-header">
-				<div id="sticky-wrapper" class="sticky-wrapper is-sticky">
-					<nav class="navbar navbar-expand-lg edufair-nav nav_blur">
-						<div class="container">	
-							<div class="container-fluid">
-								<div class="navbar-header">
-									<button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false" style="float: right;margin-top: 10px;">
-										<span class="sr-only">Toggle navigation</span>				
-										<i class="fas fa-align-right fa-2"></i>
-									</button>
-									<a class="navbar-brand edufair-brand edufair-light" href="index.html"><img src="assets/images/logo-white.svg" alt="Logo"></a>
-									<a class="navbar-brand edufair-brand edufair-dark" href="index.html"><img src="assets/images/logo-black.svg" alt="Logo"></a>
-								</div>
-								<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-									
-									<div class="edufair-cart">
-										<!-- <div class="box">
-											<a href="#" data-toggle="modal" data-target="#Login" style="margin-right: 15px;"><i class="fas fa-lock"></i><b class="op-menu"> Iniciar Sesión</b></a>
-											<a href="#" data-toggle="modal" data-target="#Registrar" id="popup"><i class="fas fa-user"></i><b class="op-menu"> Registrar</b></a>
-										</div> -->
-										<ul class="nav navbar-nav justify-content-end" style="margin-right: 0px;text-align: right;margin-bottom: 10px;">
-											<li class="nav-item"><a class="nav-link"><i class="fas fa-business-time"></i> Cuenta: {{tipoUsuario}}</a></li>
-											<li class="nav-item dropdown">
-												<a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-													<div class="media-img-wrap" style="float: left;margin-top: -6px;">
-														<div class="avatar">
-															<img *ngIf="logoUsuario" src="{{usuario?.imagen}}" alt="user" class="avatar-img rounded-circle">
-															<img *ngIf="!logoUsuario" src="assets/images/avatar.jpg" alt="user" class="avatar-img rounded-circle">
-														</div>
-													</div>
-													<b>{{usuario?.nombre}}</b>
-												</a>
-												<div class="dropdown-menu">
-													<h6 class="dropdown-header">Bienvenido</h6>
-													<!--<a class="dropdown-item" href="panel.html"><i class="fas fa-user-edit" style="margin: 0;padding: 0;font-size: 1rem;margin-right: 1rem;vertical-align: -17%;"></i> Mi Perfil</a>-->
-													<a class="dropdown-item" routerLink="/"  (click)="SalirSesion()"><i class="fas fa-door-open" style="margin: 0;padding: 0;font-size: 1rem;margin-right: 1rem;vertical-align: -17%;"></i> Salir</a>
-												</div>
-											</li>
-										</ul>
-									</div>
+<div id="fakeloader"></div>
+
+<div class="edufair-container">
 	
 	<div class="edufair-header">
 		<div id="sticky-wrapper" class="sticky-wrapper is-sticky" style="height: 74px;">
@@ -106,143 +65,8 @@
 					</div>
 				</div>
 			</div>
-			
-			<div style="background-image: linear-gradient(rgba(255, 255, 255, 0.9),rgba(255, 255, 255, 0.9)),url(assets/images/panel-back.svg);background-size: cover;background-repeat: no-repeat;background-attachment: fixed;">
-				<div class="container" style="background: #fff;">
-					<div class="col-md-12" style="padding: 15px 0 30px 0;">
-						<div class="all-course-right">
-							<div class="course-description">
-	
-								<ul class="nav nav-pills nav-justified course-description-nav">
-									<li class="nav-item"><a href="#tab1" data-toggle="tab" class="nav-link"><i class="fas fa-user-edit panel_i"></i><b class="panel_b">Perfil</b></a></li>
-									<li class="nav-item"><a href="#tab2" data-toggle="tab" class="nav-link active"><i class="fas fa-sort-amount-down panel_i"></i><b class="panel_b">Requerimientos</b></a></li>
-									<li class="nav-item"><a href="#tab3" data-toggle="tab" class="nav-link"><i class="fas fa-sort-amount-up panel_i"></i><b class="panel_b">Ofertas</b></a></li>
-									<li class="nav-item"><a href="#tab4" data-toggle="tab" class="nav-link"><i class="fas fa-clipboard-list panel_i"></i><b class="panel_b">Cotizaciones</b></a></li>
-									<li class="nav-item"><a href="#tab5" data-toggle="tab" class="nav-link"><i class="fas fa-file-contract panel_i"></i><b class="panel_b">Orden de Compra</b></a></li>
-									<li class="nav-item"><a href="#tab6" data-toggle="tab" class="nav-link"><i class="fas fa-chart-bar panel_i"></i><b class="panel_b">Estadisticas</b></a></li>
-								</ul>
-	
-								<div class="tab-content course-description-tab" style="margin: 0;">
-	
-									<div class="tab-pane fade" id="tab1" style="padding-top: 15px;">
-	
-										<h2 class="edufair-main-title" style="margin-bottom: 40px;margin-top: 10px;">Perfil de Usuario</h2>
-	
-										<div class="card text-center" style="padding-bottom: 20px;">
-											
-											<div class="card-body">
-												<img *ngIf="logoUsuario" src="{{usuario.imagen}}" class="img-thumbnail" alt="Imagen" style="width: 150px;height: 150px;background-size: cover;border-radius: 50%;">
-												<img *ngIf="!logoUsuario" src="assets/images/avatar.jpg" class="img-thumbnail" alt="Imagen" style="width: 150px;height: 150px;background-size: cover;border-radius: 50%;">
-												<div class="single-file-input">
-													<input type="file" id="user_image" name="user_image" (change)="updateImageUsuario($event)" accept="image/*" >
-													<div>Subir Imagen<i class="fa fa-upload"></i></div>
-												</div>
-												<h5 class="card-title" style="color: #262626;">{{usuario?.nombre}}</h5>
-												<p class="card-text"><i class="fas fa-map-marker-alt"></i> {{usuario?.direccion}}</p>
-											</div>
-											<div class="card-footer text-muted" style="border-radius: .25rem;border: none;">
-												<div class="row">
-													<div class="col-sm">
-														<img src="assets/images/rubro_1.svg" style="height: 50px;margin-bottom: 5px;">
-														{{rubros[0]?.nombre}}
-													</div>
-													<div class="col-sm">
-														<img src="assets/images/rubro_2.svg" style="height: 50px;margin-bottom: 5px;">
-														{{rubros[1]?.nombre}}
-													</div>
-													<div class="col-sm">
-														<img src="assets/images/rubro_3.svg" style="height: 50px;margin-bottom: 5px;">
-														{{rubros[2]?.nombre}}
-													</div>
-												</div>
-											</div>
-										</div>
-	
-										<ul class="nav nav-pills nav-justified course-description-nav">
-											<li class="nav-item"><a href="#date-1" data-toggle="tab" class="nav-link active"><i class="fas fa-id-badge"></i> Datos Personales</a></li>
-											<li class="nav-item"><a href="#date-2" data-toggle="tab" class="nav-link"><i class="fas fa-user-lock"></i> Cambiar Contraseña</a></li>
-										</ul>
-	
-										<div class="tab-content course-description-tab" style="margin: 0;border: 0px solid #eee;">
-	
-											<div class="tab-pane active" id="date-1" style="padding-top: 15px;">
-												<form action="" method="POST">
-													<div class="form-group row">
-														<div class="col-md-4">
-															<label for="exampleInputEmail1" style="margin-bottom: 0rem;margin-top: .5rem;"><i class="fas fa-user datos_label_i"></i> Nombre Completo</label>
-															<input name="" type="text"  disabled class="form-control" placeholder="Nombres" required  [value]="usuario?.nombre">
-														</div>
-														<div class="col-md-4">
-															<label for="exampleInputEmail1" style="margin-bottom: 0rem;margin-top: .5rem;"><i class="fas fa-map-marker-alt datos_label_i"></i> Dirección</label>
-															<input name="" type="text" class="form-control" placeholder="Dirección" required [value]="usuario?.direccion" #inDireccion>
-														</div>
-														<div class="col-md-4">
-															<label for="exampleInputEmail1" style="margin-bottom: 0rem;margin-top: .5rem;"><i class="fas fa-map-marked-alt datos_label_i"></i> Departamento</label>
-															<input name="" type="text" class="form-control" placeholder="Departamento" required [value]="departamentoUsuario?.nombre" disabled>
-														</div>
-	
-														<div *ngIf="tipoUsuario==='PERSONA'" class="col-md-4">
-															<label for="exampleInputEmail1" style="margin-bottom: 0rem;margin-top: .5rem;"><i class="fas fa-id-card datos_label_i"></i> DNI</label>
-															<input name="" type="text" class="form-control" placeholder="48256589" required [value]="usuario?.dni" disabled>
-														</div>
-														<div class="col-md-4">
-															<label for="exampleInputEmail1" style="margin-bottom: 0rem;margin-top: .5rem;"><i class="fas fa-phone-alt datos_label_i"></i> Telefono / Celular</label>
-															<input name="" type="number" class="form-control" placeholder="985478521" required [value]="usuario?.telefono" #inTelefono>
-														</div>
-														<div class="col-md-4">
-															<label for="exampleInputEmail1" style="margin-bottom: 0rem;margin-top: .5rem;"><i class="fas fa-envelope datos_label_i"></i> Correo</label>
-															<input name="" type="text" class="form-control" placeholder="maria_12@gmail.com" required [value]="usuario?.email" disabled>
-														</div>
-	
-														<div *ngIf="tipoUsuario==='EMPRESA'" class="col-md-4">
-															<label for="exampleInputEmail1" style="margin-bottom: 0rem;margin-top: .5rem;"><i class="fas fa-building datos_label_i"></i> RUC</label>
-															<input name="" type="text" class="form-control" placeholder="23568974582" required [value]="usuario?.ruc" disabled>
-														</div>
-														<div *ngIf="tipoUsuario==='EMPRESA'" class="col-md-4">
-															<label for="exampleInputEmail1" style="margin-bottom: 0rem;margin-top: .5rem;"><i class="fas fa-university datos_label_i"></i> Antiguedad</label>
-															<input name="" type="text" class="form-control" placeholder="10 años" required [value]="antiguedadUsuario?.nombre" disabled>
-														</div>
-														<div *ngIf="tipoUsuario==='EMPRESA'" class="col-md-4">
-															<label for="exampleInputEmail1" style="margin-bottom: 0rem;margin-top: .5rem;"><i class="fas fa-layer-group datos_label_i"></i> Especialidad</label>
-															<input name="" type="text" class="form-control" placeholder="Embutidos" required [value]="usuario?.especialidad" #inEspecialidad>
-														</div>
-	
-														<div *ngIf="tipoUsuario==='EMPRESA'" class="col-md-6">
-															<label for="exampleInputEmail1" style="margin-bottom: 0rem;margin-top: .5rem;"><i class="fas fa-box-open datos_label_i"></i> Razon Social</label>
-															<input name="" type="text" class="form-control" placeholder="Enlatados y Embutidos" required [value]="usuario?.razon_social" #inRazon_Social>
-														</div>
-														<div *ngIf="tipoUsuario==='EMPRESA'" class="col-md-6">
-															<label for="exampleInputEmail1" style="margin-bottom: 0rem;margin-top: .5rem;"><i class="fas fa-briefcase datos_label_i"></i> Tipo de Empresa</label>
-															<input name="" type="text" class="form-control" placeholder="Enlatados y Embutidos" required [value]="tipoEmp?.nombre" disabled>
-														</div>
-													</div>
-													<div class="col-md-12" style="text-align: center;padding-bottom: 30px;">
-														<a type="button" (click)="actualizar_datos()" class="edufair-component-button button-medium text-white">Guardar Cambios</a>
-													</div>
-												</form>
-											</div>
-	
-											<div class="tab-pane" id="date-2" style="padding-top: 15px;">
-												<form action="" method="POST">
-													<div class="form-group row">
-														<div class="col-md-12">
-															<label for="exampleInputEmail1" style="margin-bottom: 0rem;margin-top: .5rem;"><i class="fas fa-key datos_label_i"></i> Contraseña Actual</label>
-															<input name="Contraseña" type="text" class="form-control" placeholder="•••••••••" required>
-														</div>
-														<div class="col-md-6">
-															<label for="exampleInputEmail1" style="margin-bottom: 0rem;margin-top: .5rem;"><i class="fas fa-unlock-alt datos_label_i"></i> Nueva Contraseña</label>
-															<input name="" type="text" class="form-control" placeholder="•••••••••" required>
-														</div>
-														<div class="col-md-6">
-															<label for="exampleInputEmail1" style="margin-bottom: 0rem;margin-top: .5rem;"><i class="fas fa-unlock-alt datos_label_i"></i> Confirmar Nueva Contraseña</label>
-															<input name="" type="text" class="form-control" placeholder="•••••••••" required>
-														</div>
-													</div>
-													<div class="col-md-12" style="text-align: center;padding-bottom: 30px;">
-														<a href="#" class="edufair-component-button button-medium">Guardar Cambios</a>
-													</div>
-												</form>
-											</div>
+		</div>
+	</b>
 	
 	<div style="background-image: linear-gradient(rgba(255, 255, 255, 0.9),rgba(255, 255, 255, 0.9)),url(assets/images/panel-back.svg);background-size: cover;background-repeat: no-repeat;background-attachment: fixed;">
 		<div class="container" style="background: #fff;">
@@ -305,8 +129,8 @@
 										<form action="" method="POST">
 											<div class="form-group row">
 												<div class="col-md-4">
-													<label for="exampleInputEmail1" style="margin-bottom: 0rem;margin-top: .5rem;">Nombre</label>
-													<input name="" type="text" class="form-control" placeholder="Nombre" required>
+													<label for="exampleInputEmail1" style="margin-bottom: 0rem;margin-top: .5rem;"><i class="fas fa-user datos_label_i"></i> Nombre Completo</label>
+													<input name="" type="text" class="form-control" placeholder="Maria Ortiz" required>
 												</div>
 												<div class="col-md-4">
 													<label for="exampleInputEmail1" style="margin-bottom: 0rem;margin-top: .5rem;"><i class="fas fa-map-marker-alt datos_label_i"></i> Dirección</label>
@@ -326,104 +150,18 @@
 													<label for="exampleInputEmail1" style="margin-bottom: 0rem;margin-top: .5rem;"><i class="fas fa-id-card datos_label_i"></i> DNI</label>
 													<input name="" type="text" class="form-control" placeholder="48256589" required>
 												</div>
-												<div class="table-responsive">
-													<table class="table table-hover">
-														<thead class="thead-light">
-															<tr>
-																<th>Nombre <i class="fad fa-sort-up"></i></th>
-																<th>Rubro <i class="fad fa-sort-up"></i></th>
-																<th>Departamento <i class="fad fa-sort-up"></i></th>
-																<th>Presupuesto <i class="fad fa-sort-up"></i></th>
-																<th>Estado <i class="fad fa-sort-up"></i></th>
-															</tr>
-														</thead> 
-														<tbody> 
-															<tr *ngFor="let item of requerimiento_bien">
-																<th scope="row">{{item.nombre}}</th> 
-																<td>{{item.rubro}}</td>
-																<td>{{item.departamento}}</td>
-																<td>S/. {{item.presupuesto}}</td>
-																<td *ngIf="item.estado===1"><h5 tyle="margin: 0;line-height: 0;"><span class="badge badge-success">Publicado</span></h5></td>
-																<td *ngIf="item.estado===2"><h5 style="margin: 0;line-height: 0;"><span class="badge badge-info">Atendido</span></h5></td>
-																<td *ngIf="item.estado===3"><h5 style="margin: 0;line-height: 0;"><span class="badge badge-primary">Culminado</span></h5></td>
-																<td *ngIf="item.estado===4"><h5 style="margin: 0;line-height: 0;"><span class="badge badge-light">Desierto</span></h5></td>
-																<td *ngIf="item.estado===5"><h5 style="margin: 0;line-height: 0;"><span class="badge badge-secondary">Expirado</span></h5></td>
-																<td *ngIf="item.estado===6"><h5 style="margin: 0;line-height: 0;"><span class="badge badge-warning">Cancelado</span></h5></td>
-																<td *ngIf="item.estado===7"><h5 style="margin: 0;line-height: 0;"><span class="badge badge-danger">Eliminado</span></h5></td>
-															</tr>
-															
-														</tbody> 
-													</table>
-														<nav class="Page navigation" style="background: #fcf6fb;border-radius: 6px;">
-															<ul class="pagination edufair-pagination justify-content-center" style="padding: 15px 0;margin: 0 0 25px 0;">
-															<li class="page-item">
-																<a href="#" aria-label="Previous" class="page-link">
-																<i class="fa fa-angle-left"></i>
-																</a>
-															</li>
-															<li class="page-item active"><a href="#" class="page-link">1</a></li>
-															<li class="page-item"><a href="#" class="page-link">2</a></li>
-															<li class="page-item"><a href="#" class="page-link">3</a></li>
-															<li class="page-item"><a href="#" class="page-link">4</a></li>
-															<li class="page-item"><a href="#" class="page-link">5</a></li>
-															<li class="page-item">
-																<a href="#" aria-label="Next" class="page-link">
-																<i class="fa fa-angle-right"></i>
-																</a>
-															</li>
-															</ul>
-														</nav>
+												<div class="col-md-4">
+													<label for="exampleInputEmail1" style="margin-bottom: 0rem;margin-top: .5rem;"><i class="fas fa-phone-alt datos_label_i"></i> Telefono / Celular</label>
+													<input name="" type="text" class="form-control" placeholder="985478521" required>
 												</div>
 												<div class="col-md-4">
 													<label for="exampleInputEmail1" style="margin-bottom: 0rem;margin-top: .5rem;"><i class="fas fa-envelope datos_label_i"></i> Correo</label>
 													<input name="" type="text" class="form-control" placeholder="maria_12@gmail.com" required>
 												</div>
-												<div class="table-responsive">
-													<table class="table table-hover">
-														<thead class="thead-light">
-															<tr>
-																<th>Nombre <i class="fad fa-sort-up"></i></th>
-																<th>Rubro <i class="fad fa-sort-up"></i></th>
-																<th>Departamento <i class="fad fa-sort-up"></i></th>
-																<th>Presupuesto <i class="fad fa-sort-up"></i></th>
-																<th>Estado <i class="fad fa-sort-up"></i></th>
-															</tr>
-														</thead> 
-														<tbody> 
-															<tr *ngFor="let item of requerimiento_servicio">
-																<th scope="row">{{item.nombre}}</th> 
-																<td>{{item.rubro}}</td>
-																<td>{{item.departamento}}</td>
-																<td>S/. {{item.presupuesto}}</td>
-																<td *ngIf="item.estado===1"><h5 tyle="margin: 0;line-height: 0;"><span class="badge badge-success">Publicado</span></h5></td>
-																<td *ngIf="item.estado===2"><h5 style="margin: 0;line-height: 0;"><span class="badge badge-info">Atendido</span></h5></td>
-																<td *ngIf="item.estado===3"><h5 style="margin: 0;line-height: 0;"><span class="badge badge-primary">Culminado</span></h5></td>
-																<td *ngIf="item.estado===4"><h5 style="margin: 0;line-height: 0;"><span class="badge badge-light">Desierto</span></h5></td>
-																<td *ngIf="item.estado===5"><h5 style="margin: 0;line-height: 0;"><span class="badge badge-secondary">Expirado</span></h5></td>
-																<td *ngIf="item.estado===6"><h5 style="margin: 0;line-height: 0;"><span class="badge badge-warning">Cancelado</span></h5></td>
-																<td *ngIf="item.estado===7"><h5 style="margin: 0;line-height: 0;"><span class="badge badge-danger">Eliminado</span></h5></td>
-															</tr>
-														</tbody> 
-													</table>
-														<nav class="Page navigation" style="background: #fcf6fb;border-radius: 6px;">
-															<ul class="pagination edufair-pagination justify-content-center" style="padding: 15px 0;margin: 0 0 25px 0;">
-															<li class="page-item">
-																<a href="#" aria-label="Previous" class="page-link">
-																<i class="fa fa-angle-left"></i>
-																</a>
-															</li>
-															<li class="page-item active"><a href="#" class="page-link">1</a></li>
-															<li class="page-item"><a href="#" class="page-link">2</a></li>
-															<li class="page-item"><a href="#" class="page-link">3</a></li>
-															<li class="page-item"><a href="#" class="page-link">4</a></li>
-															<li class="page-item"><a href="#" class="page-link">5</a></li>
-															<li class="page-item">
-																<a href="#" aria-label="Next" class="page-link">
-																<i class="fa fa-angle-right"></i>
-																</a>
-															</li>
-															</ul>
-														</nav>
+
+												<div class="col-md-4">
+													<label for="exampleInputEmail1" style="margin-bottom: 0rem;margin-top: .5rem;"><i class="fas fa-building datos_label_i"></i> RUC</label>
+													<input name="" type="text" class="form-control" placeholder="23568974582" required>
 												</div>
 												<div class="col-md-4">
 													<label for="exampleInputEmail1" style="margin-bottom: 0rem;margin-top: .5rem;"><i class="fas fa-university datos_label_i"></i> Antiguedad</label>
