@@ -63,6 +63,10 @@ productList: any;
     this.markersRef = this.db.list('Puesto_Trabajo');
     return this.editMarkers(this.markersRef);
   }
+  getOrdenCompra() {
+    this.markersRef = this.db.list('OrdenCompra');
+    return this.editMarkers(this.markersRef);
+  }
   getDepartamento() {
     this.markersRef = this.db.list('Departamento');
     return this.editMarkers(this.markersRef);

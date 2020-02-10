@@ -253,7 +253,7 @@
 												</tr> 
 											</thead> 
 											<tbody> 
-												<tr *ngFor="let item of requerimientos_bien | paginate:{itemsPerPage: cantListBienes, currentPage:pageActual, id:'pagination'}"> 
+												<tr *ngFor="let item of requerimientos_bien?.reverse() | paginate:{itemsPerPage: cantListBienes, currentPage:pageActual, id:'pagination'}"> 
 													<th scope="row">{{item.nombre}}</th> 
 													<td>{{item.departamento}}</td>
 													<td>{{item.rubro}} </td>
@@ -340,7 +340,7 @@
 												</tr> 
 											</thead> 
 											<tbody> 
-												<tr *ngFor="let item of requerimientos_servicio | paginate:{itemsPerPage: cantListServicios, currentPage: pageActualServicios, id:'pagination2'}"> 
+												<tr *ngFor="let item of requerimientos_servicio?.reverse() | paginate:{itemsPerPage: cantListServicios, currentPage: pageActualServicios, id:'pagination2'}"> 
 													<th scope="row">{{item.nombre}}</th> 
 													<td>{{item.departamento}}</td>
 													<td>{{item.rubro}}</td>
@@ -427,7 +427,7 @@
 												</tr> 
 											</thead> 
 											<tbody> 
-												<tr *ngFor="let item of liquidacion | paginate:{itemsPerPage: cantListLiquidacion, currentPage:pageActualLiquidacion, id:'pagination3'}"> 
+												<tr *ngFor="let item of liquidacion?.reverse() | paginate:{itemsPerPage: cantListLiquidacion, currentPage:pageActualLiquidacion, id:'pagination3'}"> 
 													<th scope="row">{{item.nombre}}</th> 
 													<td>{{item.departamento}}</td>
 													<td>{{item.rubro}}</td>
@@ -514,7 +514,7 @@
 												</tr> 
 											</thead> 
 											<tbody> 
-												<tr *ngFor="let item of pTrabajo | paginate:{itemsPerPage: cantListTrabajo, currentPage:pageActualTrabajo, id:'pagination4'}"> 
+												<tr *ngFor="let item of pTrabajo?.reverse() | paginate:{itemsPerPage: cantListTrabajo, currentPage:pageActualTrabajo, id:'pagination4'}"> 
 													<th scope="row">{{item.nombre}}</th> 
 													<td>{{item.departamento}}</td>
 													<td>{{item.rubro}}</td>

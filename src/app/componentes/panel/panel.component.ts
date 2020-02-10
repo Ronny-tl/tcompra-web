@@ -1,10 +1,11 @@
 import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { AuthService } from '../../servicios/auth.service';
-import { FormGroup, FormControl, FormArray } from '@angular/forms';
+import { FormGroup, FormControl, FormArray, FormsModule } from '@angular/forms';
 import { ItemService } from '../../servicios/item.service';
 import {RegistroUsuarioService} from '../../servicios/registro-usuario.service';
 import {AngularFireStorage} from '@angular/fire/storage';
 import { finalize } from 'rxjs/operators';
+import {crearRequerimiento } from '../../models/crearRequerimiento';
 
 @Component({
   selector: 'app-panel',
@@ -12,6 +13,8 @@ import { finalize } from 'rxjs/operators';
   styleUrls: ['./panel.component.css']
 })
 export class PanelComponent implements OnInit {
+  //myInput= "asdasd";
+  req = new crearRequerimiento();
   nombreCompleto:string;
   uidUsuario: string;
   logoUsuario:boolean=false;
@@ -22,6 +25,14 @@ export class PanelComponent implements OnInit {
   requerimiento_servicio = [];
   requerimiento_liquidacion = [];
   requerimiento_trabajo = [];
+  oferta_requerimiento_bien = [];
+  oferta_requerimiento_servicio = [];
+  oferta_requerimiento_liquidacion = [];
+  oferta_requerimiento_trabajo = [];
+  cot_requerimiento_bien = [];
+  cot_requerimiento_servicio = [];
+  cot_requerimiento_liquidacion = [];
+  cot_requerimiento_trabajo = [];
   departamentoUsuario = undefined;
   antiguedadUsuario = undefined;
   tipoEmp = undefined;
@@ -43,6 +54,7 @@ export class PanelComponent implements OnInit {
     this.getRubros();
     this.getUsuario();
     this.get_mis_requerimientos();
+    this.get_mis_ofertas();
   }
   getUsuario(){
     this.authService.getAuth().subscribe(auth =>{
@@ -169,11 +181,23 @@ export class PanelComponent implements OnInit {
               rubro: this.findRubros(x.data.rubro).data.nombre,
               departamento: this.findDepartamento(x.data.departamento).data.nombre,
               presupuesto: x.data.presupuesto,
-              estado: x.data.estado
+              estado: x.data.estado,
+              tipo: x.data.tipo
             }
             this.requerimiento_bien.push(datareq);
-          // console.log(this.requerimiento_bien);
-            //console.log(this.departamentos);
+
+            const dataAll = {
+              key: x.key,
+              nombre: x.data.nombre,
+              rubro: this.findRubros(x.data.rubro).data.nombre,
+              departamento: this.findDepartamento(x.data.departamento).data.nombre,
+              presupuesto: x.data.presupuesto,
+              estado: x.data.estado,
+              tipo: x.data.tipo,
+              cant_ofertas: x.data.cant_ofertas
+            }
+            this.cot_requerimiento_bien.push(dataAll);
+
           }
           if(x.data.tipo===2){
             const datareq = {
@@ -182,9 +206,22 @@ export class PanelComponent implements OnInit {
               rubro: this.findRubros(x.data.rubro).data.nombre,
               departamento: this.findDepartamento(x.data.departamento).data.nombre,
               presupuesto: x.data.presupuesto,
-              estado: x.data.estado
+              estado: x.data.estado,
+              tipo: x.data.tipo
             }
             this.requerimiento_servicio.push(datareq);
+
+            const dataAll = {
+              key: x.key,
+              nombre: x.data.nombre,
+              rubro: this.findRubros(x.data.rubro).data.nombre,
+              departamento: this.findDepartamento(x.data.departamento).data.nombre,
+              presupuesto: x.data.presupuesto,
+              estado: x.data.estado,
+              tipo: x.data.tipo,
+              cant_ofertas: x.data.cant_ofertas
+            }
+            this.cot_requerimiento_servicio.push(dataAll);
           }
       }
       })
@@ -202,6 +239,18 @@ export class PanelComponent implements OnInit {
             estado: x.data.estado
           }
           this.requerimiento_liquidacion.push(datareq);
+
+          const dataAll = {
+            key: x.key,
+            nombre: x.data.nombre,
+            rubro: this.findRubros(x.data.rubro).data.nombre,
+            departamento: this.findDepartamento(x.data.departamento).data.nombre,
+            presupuesto: x.data.presupuesto,
+            estado: x.data.estado,
+            tipo: x.data.tipo,
+            cant_ofertas: x.data.cant_ofertas
+          }
+          this.cot_requerimiento_liquidacion.push(dataAll);
         }
       })
     })
@@ -219,15 +268,93 @@ export class PanelComponent implements OnInit {
             estado: x.data.estado
           }
           this.requerimiento_trabajo.push(datareq);
+
+          const dataAll = {
+            key: x.key,
+            nombre: x.data.nombre,
+            rubro: this.findRubros(x.data.rubro).data.nombre,
+            departamento: this.findDepartamento(x.data.departamento).data.nombre,
+            presupuesto: x.data.presupuesto,
+            estado: x.data.estado,
+            tipo: x.data.tipo,
+            cant_citas: x.data.cant_citas
+          }
+          this.cot_requerimiento_trabajo.push(dataAll);
         }
       })
     })
   }
 
   get_mis_ofertas(){
-
+    this.item.getOferta_Requerimiento().subscribe(data =>{
+      this.oferta_requerimiento_bien = [];
+      this.oferta_requerimiento_servicio = [];
+      data.forEach(x =>{
+        if(x.data.usuario === this.uidUsuario){
+          if(x.data.tipo===1){
+            const dataOferta = {
+              key: x.key,
+              nombre: x.data.nombre,
+              //rubro: this.findRubros(x.data.rubro).data.nombre,
+              ubicacion: this.findDepartamento(x.data.ubicacion).data.nombre,
+              presupuesto: x.data.presupuesto,
+              estado: x.data.estado
+            }
+            this.oferta_requerimiento_bien.push(dataOferta);
+          }
+          if(x.data.tipo===2){
+            const dataOferta = {
+              key: x.key,
+              nombre: x.data.nombre,
+              //rubro: this.findRubros(x.data.rubro).data.nombre,
+              ubicacion: this.findDepartamento(x.data.ubicacion).data.nombre,
+              presupuesto: x.data.presupuesto,
+              estado: x.data.estado
+            }
+            this.oferta_requerimiento_servicio.push(dataOferta);
+          }
+        }
+      })
+    })
+    console.log(this.oferta_requerimiento_bien);
+    this.item.getOferta_Liquidacion().subscribe(data =>{
+      this.oferta_requerimiento_liquidacion=[];
+      data.forEach(x => {
+        if(x.data.usuario === this.uidUsuario){
+          const dataOferta = {
+            key: x.key,
+            nombre: x.data.nombre,
+            //rubro: this.findRubros(x.data.rubro).data.nombre,
+            ubicacion: this.findDepartamento(x.data.ubicacion).data.nombre,
+            presupuesto: x.data.presupuesto,
+            estado: x.data.estado
+          }
+          this.oferta_requerimiento_liquidacion.push(dataOferta);
+        }
+      })
+    })
+    this.item.getOferta_Puesto_Trabajo().subscribe(data =>{
+      this.oferta_requerimiento_trabajo = [];
+      data.forEach(x => {
+        if(x.data.usuario === this.uidUsuario){
+          const dataOferta = {
+            key: x.key,
+            nombre: x.data.nombre,
+            //rubro: this.findRubros(x.data.rubro).data.nombre,
+            ubicacion: this.findDepartamento(x.data.ubicacion).data.nombre,
+            sueldo: x.data.sueldo,
+            estado: x.data.estado
+          }
+          this.oferta_requerimiento_trabajo.push(dataOferta);
+        }
+      })
+    })
   }
-  
+  get_mis_ordenes_compra(){
+    this.item.getOrdenCompra().subscribe(data =>{
+
+    })
+  }
   getDepartamento(){
     this.item.getDepartamento().subscribe(data => {
       this.departamentos = data;
@@ -252,4 +379,13 @@ export class PanelComponent implements OnInit {
     });
   }
 
+  agregarBien(){
+    this.req.nombre = "Ronny Ticona Laura";
+  }
+  test(){
+    alert(this.req['nombre']);
+  }
+  valueChange(event){
+    console.log(event);
+  }
 }
