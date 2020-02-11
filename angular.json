@@ -35,8 +35,6 @@
               "styles/js/bootstrap.min.js",
               "styles/js/fakeLoader.min.js",
               "styles/js/jquery.counterup.min.js",
-              "styles/js/jquery.sticky.js",
-              "styles/js/theia-sticky-sidebar.min.js",
               "styles/js/custom.js"
             ]
           },

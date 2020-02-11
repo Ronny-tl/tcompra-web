@@ -333,6 +333,7 @@
 																<th>Rubro <i class="fad fa-sort-up"></i></th>
 																<th>Departamento <i class="fad fa-sort-up"></i></th>
 																<th>Presupuesto <i class="fad fa-sort-up"></i></th>
+																<th>Ofertas <i class="fad fa-sort-up"></i></th>
 																<th>Estado <i class="fad fa-sort-up"></i></th>
 																<th>Acción <i class="fad fa-sort-up"></i></th>
 															</tr>
@@ -343,6 +344,7 @@
 																<td>{{item.rubro}}</td>
 																<td>{{item.departamento}}</td>
 																<td>S/. {{item.presupuesto}}</td>
+																<td><h5 style="margin: 0;line-height: 0;text-align: center;"><span class="badge badge-pill" style="background-color: #a11a70;color: #fff;">20</span></h5></td>
 																<td *ngIf="item.estado===1"><h5 tyle="margin: 0;line-height: 0;"><span class="badge badge-success">Publicado</span></h5></td>
 																<td *ngIf="item.estado===2"><h5 style="margin: 0;line-height: 0;"><span class="badge badge-info">Atendido</span></h5></td>
 																<td *ngIf="item.estado===3"><h5 style="margin: 0;line-height: 0;"><span class="badge badge-primary">Culminado</span></h5></td>
@@ -350,7 +352,7 @@
 																<td *ngIf="item.estado===5"><h5 style="margin: 0;line-height: 0;"><span class="badge badge-secondary">Expirado</span></h5></td>
 																<td *ngIf="item.estado===6"><h5 style="margin: 0;line-height: 0;"><span class="badge badge-warning">Cancelado</span></h5></td>
 																<td *ngIf="item.estado===7"><h5 style="margin: 0;line-height: 0;"><span class="badge badge-danger">Eliminado</span></h5></td>
-																<td style="text-align: center;"><a href="detalle-prod.html" class="edufair-component-button button-small"><i class="fas fa-trash" style="padding: 0;top: 0px;"></i> Eliminar</a></td>
+																<td style="text-align: center;"><a href="detalle-prod.html" class="edufair-component-button button-small"><i class="fas fa-trash" style="padding: 0;top: 0px;"></i></a></td>
 															</tr>
 															
 														</tbody> 
