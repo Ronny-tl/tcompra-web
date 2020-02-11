@@ -17,7 +17,7 @@
 							<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 								
 								<div class="edufair-cart" >
-									<div class="box" >
+									<!--<div class="box" >
 										<a href="#"  *ngIf="!isLogin" data-toggle="modal" data-target="#Login" style="margin-right: 15px;"><i class="fas fa-lock"></i><b class="op-menu"> Iniciar Sesión</b></a>
 										<a href="#" *ngIf="!isLogin" data-toggle="modal" data-target="#Registrar" id="popup"><i class="fas fa-user"></i><b class="op-menu"> Registrar</b></a>
 									</div> 
@@ -38,7 +38,8 @@
 													<a class="dropdown-item" type="button"  (click)="SalirSesion()"><i class="fas fa-door-open" style="margin: 0;padding: 0;color: #262626;font-size: 1rem;margin-right: 1rem;vertical-align: -17%;"></i> Salir</a>
 												</div>
 											</li>
-									</ul>
+									</ul>-->
+									<app-login></app-login>
 								</div>
 
 							</div>
@@ -204,7 +205,7 @@
 										</div>
 										<div class="col-md-6">
 											<select [(ngModel)]="selectedDepartamento" name="dpto" type="text" class="form-control" placeholder="Ciudad" required>
-												<option *ngFor="let item of all_departamento"[value]="item.key" ng-selected="selectedDepartamento == item.key">{{item.data.nombre}}</option>
+												<option *ngFor="let item of all_departamento" [value]="item.key" ng-selected="selectedDepartamento == item.key">{{item.data.nombre}}</option>
 											</select>
 										</div>
 										<div class="col-md-6">
@@ -233,7 +234,7 @@
 											<div class="col-md-6">
 												<div class="file-upload">
 													<div class="MultiFile-wrap" id="MultiFile1">
-														<input type="file" name="file" class="file-upload-input with-preview MultiFile-applied" multiple="" title="Agregue las Imagenes" maxlength="5" (change)="cargarImage($event)" accept="gif|jpg|png" id="MultiFile1" value="">
+														<input type="file" name="file" class="file-upload-input with-preview MultiFile-applied" multiple="" title="Agregue las Imagenes" maxlength="5" (change)="cargarImage($event)" accept="image/*" id="MultiFile1" value="">
 													</div>
 													<span style="color: #ad4790;"><i class="fas fa-images"></i> Agregar Imagenes</span>
 												</div>

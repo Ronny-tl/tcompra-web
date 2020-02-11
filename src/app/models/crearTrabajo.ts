@@ -1,42 +1,31 @@
-export class crearRequerimiento{
-    cant_ofertas:number;
-    comprador: string;
+export class crearTrabajo{
+    cant_citas: number;
+    cant_personal:number;
     correo: string;//
     departamento:number;//
     descripcion:string;//
+    disponiblidad:string;
     documento:string
-    encuestaCliente:string;
-    encuestaProveedor:string;
-    entrega: string;//
     estado:number;
-    fecha_atencion:string;
     fecha_final:string;//
     fecha_publicacion:string;
-    formapago:string;//
     imagenprincipal:string
+    jornada:string;
     moneda:string;//
     nombre:string;//
-    oferta:string;
-    ordencompra:string;
-    presupuesto:number;//
     rubro:string;//
+    sueldo:number;
     tipo:number;//
     tipoUsuario:number;
     usuario:string;
 
-
-    constructor(nombre,descripcion,tipoRequerimiento,rubro,departamento,presupuesto,moneda,formapago,correo,fecha_final,entrega,fecha_publicacion,tipoUsuario,usuario) {
-      this.cant_ofertas = 0;
-      this.comprador ="default";
+    constructor(nombre,descripcion,tipoRequerimiento,rubro,departamento,sueldo,moneda,disponibilidad,correo,fecha_final,jornada,fecha_publicacion,tipoUsuario,usuario) {
+      this.cant_citas = 0;
+      this.cant_personal = 0;
       this.documento = "default";
-      this.encuestaCliente ="default";
-      this.encuestaProveedor ="default";
       this.estado = 1;
-      this.fecha_atencion = "default";
       this.fecha_publicacion = fecha_publicacion;
       this.imagenprincipal = "default";
-      this.oferta ="default";
-      this.ordencompra = "default";
       this.tipoUsuario =tipoUsuario;
       this.usuario = usuario;
       this.nombre = nombre;
@@ -44,12 +33,12 @@ export class crearRequerimiento{
       this.tipo = tipoRequerimiento;
       this.rubro = rubro;
       this.departamento = departamento;
-      this.presupuesto = presupuesto;
+      this.sueldo = sueldo;
       this.moneda = moneda;
-      this.formapago = formapago;
       this.correo = correo;
       this.fecha_final = fecha_final;
-      this.entrega = entrega;
+      this.disponiblidad = disponibilidad;
+      this.jornada = jornada;
      }
 
   }

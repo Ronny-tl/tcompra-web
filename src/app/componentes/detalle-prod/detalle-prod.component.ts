@@ -456,7 +456,7 @@ mostrarPuestoTrabajo(){
         }
         if(this.tipoProducto==="3"){
           const ref = this.storage.ref('Oferta_Liquidacion/Imagenes/'+cont+'-'+id);
-          const task = this.storage.upload('Oferta_Requerimiento/Imagenes/'+cont+'-'+id,x);
+          const task = this.storage.upload('Oferta_Liquidacion/Imagenes/'+cont+'-'+id,x);
           task.snapshotChanges().pipe(finalize(() => {
                       ref.getDownloadURL().subscribe(downloadURL => {
                           this.registroOferta.updateImagen(downloadURL,3,id);

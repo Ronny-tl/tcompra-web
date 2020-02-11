@@ -116,7 +116,10 @@ export class HomePageComponent implements OnInit {
       registerPass2: new FormControl('', [Validators.required, Validators.minLength(6),Validators.nullValidator])
     });
   }
-  
+  /////////////////ULTIMO 11/02/2020
+
+  tipoUsuario:number=3;
+
   constructor(
     public authService: AuthService,
     private itemService: ItemService,
@@ -134,16 +137,19 @@ export class HomePageComponent implements OnInit {
    }
 
   ngOnInit() {
-    this.loginService = this.authService.getAuth().subscribe(auth =>{
-      if(auth){
-        this.isLogin= true;
-        this.emailUsuario = auth.email;
-        this.uid = auth.uid;
-        this.iniciarUsuario();
-      }else{
-        this.isLogin=false;
-      }
-    })
+     this.loginService = this.authService.getAuth().subscribe(auth =>{
+       if(auth){
+         //this.isLogin= true;
+         //this.emailUsuario = auth.email;
+         this.uid = auth.uid;
+         //alert(this.uid);
+         this.iniciarUsuario();
+         //alert("test");
+       }else{
+         //this.isLogin=false;
+         this.tipoUsuario = 3;
+       }
+     })
     this.getRubros();
     this.getDepartamento();
     this.getRequerimientos();
@@ -189,6 +195,7 @@ export class HomePageComponent implements OnInit {
 
   SalirSesion(){
     this.authService.logout();
+    this.tipoUsuario = 3;
   }
 
   iniciarUsuario(){
@@ -196,6 +203,7 @@ export class HomePageComponent implements OnInit {
           data.forEach(item =>{
           if(item.key == this.uid){
             this.nombreUsuario = item.data.nombre;
+            this.tipoUsuario = 0;
             if(item.data.imagen != "default"){
               this.imagenUsuario = item.data.imagen;
             }
@@ -206,13 +214,13 @@ export class HomePageComponent implements OnInit {
           data.forEach(item =>{
           if(item.key == this.uid){
             this.nombreUsuario = item.data.nombre;
+            this.tipoUsuario = 1;
             if(item.data.imagen != "default"){
               this.imagenUsuario = item.data.imagen;
             }
           }
           });
         });
-    
   }
 
   getRequerimientos(){
