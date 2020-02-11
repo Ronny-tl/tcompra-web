@@ -11,17 +11,18 @@
 									<span class="sr-only">Toggle navigation</span>				
 									<i class="fas fa-align-right fa-2"></i>
 								</button>
-								<a class="navbar-brand edufair-brand edufair-light" href="index.html"><img src="assets/images/logo-white.svg" alt="Logo"></a>
-								<a class="navbar-brand edufair-brand edufair-dark" href="index.html"><img src="assets/images/logo-black.svg" alt="Logo"></a>
+								<a class="navbar-brand edufair-brand edufair-light" routerLink="/" routerLinkActive="active"><img src="assets/images/logo-white.svg" alt="Logo"></a>
+								<a class="navbar-brand edufair-brand edufair-dark" routerLink="/" routerLinkActive="active"><img src="assets/images/logo-black.svg" alt="Logo"></a>
 							</div>
 							
 							<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 								
 								<div class="edufair-cart">
-									<div class="box">
+									<!--<div class="box">
 										<a href="#" data-toggle="modal" data-target="#Login" style="margin-right: 15px;"><i class="fas fa-lock"></i><b class="op-menu"> Iniciar Sesión</b></a>
 										<a href="#" data-toggle="modal" data-target="#PersonaContacto" id="popup"><i class="fas fa-user"></i><b class="op-menu"> Registrar</b></a>
-									</div>
+									</div>-->
+									<app-login></app-login>
 								</div>
 
 							</div>
@@ -38,8 +39,8 @@
 								<div class="container edufair-slider-text" style="top: 48%;left: -6.6%;position: absolute;">
 									<h2 class="fadeInLeft">Como Comprar</h2>
 									<ol class="breadcrumb edufair-single-breadcrumbs" style="width: 100%;">
-										<li class="breadcrumb-item"><a href="index.html">Inicio</a></li>
-										<li class="breadcrumb-item active"><a href="#">Como Comprar</a></li>
+										<li class="breadcrumb-item"><a routerLink="/" routerLinkActive="active">Inicio</a></li>
+										<li class="breadcrumb-item active"><a routerLink="/como-comprar" routerLinkActive="active">Como Comprar</a></li>
 									</ol>										
 								</div>
 							</div>				  

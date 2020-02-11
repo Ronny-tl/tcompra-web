@@ -91,6 +91,10 @@ productList: any;
     this.markersRef = this.db.list('Entrega');
     return this.editMarkers(this.markersRef);
   }
+  getFormaPago() {
+    this.markersRef = this.db.list('Formapago');
+    return this.editMarkers(this.markersRef);
+  }
   getRubros() {
     this.markersRef = this.db.list('Rubros');
     return this.editMarkers(this.markersRef);

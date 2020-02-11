@@ -1,4 +1,4 @@
-export class crearRequerimiento{
+export class crearLiquidacion{
     cant_ofertas:number;
     comprador: string;
     correo: string;//
