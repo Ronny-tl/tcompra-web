@@ -1,0 +1,7 @@
+::ng-deep .ngx-pagination {
+    text-align: center;
+}
+
+::ng-deep .ngx-pagination .current {
+    background: #a11a70 !important;
+}

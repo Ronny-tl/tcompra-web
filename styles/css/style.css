@@ -5843,4 +5843,52 @@ a.edufair-component-button:hover:before {
 	/* font-size: 0.95rem; */
 	color: #aaa;
 	font-style: italic;
-  }
+}
+
+.card-ofertas{
+	margin: 0 30px;
+	box-shadow: 0 0px 10px rgba(0, 0, 0, 0.1);
+	border-radius: 8px;
+	margin-bottom: 20px;
+	cursor: pointer;
+}
+
+.card-ofertas-detalles{
+	margin: 0 30px;
+	box-shadow: 0 0px 10px rgba(0, 0, 0, 0.1);
+	border-radius: 8px;
+	margin-bottom: 20px;
+	margin-top: -10px;
+	background: rgba(255, 255, 255, 0.50);
+}
+
+.card-oferta-title{
+	font-weight: 600;
+	background: #f3f3f3;
+	padding: 10px 10px;
+	border-radius: 8px;
+	text-align: center;
+	margin: 20px 0;
+}
+
+.dato-titulo{
+	color: #a11a70;
+	width: 18px;
+	text-align: center;
+}
+
+.dato-detalle{
+	color: #212529;
+	margin-left: 22px;
+	font-size: 18px;
+}
+
+.detalle-oferta:after {
+    position: absolute;
+    right: 0;
+    top: 10%;
+    bottom: 10%;
+    border: solid #dadada;
+    border-width: 0 thin 0 0;
+    content: "";
+}

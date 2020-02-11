@@ -292,7 +292,7 @@
 																<td>{{item.rubro}}</td>
 																<td>{{item.departamento}}</td>
 																<td>S/. {{item.presupuesto}}</td>
-																<td><h5 style="margin: 0;line-height: 0;text-align: center;"><span class="badge badge-pill" style="background-color: #a11a70;color: #fff;">20</span></h5></td>
+																<td><a href="#" data-toggle="modal" data-target="#cant_ofertas"><h5 style="margin: 0;line-height: 0;text-align: center;"><span class="badge badge-pill" style="background-color: #a11a70;color: #fff;">23</span></h5></a></td>
 																<td *ngIf="item.estado===1"><h5 tyle="margin: 0;line-height: 0;"><span class="badge badge-success">Publicado</span></h5></td>
 																<td *ngIf="item.estado===2"><h5 style="margin: 0;line-height: 0;"><span class="badge badge-info">Atendido</span></h5></td>
 																<td *ngIf="item.estado===3"><h5 style="margin: 0;line-height: 0;"><span class="badge badge-primary">Culminado</span></h5></td>
@@ -300,7 +300,7 @@
 																<td *ngIf="item.estado===5"><h5 style="margin: 0;line-height: 0;"><span class="badge badge-secondary">Expirado</span></h5></td>
 																<td *ngIf="item.estado===6"><h5 style="margin: 0;line-height: 0;"><span class="badge badge-warning">Cancelado</span></h5></td>
 																<td *ngIf="item.estado===7"><h5 style="margin: 0;line-height: 0;"><span class="badge badge-danger">Eliminado</span></h5></td>
-																<td style="text-align: center;"><a type="button" (click)="eliminarReq(item.key,item.tipo,item.nombre)" class="edufair-component-button button-small text-white"><i class="fas fa-trash" style="padding: 0;top: 0px;"></i> Eliminar</a></td>
+																<td style="text-align: center;"><a type="button" (click)="eliminarReq(item.key,item.tipo,item.nombre)" class="edufair-component-button button-small text-white"><i class="fas fa-trash" style="padding: 0;top: 0px;"></i></a></td>
 															</tr>
 															
 														</tbody> 
@@ -1044,7 +1044,7 @@
 				
         </div>
 
-		<!-- Modal -->
+		<!-- Modal Agregar -->
 		<div class="modal fade" id="agregar" tabindex="-1" role="dialog" aria-hidden="true" style="padding: 0px 20px;">
 			<div class="modal-dialog modal-lg" role="document" id="persona" name="persona">
 				<div class="modal-content" style="background: transparent;">
@@ -1389,3 +1389,247 @@
 				</div>
 			</div>
 		</div>
+
+<!-- Modal Cantidad de Ofertas-->
+<div class="modal fade" id="cant_ofertas" tabindex="-1" role="dialog" aria-hidden="true" style="padding: 0px 20px;">
+	<div class="modal-dialog modal-lg" role="document" id="persona" name="persona">
+		<div class="modal-content" style="background: transparent;">
+
+			<div class="modal-body">
+				<div class="edufair-subscription-1x" style="padding-bottom: 20px;background: #FAFAFA;border-radius: 6px;">
+
+					<h4 style="padding: 35px 30px 20px 30px;margin: 0;">
+						<b style="font-size: 26px;color: #212529">
+							<a href="#" data-dismiss="modal" aria-label="Close"><i class="fas fa-angle-left"></i></a> 
+							Muebles y Forniture
+						</b>
+					</h4>
+
+					<hr style="margin: 0px 30px 20px 30px;">
+
+					<div class="card mb-3" style="margin: 0 30px;background-color: transparent;">
+						<div class="row no-gutters">
+							<div class="col-md-3">
+								<img src="assets/images/productos/prod-05.jpg" class="card-img" alt="Producto" style="height: 100%;object-fit: cover;border-radius: 6%;box-shadow: 0 0px 18px rgba(0, 0, 0, 0.1);">
+							</div>
+							<div class="col-md-9">
+								<div class="card-body">
+									<h4 style="margin-bottom: .75rem;margin-top: .24em;">
+										<span class="badge badge-secondary" style="background-color: #A11A70;border-radius: 50px;padding: .4em .8em;font-size: 65%;">Bienes</span>
+										<b style="font-size: 18px;margin-left: 5px;">
+											<i class="fas fa-star" style="color: #a11a70;"></i>
+											<i class="fas fa-star" style="color: #a11a70;"></i>
+											<i class="fas fa-star" style="color: #a11a70;"></i>
+											<i class="fas fa-star" style="color: #a11a70;"></i>
+											<i class="fas fa-star" style="color: #a11a70;"></i>
+										</b>
+									</h4>
+									<h5 class="card-title" style="color: #212529;font-weight: 600;margin-bottom: .40rem;">Pack de Muebles y Dormitorios</h5>
+									<p class="card-text" style="margin-bottom: .75rem;">Jessica Ortiz Velarde</p>
+									<p class="card-text"><small style="font-size: 26px;color: #a11a70;font-weight: 600; ">S/. 500.00</small></p>
+								</div>
+							</div>
+						</div>
+					</div>
+					
+					<hr style="margin: 20px 30px 20px 30px;">
+					
+					<div class="card card-ofertas" data-toggle="collapse" href="#colapse01" aria-expanded="false">
+						<div class="card-body row">
+							<div class="col-8">
+								<p class="card-text" style="margin-bottom: .5em;">
+									H&J Dormitorios 
+									<b><i class="fas fa-circle" style="color: #a11a70;font-size: 8px;"></i></b> 
+									Arequipa
+								</p>
+								<h5 class="card-title" style="color: #212529;font-weight: 600;">Muebles Dormitorios</h5>
+								<p class="card-text">
+									<i class="fas fa-stopwatch" style="color: #a11a70;margin-right: 3px;"></i> Entrega: Inmediato
+									<i class="fas fa-university" style="color: #a11a70;margin-right: 3px;margin-left: 6px;"></i> 10 años
+								</p>
+							</div>
+							<div class="col-4" style="text-align: right;">
+								<a href="#" class="edufair-component-button button-small" style="padding: 10px 15px;border-radius: 10px;margin-bottom: 1.2em;"><i class="fas fa-file-pdf" style="padding: 0;top: 3px;left: 1px;font-size: 28px;"></i></a>
+								<p class="card-text"><small style="font-size: 22px;color: #a11a70;font-weight: 600; ">S/. 500.00</small></p>
+							</div>
+						</div>
+					</div>
+					<div class="collapse" id="colapse01">
+						<div class="card card-body card-ofertas-detalles">
+							<div class="row" style="text-align: center;font-size: 16px;margin-top: 5px;">
+								<div class="col-6 detalle-oferta">
+									Fecha de Entrega<br>
+									<i class="fas fa-calendar-check" style="color: #a11a70;width: 18px;text-align: center;"></i> 20/02/2020
+								</div>
+								<div class="col-6">
+									Calificación<br>
+									<i class="fas fa-star" style="color: #a11a70;"></i>
+									<i class="fas fa-star" style="color: #a11a70;"></i>
+									<i class="fas fa-star" style="color: #a11a70;"></i>
+									<i class="fas fa-star" style="color: #a11a70;"></i>
+									<i class="fas fa-star" style="color: #a11a70;"></i>
+								</div>
+							</div>
+							<h5 class="card-title card-oferta-title">
+								Detalles del Ofertante
+							</h5>
+							<div class="row">
+								<div class="col-md-4" style="margin-bottom: 10px;">
+									<i class="fas fa-map-marker-alt dato-titulo"></i> Ubicación<br>
+									<b class="dato-detalle">Arequipa</b>
+								</div>
+								<div class="col-md-4" style="margin-bottom: 10px;">
+									<i class="fas fa-envelope dato-titulo"></i> Correo<br>
+									<b class="dato-detalle">ejemplo@gmail.com</b>
+								</div>
+								<div class="col-md-4" style="margin-bottom: 10px;">
+									<i class="fas fa-stopwatch dato-titulo"></i> Tiempo de Entrega<br>
+									<b class="dato-detalle">Inmediato</b>
+								</div>
+								<div class="col-md-4" style="margin-bottom: 10px;">
+									<i class="fas fa-hand-holding-usd dato-titulo"></i> Forma de Pago<br>
+									<b class="dato-detalle">Al Contado</b>
+								</div>
+								<div class="col-md-4" style="margin-bottom: 10px;">
+									<i class="fas fa-coins dato-titulo"></i> Moneda<br>
+									<b class="dato-detalle">Soles</b>
+								</div>
+							</div>
+							<div style="text-align: center;">
+								<a href="#" class="edufair-component-button button-medium" style="margin-top: 10px;">Elegir Oferta</a>
+							</div>
+						</div>
+					</div>
+					
+					<div class="card card-ofertas" data-toggle="collapse" href="#colapse02" aria-expanded="false">
+						<div class="card-body row">
+							<div class="col-9">
+								<p class="card-text" style="margin-bottom: .5em;">H&J Dormitorios <b><i class="fas fa-circle" style="color: #a11a70;font-size: 8px;"></i></b> Arequipa</p>
+								<h5 class="card-title" style="color: #212529;font-weight: 600;">Muebles Dormitorios</h5>
+								<p class="card-text">
+									<i class="fas fa-stopwatch" style="color: #a11a70;margin-right: 3px;"></i> Entrega: Inmediato
+									<i class="fas fa-university" style="color: #a11a70;margin-right: 3px;margin-left: 6px;"></i> 10 años
+								</p>
+							</div>
+							<div class="col-3" style="text-align: right;">
+								<a href="#" class="edufair-component-button button-small" style="padding: 10px 15px;border-radius: 10px;margin-bottom: 1.2em;"><i class="fas fa-file-pdf" style="padding: 0;top: 3px;left: 1px;font-size: 28px;"></i></a>
+								<p class="card-text"><small style="font-size: 22px;color: #a11a70;font-weight: 600; ">S/. 500.00</small></p>
+							</div>
+						</div>
+					</div>
+					<div class="collapse" id="colapse02">
+						<div class="card card-body card-ofertas-detalles">
+							<div class="row" style="text-align: center;font-size: 16px;margin-top: 5px;">
+								<div class="col-6 detalle-oferta">
+									Fecha de Entrega<br>
+									<i class="fas fa-calendar-check" style="color: #a11a70;width: 18px;text-align: center;"></i> 20/02/2020
+								</div>
+								<div class="col-6">
+									Calificación<br>
+									<i class="fas fa-star" style="color: #a11a70;"></i>
+									<i class="fas fa-star" style="color: #a11a70;"></i>
+									<i class="fas fa-star" style="color: #a11a70;"></i>
+									<i class="fas fa-star" style="color: #a11a70;"></i>
+									<i class="fas fa-star" style="color: #a11a70;"></i>
+								</div>
+							</div>
+							<h5 class="card-title card-oferta-title">
+								Detalles del Ofertante
+							</h5>
+							<div class="row">
+								<div class="col-md-4" style="margin-bottom: 10px;">
+									<i class="fas fa-map-marker-alt dato-titulo"></i> Ubicación<br>
+									<b class="dato-detalle">Arequipa</b>
+								</div>
+								<div class="col-md-4" style="margin-bottom: 10px;">
+									<i class="fas fa-envelope dato-titulo"></i> Correo<br>
+									<b class="dato-detalle">ejemplo@gmail.com</b>
+								</div>
+								<div class="col-md-4" style="margin-bottom: 10px;">
+									<i class="fas fa-stopwatch dato-titulo"></i> Tiempo de Entrega<br>
+									<b class="dato-detalle">Inmediato</b>
+								</div>
+								<div class="col-md-4" style="margin-bottom: 10px;">
+									<i class="fas fa-hand-holding-usd dato-titulo"></i> Forma de Pago<br>
+									<b class="dato-detalle">Al Contado</b>
+								</div>
+								<div class="col-md-4" style="margin-bottom: 10px;">
+									<i class="fas fa-coins dato-titulo"></i> Moneda<br>
+									<b class="dato-detalle">Soles</b>
+								</div>
+							</div>
+							<div style="text-align: center;">
+								<a href="#" class="edufair-component-button button-medium" style="margin-top: 10px;">Elegir Oferta</a>
+							</div>
+						</div>
+					</div>
+
+					<div class="card card-ofertas" data-toggle="collapse" href="#colapse03" aria-expanded="false">
+						<div class="card-body row">
+							<div class="col-9">
+								<p class="card-text" style="margin-bottom: .5em;">H&J Dormitorios <b><i class="fas fa-circle" style="color: #a11a70;font-size: 8px;"></i></b> Arequipa</p>
+								<h5 class="card-title" style="color: #212529;font-weight: 600;">Muebles Dormitorios</h5>
+								<p class="card-text">
+									<i class="fas fa-stopwatch" style="color: #a11a70;margin-right: 3px;"></i> Entrega: Inmediato
+									<i class="fas fa-university" style="color: #a11a70;margin-right: 3px;margin-left: 6px;"></i> 10 años
+								</p>
+							</div>
+							<div class="col-3" style="text-align: right;">
+								<a href="#" class="edufair-component-button button-small" style="padding: 10px 15px;border-radius: 10px;margin-bottom: 1.2em;"><i class="fas fa-file-pdf" style="padding: 0;top: 3px;left: 1px;font-size: 28px;"></i></a>
+								<p class="card-text"><small style="font-size: 22px;color: #a11a70;font-weight: 600; ">S/. 500.00</small></p>
+							</div>
+						</div>
+					</div>
+					<div class="collapse" id="colapse03">
+						<div class="card card-body card-ofertas-detalles">
+							<div class="row" style="text-align: center;font-size: 16px;margin-top: 5px;">
+								<div class="col-6 detalle-oferta">
+									Fecha de Entrega<br>
+									<i class="fas fa-calendar-check" style="color: #a11a70;width: 18px;text-align: center;"></i> 20/02/2020
+								</div>
+								<div class="col-6">
+									Calificación<br>
+									<i class="fas fa-star" style="color: #a11a70;"></i>
+									<i class="fas fa-star" style="color: #a11a70;"></i>
+									<i class="fas fa-star" style="color: #a11a70;"></i>
+									<i class="fas fa-star" style="color: #a11a70;"></i>
+									<i class="fas fa-star" style="color: #a11a70;"></i>
+								</div>
+							</div>
+							<h5 class="card-title card-oferta-title">
+								Detalles del Ofertante
+							</h5>
+							<div class="row">
+								<div class="col-md-4" style="margin-bottom: 10px;">
+									<i class="fas fa-map-marker-alt dato-titulo"></i> Ubicación<br>
+									<b class="dato-detalle">Arequipa</b>
+								</div>
+								<div class="col-md-4" style="margin-bottom: 10px;">
+									<i class="fas fa-envelope dato-titulo"></i> Correo<br>
+									<b class="dato-detalle">ejemplo@gmail.com</b>
+								</div>
+								<div class="col-md-4" style="margin-bottom: 10px;">
+									<i class="fas fa-stopwatch dato-titulo"></i> Tiempo de Entrega<br>
+									<b class="dato-detalle">Inmediato</b>
+								</div>
+								<div class="col-md-4" style="margin-bottom: 10px;">
+									<i class="fas fa-hand-holding-usd dato-titulo"></i> Forma de Pago<br>
+									<b class="dato-detalle">Al Contado</b>
+								</div>
+								<div class="col-md-4" style="margin-bottom: 10px;">
+									<i class="fas fa-coins dato-titulo"></i> Moneda<br>
+									<b class="dato-detalle">Soles</b>
+								</div>
+							</div>
+							<div style="text-align: center;">
+								<a href="#" class="edufair-component-button button-medium" style="margin-top: 10px;">Elegir Oferta</a>
+							</div>
+						</div>
+					</div>
+
+				</div>
+			</div>
+
+		</div>
+	</div>
+</div>
