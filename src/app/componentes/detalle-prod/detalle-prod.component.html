@@ -132,7 +132,9 @@
 							</div>
 
 							<div class="row" style="padding: 30px 0;">
+								
 								<div class="col-md-12" style="text-align: justify;">
+									<h2 class="edufair-main-title">Descripción</h2>
 									{{producto?.descripcion}}
 								</div>
 							</div>
@@ -143,9 +145,9 @@
 							<ul class="list-checkbox">
 								<!--<li><i class="fas fa-angle-right datos_col2"></i> <b>Unidad:</b> Unidad(s)</li>
 								<li><i class="fas fa-angle-right datos_col2"></i> <b>Cantidad:</b> 200</li>-->
-								<li><i class="fas fa-angle-right datos_col2"></i> <b>Forma de Pago:</b> Al Contado</li>
-								<li><i class="fas fa-angle-right datos_col2"></i> <b>Tipo de Moneda:</b> Soles</li>
-								<li><i class="fas fa-angle-right datos_col2"></i> <b>Tiempo de Entrega:</b> Inmediato</li>
+								<li><i class="fas fa-angle-right datos_col2"></i> <b>Forma de Pago:</b> {{formaPago?.nombre}}</li>
+								<li><i class="fas fa-angle-right datos_col2"></i> <b>Tipo de Moneda:</b> {{tipoMoneda?.nombre}}</li>
+								<li><i class="fas fa-angle-right datos_col2"></i> <b>Tiempo de Entrega:</b> {{tiempoEntrega?.nombre}}</li>
 								<li><i class="fas fa-angle-right datos_col2"></i> <b>Expira:</b> {{producto?.fecha_final}}</li>
 								<!--<li><i class="fas fa-angle-right datos_col2"></i> <b>Garantia (meses):</b> 5</li>
 								<li><i class="fas fa-angle-right datos_col2"></i> <b>Soporte Técnico (meses):</b> 5</li>-->

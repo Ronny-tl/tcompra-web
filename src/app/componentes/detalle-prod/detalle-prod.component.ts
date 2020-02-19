@@ -61,6 +61,13 @@ export class DetalleProdComponent implements OnInit {
   tipoUsuario:number;
   cantImagenes:number = 0;
   cantFile:number = 0;
+
+  /////////////////// 12/02/2020
+  formaPagoArray = [];
+  formaPago:any;
+  tipoMoneda:any;
+  tiempoEntrega:any;
+
   constructor(
     private register: RegistroUsuarioService,
     private router: Router,
@@ -100,6 +107,7 @@ export class DetalleProdComponent implements OnInit {
     this.getEntrega();
     this.allDepartamento();
     this.allMoneda();
+    this.getFormapago();
 }
 iniciarUsuario(){
   this.authService.getUsuario_Empresa().subscribe(data => {
@@ -171,6 +179,7 @@ verificarOferta(){
     });
   }
 }
+
 mostrarRequerimientos(){
   this.items.listarRequerimientos2(this.idProducto).subscribe(data =>{
     this.producto = data.payload.val();
@@ -186,6 +195,9 @@ mostrarRequerimientos(){
     this.getDepartamento(this.producto.departamento);
     this.getUsuario(this.producto.tipoUsuario, this.producto.usuario);
     this.getTipo(this.producto.tipo);
+    this.getMoneda(this.producto.moneda);
+    this.getFormaPago2(this.producto.formapago);
+    this.getEntrega2(this.producto.entrega);
   });
 }
 mostrarLiquidacion(){
@@ -203,6 +215,9 @@ mostrarLiquidacion(){
     this.getDepartamento(this.producto.departamento);
     this.getUsuario(this.producto.tipoUsuario, this.producto.usuario);
     this.getTipo(this.producto.tipo);
+    this.getMoneda(this.producto.moneda);
+    this.getFormaPago2(this.producto.formapago);
+    this.getEntrega2(this.producto.entrega);
   });
 }
 
@@ -221,6 +236,9 @@ mostrarPuestoTrabajo(){
     this.getDepartamento(this.producto.departamento);
     this.getUsuario(this.producto.tipoUsuario, this.producto.usuario);
     this.getTipo(this.producto.tipo);
+    this.getMoneda(this.producto.moneda);
+    this.getFormaPago2(this.producto.formapago);
+    this.getEntrega2(this.producto.entrega);
   });
 }
 
@@ -230,6 +248,25 @@ mostrarPuestoTrabajo(){
       //console.log(this.rubro);
     })
   }
+  getMoneda(id){
+    this.items.getMonedaID(id).subscribe(data =>{
+      this.tipoMoneda = data.payload.val();
+      //console.log(this.rubro);
+    })
+  }
+  getFormaPago2(id){
+    this.items.getFormaPagoID(id).subscribe(data =>{
+      this.formaPago = data.payload.val();
+      //console.log(this.rubro);
+    })
+  }
+  getEntrega2(id){
+    this.items.getEntregaID(id).subscribe(data =>{
+      this.tiempoEntrega = data.payload.val();
+      //console.log(this.rubro);
+    })
+  }
+  
   getDepartamento(id){
     this.items.getDepartamento2(id).subscribe(data =>{
       this.departamento = data.payload.val();
@@ -251,8 +288,8 @@ mostrarPuestoTrabajo(){
     this.items.getTipo(id).subscribe(data =>{
       this.tipo = data.payload.val();
     })
-
   }
+  
   descargarArchivo(){
     if(this.producto.documento=="default"){
       alert("Este Producto no tiene ningun archivo")
@@ -279,6 +316,16 @@ mostrarPuestoTrabajo(){
     this.items.getEntrega().subscribe(data => {
       data.forEach(x =>{
         this.entrega.push({
+          key: x.key,
+          value: x.data
+        });
+      });     
+    });
+  }
+  getFormapago(){
+    this.items.getFormaPago().subscribe(data => {
+      data.forEach(x =>{
+        this.formaPagoArray.push({
           key: x.key,
           value: x.data
         });

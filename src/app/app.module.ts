@@ -42,6 +42,8 @@ import {NgxPaginationModule} from 'ngx-pagination';
 import { LoginComponent } from './componentes/login/login.component';
 import { PanelComponent } from './componentes/panel/panel.component';
 import { AuthGuard} from './guards/auth.guard';
+import {MatExpansionModule} from '@angular/material/expansion';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -76,7 +78,9 @@ import { AuthGuard} from './guards/auth.guard';
     FormsModule,
     ReactiveFormsModule,
     NgxPaginationModule,
-    AngularFireStorageModule
+    AngularFireStorageModule,
+    MatExpansionModule,
+    BrowserAnimationsModule
 
   ],
   providers: [AuthService, ItemService, AngularFireDatabase, ModalServiceService,FormBuilder,RegistroUsuarioService,DatePipe,AuthGuard],

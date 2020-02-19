@@ -10,6 +10,7 @@ import { DatePipe } from '@angular/common';
 import {RegistroRequerimientosService} from '../../servicios/registro-requerimientos.service'
 import {crearLiquidacion} from '../../models/crearLiquidacion';
 import {crearTrabajo} from '../../models/crearTrabajo';
+import {OrdenCompraService} from '../../servicios/orden-compra.service';
 @Component({
   selector: 'app-panel',
   templateUrl: './panel.component.html',
@@ -137,13 +138,36 @@ export class PanelComponent implements OnInit {
   cant_Coti_Liquidacion:number = 10;
   cant_Coti_Trabajo:number = 10;
   ////////////////////////////
+  //////CAMBIAR PASS ////////
+  @ViewChild('passActual', { static: false }) passActual: ElementRef;
+  @ViewChild('passNuevo1', { static: false }) passNuevo1: ElementRef;
+  @ViewChild('passNuevo2', { static: false }) passNuevo2: ElementRef;
+
+  ///////////// OFERTAS MODAL
+  mi_req_ofertas:any;
+  list_ofertantes = [];
+  idModal:string;
+  allAntiguedad = [];
+  mi_liq_ofertas: any;
+  list_ofertantes_liq = [];
+
+  @ViewChild('modalCita', { static: false }) modalCita: ElementRef;
+  @ViewChild('fechaCita', { static: false }) fechaCita: ElementRef;
+  @ViewChild('horaCita', { static: false }) horaCita: ElementRef;
+  @ViewChild('mensajeCita', { static: false }) mensajeCita: ElementRef;
+  citaSeleccionada: any;
+  fechaRepublicarSeleccionada: any;
+  @ViewChild('fechaRepublicar', { static: false }) fechaRepublicar: ElementRef;
+  @ViewChild('modalRepublicar', { static: false }) modalRepublicar: ElementRef;
+
   constructor(
     private authService: AuthService,
     private item: ItemService,
     private registroUsuario: RegistroUsuarioService,
     private storage: AngularFireStorage,
     private datePipe: DatePipe,
-    private registroReq: RegistroRequerimientosService
+    private registroReq: RegistroRequerimientosService,
+    private ordenCompra: OrdenCompraService
   ) { }
 
   ngOnInit() {
@@ -157,6 +181,7 @@ export class PanelComponent implements OnInit {
     this.getEntrega();
     this.getFormaPago();
     this.getJornada();
+    this.getAntiguedad();
   }
   getUsuario(){
     this.authService.getAuth().subscribe(auth =>{
@@ -276,6 +301,8 @@ export class PanelComponent implements OnInit {
     this.item.getRequerimientosPanel().subscribe(data =>{
       this.requerimiento_bien=[];
       this.requerimiento_servicio=[];
+      this.cot_requerimiento_bien=[];
+      this.cot_requerimiento_servicio=[];
       data.forEach(x =>{
         if(x.data.usuario===this.uidUsuario){
           if(x.data.tipo===1){
@@ -286,10 +313,36 @@ export class PanelComponent implements OnInit {
               departamento: this.findDepartamento(x.data.departamento).data.nombre,
               presupuesto: x.data.presupuesto,
               estado: x.data.estado,
-              tipo: x.data.tipo
+              tipo: x.data.tipo,
+              cant_ofertas: x.data.cant_ofertas,
+              comprador: x.data.comprador,
+              oferta: x.data.oferta,
+              ordencompra: x.data.ordencompra
+
             }
             this.requerimiento_bien.push(datareq);
 
+          }
+          if(x.data.tipo===2){
+            const datareq = {
+              key: x.key,
+              nombre: x.data.nombre,
+              rubro: this.findRubros(x.data.rubro).data.nombre,
+              departamento: this.findDepartamento(x.data.departamento).data.nombre,
+              presupuesto: x.data.presupuesto,
+              estado: x.data.estado,
+              tipo: x.data.tipo,
+              cant_ofertas: x.data.cant_ofertas,
+              comprador: x.data.comprador,
+              oferta: x.data.oferta,
+              ordencompra: x.data.ordencompra
+            }
+            this.requerimiento_servicio.push(datareq);
+
+          }
+      }
+      if(x.data.tipo===1){
+        if(x.data.estado===1 || x.data.estado===2){
             const dataAll = {
               key: x.key,
               nombre: x.data.nombre,
@@ -301,37 +354,29 @@ export class PanelComponent implements OnInit {
               cant_ofertas: x.data.cant_ofertas
             }
             this.cot_requerimiento_bien.push(dataAll);
-
-          }
-          if(x.data.tipo===2){
-            const datareq = {
-              key: x.key,
-              nombre: x.data.nombre,
-              rubro: this.findRubros(x.data.rubro).data.nombre,
-              departamento: this.findDepartamento(x.data.departamento).data.nombre,
-              presupuesto: x.data.presupuesto,
-              estado: x.data.estado,
-              tipo: x.data.tipo
-            }
-            this.requerimiento_servicio.push(datareq);
-
-            const dataAll = {
-              key: x.key,
-              nombre: x.data.nombre,
-              rubro: this.findRubros(x.data.rubro).data.nombre,
-              departamento: this.findDepartamento(x.data.departamento).data.nombre,
-              presupuesto: x.data.presupuesto,
-              estado: x.data.estado,
-              tipo: x.data.tipo,
-              cant_ofertas: x.data.cant_ofertas
-            }
-            this.cot_requerimiento_servicio.push(dataAll);
-          }
+        }
       }
+      if(x.data.tipo===2){
+        if(x.data.estado===1 || x.data.estado===2){
+          const dataAll = {
+            key: x.key,
+            nombre: x.data.nombre,
+            rubro: this.findRubros(x.data.rubro).data.nombre,
+            departamento: this.findDepartamento(x.data.departamento).data.nombre,
+            presupuesto: x.data.presupuesto,
+            estado: x.data.estado,
+            tipo: x.data.tipo,
+            cant_ofertas: x.data.cant_ofertas
+          }
+          this.cot_requerimiento_servicio.push(dataAll);
+        }
+      }
+
       })
     })
     this.item.getLiquidacionPanel().subscribe(data =>{
       this.requerimiento_liquidacion =[];
+      this.cot_requerimiento_liquidacion=[];
       data.forEach(x => {
         if(x.data.usuario === this.uidUsuario){
           const datareq = {
@@ -341,10 +386,16 @@ export class PanelComponent implements OnInit {
             departamento: this.findDepartamento(x.data.departamento).data.nombre,
             presupuesto: x.data.presupuesto,
             estado: x.data.estado,
-            tipo: x.data.tipo
+            tipo: x.data.tipo,
+            cant_ofertas: x.data.cant_ofertas,
+            comprador: x.data.comprador,
+            oferta: x.data.oferta,
+            ordencompra: x.data.ordencompra
           }
           this.requerimiento_liquidacion.push(datareq);
 
+        }
+        if(x.data.estado===1 || x.data.estado===2){
           const dataAll = {
             key: x.key,
             nombre: x.data.nombre,
@@ -362,6 +413,7 @@ export class PanelComponent implements OnInit {
 
     this.item.getTrabajoPanel().subscribe(data =>{
       this.requerimiento_trabajo =[];
+      this.cot_requerimiento_trabajo = [];
       data.forEach(x => {
         if(x.data.usuario === this.uidUsuario){
           const datareq = {
@@ -371,10 +423,14 @@ export class PanelComponent implements OnInit {
             departamento: this.findDepartamento(x.data.departamento).data.nombre,
             sueldo: x.data.sueldo,
             estado: x.data.estado,
-            tipo: x.data.tipo
+            tipo: x.data.tipo,
+            cant_personal: x.data.cant_personal,
+            cant_citas: x.data.cant_citas
           }
           this.requerimiento_trabajo.push(datareq);
 
+        }
+        if(x.data.estado===1 || x.data.estado===2){
           const dataAll = {
             key: x.key,
             nombre: x.data.nombre,
@@ -383,6 +439,7 @@ export class PanelComponent implements OnInit {
             presupuesto: x.data.presupuesto,
             estado: x.data.estado,
             tipo: x.data.tipo,
+            cant_personal: x.data.cant_personal,
             cant_citas: x.data.cant_citas
           }
           this.cot_requerimiento_trabajo.push(dataAll);
@@ -481,6 +538,11 @@ export class PanelComponent implements OnInit {
       this.allMoneda = data;     
     });
   }
+  getAntiguedad(){
+    this.item.getAntiguedad().subscribe(data => {
+      this.allAntiguedad = data;     
+    });
+  }
   getEntrega(){
     this.item.getEntrega().subscribe(data => {
       this.allEntrega = data;     
@@ -503,6 +565,21 @@ export class PanelComponent implements OnInit {
   }
   findRubros(keyId){
     return this.allRubros.find( function(item) {
+      return item.key == keyId;
+    });
+  }
+  findEntrega(keyId){
+    return this.allEntrega.find( function(item) {
+      return item.key == keyId;
+    });
+  }
+  findAntiguedad(keyId){
+    return this.allAntiguedad.find( function(item) {
+      return item.key == keyId;
+    });
+  }
+  findMoneda(keyId){
+    return this.allMoneda.find( function(item) {
       return item.key == keyId;
     });
   }
@@ -565,7 +642,9 @@ export class PanelComponent implements OnInit {
       this.subirImage(id,1);
       this.subirFile(id,1)
       alert("Requerimiento creado satisfactoriamente");
+      document.getElementById("hideAgregar").click();
       this.clearBien();
+
  
   }
   clearBien(){
@@ -743,6 +822,7 @@ export class PanelComponent implements OnInit {
       this.subirImage(id,1);
       this.subirFile(id,1)
       alert("Requerimiento creado satisfactoriamente");
+      document.getElementById("hideAgregar").click();
       this.clearServicio();
  
   }
@@ -819,6 +899,7 @@ export class PanelComponent implements OnInit {
       this.subirImage(id,3);
       this.subirFile(id,3)
       alert("Liquidación creado satisfactoriamente");
+      document.getElementById("hideAgregar").click();
       this.clearLiquidacion();
  
   }
@@ -894,6 +975,7 @@ export class PanelComponent implements OnInit {
       this.subirImage(id,4);
       this.subirFile(id,4)
       alert("Recurso Humano creado satisfactoriamente");
+      document.getElementById("hideAgregar").click();
       this.clearPT();
  
   }
@@ -952,20 +1034,560 @@ export class PanelComponent implements OnInit {
     }
    
   }
-  eliminarReq(key,tipo,name){
-    this.registroReq.deleteReq(key,tipo);
-    if(tipo===1 || tipo===2){
-      alert("Requerimiento "+name+" eliminado satisfactoriamente!!");
+  eliminarReq(item){
+    //this.registroReq.deleteReq(item.keyOferta,item.tipo);
+    console.log(item);
+    if(item.tipo===1 || item.tipo===2){
+
+      //alert("Requerimiento "+name+" eliminado satisfactoriamente!!");
     }
-    if(tipo===3){
-      alert("Liquidación "+name+" eliminado satisfactoriamente!!");
+    if(item.tipo===3){
+      //alert("Liquidación "+name+" eliminado satisfactoriamente!!");
     }
-    if(tipo===4){
-      alert("Recurso Humano "+name+" eliminado satisfactoriamente!!");
+    if(item.tipo===4){
+      if(item.cant_citas>0){
+        this.item.citas_once().query.once('value').then(data => {
+          data.forEach(x => {
+            if(x.child('idRecurso').val()===item.key){
+              x.ref.update({
+                cancelado: 1
+              });
+              this.item.oferta_Trabajo_once(x.child('idOferta').val()).query.once('value').then(r => {
+                r.ref.update({
+                  cancelado: 1
+                })
+              })
+            }
+          });
+        })
+      }
+      alert("Recurso Humano "+item.nombre+" eliminado satisfactoriamente!!");
     }
   }
   eliminarOfe(key,tipo,name){
       this.registroReq.deleteOferta(key,tipo);
       alert("Tu oferta "+name+" eliminado satisfactoriamente!!");
   }
+
+  cambiarPass(){
+    var temp = this.passActual.nativeElement.value;
+    if(this.passActual.nativeElement.value=""){
+      alert("Ingrese su contraseña actual");
+      return '';
+    }
+    if(this.passNuevo1.nativeElement.value=="" || this.passNuevo2.nativeElement.value==""){
+      alert("Ingrese su contraseña nueva");
+      return '';
+    }
+    if(this.passNuevo1.nativeElement.value != this.passNuevo2.nativeElement.value){
+      alert("La contraseña Nueva no coincide");
+      return '';
+    }
+    this.authService.changePassword(temp,this.passNuevo1.nativeElement.value);
+    this.passActual.nativeElement.value="";
+    this.passNuevo1.nativeElement.value="";
+    this.passNuevo2.nativeElement.value="";
+  }
+
+  cantOfertas(cant,key,tipo){
+
+    if(cant<1){
+      if(tipo!=4){
+        alert("Este requerimiento no tiene ninguna oferta");
+        return'';
+      }else{
+        alert("Este Puesto de trabajo no tiene ningun postulante");
+        return'';
+      }
+    }
+  
+    this.mi_req_ofertas = [];
+    this.list_ofertantes = [];
+    if(tipo===1 || tipo ===2){///////REQUERIMIENTOS
+      const prueba2 = this.item.listarRequerimientos2(key).subscribe(data =>{
+        this.mi_req_ofertas = data.payload.val();
+      });
+      this.item.getOferta_Requerimiento().subscribe(data =>{
+        this.list_ofertantes = [];
+        data.forEach(x => {
+          if(x.data.id_requerimiento === key){
+            if(x.data.tipoUsuario===0){
+              const usuarioEmpresa = this.item.getUsuarioEmpresa2(x.data.usuario).query.once('value').then(function(ue){
+                return ue;
+              });
+              usuarioEmpresa.then(ue => {
+                var ofe_temp = {
+                  keyOferta: x.key,
+                  keyUsuario: x.data.usuario,
+                  nombreOferta: x.data.nombre,
+                  tipoUsuario :x.data.tipoUsuario,
+                  ubicacionOferta: this.findDepartamento(x.data.ubicacion).data.nombre,
+                  nombreUsuario: x.data.nombreusuario,
+                  antiguedadUsuario: this.findAntiguedad(ue.child('antiguedad').val()).data.nombre,
+                  ubicacionUsuario: this.findDepartamento(ue.child('departamento').val()).data.nombre,
+                  presupuesto: x.data.presupuesto,
+                  correo: x.data.correo,
+                  tiempoEntrega: this.findEntrega(x.data.entrega).data.nombre,
+                  fecha_entrega: x.data.fecha_entrega,
+                  moneda: this.findMoneda(x.data.moneda).data.nombre,
+                  cancelado: x.data.cancelado,
+                  documento: x.data.documento,
+                  id_requerimiento: x.data.id_requerimiento,
+                  tipo: x.data.tipo
+                }
+
+                this.list_ofertantes.push(ofe_temp);
+                console.log(this.list_ofertantes);
+
+              })
+            }
+            if(x.data.tipoUsuario===1){
+              const usuarioPersona = this.item.getUsuarioPersona2(x.data.usuario).query.once('value').then(function(ue){
+                return ue;
+              });
+              usuarioPersona.then(ue => {
+                var ofe_temp = {
+                  keyOferta: x.key,
+                  keyUsuario: x.data.usuario,
+                  nombreOferta: x.data.nombre,
+                  tipoUsuario :x.data.tipoUsuario,
+                  ubicacionOferta: this.findDepartamento(x.data.ubicacion).data.nombre,
+                  nombreUsuario: x.data.nombreusuario,
+                  //antiguedadUsuario: this.findAntiguedad(ue.payload.child('antiguedad').val()).data.nombre,
+                  ubicacionUsuario: this.findDepartamento(ue.child('departamento').val()).data.nombre,
+                  presupuesto: x.data.presupuesto,
+                  correo: x.data.correo,
+                  tiempoEntrega: this.findEntrega(x.data.entrega).data.nombre,
+                  fecha_entrega: x.data.fecha_entrega,
+                  moneda: this.findMoneda(x.data.moneda).data.nombre,
+                  cancelado: x.data.cancelado,
+                  documento: x.data.documento,
+                  id_requerimiento: x.data.id_requerimiento,
+                  tipo: x.data.tipo
+                }
+                //console.log(ofe_temp);
+                this.list_ofertantes.push(ofe_temp);
+                console.log(this.list_ofertantes);
+                //console.log(this.list_ofertantes);
+              })
+            }
+
+          }
+        });
+        
+      });
+      document.getElementById("showModalOfe").click();
+    }
+    if(tipo===3){/////LIQUIDACION
+      this.mi_req_ofertas = [];
+      this.list_ofertantes = [];
+      this.item.listarLiquidacion2(key).subscribe(data =>{
+        this.mi_req_ofertas = data.payload.val();
+      });
+      this.item.getOferta_Liquidacion().subscribe(data =>{
+        this.list_ofertantes = [];
+        data.forEach(x => {
+          if(x.data.id_requerimiento === key){
+            if(x.data.tipoUsuario===0){
+              const usuarioEmpresa = this.item.getUsuarioEmpresa2(x.data.usuario).query.once('value').then(function(ue){
+                return ue;
+              });
+              usuarioEmpresa.then(ue => {
+                var ofe_temp = {
+                  keyOferta: x.key,
+                  keyUsuario: x.data.usuario,
+                  nombreOferta: x.data.nombre,
+                  tipoUsuario :x.data.tipoUsuario,
+                  ubicacionOferta: this.findDepartamento(x.data.ubicacion).data.nombre,
+                  nombreUsuario: x.data.nombreusuario,
+                  antiguedadUsuario: this.findAntiguedad(ue.child('antiguedad').val()).data.nombre,
+                  ubicacionUsuario: this.findDepartamento(ue.child('departamento').val()).data.nombre,
+                  presupuesto: x.data.presupuesto,
+                  correo: x.data.correo,
+                  tiempoEntrega: this.findEntrega(x.data.entrega).data.nombre,
+                  fecha_entrega: x.data.fecha_entrega,
+                  moneda: this.findMoneda(x.data.moneda).data.nombre,
+                  cancelado: x.data.cancelado,
+                  //documento: x.data.documento,
+                  id_requerimiento: x.data.id_requerimiento,
+                  tipo: x.data.tipo
+                }
+  
+                this.list_ofertantes.push(ofe_temp);
+
+              })
+            }
+            if(x.data.tipoUsuario===1){
+              const usuarioPersona = this.item.getUsuarioPersona2(x.data.usuario).query.once('value').then(function(ue){
+                return ue;
+              });
+              usuarioPersona.then(ue => {
+                var ofe_temp = {
+                  keyOferta: x.key,
+                  keyUsuario: x.data.usuario,
+                  nombreOferta: x.data.nombre,
+                  tipoUsuario :x.data.tipoUsuario,
+                  ubicacionOferta: this.findDepartamento(x.data.ubicacion).data.nombre,
+                  nombreUsuario: x.data.nombreusuario,
+                  //antiguedadUsuario: this.findAntiguedad(ue.payload.child('antiguedad').val()).data.nombre,
+                  ubicacionUsuario: this.findDepartamento(ue.child('departamento').val()).data.nombre,
+                  presupuesto: x.data.presupuesto,
+                  correo: x.data.correo,
+                  tiempoEntrega: this.findEntrega(x.data.entrega).data.nombre,
+                  fecha_entrega: x.data.fecha_entrega,
+                  moneda: this.findMoneda(x.data.moneda).data.nombre,
+                  cancelado: x.data.cancelado,
+                  //documento: x.data.documento,
+                  id_requerimiento: x.data.id_requerimiento,
+                  tipo: x.data.tipo
+                }
+
+                this.list_ofertantes.push(ofe_temp);
+
+              })
+            }
+  
+          }
+        });
+        
+      });
+  
+      document.getElementById("showModalOfe").click();
+
+    }
+    if(tipo===4){/////RECURSOS HUMANOS
+
+      this.mi_req_ofertas = [];
+      this.list_ofertantes = [];
+      this.item.listarPuestoTrabajo2(key).subscribe(data =>{
+        this.mi_req_ofertas = data.payload.val();
+      });
+      this.item.getOferta_Puesto_Trabajo().subscribe(data =>{
+        this.list_ofertantes = [];
+        data.forEach(x => {
+          if(x.data.id_requerimiento === key){
+            if(x.data.tipoUsuario===0){
+              const usuarioEmpresa = this.item.getUsuarioEmpresa2(x.data.usuario).query.once('value').then(function(ue){
+                return ue;
+              });
+              usuarioEmpresa.then(ue => {
+                var ofe_temp = {
+                  keyOferta: x.key,
+                  keyUsuario: x.data.usuario,
+                  nombreOferta: x.data.nombre,
+                  tipoUsuario :x.data.tipoUsuario,
+                  ubicacionOferta: this.findDepartamento(x.data.ubicacion).data.nombre,
+                  nombreUsuario: x.data.nombreusuario,
+                  antiguedadUsuario: this.findAntiguedad(ue.child('antiguedad').val()).data.nombre,
+                  ubicacionUsuario: this.findDepartamento(ue.child('departamento').val()).data.nombre,
+                  presupuesto: x.data.sueldo,
+                  correo: x.data.correo,
+                  tiempoEntrega: this.findEntrega(x.data.disponibilidad).data.nombre,
+                  fecha_entrega: x.data.fecha_entrega,
+                  moneda: this.findMoneda(x.data.moneda).data.nombre,
+                  cancelado: x.data.cancelado,
+                  documento: x.data.documento,
+                  id_requerimiento: x.data.id_requerimiento,
+                  tipo: x.data.tipo,
+                  fecha_atencion: x.data.fecha_atencion
+                }
+  
+                this.list_ofertantes.push(ofe_temp);
+
+              })
+            }
+            if(x.data.tipoUsuario===1){
+              const usuarioPersona = this.item.getUsuarioPersona2(x.data.usuario).query.once('value').then(function(ue){
+                return ue;
+              });
+              usuarioPersona.then(ue => {
+                var ofe_temp = {
+                  keyOferta: x.key,
+                  keyUsuario: x.data.usuario,
+                  nombreOferta: x.data.nombre,
+                  tipoUsuario :x.data.tipoUsuario,
+                  ubicacionOferta: this.findDepartamento(x.data.ubicacion).data.nombre,
+                  nombreUsuario: x.data.nombreusuario,
+                  //antiguedadUsuario: this.findAntiguedad(ue.payload.child('antiguedad').val()).data.nombre,
+                  ubicacionUsuario: this.findDepartamento(ue.child('departamento').val()).data.nombre,
+                  presupuesto: x.data.sueldo,
+                  correo: x.data.correo,
+                  tiempoEntrega: this.findEntrega(x.data.disponibilidad).data.nombre,
+                  fecha_entrega: x.data.fecha_entrega,
+                  moneda: this.findMoneda(x.data.moneda).data.nombre,
+                  cancelado: x.data.cancelado,
+                  documento: x.data.documento,
+                  id_requerimiento: x.data.id_requerimiento,
+                  tipo: x.data.tipo,
+                  fecha_atencion: x.data.fecha_atencion
+                }
+
+                this.list_ofertantes.push(ofe_temp);
+
+              })
+            }
+  
+          }
+        });
+        
+      });
+  
+      document.getElementById("showModalOfe").click();
+
+    }
+  }
+ 
+
+  comprarOferta(item,tipo){
+    console.log(item);
+    if(item.estado===3){
+      alert("Este requerimiento ha culminado");
+      return '';
+    }
+    if(item.estado===5){
+      alert("Tiempo de vigencia del requerimiento ha expirado");
+      return '';
+    }
+    if(item.estado===6){
+      alert("Este requerimiento fue cancelado");
+      return '';
+    }
+    if(item.estado===7){
+      alert("Este requerimiento fue eliminado");
+      return '';
+    }
+    if(item.tipo===1 || item.tipo===2){
+      this.item.Requerimiento_once(item.id_requerimiento).query.once('value').then(data =>{
+        if(data.child('ordencompra').val()==="default"){
+          console.log(data.child('ordencompra').val());
+          this.ordenCompra.generarOrdenCompraRequerimiento(item,this.mi_req_ofertas,this.datePipe.transform(this.myDate,'yyyy-MM-dd').toString());
+        }else{
+          this.item.ordenCompra_once(data.child('ordencompra').val()).query.once('value').then( data2 => {
+            if(data2.child('cancelado').val()===1){
+              this.ordenCompra.generarOrdenCompraRequerimiento(item,this.mi_req_ofertas,this.datePipe.transform(this.myDate,'yyyy-MM-dd').toString());
+            }else{
+              alert("Ya compraste una oferta");
+            }
+          })
+        }
+      })
+    }else if(item.tipo===3){
+      this.item.Liquidacion_once(item.id_requerimiento).query.once('value').then(data =>{
+        if(data.child('ordencompra').val()==="default"){
+          console.log(data.child('ordencompra').val());
+          this.ordenCompra.generarOrdenCompraLiquidacion(item,this.mi_req_ofertas,this.datePipe.transform(this.myDate,'yyyy-MM-dd').toString());
+        }else{
+          this.item.ordenCompra_once(data.child('ordencompra').val()).query.once('value').then( data2 => {
+            if(data2.child('cancelado').val()===1){
+              this.ordenCompra.generarOrdenCompraLiquidacion(item,this.mi_req_ofertas,this.datePipe.transform(this.myDate,'yyyy-MM-dd').toString());
+            }else{
+              alert("Ya compraste una oferta");
+            }
+          })
+        }
+      })
+    }
+  }
+
+  cancelarOferta(item){
+    console.log(item);
+    if(item.tipo===1 || item.tipo===2){
+
+      this.item.oferta_Requerimiento_once(item.keyOferta).query.once('value').then( data => {
+        data.ref.update({
+          cancelado: 1
+        })
+      })
+      this.item.Requerimiento_once(item.id_requerimiento).query.once('value').then(data =>{
+        this.item.ordenCompra_once(data.child('ordencompra').val()).query.once('value').then( data2 => {
+          data2.ref.update({
+            cancelado:1,
+            estado:2,
+            fechaCancelar: this.datePipe.transform(this.myDate,'dd-MM-yyyy').toString()
+          })
+          alert("Orden de compra cancelada");
+        })
+      })
+    }
+    else if(item.tipo===3){
+
+      this.item.oferta_Liquidacion_once(item.keyOferta).query.once('value').then( data => {
+        data.ref.update({
+          cancelado: 1
+        })
+      })
+      this.item.Liquidacion_once(item.id_requerimiento).query.once('value').then(data =>{
+        this.item.ordenCompra_once(data.child('ordencompra').val()).query.once('value').then( data2 => {
+          data2.ref.update({
+            cancelado:1,
+            estado:2,
+            fechaCancelar: this.datePipe.transform(this.myDate,'dd-MM-yyyy').toString()
+          })
+          alert("Orden de compra cancelada");
+        })
+      })
+    }
+  }
+  cancelarRequerimiento(item){
+    console.log(item);
+    if(item.estado===2){
+      this.item.oferta_Requerimiento_once(item.oferta).query.once('value').then( data => {
+        data.ref.update({
+          cancelado: 1
+        })
+      });
+      this.item.ordenCompra_once(item.ordencompra).query.once('value').then( data2 => {
+        data2.ref.update({
+          cancelado:1,
+          estado:2,
+          fechaCancelar: this.datePipe.transform(this.myDate,'dd-MM-yyyy').toString()
+        })
+      })
+    }
+    this.item.Requerimiento_once(item.key).query.once('value').then(data =>{
+      data.ref.update({
+        estado: 6
+      })
+    })
+    alert("Tu requerimiento "+item.nombre+" fue cancelado");
+  }
+
+  cancelarLiquidacion(item){
+    console.log(item);
+    if(item.estado===2){
+      this.item.oferta_Liquidacion_once(item.oferta).query.once('value').then( data => {
+        data.ref.update({
+          cancelado: 1
+        })
+      });
+      this.item.ordenCompra_once(item.ordencompra).query.once('value').then( data2 => {
+        data2.ref.update({
+          cancelado:1,
+          estado:2,
+          fechaCancelar: this.datePipe.transform(this.myDate,'dd-MM-yyyy').toString()
+        })
+      })
+    }
+    this.item.Liquidacion_once(item.key).query.once('value').then(data =>{
+      data.ref.update({
+        estado: 6
+      })
+    })
+    alert("Tu requerimiento "+item.nombre+" fue cancelado");
+  }
+
+  culminarRequerimiento(item){
+    console.log(item);
+  }
+  generarCitaModal(item){
+    //console.log(item);
+    this.citaSeleccionada = item;
+  }
+  generarCita(){
+    if(this.fechaCita.nativeElement.value===""){
+      alert("Por favor ingrese una fecha");
+      return '';
+    }
+    if(this.horaCita.nativeElement.value==="00:00"){
+      alert("Por favor ingrese una hora");
+      return '';
+    }
+    if(this.mensajeCita.nativeElement.value===""){
+      alert("Por favor ingrese un mensaje");
+      return '';
+    }
+    this.ordenCompra.generarCitaTrabajo(
+      this.citaSeleccionada,this.mi_req_ofertas,
+      this.datePipe.transform(this.fechaCita.nativeElement.value,'dd-MM-yyyy').toString(),
+      this.horaCita.nativeElement.value,
+      this.mensajeCita.nativeElement.value,
+      this.datePipe.transform(this.myDate,'yyyy-MM-dd').toString());
+    this.modalCita.nativeElement.click();
+    this.clearModalCita();
+  }
+  clearModalCita(){
+    this.fechaCita.nativeElement.value = null;
+    this.horaCita.nativeElement.value = "00:00";
+    this.mensajeCita.nativeElement.value = "";
+  }
+
+  cancelarCita(item){
+    this.item.oferta_Trabajo_once(item.keyOferta).query.once('value').then(data => {
+      data.ref.update({
+        cancelado: 1
+      })
+    })
+    this.item.citas_once().query.once('value').then(data => {
+      data.forEach( x => {
+        if(x.child('idOferta').val()===item.keyOferta && x.child('idPostulante').val()===item.keyUsuario && x.child('idRecurso').val()===item.id_requerimiento){
+          x.ref.update({
+            cancelado: 1
+          })
+        }
+      })
+    });
+    this.item.Trabajo_once(item.id_requerimiento).query.once('value').then(data => {
+      data.ref.update({
+        cant_citas: data.child('cant_citas').val()-1
+      })
+    })
+
+    alert("Cita cancelada satisfactoriamente");
+  }
+
+  cancelarTrabajo(item){
+    console.log(item);
+    if(item.cant_citas>0){
+      this.item.citas_once().query.once('value').then(data => {
+        data.forEach(x => {
+          if(x.child('idRecurso').val()===item.key){
+            x.ref.update({
+              cancelado: 1
+            });
+            this.item.oferta_Trabajo_once(x.child('idOferta').val()).query.once('value').then(r => {
+              r.ref.update({
+                cancelado: 1
+              })
+            })
+          }
+        });
+      })
+    }
+
+    this.item.Trabajo_once(item.key).query.once('value').then(data => {
+      data.ref.update({
+        estado: 6
+      })
+    })
+    alert("Puesto de trabajo "+item.nombre+" cancelado satisfactoriamente");
+  }
+  republicarRequerimientoModal(item){
+    this.fechaRepublicarSeleccionada = item;
+    console.log(item);
+  }
+  republicarRequerimiento(){
+    if(this.fechaRepublicar.nativeElement.value===""){
+      alert("Por favor seleccione una fecha");
+      return '';
+    }
+    if(this.fechaRepublicarSeleccionada.tipo===1 || this.fechaRepublicarSeleccionada.tipo===2){
+
+    }
+    if(this.fechaRepublicarSeleccionada.tipo===3){
+    
+    }
+    if(this.fechaRepublicarSeleccionada.tipo===4){
+      this.item.Trabajo_once(this.fechaRepublicarSeleccionada.key).query.once('value').then(data => {
+        data.ref.update({
+          estado: 1,
+          fecha_final:  this.datePipe.transform(this.fechaRepublicar.nativeElement.value,'dd-MM-yyyy').toString()
+        })
+        this.fechaRepublicar.nativeElement.value = null;
+      })
+      alert("Puesto de trabajo " +this.fechaRepublicarSeleccionada.nombre+" republicado satisfactoriamente");
+      
+    }
+    this.modalRepublicar.nativeElement.click();
+  }
+
 }

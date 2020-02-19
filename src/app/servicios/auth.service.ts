@@ -7,6 +7,8 @@ import { Observable } from 'rxjs/Observable';
 import { map } from 'rxjs/operators';
 //import { UserInterface } from '../models/user';
 import { auth } from 'firebase/app';
+import { error } from 'protractor';
+import { cpus } from 'os';
 
 
 @Injectable({
@@ -15,12 +17,19 @@ import { auth } from 'firebase/app';
 export class AuthService {
   markersRef: AngularFireList<any>;
   user: Observable<firebase.User>;
+  passChange:string;
 
   constructor(
     public afAuth: AngularFireAuth,
     public db: AngularFireDatabase
   ) {
   
+   }
+   setPass(pass){
+    this.passChange = pass;
+   }
+   getPass(){
+     return this.passChange;
    }
 
    loginTwitter () {
@@ -57,6 +66,48 @@ export class AuthService {
 
   logout() {
     return this.afAuth.auth.signOut();
+  }
+
+  resetPassword(email: string) {
+   this.afAuth.auth.sendPasswordResetEmail(email).then(() => {
+     alert("Hemos enviado un correo electrónico a "+email+" para restablecer su contraseña");
+      })
+   .catch((error) => {
+     //console.log(error)
+     if(error.message === "There is no user record corresponding to this identifier. The user may have been deleted."){
+       alert("Este usuario no existe!!");
+     }
+     if(error.message === "The email address is badly formatted."){
+       alert("Ingrese un correo electronico valido");
+     }
+    });
+
+  }
+  changePassword(pass,newPass){
+    const user = this.afAuth.auth.currentUser;
+    //console.log(user.email);
+    //console.log(pass);
+    const credentials = firebase.auth.EmailAuthProvider.credential(user.email, pass);
+    user.reauthenticateWithCredential(credentials)
+    .then(() => {
+      //console.log('reauth ok')
+      user.updatePassword(newPass).then(succ => {
+        //console.log(succ);
+        alert("Contraseña actualizado correctamente!!");
+      }).catch((error)=>{
+        //console.log(error);
+        if(error.message==="Password should be at least 6 characters"){
+          alert("La contraseña debe tener al menos 6 caracteres.");
+        }
+      });
+    })
+    .catch((error) => {
+      //console.log(error);
+      if(error.message==="The password is invalid or the user does not have a password."){
+        alert("La contraseña actual es incorrecta!!");
+      }
+    });
+
   }
 
   getUsuario_Empresa() {

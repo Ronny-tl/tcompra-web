@@ -39,6 +39,7 @@ export class LoginComponent implements OnInit {
   validarDoc : string;
   @ViewChild('Login', { static: false }) loginModal: ElementRef;
   @ViewChild('Empresa', { static: false }) EmpresaModal: ElementRef;
+  @ViewChild('Persona', { static: false }) PersonaModal: ElementRef;
   @ViewChild('Registrar', { static: false }) RegistrarModal: ElementRef;
   @ViewChild('ValidarCuenta', { static: false }) validarCuenta2: ElementRef;
 //////////////////// Registro Empresa
@@ -55,8 +56,8 @@ export class LoginComponent implements OnInit {
   requerimientos_servicio: requerimientos[];
   pTrabajo: puestoTrabajo[];
   liquidacion: liquidacion[];
-  rEmpresa ={nombre:'',ruc:'',razonSocial:'',direccion:'',departamento:0,tipo:0,especialidad:'',rubro1:undefined,rubro2:undefined,rubro3:undefined,antiguedad:0,email:'',imagen:'default',fec_creacion:'',fec_modificacion:'',telefono:'',tokenWeb:'',ultima_sesion:'',conectado:0};
-  rPersona={nombre:'',dni:'',direccion:'',departamento:0,tipo:0,imagen:'default',fec_creacion:'',fec_modificacion:'',rubro1:undefined,rubro2:undefined,rubro3:undefined,email:'',telefono:'',tokenWeb:'',ultima_sesion:'',conectado:0}
+  rEmpresa ={nombre:'',ruc:'',razonSocial:'',direccion:'',departamento:0,tipo:0,especialidad:'',rubro1:undefined,rubro2:undefined,rubro3:undefined,antiguedad:0,email:'',imagen:'default',fec_creacion:'',fec_modificacion:'',telefono:'',tokenWeb:'',tokenMovil:'',ultima_sesion:'',conectado:0,calificacionClienteBien:0,calificacionClienteMal:0,calificacionProveedorBien:0,calificacionProveedorMal:0};
+  rPersona={nombre:'',dni:'',direccion:'',departamento:0,tipo:0,imagen:'default',fec_creacion:'',fec_modificacion:'',rubro1:undefined,rubro2:undefined,rubro3:undefined,email:'',telefono:'',tokenWeb:'',tokenMovil:'',ultima_sesion:'',conectado:0,calificacionClienteBien:0,calificacionClienteMal:0,calificacionProveedorBien:0,calificacionProveedorMal:0}
   tipoRegistro: string;
   persona = [];
   empresa = [];
@@ -103,9 +104,15 @@ export class LoginComponent implements OnInit {
  selectedRubro1P:string ="-LjS65S0NtwAABX-VuOg";
  selectedRubro2P:string ="-LjS65S0NtwAABX-VuOg";
  selectedRubro3P:string ="-LjS65S0NtwAABX-VuOg";
- selectedTipoPersona:number =0;
+ selectedDepaPersona:number =0;
+ @ViewChild('nombrePersona',{static: false}) nombrePersona: ElementRef;
+ @ViewChild('ape1Persona',{static: false}) ape1Persona: ElementRef;
+ @ViewChild('ape2Persona',{static: false}) ape2Persona: ElementRef;
+ @ViewChild('direccionPersona',{static: false}) direccionPersona: ElementRef;
+ @ViewChild('telefonoPersona',{static: false}) telefonoPersona: ElementRef;
 
-
+ @ViewChild('EmailRec',{static: false}) EmailRec: ElementRef;
+ @ViewChild('RecuperarPass',{static: false}) modalRecuperar: ElementRef;
 
 
   constructor(
@@ -154,6 +161,7 @@ export class LoginComponent implements OnInit {
             }else{
               this.iniciarUsuario();
               this.loginModal.nativeElement.click();
+              this.authService.setPass(this.pass.nativeElement.value);
             }
         
         }).catch((err)=>{
@@ -337,7 +345,7 @@ export class LoginComponent implements OnInit {
             return '';
           }
         });
-        v1.unsubscribe()
+        v1.unsubscribe();
         //alert(this.validar);
         if(this.validar === false){
           //alert(this.ruc.nativeElement.value);
@@ -350,7 +358,7 @@ export class LoginComponent implements OnInit {
         }
       });
     }else{
-      this.authService.getUsuario_Persona().subscribe(data => {
+      const v2 = this.authService.getUsuario_Persona().subscribe(data => {
         data.forEach(item =>{
           if(item.data.dni === this.validarDoc){
             alert("Este DNI ya se encuentra registrado!!");
@@ -359,7 +367,9 @@ export class LoginComponent implements OnInit {
           }
         });
         //alert(this.validar);
+        v2.unsubscribe();
         if(this.validar === false){
+          this.rPersona['dni'] = this.validarDoc;
           this.tipoRegistro = 'Persona';
           this.RegistrarModal.nativeElement.click();
           document.getElementById("modalPersona").click();
@@ -401,22 +411,21 @@ export class LoginComponent implements OnInit {
       alert("Por favor Seleccione su Antiguedad");
       return'';
     }
-      this.rEmpresa['departamento'] = this.selectedDepaEmpresa;
-      this.rEmpresa['tipo'] = this.selectedTipoEmpresa;
+      this.rEmpresa['departamento'] = Number(this.selectedDepaEmpresa);
+      this.rEmpresa['tipo'] = Number(this.selectedTipoEmpresa);
       this.rEmpresa['rubro1'] = this.selectedRubro1;
       this.rEmpresa['rubro2'] = this.selectedRubro2;
       this.rEmpresa['rubro3'] = this.selectedRubro3;
-      this.rEmpresa['antiguedad'] = this.selectedAntiguedad;
-
+      this.rEmpresa['antiguedad'] = Number(this.selectedAntiguedad);
       this.rEmpresa['nombre'] = this.nombreEmpresa.nativeElement.value;
       this.rEmpresa['razonSocial'] = this.razonSocialEmpresa.nativeElement.value;
       this.rEmpresa['direccion'] = this.direccionEmpresa.nativeElement.value;
       this.rEmpresa['especialidad'] = this.especialidadEmpresa.nativeElement.value;
       this.rEmpresa['fec_creacion'] = this.datePipe.transform(this.myDate, 'dd-MM-yyyy').toString();
       this.rEmpresa['fec_modificacion'] = this.datePipe.transform(this.myDate, 'dd-MM-yyyy').toString();
-      document.getElementById("empresatest").click();
+      document.getElementById("empresahide").click();
       document.getElementById("validarCuenta").click();
-      this.clearInputEmpresa();
+      //this.clearInputEmpresa();
   }
 
   clearInputEmpresa(){
@@ -430,11 +439,67 @@ export class LoginComponent implements OnInit {
     this.razonSocialEmpresa.nativeElement.value = "";
     this.direccionEmpresa.nativeElement.value = "";
     this.especialidadEmpresa.nativeElement.value = "";
-    this.validarDoc = "";
+    //this.validarDoc = "";
     this.registerEmail.nativeElement.value = "";
     this.registerPass.nativeElement.value = "";
     this.registerPass2.nativeElement.value = "";
 
+  }
+  validarCuentaPersona(){
+    if(this.nombrePersona.nativeElement.value===""){
+      alert("Ingrese su nombre");
+      return ''
+    }
+    if(this.ape1Persona.nativeElement.value===""){
+      alert("Ingrese su apellido paterno");
+      return '';
+    }
+    if(this.ape2Persona.nativeElement.value===""){
+      alert("Ingrese su apellido materno");
+      return '';
+    }
+    if(this.direccionPersona.nativeElement.value===""){
+      alert("Ingrese su direccion");
+      return '';
+    }
+    if(this.selectedDepaPersona === 0){
+      alert("Seleccione un departamento");
+      return '';
+    }
+    if(this.telefonoPersona.nativeElement.value===""){
+      alert("Ingrese su telefono");
+      return '';
+    }
+    if(this.selectedRubro1P==="-LjS65S0NtwAABX-VuOg" || this.selectedRubro2P ==="-LjS65S0NtwAABX-VuOg" || this.selectedRubro3P==="-LjS65S0NtwAABX-VuOg"){
+      alert("Por favor Seleccione los 3 rubros");
+      return'';
+    }
+    this.rPersona['nombre'] = this.nombrePersona.nativeElement.value +" "+this.ape1Persona.nativeElement.value+" "+this.ape2Persona.nativeElement.value;
+    this.rPersona['direccion'] = this.direccionPersona.nativeElement.value;
+    this.rPersona['departamento'] = Number(this.selectedDepaPersona);
+    this.rPersona['telefono'] = this.telefonoPersona.nativeElement.value;
+    this.rPersona['rubro1'] = this.selectedRubro1P;
+    this.rPersona['rubro2'] = this.selectedRubro2P;
+    this.rPersona['rubro3'] = this.selectedRubro3P;
+    this.rPersona['fec_creacion'] = this.datePipe.transform(this.myDate, 'dd-MM-yyyy').toString();
+    this.rPersona['fec_modificacion'] = this.datePipe.transform(this.myDate, 'dd-MM-yyyy').toString();
+    document.getElementById("personahide").click();
+    document.getElementById("validarCuenta").click();
+    //this.clearInputPersona()
+  }
+  clearInputPersona(){
+    this.nombrePersona.nativeElement.value = "";
+    this.ape1Persona.nativeElement.value = "";
+    this.ape2Persona.nativeElement.value = "";
+    this.direccionPersona.nativeElement.value = "";
+    this.selectedDepaPersona = 0;
+    this.telefonoPersona.nativeElement.value = "";
+    this.selectedRubro1P = "-LjS65S0NtwAABX-VuOg";
+    this.selectedRubro2P = "-LjS65S0NtwAABX-VuOg";
+    this.selectedRubro3P = "-LjS65S0NtwAABX-VuOg";
+    this.registerEmail.nativeElement.value = "";
+    this.registerPass.nativeElement.value = "";
+    this.registerPass2.nativeElement.value = "";
   }
   selectDepartamento(id: number) {
     this.rEmpresa['departamento'] = id;
@@ -473,16 +538,32 @@ export class LoginComponent implements OnInit {
       this.authService.registerUser(this.registerEmail.nativeElement.value,this.registerPass.nativeElement.value).then((res:any) =>{
           if(res.user.emailVerified==false){
             //this.rEmpresa['email'] = this.registerEmail.nativeElement.value;
-            this.addDB.addUsuario(this.rEmpresa,res.user.uid,this.tipoRegistro);
-            alert("Gracias por registrarte en TCompra, Para poder loguearte es necesario verificar tu correo");
+            if(this.tipoRegistro==="Empresa"){
+              this.rEmpresa['email'] = this.registerEmail.nativeElement.value;
+              this.addDB.addUsuario(this.rEmpresa,res.user.uid,this.tipoRegistro);
+              alert("Gracias por registrarte en TCompra Empresa, Para poder Iniciar Sesión es necesario verificar tu correo");
+              //this.EmpresaModal.nativeElement.click();
+              this.clearInputEmpresa();
+              document.getElementById("validarhide").click();
+            }
+            if(this.tipoRegistro==="Persona"){
+              this.rPersona['email'] = this.registerEmail.nativeElement.value;
+              this.addDB.addUsuario(this.rPersona,res.user.uid,this.tipoRegistro);
+              alert("Gracias por registrarte en TCompra Persona, Para poder Iniciar Sesión es necesario verificar tu correo");
+              //his.PersonaModal.nativeElement.click();
+              this.clearInputPersona()
+              document.getElementById("validarhide").click();
+            }
             //this.EmpresaModal.nativeElement.click();
-            this.validarCuenta2.nativeElement.click();
+            //this.PersonaModal.nativeElement.click();
+            //this.validarCuenta2.nativeElement.click();
+
             //this.EmpresaModal.nativeElement.click();
             //this.authService.logout();
             
           }
           this.authService.logout();
-          this.EmpresaModal.nativeElement.click();
+          //his.EmpresaModal.nativeElement.click();
           //console.log(res);
       }).catch((err) =>{
         if(err.message ==="The email address is already in use by another account."){
@@ -495,11 +576,13 @@ export class LoginComponent implements OnInit {
     }
   }
 
-  testmodal(){
-    document.getElementById("empresatest").click();
-  }
   validarBox(values:any,id:number){
     this.aceptoTerminosRegistro = values.currentTarget.checked
     }
-  
+  recuperarPass(){
+    this.authService.resetPassword(this.EmailRec.nativeElement.value);
+    this.modalRecuperar.nativeElement.click();
+    this.EmailRec.nativeElement.value = "";
+  }
+
 }
