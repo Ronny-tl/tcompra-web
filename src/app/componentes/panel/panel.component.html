@@ -300,9 +300,6 @@
 																<td *ngIf="item.estado===5"><h5 style="margin: 0;line-height: 0;"><span class="badge badge-secondary">Expirado</span></h5></td>
 																<td *ngIf="item.estado===6"><h5 style="margin: 0;line-height: 0;"><span class="badge badge-warning">Cancelado</span></h5></td>
 																<td *ngIf="item.estado===7"><h5 style="margin: 0;line-height: 0;"><span class="badge badge-danger">Eliminado</span></h5></td>
-<<<<<<< HEAD
-																<td style="text-align: center;padding: 0.55rem .75rem;"><a href="#" type="button" (click)="eliminarReq(item.key,item.tipo,item.nombre)" class="edufair-component-button button-small"><i class="fas fa-trash" style="padding: 0;top: 0px;"></i></a></td>
-=======
 																<!--<td style="text-align: center;" *ngIf="!item.estado===2 || item.estado===4 || item.estado===5 || item.estado===6 || item.estado ===1"><a type="button" (click)="eliminarReq(item.key,item.tipo,item.nombre)" class="edufair-component-button button-small text-white"><i class="fas fa-trash" style="padding: 0;top: 0px;"></i> Eliminar</a></td>
 																<td style="text-align: center;" *ngIf="!item.estado===3 || item.estado===1 || item.estado===2"><a type="button" (click)="cancelarRequerimiento(item)" class="edufair-component-button button-small text-white"><i class="fas fa-window-close" style="padding: 0;top: 0px;"></i> Cancelar</a></td>
 																<td style="text-align: center;" *ngIf="item.estado===2" ><a type="button" (click)="culminarRequerimiento(item)" class="edufair-component-button button-small text-white"><i class="fas fa-window-close" style="padding: 0;top: 0px;"></i> Culminar</a></td>
@@ -319,7 +316,6 @@
 																	</ul>
 																</div>
 																</td>
->>>>>>> bb57dc23765763386bae3ef015bc3d1f9dfe8dcb
 															</tr>
 															
 														</tbody> 
@@ -1877,3 +1873,32 @@
 	</div>
 </div>
 
+<!-- Modal Republicar -->
+<div class="modal fade" id="republicar" tabindex="-1" role="dialog" aria-hidden="true" style="padding: 0px 20px;">
+	<div class="modal-dialog modal-sm" role="document" id="persona" name="persona">
+		<div class="modal-content" style="background: transparent;">
+
+			<div class="modal-body">
+				<div class="edufair-subscription-1x" style="padding-bottom: 20px;background: #FAFAFA;border-radius: 6px;">
+					<h4 style="padding: 35px 30px 20px 30px;margin: 0;">
+						<b style="font-size: 26px;">Republicar</b><br>
+						<b style="font-size: 18px;font-weight: 400;">Renovar Fecha de publicación.</b>
+					</h4>
+					
+					<div class="edufair-subscription-form-1x" style="padding: 10px 15px;">
+
+						<div class="col-md-12">
+							<label for="exampleInputEmail1" style="margin-bottom: 0rem;margin-top: .5rem;">Nueva Fecha</label>
+							<input name="" type="text" class="form-control" placeholder="00/00/2020" required>
+						</div>
+						<div class="col-md-12">
+							<button class="edufair-btn-larg btn-block boton_login" id="btnPersona" type="button">Republicar</button>
+						</div>
+					</div>
+
+				</div>
+			</div>
+
+		</div>
+	</div>
+</div>
