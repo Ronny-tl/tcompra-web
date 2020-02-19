@@ -58,7 +58,7 @@
 							<div class="col">
 								<nav aria-label="breadcrumb">
 									<ol class="breadcrumb" style="margin-bottom: 0rem;background: transparent;">
-										<!--<li class="breadcrumb-item "><a href="index.html"><i class="fas fa-home" style="color: #262626;"></i></a></li>-->
+										<li class="breadcrumb-item "><a href="index.html"><i class="fas fa-home" style="color: #262626;"></i></a></li>
 										<li class="breadcrumb-item item_panel active" aria-current="page">Panel de Control</li>
 									</ol>
 								</nav>
@@ -300,7 +300,7 @@
 																<td *ngIf="item.estado===5"><h5 style="margin: 0;line-height: 0;"><span class="badge badge-secondary">Expirado</span></h5></td>
 																<td *ngIf="item.estado===6"><h5 style="margin: 0;line-height: 0;"><span class="badge badge-warning">Cancelado</span></h5></td>
 																<td *ngIf="item.estado===7"><h5 style="margin: 0;line-height: 0;"><span class="badge badge-danger">Eliminado</span></h5></td>
-																<td style="text-align: center;"><a type="button" (click)="eliminarReq(item.key,item.tipo,item.nombre)" class="edufair-component-button button-small text-white"><i class="fas fa-trash" style="padding: 0;top: 0px;"></i></a></td>
+																<td style="text-align: center;padding: 0.55rem .75rem;"><a href="#" type="button" (click)="eliminarReq(item.key,item.tipo,item.nombre)" class="edufair-component-button button-small"><i class="fas fa-trash" style="padding: 0;top: 0px;"></i></a></td>
 															</tr>
 															
 														</tbody> 
