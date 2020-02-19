@@ -21,7 +21,9 @@
                     </div>
                 </li>
         </ul>
-        <button id="empresatest" [hidden]="true" data-toggle="modal" data-dismiss="modal" aria-label="Close" data-target="#Empresa"></button>
+        <button id="empresahide" [hidden]="true" data-toggle="modal" data-dismiss="modal" aria-label="Close" data-target="#Empresa"></button>
+        <button id="personahide" [hidden]="true" data-toggle="modal" data-dismiss="modal" aria-label="Close" data-target="#Persona"></button>
+        <button id="validarhide" [hidden]="true" data-toggle="modal" data-dismiss="modal" aria-label="Close" data-target="#ValidarCuenta"></button>
         <button id="modalLogin" [hidden]="true" data-toggle="modal" data-target="#Login"></button>
 		<button id="modalEmpresa" [hidden]="true" data-toggle="modal" data-target="#Empresa"></button>
 		<button id="modalPersona" [hidden]="true" data-toggle="modal" data-target="#Persona"></button>
@@ -56,19 +58,19 @@
                                             </span>-->
                                         </div>
                                     </div>
-                                    <div class="col-md-12">
+                                    <!--<div class="col-md-12">
                                         <div class="custom-control custom-checkbox my-1 mr-sm-2">
                                             <input type="checkbox" class="custom-control-input" id="customControlInline">
                                             <label class="custom-control-label text-dark" for="customControlInline">Recordarme</label>
                                         </div>
-                                    </div>
+                                    </div>-->
                             
                                     <div class="col-md-12">
                                         <button (click)="IniciarSesion()" type="button" class="edufair-btn-larg btn-block boton_login">Iniciar Sesión</button>
                                     </div>
                                     <div class="col-md-12 terms-condition">
                                         <p style="margin-bottom: 0;">¿No eres miembro? <a href="#" class="" data-toggle="modal" data-dismiss="modal" aria-label="Close" data-target="#Registrar"> <b>Registrate</b></a></p>
-                                        <p style="padding-top: 10px;">Olvidaste tu <a href="#" class="" data-toggle="modal" data-dismiss="modal" aria-label="Close" data-target="#RecuperarPass"> <b>Contraseña?</b></a></p>
+                                        <p style="padding-top: 10px;">¿Olvidaste tu <a href="#" class="" data-toggle="modal" data-dismiss="modal" aria-label="Close" data-target="#RecuperarPass"> <b>Contraseña?</b></a></p>
                                     </div>
                                 </form>	
                             </div>			
@@ -160,8 +162,9 @@
                                     <div class="col-md-12">
                                         <div class="form-group row">
                                             <div class="col-md-6">
-                                                <select id="PERdireccion2" name="PERciudad" type="text" class="form-control" placeholder="Ciudad" required>
-                                                    <option value="0">Departamento</option>
+                                                <select [(ngModel)]="selectedDepaPersona" id="PERdireccion2" name="PERciudad" type="text" class="form-control" placeholder="Ciudad" required>
+                                                    <option *ngFor="let item of departamentos" [value]="item.key" ng-selected="selectedDepaPersona == item.key">
+                                                        {{item.data.nombre}}</option>
                                                     
                                                 </select>
                                             </div>
@@ -174,7 +177,7 @@
                                     </div>
                                     <div class="col-md-12">
                                         <div class="form-group">
-                                            <input id="PERtelefono" name="PERtelefono" class="form-control" type="text" placeholder="Telefono" required>
+                                            <input  name="" type="number" max="999999999" oninput="this.value = this.value.replace(/[^0-9.]/g, ''); this.value = this.value.replace(/(\..*)\./g, '$1');" onKeyPress="if(this.value.length==9) return false;" class="form-control" placeholder="Telefono" required #telefonoPersona>
                                         </div>
                                     </div>
                                     <div class="col-md-12" style="text-align: center;color: #898989;">
@@ -183,24 +186,27 @@
                                     <div class="col-md-12">
                                         <div class="form-group row">
                                             <div class="col-md-4">
-                                                <select id="PERCONrubro11" name="cUE_RUB1">
-                                                    <option>Seleccione 1° Rubro</option>
+                                                <select [(ngModel)]="selectedRubro1P" id="PERCONrubro1P" name="cUE_RUB1P">
+                                                    <option *ngFor="let item of rubros" [value]="item.key" ng-selected="selectedRubro1 == item.key">
+                                                        {{item.data.nombre}}</option>
                                                 </select>
                                             </div>
                                             <div class="col-md-4">
-                                                <select id="PERCONrubro22" name="cUE_RUB2">
-                                                    <option>Seleccione 2° Rubro</option>
+                                                <select [(ngModel)]="selectedRubro2P" id="PERCONrubro2P" name="cUE_RUB2P">
+                                                    <option *ngFor="let item of rubros" [value]="item.key" ng-selected="selectedRubro2 == item.key">
+                                                        {{item.data.nombre}}</option>
                                                 </select>
                                             </div>
                                             <div class="col-md-4">
-                                                <select id="PERCONrubro22" name="cUE_RUB2">
-                                                    <option>Seleccione 2° Rubro</option>
+                                                <select [(ngModel)]="selectedRubro3P" id="PERCONrubro3P" name="cUE_RUB2P">
+                                                    <option *ngFor="let item of rubros" [value]="item.key" ng-selected="selectedRubro3P == item.key">
+                                                        {{item.data.nombre}}</option>
                                                 </select>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="col-md-12">
-                                        <button class="edufair-btn-larg btn-block boton_login" id="btnPersona" type="button">Registrar Persona</button>
+                                        <button class="edufair-btn-larg btn-block boton_login" (click)="validarCuentaPersona()"id="btnPersona" type="button">Registrar Persona</button>
                                     </div>
                                 </form>
                             </div>
@@ -309,7 +315,6 @@
                                 </div>
                                 <div class="col-md-12">
                                     <button class="edufair-btn-larg btn-block boton_login" (click)="validarCuentaEmpresa()" id="btnEmpresa" type="button">Registrar Empresa</button>
-                                    <button class="edufair-btn-larg btn-block boton_login" (click)="testmodal()" id="btnEmpresa2" type="button">Registrar Empresa</button>
                                 </div>
                             </form>
                         </div>
@@ -424,7 +429,7 @@
             </div>
         </div>
         
-        <div class="modal fade" id="RecuperarPass" tabindex="-1" role="dialog">
+        <div class="modal fade" id="RecuperarPass" tabindex="-1" role="dialog" #RecuperarPass>
             <div class="modal-dialog modal-sm" role="document">
                 <div class="modal-content">
         
@@ -443,11 +448,11 @@
                                     </div>
                                     <div class="col-md-12">
                                         <div class="form-group">
-                                            <input id="var_correoRec" class="form-control" name="var_correRec" type="email" placeholder="Introducir Email">
+                                            <input id="var_correoRec" class="form-control" name="var_correRec" type="email" placeholder="Introducir Email" #EmailRec>
                                         </div>
                                     </div>
                                     <div class="col-md-12">
-                                        <button class="edufair-btn-larg btn-block boton_login" id="btnRecuperar" type="button">Seguir</button>
+                                        <button class="edufair-btn-larg btn-block boton_login" (click)="recuperarPass()" id="btnRecuperar" type="button">Recuperar</button>
                                     </div>
                                 </div>
         

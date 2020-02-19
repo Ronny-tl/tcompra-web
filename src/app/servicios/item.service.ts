@@ -47,6 +47,10 @@ productList: any;
   listarPuestoTrabajo() {
     this.appsRef = this.db.list('Puesto_Trabajo');
     return this.appsRef;
+  }
+  listarOfertasRequerimiento(){
+    this.appsRef = this.db.list('Oferta_Requerimiento');
+    return this.appsRef;
   }   
   getItems(){
     return this.req;
@@ -111,6 +115,15 @@ productList: any;
   getRubro(id) {
     return this.db.object('/Rubros/' + id).snapshotChanges();
   }
+  getFormaPagoID(id) {
+    return this.db.object('/Formapago/' + id).snapshotChanges();
+  }
+  getMonedaID(id) {
+    return this.db.object('/Moneda/' + id).snapshotChanges();
+  }
+  getEntregaID(id) {
+    return this.db.object('/Entrega/' + id).snapshotChanges();
+  }
   getDepartamento2(id) {
     return this.db.object('/Departamento/' + id).snapshotChanges();
   }
@@ -125,6 +138,46 @@ productList: any;
   }
   getAntiguedad2(id) {
     return this.db.object('/Antiguedad/' + id).snapshotChanges();
+  }
+  getUsuarioEmpresa2(id){
+    this.markersRef = this.db.list('Empresa/'+id);
+    return this.markersRef;
+  }   
+  getUsuarioPersona2(id){
+    this.markersRef = this.db.list('Persona/'+id);
+    return this.markersRef;
+  }
+  oferta_Requerimiento_once(id){ //// LISTA SOLO UNA VEZ
+    this.markersRef = this.db.list('Oferta_Requerimiento/'+id);
+    return this.markersRef;
+  }
+  Requerimiento_once(id){ //// LISTA SOLO UNA VEZ
+    this.markersRef = this.db.list('Requerimientos/'+id);
+    return this.markersRef;
+  }
+  oferta_Liquidacion_once(id){ //// LISTA SOLO UNA VEZ
+    this.markersRef = this.db.list('Oferta_Liquidacion/'+id);
+    return this.markersRef;
+  }
+  Liquidacion_once(id){ //// LISTA SOLO UNA VEZ
+    this.markersRef = this.db.list('Liquidacion/'+id);
+    return this.markersRef;
+  }
+  ordenCompra_once(id){ //// LISTA SOLO UNA VEZ
+    this.markersRef = this.db.list('OrdenCompra/'+id);
+    return this.markersRef;
+  }
+  oferta_Trabajo_once(id){ //// LISTA SOLO UNA VEZ
+    this.markersRef = this.db.list('Oferta_Trabajo/'+id);
+    return this.markersRef;
+  }
+  Trabajo_once(id){ //// LISTA SOLO UNA VEZ
+    this.markersRef = this.db.list('Puesto_Trabajo/'+id);
+    return this.markersRef;
+  }
+  citas_once(){ //// LISTA SOLO UNA VEZ
+    this.markersRef = this.db.list('Citas/');
+    return this.markersRef;
   }
 
   editMarkers(marker: AngularFireList<any>) {

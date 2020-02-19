@@ -183,14 +183,14 @@
 											<div class="form-group row">
 												<label for="colFormLabelSm" class="col-sm-4 col-form-label" style="padding: 20px 5px;">Palabras Claves:</label>
 												<div class="col-sm-8">
-													<input type="email" class="form-control">
+													<input type="email" class="form-control" #busqBien>
 												</div>
 											</div>
 											<div class="form-group row">
 												<label for="staticEmail" class="col-sm-4 col-form-label" style="padding: 20px 5px;">Rubro:</label>
 												<div class="col-sm-8">
-													<select class="form_control selectitem" [(ngModel)]="selectTest">
-														<option *ngFor="let item of rubros" [value]="item.key">
+													<select [(ngModel)]="selecRubroBien" class="form_control selectitem">
+														<option *ngFor="let item of rubros" [value]="item.data.nombre" ng-selected="selecRubroBien === item.nombre">
 															{{item.data.nombre}}</option>
 													</select>
 												</div>
@@ -198,8 +198,8 @@
 											<div class="form-group row">
 												<label for="colFormLabelSm" class="col-sm-4 col-form-label" style="padding: 20px 5px;">Tiempo de Entrega:</label>
 												<div class="col-sm-8">
-													<select class="form_control selectitem" >
-														<option *ngFor="let item of entrega" [value]="item.data.nombre">
+													<select [(ngModel)]="selecEntregaBien" class="form_control selectitem" >
+														<option *ngFor="let item of entrega" [value]="item.key" ng-selected="selecEntregaBien === item.key">
 															{{item.data.nombre}}</option>
 													</select>
 												</div>
@@ -210,27 +210,28 @@
 											<div class="form-group row">
 												<label for="staticEmail" class="col-sm-4 col-form-label" style="padding: 20px 5px;">Ubicación:</label>
 												<div class="col-sm-8">
-													<select class="form_control selectitem">
-														<option *ngFor="let item of departamentos" [value]="item.data.nombre">
+													<select [(ngModel)]="selecDepBien" class="form_control selectitem">
+														<option *ngFor="let item of departamentos" [value]="item.data.nombre" ng-selected="selecDepBien === item.nombre">
 															{{item.data.nombre}}</option>
 													</select>
 												</div>
 											</div>
 											<div class="form-group row">
 												<label for="staticEmail" class="col-sm-4 col-form-label" style="padding: 20px 5px;">F. de Publicación:</label>
-												<div class="col-sm-4"><input type="date" class="form-control"></div>
-												<div class="col-sm-4"><input type="date" class="form-control"></div>
+												<div class="col-sm-4"><input type="date" class="form-control" #busqBien1></div>
+												<div class="col-sm-4"><input type="date" class="form-control" #busqBien2></div>
 											</div>
 										</div>
 
 										<div class="col-md-12" style="padding: 15px 0;text-align:  center;border-top: 1px solid #dddddd;border-bottom: 1px solid #dddddd;display: flow-root;">
-											<a href="#" class="edufair-component-button button-medium" data-toggle="modal" data-target="#Login">Buscar <i class="fas fa-search"></i></a>
+											<a type="button" *ngIf="!busquedaBien" class="edufair-component-button button-medium text-white" (click)="buscarBien()">Buscar <i class="fas fa-search"></i></a>
+											<a type="button" *ngIf="busquedaBien" class="edufair-component-button button-medium text-white" (click)="buscarBien()">Cancelar Busqueda <i class="fas fa-search"></i></a>
 											<!-- <button  class="btn btn-search form-control"  (click)="paginationTable()">Prueba<i class="fas fa-eye"></i></button>
 											<input id="test" type="text" class="form-control" placeholder="¿Que Buscas...?"> -->
-											<button id="modalLogin" [hidden]="true" data-toggle="modal" data-target="#Login"></button>
+											<!--<button id="modalLogin" [hidden]="true" data-toggle="modal" data-target="#Login"></button>
 											<button id="modalEmpresa" [hidden]="true" data-toggle="modal" data-target="#Empresa"></button>
 											<button id="modalPersona" [hidden]="true" data-toggle="modal" data-target="#Persona"></button>
-											<button id="validarCuenta" [hidden]="true" data-toggle="modal" data-target="#ValidarCuenta"></button>
+											<button id="validarCuenta" [hidden]="true" data-toggle="modal" data-target="#ValidarCuenta"></button>-->
 										</div>
 
 									</div>
@@ -276,14 +277,14 @@
 											<div class="form-group row">
 												<label for="colFormLabelSm" class="col-sm-4 col-form-label" style="padding: 20px 5px;">Palabras Claves:</label>
 												<div class="col-sm-8">
-													<input type="email" class="form-control">
+													<input type="email" class="form-control" #busqServicio>
 												</div>
 											</div>
 											<div class="form-group row">
 												<label for="staticEmail" class="col-sm-4 col-form-label" style="padding: 20px 5px;">Rubro:</label>
 												<div class="col-sm-8">
-													<select class="form_control selectitem" >
-														<option *ngFor="let item of rubros" [value]="item.data.nombre">
+													<select [(ngModel)]="selecRubroServicio" class="form_control selectitem" >
+														<option *ngFor="let item of rubros" [value]="item.data.nombre" ng-selected="selecRubroServicio === item.nombre">
 															{{item.data.nombre}}</option>
 													</select>
 												</div>
@@ -291,8 +292,8 @@
 											<div class="form-group row">
 												<label for="colFormLabelSm" class="col-sm-4 col-form-label" style="padding: 20px 5px;">Tiempo de Entrega:</label>
 												<div class="col-sm-8">
-													<select class="form_control selectitem" >
-														<option *ngFor="let item of entrega" [value]="item.data.nombre">
+													<select [(ngModel)]="selecEntregaServicio" class="form_control selectitem" >
+														<option *ngFor="let item of entrega" [value]="item.key" ng-selected="selecEntregaServicio === item.key">
 															{{item.data.nombre}}</option>
 													</select>
 												</div>
@@ -303,21 +304,22 @@
 											<div class="form-group row">
 												<label for="staticEmail" class="col-sm-4 col-form-label" style="padding: 20px 5px;">Ubicación:</label>
 												<div class="col-sm-8">
-													<select class="form_control selectitem" >
-														<option *ngFor="let item of departamentos" [value]="item.data.nombre">
+													<select [(ngModel)]="selecDepServicio" class="form_control selectitem" >
+														<option *ngFor="let item of departamentos" [value]="item.data.nombre" ng-selected="selecServicio === item.nombre">
 															{{item.data.nombre}}</option>
 													</select>
 												</div>
 											</div>
 											<div class="form-group row">
 												<label for="staticEmail" class="col-sm-4 col-form-label" style="padding: 20px 5px;">F. de Publicación:</label>
-												<div class="col-sm-4"><input type="date" class="form-control"></div>
-												<div class="col-sm-4"><input type="date" class="form-control"></div>
+												<div class="col-sm-4"><input type="date" class="form-control" #busqServicio1></div>
+												<div class="col-sm-4"><input type="date" class="form-control" #busqServicio2></div>
 											</div>
 										</div>
 
 										<div class="col-md-12" style="padding: 15px 0;text-align:  center;border-top: 1px solid #dddddd;border-bottom: 1px solid #dddddd;display: flow-root;">
-											<a href="#" class="edufair-component-button button-medium">Buscar <i class="fas fa-search"></i></a>
+											<a type="button" *ngIf="!busquedaServicio" class="edufair-component-button button-medium text-white" (click)="buscarServicio()">Buscar <i class="fas fa-search"></i></a>
+											<a type="button" *ngIf="busquedaServicio" class="edufair-component-button button-medium text-white" (click)="buscarServicio()">Cancelar Busqueda <i class="fas fa-search"></i></a>
 										</div>
 
 									</div>
@@ -363,14 +365,14 @@
 											<div class="form-group row">
 												<label for="colFormLabelSm" class="col-sm-4 col-form-label" style="padding: 20px 5px;">Palabras Claves:</label>
 												<div class="col-sm-8">
-													<input type="email" class="form-control">
+													<input type="email" class="form-control" #busqLiq>
 												</div>
 											</div>
 											<div class="form-group row">
 												<label for="staticEmail" class="col-sm-4 col-form-label" style="padding: 20px 5px;">Rubro:</label>
 												<div class="col-sm-8">
-													<select class="form_control selectitem" >
-														<option *ngFor="let item of rubros" [value]="item.data.nombre">
+													<select [(ngModel)]="selecRubroLiq" class="form_control selectitem" >
+														<option *ngFor="let item of rubros" [value]="item.data.nombre" ng-selected="selecRubroLiq === item.nombre">
 															{{item.data.nombre}}</option>
 													</select>
 												</div>
@@ -378,8 +380,8 @@
 											<div class="form-group row">
 												<label for="colFormLabelSm" class="col-sm-4 col-form-label" style="padding: 20px 5px;">Tiempo de Entrega:</label>
 												<div class="col-sm-8">
-													<select class="form_control selectitem" >
-														<option *ngFor="let item of entrega" [value]="item.data.nombre">
+													<select [(ngModel)]="selecEntregaLiq" class="form_control selectitem" >
+														<option *ngFor="let item of entrega" [value]="item.key" ng-selected="selecEntregaLiq === item.key">
 															{{item.data.nombre}}</option>
 													</select>
 												</div>
@@ -390,21 +392,22 @@
 											<div class="form-group row">
 												<label for="staticEmail" class="col-sm-4 col-form-label" style="padding: 20px 5px;">Ubicación:</label>
 												<div class="col-sm-8">
-													<select class="form_control selectitem" >
-														<option *ngFor="let item of departamentos" [value]="item.data.nombre">
+													<select [(ngModel)]="selecDepLiq" class="form_control selectitem" >
+														<option *ngFor="let item of departamentos" [value]="item.data.nombre" ng-selected="selecDepLiq === item.nombre">
 															{{item.data.nombre}}</option>
 													</select>
 												</div>
 											</div>
 											<div class="form-group row">
 												<label for="staticEmail" class="col-sm-4 col-form-label" style="padding: 20px 5px;">F. de Publicación:</label>
-												<div class="col-sm-4"><input type="date" class="form-control"></div>
-												<div class="col-sm-4"><input type="date" class="form-control"></div>
+												<div class="col-sm-4"><input type="date" class="form-control" #busqLiq1></div>
+												<div class="col-sm-4"><input type="date" class="form-control" #busqLiq2></div>
 											</div>
 										</div>
 
 										<div class="col-md-12" style="padding: 15px 0;text-align:  center;border-top: 1px solid #dddddd;border-bottom: 1px solid #dddddd;display: flow-root;">
-											<a href="#" class="edufair-component-button button-medium">Buscar <i class="fas fa-search"></i></a>
+											<a type="button" *ngIf="!busquedaLiquidacion" class="edufair-component-button button-medium text-white" (click)="buscarLiquidacion()">Buscar <i class="fas fa-search"></i></a>
+											<a type="button" *ngIf="busquedaLiquidacion" class="edufair-component-button button-medium text-white" (click)="buscarLiquidacion()">Cancelar Busqueda <i class="fas fa-search"></i></a>
 										</div>
 
 									</div>
@@ -450,14 +453,14 @@
 											<div class="form-group row">
 												<label for="colFormLabelSm" class="col-sm-4 col-form-label" style="padding: 20px 5px;">Palabras Claves:</label>
 												<div class="col-sm-8">
-													<input type="email" class="form-control">
+													<input type="email" class="form-control" #busqTrabajo>
 												</div>
 											</div>
 											<div class="form-group row">
 												<label for="staticEmail" class="col-sm-4 col-form-label" style="padding: 20px 5px;">Rubro:</label>
 												<div class="col-sm-8">
-													<select class="form_control selectitem" >
-														<option *ngFor="let item of rubros" [value]="item.data.nombre">
+													<select [(ngModel)]="selecRubroTrabajo" class="form_control selectitem" >
+														<option *ngFor="let item of rubros" [value]="item.data.nombre" ng-selected="selecRubroTrabajo === item.nombre">
 															{{item.data.nombre}}</option>
 													</select>
 												</div>
@@ -465,8 +468,8 @@
 											<div class="form-group row">
 												<label for="colFormLabelSm" class="col-sm-4 col-form-label" style="padding: 20px 5px;">Jornada Laboral:</label>
 												<div class="col-sm-8">
-													<select class="form_control selectitem" >
-														<option *ngFor="let item of jornada" [value]="item.data.nombre">
+													<select [(ngModel)]="selecJornadaTrabajo" class="form_control selectitem" >
+														<option *ngFor="let item of jornada" [value]="item.data.nombre" ng-selected="selecJornadaTrabajo === item.nombre">
 															{{item.data.nombre}}</option>
 													</select>
 												</div>
@@ -477,21 +480,22 @@
 											<div class="form-group row">
 												<label for="staticEmail" class="col-sm-4 col-form-label" style="padding: 20px 5px;">Ubicación:</label>
 												<div class="col-sm-8">
-													<select class="form_control selectitem" >
-														<option *ngFor="let item of departamentos" [value]="item.data.nombre">
+													<select [(ngModel)]="selecDepTrabajo" class="form_control selectitem" >
+														<option *ngFor="let item of departamentos" [value]="item.data.nombre" ng-selected="selecDepTrabajo === item.nombre">
 															{{item.data.nombre}}</option>
 													</select>
 												</div>
 											</div>
 											<div class="form-group row">
 												<label for="staticEmail" class="col-sm-4 col-form-label" style="padding: 20px 5px;">F. de Publicación:</label>
-												<div class="col-sm-4"><input type="date" class="form-control"></div>
-												<div class="col-sm-4"><input type="date" class="form-control"></div>
+												<div class="col-sm-4"><input type="date" class="form-control" #busqTrabajo1></div>
+												<div class="col-sm-4"><input type="date" class="form-control" #busqTrabajo2></div>
 											</div>
 										</div>
 
 										<div class="col-md-12" style="padding: 15px 0;text-align:  center;border-top: 1px solid #dddddd;border-bottom: 1px solid #dddddd;display: flow-root;">
-											<a href="#" class="edufair-component-button button-medium">Buscar <i class="fas fa-search"></i></a>
+											<a type="button" *ngIf="!busquedaTrabajo" class="edufair-component-button button-medium text-white" (click)="buscarTrabajo()">Buscar <i class="fas fa-search"></i></a>
+											<a type="button" *ngIf="busquedaTrabajo" class="edufair-component-button button-medium text-white" (click)="buscarTrabajo()">Cancelar Busqueda <i class="fas fa-search"></i></a>
 										</div>
 
 									</div>

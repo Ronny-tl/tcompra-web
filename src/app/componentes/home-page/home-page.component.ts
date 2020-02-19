@@ -120,6 +120,40 @@ export class HomePageComponent implements OnInit {
 
   tipoUsuario:number=3;
 
+  ///////////////// 12/02/2020
+  busquedaBien:boolean = false;
+  busquedaServicio:boolean = false;
+  busquedaLiquidacion:boolean = false;
+  busquedaTrabajo:boolean = false;
+
+  @ViewChild('busqBien',{static: false}) busqBien: ElementRef;
+  selecDepBien:string = "Departamento";
+  selecRubroBien:string = "Seleccione Rubro";
+  selecEntregaBien:string = "-LjS6ygVTMvasGPrdtqp";
+  @ViewChild('busqBien1',{static: false}) busqBien1: ElementRef;
+  @ViewChild('busqBien2',{static: false}) busqBien2: ElementRef;
+
+  @ViewChild('busqServicio',{static: false}) busqServicio: ElementRef;
+  selecDepServicio:string = "Departamento";
+  selecRubroServicio:string = "Seleccione Rubro";
+  selecEntregaServicio:string = "-LjS6ygVTMvasGPrdtqp";
+  @ViewChild('busqServicio1',{static: false}) busqServicio1: ElementRef;
+  @ViewChild('busqServicio2',{static: false}) busqServicio2: ElementRef;
+
+  @ViewChild('busqLiq',{static: false}) busqLiq: ElementRef;
+  selecDepLiq:string = "Departamento";
+  selecRubroLiq:string = "Seleccione Rubro";
+  selecEntregaLiq:string = "-LjS6ygVTMvasGPrdtqp";
+  @ViewChild('busqLiq1',{static: false}) busqLiq1: ElementRef;
+  @ViewChild('busqLiq2',{static: false}) busqLiq2: ElementRef;
+  
+  @ViewChild('busqTrabajo',{static: false}) busqTrabajo: ElementRef;
+  selecDepTrabajo:string = "Departamento";
+  selecRubroTrabajo:string = "Seleccione Rubro";
+  selecJornadaTrabajo:string = "-LjS6SlPBOA29CcKypLS";
+  @ViewChild('busqTrabajo1',{static: false}) busqTrabajo1: ElementRef;
+  @ViewChild('busqTrabajo2',{static: false}) busqTrabajo2: ElementRef;
+
   constructor(
     public authService: AuthService,
     private itemService: ItemService,
@@ -225,41 +259,52 @@ export class HomePageComponent implements OnInit {
 
   getRequerimientos(){
     let s = this.itemService.listarRequerimientos(); 
-    s.snapshotChanges().subscribe(data => { 
-      this.requerimientos_bien = [];
-      this.requerimientos_servicio = [];
+    s.snapshotChanges().subscribe(data => {
+      if(!this.busquedaBien){ this.requerimientos_bien = []; }
+      if(!this.busquedaServicio){ this.requerimientos_servicio = [];}
+      this.cantBienes = 0;
+      this.cantServicios= 0;
       data.forEach(item => {
         //console.log(item);
         //let a= item.payload.toJSON(); 
         //a['$key'] = item.key;
         if(item.payload.child('tipo').val()==1){
-        const a = {
-          key:item.key,
-          nombre: item.payload.child('nombre').val(),
-          correo: item.payload.child('correo').val(),
-          entrega: item.payload.child('entrega').val(),
-          rubro: this.findRubros(item.payload.child('rubro').val()).data.nombre,
-          fecha_final: item.payload.child('fecha_final').val(),
-          tipo: item.payload.child('tipo').val(),
-          departamento: this.findDepartamento(item.payload.child('departamento').val()).data.nombre
-        }
-        this.requerimientos_bien.push(a);
+          if(item.payload.child('estado').val()===1){
+            const a = {
+              key:item.key,
+              nombre: item.payload.child('nombre').val(),
+              correo: item.payload.child('correo').val(),
+              entrega: item.payload.child('entrega').val(),
+              rubro: this.findRubros(item.payload.child('rubro').val()).data.nombre,
+              fecha_final: item.payload.child('fecha_final').val(),
+              tipo: item.payload.child('tipo').val(),
+              departamento: this.findDepartamento(item.payload.child('departamento').val()).data.nombre
+            }
+            if(!this.busquedaBien){
+              this.requerimientos_bien.push(a);
+            }
+
+          }
         this.cantBienes = this.cantBienes + 1;
         //this.requerimientos_bien.push(a as requerimientos);
       }
       if(item.payload.child('tipo').val()==2){
-          const a = {
-            key:item.key,
-            nombre: item.payload.child('nombre').val(),
-            correo: item.payload.child('correo').val(),
-            entrega: item.payload.child('entrega').val(),
-            rubro: this.findRubros(item.payload.child('rubro').val()).data.nombre,
-            fecha_final: item.payload.child('fecha_final').val(),
-            tipo: item.payload.child('tipo').val(),
-            departamento: this.findDepartamento(item.payload.child('departamento').val()).data.nombre
-            
-          }
-          this.requerimientos_servicio.push(a);
+        if(item.payload.child('estado').val()===1){
+            const a = {
+              key:item.key,
+              nombre: item.payload.child('nombre').val(),
+              correo: item.payload.child('correo').val(),
+              entrega: item.payload.child('entrega').val(),
+              rubro: this.findRubros(item.payload.child('rubro').val()).data.nombre,
+              fecha_final: item.payload.child('fecha_final').val(),
+              tipo: item.payload.child('tipo').val(),
+              departamento: this.findDepartamento(item.payload.child('departamento').val()).data.nombre
+              
+            }
+            if(!this.busquedaServicio){
+              this.requerimientos_servicio.push(a);
+            }
+        }
           this.cantServicios = this.cantServicios +1;
         }
       });
@@ -270,20 +315,24 @@ export class HomePageComponent implements OnInit {
     let s = this.itemService.listarLiquidacion(); 
     s.snapshotChanges().subscribe(data => { 
       this.cantLiquidacion = data.length;
-      this.liquidacion = [];
+      if(!this.busquedaLiquidacion){this.liquidacion = [];}
       data.forEach(item => {
         if(item.payload.child('tipo').val()==3){
-        const a = {
-          key:item.key,
-          tipo: item.payload.child('tipo').val(),
-          nombre: item.payload.child('nombre').val(),
-          correo: item.payload.child('correo').val(),
-          entrega: item.payload.child('entrega').val(),
-          rubro: this.findRubros(item.payload.child('rubro').val()).data.nombre,
-          fecha_final: item.payload.child('fecha_final').val(),
-          departamento: this.findDepartamento(item.payload.child('departamento').val()).data.nombre
-        }
-        this.liquidacion.push(a);
+          if(item.payload.child('estado').val()===1){
+            const a = {
+              key:item.key,
+              tipo: item.payload.child('tipo').val(),
+              nombre: item.payload.child('nombre').val(),
+              correo: item.payload.child('correo').val(),
+              entrega: item.payload.child('entrega').val(),
+              rubro: this.findRubros(item.payload.child('rubro').val()).data.nombre,
+              fecha_final: item.payload.child('fecha_final').val(),
+              departamento: this.findDepartamento(item.payload.child('departamento').val()).data.nombre
+            }
+            if(!this.busquedaLiquidacion){
+              this.liquidacion.push(a);
+            }
+          }
       }
       
       });
@@ -294,21 +343,25 @@ export class HomePageComponent implements OnInit {
     let s = this.itemService.listarPuestoTrabajo(); 
     s.snapshotChanges().subscribe(data => { 
       this.cantTrabajo = data.length;
-      this.pTrabajo = [];
+      if(!this.busquedaTrabajo){this.pTrabajo = [];}
       data.forEach(item => {
         if(item.payload.child('tipo').val()==4){
-          const a = {
-          key:item.key,
-          tipo: item.payload.child('tipo').val(),
-          nombre: item.payload.child('nombre').val(),
-          correo: item.payload.child('correo').val(),
-          entrega: item.payload.child('entrega').val(),
-          rubro: this.findRubros(item.payload.child('rubro').val()).data.nombre,
-          fecha_final: item.payload.child('fecha_final').val(),
-          departamento: this.findDepartamento(item.payload.child('departamento').val()).data.nombre
+          if(item.payload.child('estado').val()===1){
+              const a = {
+              key:item.key,
+              tipo: item.payload.child('tipo').val(),
+              nombre: item.payload.child('nombre').val(),
+              correo: item.payload.child('correo').val(),
+              jornada: item.payload.child('jornada').val(),
+              rubro: this.findRubros(item.payload.child('rubro').val()).data.nombre,
+              fecha_final: item.payload.child('fecha_final').val(),
+              departamento: this.findDepartamento(item.payload.child('departamento').val()).data.nombre
+            }
+            if(!this.busquedaTrabajo){
+              this.pTrabajo.push(a);
+            }
+          }
         }
-        this.pTrabajo.push(a);
-      }
       
       });
     });
@@ -589,6 +642,164 @@ export class HomePageComponent implements OnInit {
     if(id===4){ this.cantListTrabajo = parseInt(cant);}
    
   }
+  buscarBien(){
+    if(this.busquedaBien){
+      this.busquedaBien = false;
+      this.getRequerimientos();
+    }else{
+      this.busquedaBien = true;
+      var temp = [];
+      for(let x of this.requerimientos_bien){
+        var du = true;
+        if(du && this.busqBien.nativeElement.value.toUpperCase() != ""  && x.nombre.toUpperCase().includes(this.busqBien.nativeElement.value.toUpperCase())){
+         temp.push(x);
+         du = false;
+        }
+        if(du && this.selecDepBien===x.departamento){
+          temp.push(x);
+          du = false;
+        }
+        if(du && this.selecRubroBien=== x.rubro){
+          temp.push(x);
+          du = false;
+        }if(du && this.selecEntregaBien ===x.entrega){
+          temp.push(x);
+          du = false;
+        }if(du && this.busqBien1.nativeElement.value != "" && this.busqBien2.nativeElement.value != ""){
+          var p = x.fecha_final.split('-');
+          var p2 = this.busqBien1.nativeElement.value.split('-');
+          var p3 = this.busqBien2.nativeElement.value.split('-');
+          var fp = new Date(Number(p[2]),Number(p[1])-1,Number(p[0]));
+          var f1 = new Date(Number(p2[0]),Number(p2[1])-1,Number(p2[2]));
+          var f2 = new Date(Number(p3[0]),Number(p3[1]-1),Number(p3[2]));
+          if(fp.getTime() >= f1.getTime() && fp.getTime() <= f2.getTime()){
+            temp.push(x);
+            du = false;
+          }
+        }
+      }
+      this.requerimientos_bien = temp;
+    }
+  }
 
+  buscarServicio(){
+    if(this.busquedaServicio){
+      this.busquedaServicio = false;
+      this.getRequerimientos();
+    }else{
+      this.busquedaServicio = true;
+      var temp = [];
+      for(let x of this.requerimientos_servicio){
+        var du = true;
+        if(du && this.busqServicio.nativeElement.value.toUpperCase() != ""  && x.nombre.toUpperCase().includes(this.busqServicio.nativeElement.value.toUpperCase())){
+         temp.push(x);
+         du = false;
+        }
+        if(du && this.selecDepServicio===x.departamento){
+          temp.push(x);
+          du = false;
+        }
+        if(du && this.selecRubroServicio=== x.rubro){
+          temp.push(x);
+          du = false;
+        }if(du && this.selecEntregaServicio ===x.entrega){
+          temp.push(x);
+          du = false;
+        }if(du && this.busqServicio1.nativeElement.value != "" && this.busqServicio2.nativeElement.value != ""){
+          var p = x.fecha_final.split('-');
+          var p2 = this.busqServicio1.nativeElement.value.split('-');
+          var p3 = this.busqServicio2.nativeElement.value.split('-');
+          var fp = new Date(Number(p[2]),Number(p[1])-1,Number(p[0]));
+          var f1 = new Date(Number(p2[0]),Number(p2[1])-1,Number(p2[2]));
+          var f2 = new Date(Number(p3[0]),Number(p3[1]-1),Number(p3[2]));
+          if(fp.getTime() >= f1.getTime() && fp.getTime() <= f2.getTime()){
+            temp.push(x);
+            du = false;
+          }
+        }
+      }
+      this.requerimientos_servicio = temp;
+    }
+  }
+
+  buscarLiquidacion(){
+    if(this.busquedaLiquidacion){
+      this.busquedaLiquidacion = false;
+      this.getLiquidacion();
+    }else{
+      this.busquedaLiquidacion = true;
+      var temp = [];
+      for(let x of this.liquidacion){
+        var du = true;
+        if(du && this.busqLiq.nativeElement.value.toUpperCase() != ""  && x.nombre.toUpperCase().includes(this.busqLiq.nativeElement.value.toUpperCase())){
+         temp.push(x);
+         du = false;
+        }
+        if(du && this.selecDepLiq===x.departamento){
+          temp.push(x);
+          du = false;
+        }
+        if(du && this.selecRubroLiq=== x.rubro){
+          temp.push(x);
+          du = false;
+        }if(du && this.selecEntregaLiq ===x.entrega){
+          temp.push(x);
+          du = false;
+        }if(du && this.busqLiq1.nativeElement.value != "" && this.busqLiq2.nativeElement.value != ""){
+          var p = x.fecha_final.split('-');
+          var p2 = this.busqLiq1.nativeElement.value.split('-');
+          var p3 = this.busqLiq2.nativeElement.value.split('-');
+          var fp = new Date(Number(p[2]),Number(p[1])-1,Number(p[0]));
+          var f1 = new Date(Number(p2[0]),Number(p2[1])-1,Number(p2[2]));
+          var f2 = new Date(Number(p3[0]),Number(p3[1]-1),Number(p3[2]));
+          if(fp.getTime() >= f1.getTime() && fp.getTime() <= f2.getTime()){
+            temp.push(x);
+            du = false;
+          }
+        }
+      }
+      this.liquidacion = temp;
+    }
+  }
+
+  buscarTrabajo(){
+    if(this.busquedaTrabajo){
+      this.busquedaTrabajo = false;
+      this.getPuestoTrabajo();
+    }else{
+      this.busquedaTrabajo = true;
+      var temp = [];
+      for(let x of this.pTrabajo){
+        var du = true;
+        if(du && this.busqTrabajo.nativeElement.value.toUpperCase() != ""  && x.nombre.toUpperCase().includes(this.busqTrabajo.nativeElement.value.toUpperCase())){
+         temp.push(x);
+         du = false;
+        }
+        if(du && this.selecDepTrabajo === x.departamento){
+          temp.push(x);
+          du = false;
+        }
+        if(du && this.selecRubroTrabajo === x.rubro){
+          temp.push(x);
+          du = false;
+        }if(du && this.selecJornadaTrabajo ===x.jornada){
+          temp.push(x);
+          du = false;
+        }if(du && this.busqTrabajo1.nativeElement.value != "" && this.busqTrabajo2.nativeElement.value != ""){
+          var p = x.fecha_final.split('-');
+          var p2 = this.busqTrabajo1.nativeElement.value.split('-');
+          var p3 = this.busqTrabajo2.nativeElement.value.split('-');
+          var fp = new Date(Number(p[2]),Number(p[1])-1,Number(p[0]));
+          var f1 = new Date(Number(p2[0]),Number(p2[1])-1,Number(p2[2]));
+          var f2 = new Date(Number(p3[0]),Number(p3[1]-1),Number(p3[2]));
+          if(fp.getTime() >= f1.getTime() && fp.getTime() <= f2.getTime()){
+            temp.push(x);
+            du = false;
+          }
+        }
+      }
+      this.pTrabajo = temp;
+    }
+  }
 
 }
