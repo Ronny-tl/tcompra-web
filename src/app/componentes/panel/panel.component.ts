@@ -173,7 +173,6 @@ export class PanelComponent implements OnInit {
     private datePipe: DatePipe,
     private registroReq: RegistroRequerimientosService,
     private ordenCompra: OrdenCompraService,
-    private usuarioClass: usuario
     //private modalService: NgbModal //para el modal
   ) {
    
@@ -234,8 +233,6 @@ export class PanelComponent implements OnInit {
     this.getDepartamentoUsuario(this.usuario.departamento)
     this.getAntiguedadUsuario(this.usuario.antiguedad);
     this.getTipo(this.usuario.tipo_empresa);
-    this.usuarioClass.calificacionClienteBien = this.usuario.calificacionClienteBien;
-    this.usuarioClass.calificacionClienteMal = this.usuario.calificacionClienteMal;
   }
   getRubroUsuario(id){
     this.item.getRubro(id).subscribe(data =>{
