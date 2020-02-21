@@ -1,10 +1,6 @@
-<mat-expansion-panel>
-    <mat-expansion-panel-header>
-        This is the expansion title
-
-     
-    </mat-expansion-panel-header>
-  
-    <p>This is the primary content of the panel.</p>
-  
-  </mat-expansion-panel>
+<div style="text-align:center">
+  <h1>
+    ng-starrating demo
+  </h1>
+  <star-rating value="2.9" totalstars="5" checkedcolor="yellow" uncheckedcolor="black" size="30px" readonly="false" (rate)="onRate($event)"></star-rating>
+</div>

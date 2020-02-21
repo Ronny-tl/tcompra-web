@@ -253,7 +253,7 @@
 											<li class="nav-item"><a href="#date-comprar-1" data-toggle="tab" class="nav-link active"><i class="fas fa-user-chart"></i> Bienes</a></li>
 											<li class="nav-item"><a href="#date-comprar-2" data-toggle="tab" class="nav-link"><i class="fas fa-briefcase"></i> Servicios</a></li>
 											<li class="nav-item"><a href="#date-comprar-3" data-toggle="tab" class="nav-link"><i class="fas fa-shopping-basket"></i> Liquidación</a></li>
-											<li class="nav-item"><a href="#date-comprar-4" data-toggle="tab" class="nav-link"><i class="fas fa-user-tie"></i> RR.HH.</a></li>
+											<li *ngIf="hideRRHH" class="nav-item"><a href="#date-comprar-4" data-toggle="tab" class="nav-link"><i class="fas fa-user-tie"></i> RR.HH.</a></li>
 										</ul>
 	
 										<div class="tab-content course-description-tab" style="margin: 0;border: 0px solid #eee;padding: 0;">
@@ -311,7 +311,7 @@
 																	  <li><a type="button" *ngIf="!item.estado===2 || item.estado===4 || item.estado===5 || item.estado===6 || item.estado ===1" (click)="eliminarReq(item)"><i class="fas fa-trash" style="padding: 0;top: 0px;"></i> Eliminar</a></li>
 																	  <li><a type="button" *ngIf="!item.estado===3 || item.estado===1 || item.estado===2" (click)="cancelarRequerimiento(item)"><i class="fas fa-window-close" style="padding: 0;top: 0px;"></i> Cancelar</a></li>
 																	  <li><a type="button" *ngIf="item.estado===2" (click)="culminarRequerimiento(item)">Culminar</a></li>
-																	  <li><a type="button" *ngIf="item.estado===6 || item.estado===4 || item.estado===5" (click)="republicarRequerimiento(item.key,item.tipo,item.nombre)">Republicar</a></li>
+																	  <li><a type="button" *ngIf="item.estado===6 || item.estado===4 || item.estado===5" (click)="republicarRequerimientoModal(item)"  data-toggle="modal" data-target="#modalRepublicar">Republicar</a></li>
 																	  <li><a type="button" *ngIf="item.estado===3">Ver Resumen</a></li>
 																	</ul>
 																</div>
@@ -379,7 +379,7 @@
 																	  <li><a type="button" *ngIf="!item.estado===2 || item.estado===4 || item.estado===5 || item.estado===6 || item.estado ===1" (click)="eliminarReq(item)"><i class="fas fa-trash" style="padding: 0;top: 0px;"></i> Eliminar</a></li>
 																	  <li><a type="button" *ngIf="!item.estado===3 || item.estado===1 || item.estado===2" (click)="cancelarRequerimiento(item)"><i class="fas fa-window-close" style="padding: 0;top: 0px;"></i> Cancelar</a></li>
 																	  <li><a type="button" *ngIf="item.estado===2" (click)="culminarRequerimiento(item)">Culminar</a></li>
-																	  <li><a type="button" *ngIf="item.estado===6 || item.estado===4 || item.estado===5" (click)="republicarRequerimiento(item.key,item.tipo,item.nombre)">Republicar</a></li>
+																	  <li><a type="button" *ngIf="item.estado===6 || item.estado===4 || item.estado===5" (click)="republicarRequerimientoModal(item)"  data-toggle="modal" data-target="#modalRepublicar">Republicar</a></li>
 																	  <li><a type="button" *ngIf="item.estado===3">Ver Resumen</a></li>
 																	</ul>
 																</div>
@@ -444,7 +444,7 @@
 																	  <li><a type="button" *ngIf="!item.estado===2 || item.estado===4 || item.estado===5 || item.estado===6 || item.estado ===1" (click)="eliminarReq(item)"><i class="fas fa-trash" style="padding: 0;top: 0px;"></i> Eliminar</a></li>
 																	  <li><a type="button" *ngIf="!item.estado===3 || item.estado===1 || item.estado===2" (click)="cancelarLiquidacion(item)"><i class="fas fa-window-close" style="padding: 0;top: 0px;"></i> Cancelar</a></li>
 																	  <li><a type="button" *ngIf="item.estado===2" (click)="culminarRequerimiento(item)">Culminar</a></li>
-																	  <li><a type="button" *ngIf="item.estado===6 || item.estado===4 || item.estado===5" (click)="republicarRequerimiento(item.key,item.tipo,item.nombre)">Republicar</a></li>
+																	  <li><a type="button" *ngIf="item.estado===6 || item.estado===4 || item.estado===5" (click)="republicarRequerimientoModal(item)"  data-toggle="modal" data-target="#modalRepublicar">Republicar</a></li>
 																	  <li><a type="button" *ngIf="item.estado===3">Ver Resumen</a></li>
 																	</ul>
 																</div>
@@ -510,7 +510,7 @@
 																	  <li><a type="button" *ngIf="!item.estado===2 || item.estado===4 || item.estado===5 || item.estado===6 || item.estado ===1" (click)="eliminarReq(item)"><i class="fas fa-trash" style="padding: 0;top: 0px;"></i> Eliminar</a></li>
 																	  <li><a type="button" *ngIf="!item.estado===3 || item.estado===1 || item.estado===2" (click)="cancelarTrabajo(item)"><i class="fas fa-window-close" style="padding: 0;top: 0px;"></i> Cancelar</a></li>
 																	  <li><a type="button" *ngIf="item.estado===2">Culminar</a></li>
-																	  <li><a type="button" *ngIf="item.estado===6 || item.estado===4 || item.estado===5" (click)="republicarRequerimientoModal(item)" data-toggle="modal" data-target="#modalRepublicar" >Republicar</a></li>
+																	  <li><a type="button" *ngIf="item.estado===6 || item.estado===4 || item.estado===5" (click)="republicarRequerimientoModal(item)"  data-toggle="modal" data-target="#modalRepublicar">Republicar</a></li>
 																	  <li><a type="button" *ngIf="item.estado===3">Ver Resumen</a></li>
 																	</ul>
 																</div>
@@ -565,6 +565,7 @@
 											<li class="nav-item"><a href="#date-vender-1" data-toggle="tab" class="nav-link active"><i class="fas fa-user-chart"></i> Bienes</a></li>
 											<li class="nav-item"><a href="#date-vender-2" data-toggle="tab" class="nav-link"><i class="fas fa-briefcase"></i> Servicios</a></li>
 											<li class="nav-item"><a href="#date-vender-3" data-toggle="tab" class="nav-link"><i class="fas fa-shopping-basket"></i> Liquidación</a></li>
+											<li *ngIf="!hideRRHH" class="nav-item"><a href="#date-vender-4" data-toggle="tab" class="nav-link"><i class="fas fa-user-tie"></i>  RR.HH</a></li>
 										</ul>
 	
 										<div class="tab-content course-description-tab" style="margin: 0;border: 0px solid #eee;padding: 0;">
@@ -600,9 +601,21 @@
 																<th scope="row">{{item.nombre}}</th> 
 																<td>{{item.ubicacion}}</td>
 																<td>S/. {{item.presupuesto}}</td>
-																<td *ngIf="item.estado===1"><h5 tyle="margin: 0;line-height: 0;"><span class="badge badge-success">Entregado</span></h5></td>
-																<td *ngIf="item.estado===0"><h5 style="margin: 0;line-height: 0;"><span class="badge badge-secondary">No Entregado</span></h5></td>
-																<td style="text-align: center;"><a type="button" (click)="eliminarOfe(item.key,item.tipo,item.nombre)" class="edufair-component-button button-small text-white"><i class="fas fa-trash" style="padding: 0;top: 0px;"></i> Eliminar</a></td>
+																<td *ngIf="item.cancelado===0 && item.fecha_atencion === 'default'"><h5 tyle="margin: 0;line-height: 0;"><span class="badge badge-success">Oferta Activa</span></h5></td>
+																<td *ngIf="item.cancelado===0 && item.fecha_atencion !='default'"><h5 tyle="margin: 0;line-height: 0;"><span class="badge badge-warning">Oferta Ganadora</span></h5></td>
+																<td *ngIf="item.cancelado===1"><h5 style="margin: 0;line-height: 0;"><span class="badge badge-danger">Oferta Cancelada</span></h5></td>
+																<!--<td style="text-align: center;"><a type="button" (click)="eliminarOfe(item.key,item.tipo,item.nombre)" class="edufair-component-button button-small text-white"><i class="fas fa-trash" style="padding: 0;top: 0px;"></i> Eliminar</a></td>-->
+																<td><div class="dropdown show">
+
+																	<a type="button" class="edufair-component-button button-small text-white dropdown-toggle" data-toggle="dropdown">Seleccione  <span class="caret"></span></a>
+																	<ul class="dropdown-menu" role="menu">
+																	  <li><a type="button" *ngIf="item.fecha_atencion === 'default' && item.cancelado != 1" (click)="eliminarOfe(item)"><i class="fas fa-trash" style="padding: 0;top: 0px;"></i> Eliminar</a></li>
+																	  <li><a type="button" *ngIf="item.fecha_atencion != 'default' && item.cancelado != 1" (click)="cancelarMiOferta(item)"><i class="fas fa-window-close" style="padding: 0;top: 0px;"></i> Cancelar Oferta</a></li>
+																	  <li><a type="button" *ngIf="item.fecha_atencion != 'default' && item.cancelado != 1">Culminar</a></li>
+																	  <li><a type="button" >Detalle Oferta</a></li>
+																	</ul>
+																</div>
+																</td>
 															</tr>
 														</tbody> 
 													</table>
@@ -641,9 +654,21 @@
 																<th scope="row">{{item.nombre}}</th> 
 																<td>{{item.ubicacion}}</td>
 																<td>S/. {{item.presupuesto}}</td>
-																<td *ngIf="item.estado===1"><h5 tyle="margin: 0;line-height: 0;"><span class="badge badge-success">Entregado</span></h5></td>
-																<td *ngIf="item.estado===0"><h5 style="margin: 0;line-height: 0;"><span class="badge badge-secondary">No Entregado</span></h5></td>
-																<td style="text-align: center;"><a type="button" (click)="eliminarOfe(item.key,item.tipo,item.nombre)" class="edufair-component-button button-small text-white"><i class="fas fa-trash" style="padding: 0;top: 0px;"></i> Eliminar</a></td>
+																<td *ngIf="item.cancelado===0 && item.fecha_atencion === 'default'"><h5 tyle="margin: 0;line-height: 0;"><span class="badge badge-success">Oferta Activa</span></h5></td>
+																<td *ngIf="item.cancelado===0 && item.fecha_atencion !='default'"><h5 tyle="margin: 0;line-height: 0;"><span class="badge badge-warning">Oferta Ganadora</span></h5></td>
+																<td *ngIf="item.cancelado===1"><h5 style="margin: 0;line-height: 0;"><span class="badge badge-danger">Oferta Cancelada</span></h5></td>
+																<!--<td style="text-align: center;"><a type="button" (click)="eliminarOfe(item.key,item.tipo,item.nombre)" class="edufair-component-button button-small text-white"><i class="fas fa-trash" style="padding: 0;top: 0px;"></i> Eliminar</a></td>-->
+																<td><div class="dropdown show">
+
+																	<a type="button" class="edufair-component-button button-small text-white dropdown-toggle" data-toggle="dropdown">Seleccione  <span class="caret"></span></a>
+																	<ul class="dropdown-menu" role="menu">
+																	  <li><a type="button" *ngIf="item.fecha_atencion === 'default' && item.cancelado != 1" (click)="eliminarOfe(item)"><i class="fas fa-trash" style="padding: 0;top: 0px;"></i> Eliminar</a></li>
+																	  <li><a type="button" *ngIf="item.fecha_atencion != 'default' && item.cancelado != 1" (click)="cancelarMiOferta(item)"><i class="fas fa-window-close" style="padding: 0;top: 0px;"></i> Cancelar Oferta</a></li>
+																	  <li><a type="button" *ngIf="item.fecha_atencion != 'default' && item.cancelado != 1">Culminar</a></li>
+																	  <li><a type="button" >Detalle Oferta</a></li>
+																	</ul>
+																</div>
+																</td>
 															</tr>
 														</tbody> 
 													</table>
@@ -682,13 +707,78 @@
 																<th scope="row">{{item.nombre}}</th> 
 																<td>{{item.ubicacion}}</td>
 																<td>S/. {{item.presupuesto}}</td>
-																<td *ngIf="item.estado===1"><h5 tyle="margin: 0;line-height: 0;"><span class="badge badge-success">Entregado</span></h5></td>
-																<td *ngIf="item.estado===0"><h5 style="margin: 0;line-height: 0;"><span class="badge badge-secondary">No Entregado</span></h5></td>
-																<td style="text-align: center;"><a type="button" (click)="eliminarOfe(item.key,item.tipo,item.nombre)" class="edufair-component-button button-small text-white"><i class="fas fa-trash" style="padding: 0;top: 0px;"></i> Eliminar</a></td>
+																<td *ngIf="item.cancelado===0 && item.fecha_atencion === 'default'"><h5 tyle="margin: 0;line-height: 0;"><span class="badge badge-success">Oferta Activa</span></h5></td>
+																<td *ngIf="item.cancelado===0 && item.fecha_atencion !='default'"><h5 tyle="margin: 0;line-height: 0;"><span class="badge badge-warning">Oferta Ganadora</span></h5></td>
+																<td *ngIf="item.cancelado===1"><h5 style="margin: 0;line-height: 0;"><span class="badge badge-danger">Oferta Cancelada</span></h5></td>
+																<!--<td style="text-align: center;"><a type="button" (click)="eliminarOfe(item.key,item.tipo,item.nombre)" class="edufair-component-button button-small text-white"><i class="fas fa-trash" style="padding: 0;top: 0px;"></i> Eliminar</a></td>-->
+																<td><div class="dropdown show">
+
+																	<a type="button" class="edufair-component-button button-small text-white dropdown-toggle" data-toggle="dropdown">Seleccione  <span class="caret"></span></a>
+																	<ul class="dropdown-menu" role="menu">
+																	  <li><a type="button" *ngIf="item.fecha_atencion === 'default' && item.cancelado != 1" (click)="eliminarOfe(item)"><i class="fas fa-trash" style="padding: 0;top: 0px;"></i> Eliminar</a></li>
+																	  <li><a type="button" *ngIf="item.fecha_atencion != 'default' && item.cancelado != 1" (click)="cancelarMiOferta(item)"><i class="fas fa-window-close" style="padding: 0;top: 0px;"></i> Cancelar Oferta</a></li>
+																	  <li><a type="button" *ngIf="item.fecha_atencion != 'default' && item.cancelado != 1">Culminar</a></li>
+																	  <li><a type="button" >Detalle Oferta</a></li>
+																	</ul>
+																</div>
+																</td>
 															</tr>
 														</tbody> 
 													</table>
 													<pagination-controls (pageChange)="pageActual_2_3 = $event" [previousLabel]="labels.previousLabel"   [nextLabel]="labels.nextLabel" id="pagination7" (pageBoundsCorrection)="pageActual_2_3 = $event"></pagination-controls>
+												</div>
+											</div>
+
+											<div class="tab-pane" id="date-vender-4" style="padding-top: 15px;">
+												<div class="row">
+													<div class="col">
+														<label>Mostrar 
+															<select class="form-control form-control-sm" style="display: inline-block;width: auto;margin: 10px 10px;" (change)="paginationTable($event.target.value,2,4)"><option value="10">10</option>
+																<option value="25">25</option>
+																<option value="50">50</option>
+																<option value="100">100</option>
+															</select>Entradas
+														</label>
+													</div>
+													<div class="col" style="text-align: right;">
+														<a href="#" class="edufair-component-button button-medium" style="margin-top: 10px;">Generar PDF <i class="fas fa-file-pdf"></i></a>
+													</div>
+												</div>
+												<div class="table-responsive">
+													<table class="table table-hover">
+														<thead class="thead-light">
+															<tr>
+																<th>Nombre <i class="fad fa-sort-up"></i></th>
+																<th>Departamento <i class="fad fa-sort-up"></i></th>
+																<th>Presupuesto <i class="fad fa-sort-up"></i></th>
+																<th>Estado <i class="fad fa-sort-up"></i></th>
+																<th>Acción <i class="fad fa-sort-up"></i></th>
+															</tr>
+														</thead> 
+														<tbody> 
+															<tr *ngFor="let item of oferta_requerimiento_trabajo | paginate:{itemsPerPage: cant_Mis_Ofe_Trabajo, currentPage:pageActual_2_4, id:'pagination8'}">
+																<th scope="row">{{item.nombre}}</th> 
+																<td>{{item.ubicacion}}</td>
+																<td>S/. {{item.presupuesto}}</td>
+																<td *ngIf="item.cancelado===0 && item.fecha_atencion === 'default'"><h5 tyle="margin: 0;line-height: 0;"><span class="badge badge-success">Postulación Activa</span></h5></td>
+																<td *ngIf="item.cancelado===0 && item.fecha_atencion !='default'"><h5 tyle="margin: 0;line-height: 0;"><span class="badge badge-warning">Cita Pendiente</span></h5></td>
+																<td *ngIf="item.cancelado===1"><h5 style="margin: 0;line-height: 0;"><span class="badge badge-danger">Cita Cancelada</span></h5></td>
+																<!--<td style="text-align: center;"><a type="button" (click)="eliminarOfe(item.key,item.tipo,item.nombre)" class="edufair-component-button button-small text-white"><i class="fas fa-trash" style="padding: 0;top: 0px;"></i> Eliminar</a></td>-->
+																<td><div class="dropdown show">
+
+																	<a type="button" class="edufair-component-button button-small text-white dropdown-toggle" data-toggle="dropdown">Seleccione  <span class="caret"></span></a>
+																	<ul class="dropdown-menu" role="menu">
+																	  <li><a type="button" *ngIf="item.fecha_atencion === 'default' && item.cancelado != 1" (click)="eliminarOfe(item)"><i class="fas fa-trash" style="padding: 0;top: 0px;"></i> Eliminar</a></li>
+																	  <li><a type="button" *ngIf="item.fecha_atencion != 'default' && item.cancelado != 1" (click)="cancelarMiOferta(item)"><i class="fas fa-window-close" style="padding: 0;top: 0px;"></i> Cancelar Oferta</a></li>
+																	  <li><a type="button" *ngIf="item.fecha_atencion != 'default' && item.cancelado != 1">Culminar</a></li>
+																	  <li><a type="button" >Detalle Oferta</a></li>
+																	</ul>
+																</div>
+																</td>
+															</tr>
+														</tbody> 
+													</table>
+													<pagination-controls (pageChange)="pageActual_2_4 = $event" [previousLabel]="labels.previousLabel"   [nextLabel]="labels.nextLabel" id="pagination8" (pageBoundsCorrection)="pageActual_2_4 = $event"></pagination-controls>
 												</div>
 											</div>
 	
@@ -734,6 +824,7 @@
 											<li class="nav-item"><a href="#date-cotizar-1" data-toggle="tab" class="nav-link active"><i class="fas fa-user-chart"></i> Bienes</a></li>
 											<li class="nav-item"><a href="#date-cotizar-2" data-toggle="tab" class="nav-link"><i class="fas fa-briefcase"></i> Servicios</a></li>
 											<li class="nav-item"><a href="#date-cotizar-3" data-toggle="tab" class="nav-link"><i class="fas fa-shopping-basket"></i> Liquidación</a></li>
+											<li *ngIf="!hideRRHH" class="nav-item"><a href="#date-cotizar-4" data-toggle="tab" class="nav-link"><i class="fas fa-user-tie"></i>  RR.HH</a></li>
 										</ul>
 	
 										<div class="tab-content course-description-tab" style="margin: 0;border: 0px solid #eee;padding: 0;">
@@ -862,7 +953,48 @@
 													<pagination-controls (pageChange)="pageActual_3_3 = $event" [previousLabel]="labels.previousLabel"   [nextLabel]="labels.nextLabel" id="pagination11" (pageBoundsCorrection)="pageActual_3_3 = $event"></pagination-controls>
 												</div>
 											</div>
-	
+
+											<div class="tab-pane" id="date-cotizar-4" style="padding-top: 15px;">
+												<div class="row">
+													<div class="col">
+														<label>Mostrar 
+															<select class="form-control form-control-sm" style="display: inline-block;width: auto;margin: 10px 10px;" (change)="paginationTable($event.target.value,3,3)"><option value="10">10</option>
+																<option value="25">25</option>
+																<option value="50">50</option>
+																<option value="100">100</option>
+															</select>Entradas
+														</label>
+													</div>
+													<div class="col" style="text-align: right;">
+														<a href="#" class="edufair-component-button button-medium" style="margin-top: 10px;">Generar PDF <i class="fas fa-file-pdf"></i></a>
+													</div>
+												</div>
+												<div class="table-responsive">
+													<table class="table table-hover">
+														<thead class="thead-light">
+															<tr>
+																<th>Nombre <i class="fad fa-sort-up"></i></th>
+																<th>Rubro <i class="fad fa-sort-up"></i></th>
+																<th>Departamento <i class="fad fa-sort-up"></i></th>
+																<th>Presupuesto <i class="fad fa-sort-up"></i></th>
+																<th style="text-align: center;">Postulantes <i class="fad fa-sort-up"></i></th>
+															</tr>
+														</thead> 
+														<tbody> 
+															<tr *ngFor="let item of cot_requerimiento_trabajo?.reverse() | paginate:{itemsPerPage: cant_Coti_Trabajo, currentPage:pageActual_3_4, id:'pagination12'}">
+																<th scope="row">{{item.nombre}}</th> 
+																<td>{{item.rubro}}</td>
+																<td>{{item.departamento}}</td>
+																<td>S/. {{item.presupuesto}}</td>
+																<td><h5 style="margin: 0;line-height: 0;text-align: center;"><span class="badge badge-pill" style="background-color: #a11a70;color: #fff;">{{item.cant_personal}}</span></h5></td>
+																<td style="text-align: center;"><a type="button" routerLink="/detalle-prod/{{item.tipo}}/{{item.key}}"  routerLinkActive="active" class="edufair-component-button button-small text-white"><i class="fas fa-eye" style="padding: 0;top: 0px;"></i> VER</a></td>
+															</tr>
+														</tbody> 
+													</table>
+													<pagination-controls (pageChange)="pageActual_3_4 = $event" [previousLabel]="labels.previousLabel"   [nextLabel]="labels.nextLabel" id="pagination12" (pageBoundsCorrection)="pageActual_3_4 = $event"></pagination-controls>
+												</div>
+											</div>
+
 										</div>
 									</div>
 	
@@ -1133,7 +1265,7 @@
 										<li class="nav-item"><a href="#agregar-1" data-toggle="tab" class="nav-link active"><i class="fas fa-user-chart"></i> Bienes</a></li>
 										<li class="nav-item"><a href="#agregar-2" data-toggle="tab" class="nav-link"><i class="fas fa-briefcase"></i> Servicios</a></li>
 										<li class="nav-item"><a href="#agregar-3" data-toggle="tab" class="nav-link"><i class="fas fa-shopping-basket"></i> Liquidación</a></li>
-										<li class="nav-item"><a href="#agregar-4" data-toggle="tab" class="nav-link"><i class="fas fa-user-tie"></i> RR.HH</a></li>
+										<li *ngIf="hideRRHH"class="nav-item"><a href="#agregar-4" data-toggle="tab" class="nav-link"><i class="fas fa-user-tie"></i> RR.HH</a></li>
 									</ul>
 	
 									<div class="tab-content course-description-tab" style="margin: 0;border: 0px solid #eee;padding: 0;">
@@ -1484,21 +1616,18 @@
 							</div>
 							<div class="col-md-9">
 								<div class="card-body">
-									<h4 style="margin-bottom: .75rem;margin-top: .24em;">
+									<h4 style="margin-bottom: .75rem;margin-top: .12em;">
 										<span *ngIf="mi_req_ofertas?.tipo===1" class="badge badge-secondary" style="background-color: #A11A70;border-radius: 50px;padding: .4em .8em;font-size: 65%;">Bienes</span>
 										<span *ngIf="mi_req_ofertas?.tipo===2" class="badge badge-secondary" style="background-color: #A11A70;border-radius: 50px;padding: .4em .8em;font-size: 65%;">Servicios</span>
 										<span *ngIf="mi_req_ofertas?.tipo===3" class="badge badge-secondary" style="background-color: #A11A70;border-radius: 50px;padding: .4em .8em;font-size: 65%;">Liquidación</span>
 										<span *ngIf="mi_req_ofertas?.tipo===4" class="badge badge-secondary" style="background-color: #A11A70;border-radius: 50px;padding: .4em .8em;font-size: 65%;">Recurso Humano</span>
-										<b style="font-size: 18px;margin-left: 5px;">
-											<i class="fas fa-star" style="color: #a11a70;"></i>
-											<i class="fas fa-star" style="color: #a11a70;"></i>
-											<i class="fas fa-star" style="color: #a11a70;"></i>
-											<i class="fas fa-star" style="color: #a11a70;"></i>
-											<i class="fas fa-star" style="color: #a11a70;"></i>
-										</b>
+										
+										<div>Calificacion Positiva<star-rating value="{{usuarioClass.calificacionClienteBien}}" totalstars="5" checkedcolor="green" uncheckedcolor="black" size="28px" readonly="true"></star-rating></div>
+										<div>Calificacion Negativa<star-rating value="0" totalstars="5" checkedcolor="red" uncheckedcolor="black" size="28px" readonly="true"></star-rating></div>
+										
 									</h4>
 									<h5 class="card-title" style="color: #212529;font-weight: 600;margin-bottom: .40rem;">{{mi_req_ofertas?.descripcion}}</h5>
-									<p class="card-text" style="margin-bottom: .75rem;">{{usuario?.nombre.toUpperCase()}}</p>
+									<p class="card-text" style="margin-bottom: .75rem; text-transform: uppercase">{{usuario?.nombre}}</p>
 									<p *ngIf="mi_req_ofertas?.tipo!=4" class="card-text"><small style="font-size: 26px;color: #a11a70;font-weight: 600; ">S/. {{mi_req_ofertas?.presupuesto}}</small></p>
 									<p *ngIf="mi_req_ofertas?.tipo===4"class="card-text"><small style="font-size: 26px;color: #a11a70;font-weight: 600; ">S/. {{mi_req_ofertas?.sueldo}}</small></p>
 								</div>
@@ -1841,15 +1970,14 @@
 </div>
 
 
-<!-- modal republicar-->
+<!--modal republicar-->
 <div class="modal fade" id="modalRepublicar" tabindex="-1" role="dialog" #modalRepublicar>
-	<div class="modal-dialog modal-sm border border-dark rounded" role="document">
+	<div class="modal-dialog modal-sm rounded" role="document">
 		<div class="modal-content">
 
-			<div class="modal-body border border-dark rounded">
+			<div class="modal-body rounded">
 				<div class="edufair-subscription-1x" style="padding-bottom: 10px;">
 					<div class="edufair-subscription-title-1x">
-						<!--<img src="assets/images/logo.svg" style="padding: 30px 60px 0px 60px;">-->
 						<h3 style="font-size: 20px;padding: 10px;color: #fff;">Republicar</h3>
 					</div>
 					<div class="edufair-subscription-form-1x" align="center">
@@ -1861,7 +1989,7 @@
 								<input name="" type="date" class="form-control text-center" placeholder="00/00/2020" required #fechaRepublicar>
 							</div>
 							<div class="col-md-12">
-								<button class="edufair-btn-larg btn-block boton_login" (click)="republicarRequerimiento()" id="btnRecuperar" type="button">Aceptar</button>
+								<button class="edufair-btn-larg btn-block boton_login" (click)="republicarRequerimiento(fechaRepublicar)" id="btnRecuperar" type="button">Aceptar</button>
 							</div>
 						</div>
 
@@ -1873,32 +2001,41 @@
 	</div>
 </div>
 
-<!-- Modal Republicar -->
-<div class="modal fade" id="republicar" tabindex="-1" role="dialog" aria-hidden="true" style="padding: 0px 20px;">
-	<div class="modal-dialog modal-sm" role="document" id="persona" name="persona">
-		<div class="modal-content" style="background: transparent;">
-
-			<div class="modal-body">
-				<div class="edufair-subscription-1x" style="padding-bottom: 20px;background: #FAFAFA;border-radius: 6px;">
-					<h4 style="padding: 35px 30px 20px 30px;margin: 0;">
-						<b style="font-size: 26px;">Republicar</b><br>
-						<b style="font-size: 18px;font-weight: 400;">Renovar Fecha de publicación.</b>
-					</h4>
-					
-					<div class="edufair-subscription-form-1x" style="padding: 10px 15px;">
-
-						<div class="col-md-12">
-							<label for="exampleInputEmail1" style="margin-bottom: 0rem;margin-top: .5rem;">Nueva Fecha</label>
-							<input name="" type="text" class="form-control" placeholder="00/00/2020" required>
+<!-- Modal Republicar 
+<ng-template #modalRepublicar let-modal>
+	<div class="modal fade modal-sm">
+	<div class="modal fade modal-sm">
+		<h4 class="modal modal-sm" id="modal-basic-title">Profile update</h4>
+		<button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+		  <span aria-hidden="true">&times;</span>
+		</button>
+	</div>
+	  
+	
+				<div class="modal-body modal-sm border border-dark rounded">
+					<div class="edufair-subscription-1x" style="padding-bottom: 10px;">
+						<div class="edufair-subscription-title-1x">
+							
+							<h3 style="font-size: 20px;padding: 10px;color: #fff;">Republicar</h3>
 						</div>
-						<div class="col-md-12">
-							<button class="edufair-btn-larg btn-block boton_login" id="btnPersona" type="button">Republicar</button>
+						<div class="edufair-subscription-form-1x" align="center">
+	
+							<div role="form">
+								
+								<div class="col-md-12">
+									<label for="exampleInputEmail1" style="margin-top: 3px;font-weight: 600;font-size: 16px;">Seleccione una Fecha:</label>
+									<input name="" type="date" class="form-control text-center" placeholder="00/00/2020" required #fechaRepublicar>
+								</div>
+								<div class="col-md-12">
+									<button class="edufair-btn-larg btn-block boton_login" (click)="republicarRequerimiento(fechaRepublicar)" id="btnRecuperar" type="button">Aceptar</button>
+								</div>
+							</div>
+	
 						</div>
 					</div>
-
 				</div>
 			</div>
+			
 
-		</div>
-	</div>
-</div>
+</ng-template>
+-->

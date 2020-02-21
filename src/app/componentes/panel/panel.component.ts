@@ -11,6 +11,9 @@ import {RegistroRequerimientosService} from '../../servicios/registro-requerimie
 import {crearLiquidacion} from '../../models/crearLiquidacion';
 import {crearTrabajo} from '../../models/crearTrabajo';
 import {OrdenCompraService} from '../../servicios/orden-compra.service';
+import {NgbModal, ModalDismissReasons,NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
+import {usuario} from '../../models/usuario';
+
 @Component({
   selector: 'app-panel',
   templateUrl: './panel.component.html',
@@ -18,6 +21,7 @@ import {OrdenCompraService} from '../../servicios/orden-compra.service';
 })
 export class PanelComponent implements OnInit {
   //myInput= "asdasd";
+  hideRRHH: boolean = true;
   public labels: any = {
     previousLabel: 'Atras',
     nextLabel: 'Siguiente'
@@ -157,9 +161,10 @@ export class PanelComponent implements OnInit {
   @ViewChild('mensajeCita', { static: false }) mensajeCita: ElementRef;
   citaSeleccionada: any;
   fechaRepublicarSeleccionada: any;
-  @ViewChild('fechaRepublicar', { static: false }) fechaRepublicar: ElementRef;
+  //@ViewChild('fechaRepublicar', { static: false }) fechaRepublicar: ElementRef;
   @ViewChild('modalRepublicar', { static: false }) modalRepublicar: ElementRef;
 
+  //modalReference: NgbModalRef; para el modal
   constructor(
     private authService: AuthService,
     private item: ItemService,
@@ -167,8 +172,12 @@ export class PanelComponent implements OnInit {
     private storage: AngularFireStorage,
     private datePipe: DatePipe,
     private registroReq: RegistroRequerimientosService,
-    private ordenCompra: OrdenCompraService
-  ) { }
+    private ordenCompra: OrdenCompraService,
+    private usuarioClass: usuario
+    //private modalService: NgbModal //para el modal
+  ) {
+   
+   }
 
   ngOnInit() {
     this.getUsuario();
@@ -192,6 +201,7 @@ export class PanelComponent implements OnInit {
           //alert(auth.uid);
           this.usuario = item.data;
           this.tipoUsuario = "EMPRESA";
+          this.hideRRHH = true;
           this.tipoUsuarioNumber = 0,
           this.datosComplementariosUsuario();
           if(item.data.imagen != "default"){
@@ -206,6 +216,7 @@ export class PanelComponent implements OnInit {
           //alert("persona");
           this.usuario = item.data;
           this.tipoUsuario = "PERSONA";
+          this.hideRRHH = false;
           this.tipoUsuarioNumber = 1,
           this.datosComplementariosUsuario();
           if(item.data.imagen != "default"){
@@ -223,6 +234,8 @@ export class PanelComponent implements OnInit {
     this.getDepartamentoUsuario(this.usuario.departamento)
     this.getAntiguedadUsuario(this.usuario.antiguedad);
     this.getTipo(this.usuario.tipo_empresa);
+    this.usuarioClass.calificacionClienteBien = this.usuario.calificacionClienteBien;
+    this.usuarioClass.calificacionClienteMal = this.usuario.calificacionClienteMal;
   }
   getRubroUsuario(id){
     this.item.getRubro(id).subscribe(data =>{
@@ -436,7 +449,7 @@ export class PanelComponent implements OnInit {
             nombre: x.data.nombre,
             rubro: this.findRubros(x.data.rubro).data.nombre,
             departamento: this.findDepartamento(x.data.departamento).data.nombre,
-            presupuesto: x.data.presupuesto,
+            presupuesto: x.data.sueldo,
             estado: x.data.estado,
             tipo: x.data.tipo,
             cant_personal: x.data.cant_personal,
@@ -462,6 +475,12 @@ export class PanelComponent implements OnInit {
               presupuesto: x.data.presupuesto,
               estado: x.data.estado,
               tipo: x.data.tipo,
+              cancelado: x.data.cancelado,
+              fecha_entrega: x.data.fecha_entrega,
+              fecha_atencion: x.data.fecha_atencion,
+              id_requerimiento: x.data.id_requerimiento
+
+
             }
             this.oferta_requerimiento_bien.push(dataOferta);
           }
@@ -473,7 +492,11 @@ export class PanelComponent implements OnInit {
               ubicacion: this.findDepartamento(x.data.ubicacion).data.nombre,
               presupuesto: x.data.presupuesto,
               estado: x.data.estado,
-              tipo: x.data.tipo
+              tipo: x.data.tipo,
+              cancelado: x.data.cancelado,
+              fecha_entrega: x.data.fecha_entrega,
+              fecha_atencion: x.data.fecha_atencion,
+              id_requerimiento: x.data.id_requerimiento
             }
             this.oferta_requerimiento_servicio.push(dataOferta);
           }
@@ -491,7 +514,11 @@ export class PanelComponent implements OnInit {
             ubicacion: this.findDepartamento(x.data.ubicacion).data.nombre,
             presupuesto: x.data.presupuesto,
             estado: x.data.estado,
-            tipo: x.data.tipo
+            tipo: x.data.tipo,
+            cancelado: x.data.cancelado,
+            fecha_entrega: x.data.fecha_entrega,
+            fecha_atencion: x.data.fecha_atencion,
+            id_requerimiento: x.data.id_requerimiento
           }
           this.oferta_requerimiento_liquidacion.push(dataOferta);
         }
@@ -508,7 +535,11 @@ export class PanelComponent implements OnInit {
             ubicacion: this.findDepartamento(x.data.ubicacion).data.nombre,
             sueldo: x.data.sueldo,
             estado: x.data.estado,
-            tipo: x.data.tipo
+            tipo: x.data.tipo,
+            cancelado: x.data.cancelado,
+            fecha_entrega: x.data.fecha_entrega,
+            fecha_atencion: x.data.fecha_atencion,
+            id_requerimiento: x.data.id_requerimiento
           }
           this.oferta_requerimiento_trabajo.push(dataOferta);
         }
@@ -1035,14 +1066,29 @@ export class PanelComponent implements OnInit {
    
   }
   eliminarReq(item){
-    //this.registroReq.deleteReq(item.keyOferta,item.tipo);
+    this.registroReq.deleteReq(item.key,item.tipo);
     console.log(item);
     if(item.tipo===1 || item.tipo===2){
-
-      //alert("Requerimiento "+name+" eliminado satisfactoriamente!!");
+      if(item.comprador!="default"){
+        this.item.oferta_Requerimiento_once(item.oferta).query.once('value').then(data => {
+          data.ref.update({cancelado: 1});
+        })
+        this.item.ordenCompra_once(item.ordencompra).query.once('value').then(data => {
+          data.ref.update({cancelado: 1});
+        })
+      }
+      alert("Requerimiento "+item.nombre+" eliminado satisfactoriamente!!");
     }
     if(item.tipo===3){
-      //alert("Liquidación "+name+" eliminado satisfactoriamente!!");
+      if(item.comprador!="default"){
+        this.item.oferta_Liquidacion_once(item.oferta).query.once('value').then(data => {
+          data.ref.update({cancelado: 1});
+        })
+        this.item.ordenCompra_once(item.ordencompra).query.once('value').then(data => {
+          data.ref.update({cancelado: 1});
+        })
+      }
+       alert("Liquidación "+item.nombre+" eliminado satisfactoriamente!!");
     }
     if(item.tipo===4){
       if(item.cant_citas>0){
@@ -1064,9 +1110,10 @@ export class PanelComponent implements OnInit {
       alert("Recurso Humano "+item.nombre+" eliminado satisfactoriamente!!");
     }
   }
-  eliminarOfe(key,tipo,name){
-      this.registroReq.deleteOferta(key,tipo);
-      alert("Tu oferta "+name+" eliminado satisfactoriamente!!");
+  eliminarOfe(item){
+      
+      this.registroReq.deleteOferta(item.key,item.tipo,item);
+      alert("Tu oferta "+item.nombre+" eliminado satisfactoriamente!!");
   }
 
   cambiarPass(){
@@ -1536,23 +1583,23 @@ export class PanelComponent implements OnInit {
   }
 
   cancelarTrabajo(item){
-    console.log(item);
-    if(item.cant_citas>0){
-      this.item.citas_once().query.once('value').then(data => {
-        data.forEach(x => {
-          if(x.child('idRecurso').val()===item.key){
-            x.ref.update({
-              cancelado: 1
-            });
-            this.item.oferta_Trabajo_once(x.child('idOferta').val()).query.once('value').then(r => {
-              r.ref.update({
-                cancelado: 1
-              })
-            })
-          }
-        });
-      })
-    }
+    //console.log(item);
+    //if(item.cant_citas>0){
+      //this.item.citas_once().query.once('value').then(data => {
+        //data.forEach(x => {
+          //if(x.child('idRecurso').val()===item.key){
+            //x.ref.update({
+              //cancelado: 1
+            //});
+            //this.item.oferta_Trabajo_once(x.child('idOferta').val()).query.once('value').then(r => {
+              //r.ref.update({
+                //cancelado: 1
+              //})
+            //})
+          //}
+        //});
+      //})
+    //}
 
     this.item.Trabajo_once(item.key).query.once('value').then(data => {
       data.ref.update({
@@ -1562,32 +1609,90 @@ export class PanelComponent implements OnInit {
     alert("Puesto de trabajo "+item.nombre+" cancelado satisfactoriamente");
   }
   republicarRequerimientoModal(item){
+    //this.modalReference = this.modalService.open(modal);
     this.fechaRepublicarSeleccionada = item;
-    console.log(item);
+    //console.log(item);
   }
-  republicarRequerimiento(){
-    if(this.fechaRepublicar.nativeElement.value===""){
+  republicarRequerimiento(fechaR){
+    //console.log(fechaR.value);
+    if(fechaR.value ===""){
       alert("Por favor seleccione una fecha");
       return '';
     }
     if(this.fechaRepublicarSeleccionada.tipo===1 || this.fechaRepublicarSeleccionada.tipo===2){
+      this.item.Requerimiento_once(this.fechaRepublicarSeleccionada.key).query.once('value').then(data => {
+        data.ref.update({
+          estado: 1,
+          fecha_final:  this.datePipe.transform(fechaR.value,'dd-MM-yyyy').toString()
+        })
+        fechaR.value = null;
+        
+      })
+      alert("Requerimiento " +this.fechaRepublicarSeleccionada.nombre+" republicado satisfactoriamente");
 
     }
     if(this.fechaRepublicarSeleccionada.tipo===3){
-    
+      this.item.Liquidacion_once(this.fechaRepublicarSeleccionada.key).query.once('value').then(data => {
+        data.ref.update({
+          estado: 1,
+          fecha_final:  this.datePipe.transform(fechaR.value,'dd-MM-yyyy').toString()
+        })
+        fechaR.value = null;
+        
+      })
+      alert("Liquidacion " +this.fechaRepublicarSeleccionada.nombre+" republicado satisfactoriamente");
     }
     if(this.fechaRepublicarSeleccionada.tipo===4){
       this.item.Trabajo_once(this.fechaRepublicarSeleccionada.key).query.once('value').then(data => {
         data.ref.update({
           estado: 1,
-          fecha_final:  this.datePipe.transform(this.fechaRepublicar.nativeElement.value,'dd-MM-yyyy').toString()
+          fecha_final:  this.datePipe.transform(fechaR.value,'dd-MM-yyyy').toString()
         })
-        this.fechaRepublicar.nativeElement.value = null;
+        fechaR.value = null;
       })
       alert("Puesto de trabajo " +this.fechaRepublicarSeleccionada.nombre+" republicado satisfactoriamente");
-      
+
     }
     this.modalRepublicar.nativeElement.click();
+  }
+  cancelarMiOferta(item){
+    console.log(item);
+    if(item.tipo===1 || item.tipo===2){
+
+      this.item.oferta_Requerimiento_once(item.key).query.once('value').then( data => {
+        data.ref.update({
+          cancelado: 1
+        })
+      })
+      this.item.Requerimiento_once(item.id_requerimiento).query.once('value').then(data =>{
+        this.item.ordenCompra_once(data.child('ordencompra').val()).query.once('value').then( data2 => {
+          data2.ref.update({
+            cancelado:1,
+            estado:2,
+            fechaCancelar: this.datePipe.transform(this.myDate,'dd-MM-yyyy').toString()
+          })
+          alert("Orden de compra cancelada");
+        })
+      })
+    }
+    else if(item.tipo===3){
+
+      this.item.oferta_Liquidacion_once(item.key).query.once('value').then( data => {
+        data.ref.update({
+          cancelado: 1
+        })
+      })
+      this.item.Liquidacion_once(item.id_requerimiento).query.once('value').then(data =>{
+        this.item.ordenCompra_once(data.child('ordencompra').val()).query.once('value').then( data2 => {
+          data2.ref.update({
+            cancelado:1,
+            estado:2,
+            fechaCancelar: this.datePipe.transform(this.myDate,'dd-MM-yyyy').toString()
+          })
+          alert("Orden de compra cancelada");
+        })
+      })
+    }
   }
 
 }

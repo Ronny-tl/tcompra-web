@@ -75,23 +75,23 @@ export class RegistroRequerimientosService {
       this.af.list('/Puesto_Trabajo/'+key).query.ref.update({estado:7});
     }
   }
-  deleteOferta(key,tipo){
+  deleteOferta(key,tipo,item){
     if(tipo===1 || tipo ===2){
       this.af.object('/Oferta_Requerimiento/'+key).remove();
-      this.updateDeleteCantidadOferta(key,tipo);
+      this.updateDeleteCantidadOferta(item,tipo);
     }
     if(tipo===3){
       this.af.object('/Oferta_Liquidacion/'+key).remove();
-      this.updateDeleteCantidadOferta(key,tipo);
+      this.updateDeleteCantidadOferta(item,tipo);
     }
     if(tipo===4){
       this.af.object('/Oferta_Trabajo/'+key).remove();
-      this.updateDeleteCantidadOferta(key,tipo);
+      this.updateDeleteCantidadOferta(item,tipo);
     }
   }
   updateDeleteCantidadOferta(id,tipoProducto){
     if(tipoProducto===1 || tipoProducto===2){
-      const ref = this.af.database.ref('/Requerimientos/'+id);
+      const ref = this.af.database.ref('/Requerimientos/'+id.id_requerimiento);
       ref.once('value').then(x =>{
         var cant_ofertas = x.child('cant_ofertas').val();
         ref.update({
@@ -100,7 +100,7 @@ export class RegistroRequerimientosService {
       });
     }
     if(tipoProducto===3){
-      const ref = this.af.database.ref('/Liquidacion/'+id);
+      const ref = this.af.database.ref('/Liquidacion/'+id.id_requerimiento);
       ref.once('value').then(x =>{
         var cant_ofertas = x.child('cant_ofertas').val();
         ref.update({
@@ -109,7 +109,7 @@ export class RegistroRequerimientosService {
       });
     }
     if(tipoProducto===4){
-      const ref = this.af.database.ref('/Puesto_Trabajo/'+id);
+      const ref = this.af.database.ref('/Puesto_Trabajo/'+id.id_requerimiento);
       ref.once('value').then(x =>{
         var cant_personal = x.child('cant_personal').val();
         ref.update({

@@ -45,6 +45,10 @@ import { AuthGuard} from './guards/auth.guard';
 import {MatExpansionModule} from '@angular/material/expansion';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+import {MatDatepickerModule, MatFormFieldModule, MatInputModule,MatNativeDateModule,MatDialogModule} from '@angular/material';
+import { NgbDate, NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import {RatingModule} from 'ng-starrating';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -64,6 +68,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     ErrorComponent,
     LoginComponent,
     PanelComponent
+    
+
   ],
   imports: [
     BrowserModule,
@@ -80,7 +86,15 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     NgxPaginationModule,
     AngularFireStorageModule,
     MatExpansionModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    MatDatepickerModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatNativeDateModule,
+    MatDialogModule,
+    NgbModule,
+    RatingModule
+
 
   ],
   providers: [AuthService, ItemService, AngularFireDatabase, ModalServiceService,FormBuilder,RegistroUsuarioService,DatePipe,AuthGuard],
