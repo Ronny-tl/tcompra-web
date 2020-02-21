@@ -163,7 +163,7 @@ export class PanelComponent implements OnInit {
   fechaRepublicarSeleccionada: any;
   //@ViewChild('fechaRepublicar', { static: false }) fechaRepublicar: ElementRef;
   @ViewChild('modalRepublicar', { static: false }) modalRepublicar: ElementRef;
-
+  calificacionCliente:any;
   //modalReference: NgbModalRef; para el modal
   constructor(
     private authService: AuthService,
@@ -172,8 +172,7 @@ export class PanelComponent implements OnInit {
     private storage: AngularFireStorage,
     private datePipe: DatePipe,
     private registroReq: RegistroRequerimientosService,
-    private ordenCompra: OrdenCompraService,
-    private usuarioClass: usuario
+    private ordenCompra: OrdenCompraService
     //private modalService: NgbModal //para el modal
   ) {
    
@@ -234,8 +233,9 @@ export class PanelComponent implements OnInit {
     this.getDepartamentoUsuario(this.usuario.departamento)
     this.getAntiguedadUsuario(this.usuario.antiguedad);
     this.getTipo(this.usuario.tipo_empresa);
-    this.usuarioClass.calificacionClienteBien = this.usuario.calificacionClienteBien;
-    this.usuarioClass.calificacionClienteMal = this.usuario.calificacionClienteMal;
+    
+    //this.setValueCalificacion();
+
   }
   getRubroUsuario(id){
     this.item.getRubro(id).subscribe(data =>{
@@ -1136,7 +1136,7 @@ export class PanelComponent implements OnInit {
     this.passNuevo2.nativeElement.value="";
   }
 
-  cantOfertas(cant,key,tipo){
+  cantOfertas(cant,key,tipo,cali){
 
     if(cant<1){
       if(tipo!=4){
@@ -1147,7 +1147,7 @@ export class PanelComponent implements OnInit {
         return'';
       }
     }
-  
+
     this.mi_req_ofertas = [];
     this.list_ofertantes = [];
     if(tipo===1 || tipo ===2){///////REQUERIMIENTOS
@@ -1693,6 +1693,10 @@ export class PanelComponent implements OnInit {
         })
       })
     }
+  }
+  setValue(){
+    console.log("entro funcion");
+    this.calificacionCliente = (this.usuario.calificacionClienteBien+ this.usuario.calificacionClienteMal)/2;
   }
 
 }

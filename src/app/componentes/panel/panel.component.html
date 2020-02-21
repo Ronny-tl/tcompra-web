@@ -292,7 +292,7 @@
 																<td>{{item.rubro}}</td>
 																<td>{{item.departamento}}</td>
 																<td>S/. {{item.presupuesto}}</td>
-																<td><a type="button" (click)="cantOfertas(item.cant_ofertas,item.key,item.tipo)"><h5 style="margin: 0;line-height: 0;text-align: center;"><span class="badge badge-pill" style="background-color: #a11a70;color: #fff;">Ver: {{item.cant_ofertas}}</span></h5></a></td>
+																<td><a type="button" (click)="cantOfertas(item.cant_ofertas,item.key,item.tipo,calificacionCliente)"><h5 style="margin: 0;line-height: 0;text-align: center;"><span class="badge badge-pill" style="background-color: #a11a70;color: #fff;">Ver: {{item.cant_ofertas}}</span></h5></a></td>
 																<td *ngIf="item.estado===1"><h5 tyle="margin: 0;line-height: 0;"><span class="badge badge-success">Publicado</span></h5></td>
 																<td *ngIf="item.estado===2"><h5 style="margin: 0;line-height: 0;"><span class="badge badge-info">Atendido</span></h5></td>
 																<td *ngIf="item.estado===3"><h5 style="margin: 0;line-height: 0;"><span class="badge badge-primary">Culminado</span></h5></td>
@@ -1622,7 +1622,7 @@
 										<span *ngIf="mi_req_ofertas?.tipo===3" class="badge badge-secondary" style="background-color: #A11A70;border-radius: 50px;padding: .4em .8em;font-size: 65%;">Liquidación</span>
 										<span *ngIf="mi_req_ofertas?.tipo===4" class="badge badge-secondary" style="background-color: #A11A70;border-radius: 50px;padding: .4em .8em;font-size: 65%;">Recurso Humano</span>
 										
-										<div>Calificacion Positiva<star-rating value="{{usuarioClass.calificacionClienteBien}}" totalstars="5" checkedcolor="green" uncheckedcolor="black" size="28px" readonly="true"></star-rating></div>
+										<div>Calificacion Positiva<star-rating value="0" totalstars="5" checkedcolor="green" uncheckedcolor="black" size="28px" readonly="false" (ngModel)="calificacionCliente"></star-rating></div>
 										<div>Calificacion Negativa<star-rating value="0" totalstars="5" checkedcolor="red" uncheckedcolor="black" size="28px" readonly="true"></star-rating></div>
 										
 									</h4>

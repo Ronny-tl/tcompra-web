@@ -7,6 +7,7 @@ import { StarRatingComponent } from 'ng-starrating';
   styleUrls: ['./terminos-condiciones.component.css']
 })
 export class TerminosCondicionesComponent implements OnInit {
+  prueba: number= 1;
   closeResult: string;
   modalReference: NgbModalRef;
   constructor(private modalService: NgbModal) { }
@@ -31,12 +32,19 @@ export class TerminosCondicionesComponent implements OnInit {
       return  `with: ${reason}`;
     }
   }
-  prueba(){
+  prueba2(){
     this.modalReference.close();
   }
   onRate(event){
     console.log(event);
     console.log(event.newValue);
   }
+  changevalue(){
+    this.prueba = 4;
+  }
+  changevalue2(){
+    this.prueba = 2;
+  }
+
 
 }
