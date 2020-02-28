@@ -1836,7 +1836,7 @@
 		<div class="modal-content" style="background: transparent;">
 
 			<div class="modal-body">
-				<div class="edufair-subscription-1x" style="padding-bottom: 20px;background: #FAFAFA;border-radius: 6px;">
+				<div class="edufair-subscription-1x" style="padding-bottom: 20px;background: #FAFAFA;border-radius: 6px;font-weight: bold;">
 
 					<h4 style="padding: 35px 30px 20px 30px;margin: 0;">
 						<b style="font-size: 26px;color: #212529">
@@ -1855,18 +1855,19 @@
 							</div>
 							<div class="col-md-9">
 								<div class="card-body">
-									<h4 style="margin-bottom: .75rem;margin-top: .12em;">
+									<h4 style="margin-bottom: .75rem;margin-top: .12em;display: flex;align-items: center;">
 										<span *ngIf="mi_req_ofertas?.tipo===1" class="badge badge-secondary" style="background-color: #A11A70;border-radius: 50px;padding: .4em .8em;font-size: 65%;">Bienes</span>
 										<span *ngIf="mi_req_ofertas?.tipo===2" class="badge badge-secondary" style="background-color: #A11A70;border-radius: 50px;padding: .4em .8em;font-size: 65%;">Servicios</span>
 										<span *ngIf="mi_req_ofertas?.tipo===3" class="badge badge-secondary" style="background-color: #A11A70;border-radius: 50px;padding: .4em .8em;font-size: 65%;">Liquidación</span>
 										<span *ngIf="mi_req_ofertas?.tipo===4" class="badge badge-secondary" style="background-color: #A11A70;border-radius: 50px;padding: .4em .8em;font-size: 65%;">Recurso Humano</span>
-										
-										<div>Calificacion Positiva<star-rating value="3" totalstars="5" checkedcolor="green" uncheckedcolor="black" size="28px" readonly="true"></star-rating></div>
-										<div>Calificacion Negativa<star-rating value="0" totalstars="5" checkedcolor="red" uncheckedcolor="black" size="28px" readonly="true"></star-rating></div>
+										<b style="font-size: 18px;margin-left: 10px;">
+											<star-rating value="3" totalstars="5" checkedcolor="#A11A70" uncheckedcolor="#bbbbbb" readonly="true"></star-rating>
+										</b>
+										<!-- <div>Calificacion Negativa<star-rating value="0" totalstars="5" checkedcolor="red" uncheckedcolor="black" size="28px" readonly="true"></star-rating></div> -->
 										
 									</h4>
 									<h5 class="card-title" style="color: #212529;font-weight: 600;margin-bottom: .40rem;">{{mi_req_ofertas?.descripcion}}</h5>
-									<p class="card-text" style="margin-bottom: .75rem; text-transform: uppercase">{{usuario?.nombre}}</p>
+									<p class="card-text" style="margin-bottom: .75rem;">{{usuario?.nombre}}</p>
 									<p *ngIf="mi_req_ofertas?.tipo!=4" class="card-text"><small style="font-size: 26px;color: #a11a70;font-weight: 600; ">S/. {{mi_req_ofertas?.presupuesto}}</small></p>
 									<p *ngIf="mi_req_ofertas?.tipo===4"class="card-text"><small style="font-size: 26px;color: #a11a70;font-weight: 600; ">S/. {{mi_req_ofertas?.sueldo}}</small></p>
 								</div>
