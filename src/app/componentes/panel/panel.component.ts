@@ -127,6 +127,9 @@ export class PanelComponent implements OnInit {
   pageActual_3_3:number = 1;
   pageActual_3_4:number = 1;
 
+  pageActual_4_1:number = 1;
+  pageActual_4_2:number = 1;
+
   cant_Mis_Req_Bienes:number= 10;
   cant_Mis_Req_Servicios:number= 10;
   cant_Mis_Req_Liquidacion:number= 10;
@@ -141,6 +144,9 @@ export class PanelComponent implements OnInit {
   cant_Coti_Servicios:number = 10;
   cant_Coti_Liquidacion:number = 10;
   cant_Coti_Trabajo:number = 10;
+
+  cant_Ord_Emitido:number = 10;
+  cant_Ord_Recibido:number = 10;
   ////////////////////////////
   //////CAMBIAR PASS ////////
   @ViewChild('passActual', { static: false }) passActual: ElementRef;
@@ -163,8 +169,21 @@ export class PanelComponent implements OnInit {
   fechaRepublicarSeleccionada: any;
   //@ViewChild('fechaRepublicar', { static: false }) fechaRepublicar: ElementRef;
   @ViewChild('modalRepublicar', { static: false }) modalRepublicar: ElementRef;
-  calificacionCliente:any;
+  ////calificaciones
+  @ViewChild('calificacionClienteBien', { static: false }) calificacionClienteBien: ElementRef;
+  @ViewChild('calificacionClienteMal', { static: false }) calificacionClienteMal: ElementRef;
+  @ViewChild('calificacionProveedorBien', { static: false }) calificacionProveedorBien: ElementRef;
+  @ViewChild('calificacionProveedorMal', { static: false }) calificacionProveedorMal: ElementRef;
   //modalReference: NgbModalRef; para el modal
+  resumenGanador = {};
+  resumenOfertas = [];
+  itemCulminar: any;
+  itemCulminarPro: any;
+  @ViewChild('modalCulminar', { static: false }) modalCulminar: ElementRef;
+  @ViewChild('modalCulminar2', { static: false }) modalCulminar2: ElementRef;
+  deOferta: any;
+  ordenCompraEmitidos = [];
+  ordenCompraRecibidos = [];
   constructor(
     private authService: AuthService,
     private item: ItemService,
@@ -172,7 +191,7 @@ export class PanelComponent implements OnInit {
     private storage: AngularFireStorage,
     private datePipe: DatePipe,
     private registroReq: RegistroRequerimientosService,
-    private ordenCompra: OrdenCompraService
+    private ordenCompra: OrdenCompraService,
     //private modalService: NgbModal //para el modal
   ) {
    
@@ -180,16 +199,17 @@ export class PanelComponent implements OnInit {
 
   ngOnInit() {
     this.getUsuario();
+    this.getEntrega();
+    this.getMoneda();
     this.getDepartamento();
     this.getRubros();
-    
-    this.get_mis_requerimientos();
-    this.get_mis_ofertas();
-    this.getMoneda();
-    this.getEntrega();
     this.getFormaPago();
     this.getJornada();
     this.getAntiguedad();
+    this.get_mis_requerimientos();
+    this.get_mis_ofertas();
+    this.get_mis_ordenes_compra();
+
   }
   getUsuario(){
     this.authService.getAuth().subscribe(auth =>{
@@ -233,9 +253,6 @@ export class PanelComponent implements OnInit {
     this.getDepartamentoUsuario(this.usuario.departamento)
     this.getAntiguedadUsuario(this.usuario.antiguedad);
     this.getTipo(this.usuario.tipo_empresa);
-    
-    //this.setValueCalificacion();
-
   }
   getRubroUsuario(id){
     this.item.getRubro(id).subscribe(data =>{
@@ -321,6 +338,7 @@ export class PanelComponent implements OnInit {
           if(x.data.tipo===1){
             const datareq = {
               key: x.key,
+              keyUsuario: x.data.usuario,
               nombre: x.data.nombre,
               rubro: this.findRubros(x.data.rubro).data.nombre,
               departamento: this.findDepartamento(x.data.departamento).data.nombre,
@@ -339,6 +357,7 @@ export class PanelComponent implements OnInit {
           if(x.data.tipo===2){
             const datareq = {
               key: x.key,
+              keyUsuario: x.data.usuario,
               nombre: x.data.nombre,
               rubro: this.findRubros(x.data.rubro).data.nombre,
               departamento: this.findDepartamento(x.data.departamento).data.nombre,
@@ -358,6 +377,7 @@ export class PanelComponent implements OnInit {
         if(x.data.estado===1 || x.data.estado===2){
             const dataAll = {
               key: x.key,
+              keyUsuario: x.data.usuario,
               nombre: x.data.nombre,
               rubro: this.findRubros(x.data.rubro).data.nombre,
               departamento: this.findDepartamento(x.data.departamento).data.nombre,
@@ -373,6 +393,7 @@ export class PanelComponent implements OnInit {
         if(x.data.estado===1 || x.data.estado===2){
           const dataAll = {
             key: x.key,
+            keyUsuario: x.data.usuario,
             nombre: x.data.nombre,
             rubro: this.findRubros(x.data.rubro).data.nombre,
             departamento: this.findDepartamento(x.data.departamento).data.nombre,
@@ -394,6 +415,7 @@ export class PanelComponent implements OnInit {
         if(x.data.usuario === this.uidUsuario){
           const datareq = {
             key: x.key,
+            keyUsuario: x.data.usuario,
             nombre: x.data.nombre,
             rubro: this.findRubros(x.data.rubro).data.nombre,
             departamento: this.findDepartamento(x.data.departamento).data.nombre,
@@ -411,6 +433,7 @@ export class PanelComponent implements OnInit {
         if(x.data.estado===1 || x.data.estado===2){
           const dataAll = {
             key: x.key,
+            keyUsuario: x.data.usuario,
             nombre: x.data.nombre,
             rubro: this.findRubros(x.data.rubro).data.nombre,
             departamento: this.findDepartamento(x.data.departamento).data.nombre,
@@ -431,6 +454,7 @@ export class PanelComponent implements OnInit {
         if(x.data.usuario === this.uidUsuario){
           const datareq = {
             key: x.key,
+            keyUsuario: x.data.usuario,
             nombre: x.data.nombre,
             rubro: this.findRubros(x.data.rubro).data.nombre,
             departamento: this.findDepartamento(x.data.departamento).data.nombre,
@@ -446,6 +470,7 @@ export class PanelComponent implements OnInit {
         if(x.data.estado===1 || x.data.estado===2){
           const dataAll = {
             key: x.key,
+            keyUsuario: x.data.usuario,
             nombre: x.data.nombre,
             rubro: this.findRubros(x.data.rubro).data.nombre,
             departamento: this.findDepartamento(x.data.departamento).data.nombre,
@@ -467,38 +492,68 @@ export class PanelComponent implements OnInit {
       data.forEach(x =>{
         if(x.data.usuario === this.uidUsuario){
           if(x.data.tipo===1){
-            const dataOferta = {
-              key: x.key,
-              nombre: x.data.nombre,
-              //rubro: this.findRubros(x.data.rubro).data.nombre,
-              ubicacion: this.findDepartamento(x.data.ubicacion).data.nombre,
-              presupuesto: x.data.presupuesto,
-              estado: x.data.estado,
-              tipo: x.data.tipo,
-              cancelado: x.data.cancelado,
-              fecha_entrega: x.data.fecha_entrega,
-              fecha_atencion: x.data.fecha_atencion,
-              id_requerimiento: x.data.id_requerimiento
+            //const ref_Req = this.item.Requerimiento_once(x.data.id_requerimiento).query.once('value');
+            //ref_Req.then(data => { 
+            //const ref_Ord = this.item.ordenCompra_once(data.child('ordencompra').val()).query.once('value');
+            //ref_Ord.then(data2 => { 
+                const dataOferta = {
+                  key: x.key,
+                  nombre: x.data.nombre,
+                  //rubro: this.findRubros(x.data.rubro).data.nombre,
+                  ubicacion: this.findDepartamento(x.data.ubicacion).data.nombre,
+                  presupuesto: x.data.presupuesto,
+                  estado: x.data.estado,
+                  tipo: x.data.tipo,
+                  cancelado: x.data.cancelado,
+                  fecha_entrega: x.data.fecha_entrega,
+                  fecha_atencion: x.data.fecha_atencion,
+                  id_requerimiento: x.data.id_requerimiento,
+                  //confirmacionPro: data2.child('confirmacionProveedor').val(),
+                  //id_ordencompra: data2.key
+                  nombreusuario: x.data.nombreusuario,
+                  correo: x.data.correo,
+                  entrega: this.findEntrega(x.data.entrega).data.nombre,
+                  fecha_publicacion: x.data.fecha_oferta,
+                  moneda: this.findMoneda(x.data.moneda).data.nombre,
+                  imagen: x.data.imagenprincipal
 
 
-            }
-            this.oferta_requerimiento_bien.push(dataOferta);
+                }
+                this.oferta_requerimiento_bien.push(dataOferta);
+              //})
+            //})
+            
           }
           if(x.data.tipo===2){
-            const dataOferta = {
-              key: x.key,
-              nombre: x.data.nombre,
-              //rubro: this.findRubros(x.data.rubro).data.nombre,
-              ubicacion: this.findDepartamento(x.data.ubicacion).data.nombre,
-              presupuesto: x.data.presupuesto,
-              estado: x.data.estado,
-              tipo: x.data.tipo,
-              cancelado: x.data.cancelado,
-              fecha_entrega: x.data.fecha_entrega,
-              fecha_atencion: x.data.fecha_atencion,
-              id_requerimiento: x.data.id_requerimiento
-            }
-            this.oferta_requerimiento_servicio.push(dataOferta);
+            //const ref_Req = this.item.Requerimiento_once(x.data.id_requerimiento).query.once('value');
+            //ref_Req.then(data => { 
+            //const ref_Ord = this.item.ordenCompra_once(data.child('ordencompra').val()).query.once('value'); 
+              //ref_Ord.then(data2 => {
+                const dataOferta = {
+                  key: x.key,
+                  nombre: x.data.nombre,
+                  //rubro: this.findRubros(x.data.rubro).data.nombre,
+                  ubicacion: this.findDepartamento(x.data.ubicacion).data.nombre,
+                  presupuesto: x.data.presupuesto,
+                  estado: x.data.estado,
+                  tipo: x.data.tipo,
+                  cancelado: x.data.cancelado,
+                  fecha_entrega: x.data.fecha_entrega,
+                  fecha_atencion: x.data.fecha_atencion,
+                  id_requerimiento: x.data.id_requerimiento,
+                  //confirmacionPro: data2.child('confirmacionProveedor'),
+                  //id_ordencompra: data2.key
+                  nombreusuario: x.data.nombreusuario,
+                  correo: x.data.correo,
+                  entrega: this.findEntrega(x.data.entrega).data.nombre,
+                  fecha_publicacion: x.data.fecha_oferta,
+                  moneda: this.findMoneda(x.data.moneda).data.nombre,
+                  imagen: x.data.imagenprincipal
+                }
+                this.oferta_requerimiento_servicio.push(dataOferta);
+              //})
+            //})
+            
           }
         }
       })
@@ -507,20 +562,36 @@ export class PanelComponent implements OnInit {
       this.oferta_requerimiento_liquidacion=[];
       data.forEach(x => {
         if(x.data.usuario === this.uidUsuario){
-          const dataOferta = {
-            key: x.key,
-            nombre: x.data.nombre,
-            //rubro: this.findRubros(x.data.rubro).data.nombre,
-            ubicacion: this.findDepartamento(x.data.ubicacion).data.nombre,
-            presupuesto: x.data.presupuesto,
-            estado: x.data.estado,
-            tipo: x.data.tipo,
-            cancelado: x.data.cancelado,
-            fecha_entrega: x.data.fecha_entrega,
-            fecha_atencion: x.data.fecha_atencion,
-            id_requerimiento: x.data.id_requerimiento
-          }
-          this.oferta_requerimiento_liquidacion.push(dataOferta);
+          //const ref_Req = this.item.Liquidacion_once(x.data.id_requerimiento).query.once('value');
+          //ref_Req.then(data => { 
+            //const ref_Ord = this.item.ordenCompra_once(data.child('ordencompra').val()).query.once('value'); 
+              //ref_Ord.then(data2 => {
+              //console.log(this.findDepartamento(x.data.ubicacion).data.nombre);
+              const dataOferta = {
+                key: x.key,
+                nombre: x.data.nombre,
+                //rubro: this.findRubros(x.data.rubro).data.nombre,
+                ubicacion: this.findDepartamento(x.data.ubicacion).data.nombre,
+                presupuesto: x.data.presupuesto,
+                estado: x.data.estado,
+                tipo: x.data.tipo,
+                cancelado: x.data.cancelado,
+                fecha_entrega: x.data.fecha_entrega,
+                fecha_atencion: x.data.fecha_atencion,
+                id_requerimiento: x.data.id_requerimiento,
+                //confirmacionPro: data2.child('confirmacionProveedor').val(),
+                //id_ordencompra: data2.key
+                nombreusuario: x.data.nombreusuario,
+                  correo: x.data.correo,
+                  entrega: this.findEntrega(x.data.entrega).data.nombre,
+                  fecha_publicacion: x.data.fecha_oferta,
+                  moneda: this.findMoneda(x.data.moneda).data.nombre,
+                  imagen: 'default'
+              }
+              this.oferta_requerimiento_liquidacion.push(dataOferta);
+            //});
+            
+         // })
         }
       })
     })
@@ -547,10 +618,82 @@ export class PanelComponent implements OnInit {
     })
   }
   get_mis_ordenes_compra(){
+    
     this.item.getOrdenCompra().subscribe(data =>{
-
+      this.ordenCompraEmitidos = [];
+      this.ordenCompraRecibidos = [];
+      data.forEach(snap => {
+        //EMITIDOS
+        if(snap.data.idCliente===this.uidUsuario){
+          this.getTipoUsuario(snap.data.tipoProveedor,snap.data.idProveedor).then(x => {
+            this.getTipoRequerimiento(snap.data.tipo,snap.data.idRequerimiento).then(x2 =>{
+              let temp = {
+                nombreProUsuario: x.child('nombre').val(),
+                nombreRequerimiento: x2.child('nombre').val(),
+                fecha: snap.data.fechaCompra,
+                confirmacionCli: snap.data.confirmacionCliente,
+                confirmacionPro: snap.data.confirmacionProveedor,
+                idOrdenCompra: snap.key,
+                idRequerimiento: snap.data.idRequerimiento,
+                idOferta: snap.data.idOferta,
+                idCliente: snap.data.idCliente,
+                idProveedor:snap.data.idProveedor,
+                tipoCliente: snap.data.tipoCliente,
+                tipoProveedor: snap.data.tipoProveedor,
+                tipoRequerimiento: snap.data.tipo,
+                cancelado: snap.data.cancelado,
+                calificacionProveedorBien: snap.data.calificacionProveedorBien,
+                calificacionProveedorMal: snap.data.calificacionProveedorMal
+              }
+              this.ordenCompraEmitidos.push(temp);
+            })
+          })
+        }
+        if(snap.data.idProveedor===this.uidUsuario){//RECIBIDOS
+          this.getTipoUsuario(snap.data.tipoCliente,snap.data.idCliente).then(x => {
+            this.getTipoRequerimiento(snap.data.tipo,snap.data.idRequerimiento).then(x2 =>{
+              let temp = {
+                nombreCliUsuario: x.child('nombre').val(),
+                nombreRequerimiento: x2.child('nombre').val(),
+                fecha: snap.data.fechaCompra,
+                confirmacionCli: snap.data.confirmacionCliente,
+                confirmacionPro: snap.data.confirmacionProveedor,
+                idOrdenCompra: snap.key,
+                idRequerimiento: snap.data.idRequerimiento,
+                idOferta: snap.data.idOferta,
+                idCliente: snap.data.idCliente,
+                idProveedor:snap.data.idProveedor,
+                tipoCliente: snap.data.tipoCliente,
+                tipoProveedor: snap.data.tipoProveedor,
+                tipoRequerimiento: snap.data.tipo,
+                cancelado: snap.data.cancelado,
+                calificacionClienteBien: snap.data.calificacionClienteBien,
+                calificacionClienteMal: snap.data.calificacionClienteMal
+              }
+              this.ordenCompraRecibidos.push(temp);
+            })
+          })
+        }
+      })
+      //console.log(this.ordenCompraEmitidos);
+      //console.log(this.ordenCompraRecibidos);
     })
   }
+  getTipoUsuario(tipo,id){
+    if(tipo===0){
+      return this.item.Empresa_once(id).query.once('value');
+    }else if(tipo===1){
+      return this.item.Persona_once(id).query.once('value');
+    }
+  }
+  getTipoRequerimiento(tipo,id){
+    if(tipo===1 || tipo===2){
+      return this.item.Requerimiento_once(id).query.once('value');
+    }else if(tipo===3){
+      return this.item.Liquidacion_once(id).query.once('value');
+    }
+  }
+
   getDepartamento(){
     this.item.getDepartamento().subscribe(data => {
       this.departamentos = data;
@@ -1063,6 +1206,12 @@ export class PanelComponent implements OnInit {
     if(id_1===3 && id_2 ===4){ 
       this.cant_Coti_Trabajo = parseInt(cant);
     }
+    if(id_1===4 && id_2 ===1){ 
+      this.cant_Ord_Emitido = parseInt(cant);
+    }
+    if(id_1===4 && id_2 ===2){ 
+      this.cant_Ord_Recibido = parseInt(cant);
+    }
    
   }
   eliminarReq(item){
@@ -1148,6 +1297,13 @@ export class PanelComponent implements OnInit {
       }
     }
 
+    this.calificacionClienteBien['readonly']= false;
+    this.calificacionClienteMal['readonly'] = false;
+    this.calificacionClienteBien['value'] = this.usuario.calificacionClienteBien;
+    this.calificacionClienteMal['value'] = this.usuario.calificacionClienteMal;
+    this.calificacionClienteMal['readonly'] = true;
+    this.calificacionClienteBien['readonly'] = true;
+    //console.log(this.calificacionCliente2['readonly']);
     this.mi_req_ofertas = [];
     this.list_ofertantes = [];
     if(tipo===1 || tipo ===2){///////REQUERIMIENTOS
@@ -1180,11 +1336,15 @@ export class PanelComponent implements OnInit {
                   cancelado: x.data.cancelado,
                   documento: x.data.documento,
                   id_requerimiento: x.data.id_requerimiento,
-                  tipo: x.data.tipo
+                  tipo: x.data.tipo,
+                  calificacionClienteBien: ue.child('calificacionClienteBien').val(),
+                  calificacionClienteMal: ue.child('calificacionClienteMal').val(),
+                  calificacionProveedorBien: ue.child('calificacionProveedorBien').val(),
+                  calificacionProveedorMal: ue.child('calificacionProveedorMal').val()
                 }
 
                 this.list_ofertantes.push(ofe_temp);
-                console.log(this.list_ofertantes);
+                //console.log(this.list_ofertantes);
 
               })
             }
@@ -1210,11 +1370,15 @@ export class PanelComponent implements OnInit {
                   cancelado: x.data.cancelado,
                   documento: x.data.documento,
                   id_requerimiento: x.data.id_requerimiento,
-                  tipo: x.data.tipo
+                  tipo: x.data.tipo,
+                  calificacionClienteBien: ue.child('calificacionClienteBien').val(),
+                  calificacionClienteMal: ue.child('calificacionClienteMal').val(),
+                  calificacionProveedorBien: ue.child('calificacionProveedorBien').val(),
+                  calificacionProveedorMal: ue.child('calificacionProveedorMal').val()
                 }
                 //console.log(ofe_temp);
                 this.list_ofertantes.push(ofe_temp);
-                console.log(this.list_ofertantes);
+                //console.log(this.list_ofertantes);
                 //console.log(this.list_ofertantes);
               })
             }
@@ -1257,7 +1421,11 @@ export class PanelComponent implements OnInit {
                   cancelado: x.data.cancelado,
                   //documento: x.data.documento,
                   id_requerimiento: x.data.id_requerimiento,
-                  tipo: x.data.tipo
+                  tipo: x.data.tipo,
+                  calificacionClienteBien: ue.child('calificacionClienteBien').val(),
+                  calificacionClienteMal: ue.child('calificacionClienteMal').val(),
+                  calificacionProveedorBien: ue.child('calificacionProveedorBien').val(),
+                  calificacionProveedorMal: ue.child('calificacionProveedorMal').val()
                 }
   
                 this.list_ofertantes.push(ofe_temp);
@@ -1286,7 +1454,11 @@ export class PanelComponent implements OnInit {
                   cancelado: x.data.cancelado,
                   //documento: x.data.documento,
                   id_requerimiento: x.data.id_requerimiento,
-                  tipo: x.data.tipo
+                  tipo: x.data.tipo,
+                  calificacionClienteBien: ue.child('calificacionClienteBien').val(),
+                  calificacionClienteMal: ue.child('calificacionClienteMal').val(),
+                  calificacionProveedorBien: ue.child('calificacionProveedorBien').val(),
+                  calificacionProveedorMal: ue.child('calificacionProveedorMal').val()
                 }
 
                 this.list_ofertantes.push(ofe_temp);
@@ -1336,7 +1508,11 @@ export class PanelComponent implements OnInit {
                   documento: x.data.documento,
                   id_requerimiento: x.data.id_requerimiento,
                   tipo: x.data.tipo,
-                  fecha_atencion: x.data.fecha_atencion
+                  fecha_atencion: x.data.fecha_atencion,
+                  calificacionClienteBien: ue.child('calificacionClienteBien').val(),
+                  calificacionClienteMal: ue.child('calificacionClienteMal').val(),
+                  calificacionProveedorBien: ue.child('calificacionProveedorBien').val(),
+                  calificacionProveedorMal: ue.child('calificacionProveedorMal').val()
                 }
   
                 this.list_ofertantes.push(ofe_temp);
@@ -1366,7 +1542,11 @@ export class PanelComponent implements OnInit {
                   documento: x.data.documento,
                   id_requerimiento: x.data.id_requerimiento,
                   tipo: x.data.tipo,
-                  fecha_atencion: x.data.fecha_atencion
+                  fecha_atencion: x.data.fecha_atencion,
+                  calificacionClienteBien: ue.child('calificacionClienteBien').val(),
+                  calificacionClienteMal: ue.child('calificacionClienteMal').val(),
+                  calificacionProveedorBien: ue.child('calificacionProveedorBien').val(),
+                  calificacionProveedorMal: ue.child('calificacionProveedorMal').val()
                 }
 
                 this.list_ofertantes.push(ofe_temp);
@@ -1386,7 +1566,7 @@ export class PanelComponent implements OnInit {
  
 
   comprarOferta(item,tipo){
-    console.log(item);
+    //console.log(item);
     if(item.estado===3){
       alert("Este requerimiento ha culminado");
       return '';
@@ -1437,99 +1617,198 @@ export class PanelComponent implements OnInit {
   }
 
   cancelarOferta(item){
-    console.log(item);
+    console.log(item);////FALTA VALIDAR QUE REVISE CUANDO ESTE CULMINADO
     if(item.tipo===1 || item.tipo===2){
-
-      this.item.oferta_Requerimiento_once(item.keyOferta).query.once('value').then( data => {
-        data.ref.update({
-          cancelado: 1
-        })
-      })
-      this.item.Requerimiento_once(item.id_requerimiento).query.once('value').then(data =>{
-        this.item.ordenCompra_once(data.child('ordencompra').val()).query.once('value').then( data2 => {
-          data2.ref.update({
-            cancelado:1,
-            estado:2,
-            fechaCancelar: this.datePipe.transform(this.myDate,'dd-MM-yyyy').toString()
-          })
-          alert("Orden de compra cancelada");
+      this.item.Requerimiento_once(item.id_requerimiento).query.once('value').then(snap => {
+        this.item.ordenCompra_once(snap.child('ordencompra').val()).query.once('value').then(snap2 => {
+          if(snap2.child('confirmacionProveedor').val()===0){
+            this.item.oferta_Requerimiento_once(item.keyOferta).query.once('value').then( data => {
+              data.ref.update({
+                cancelado: 1
+              })
+            })
+            this.item.Requerimiento_once(item.id_requerimiento).query.once('value').then(data =>{
+              this.item.ordenCompra_once(data.child('ordencompra').val()).query.once('value').then( data2 => {
+                data2.ref.update({
+                  cancelado:1,
+                  estado:2,
+                  fechaCancelar: this.datePipe.transform(this.myDate,'dd-MM-yyyy').toString()
+                })
+                alert("Orden de compra cancelada");
+              })
+            })
+          }
+          if(snap2.child('confirmacionProveedor').val()===1){
+            alert("Su proveedor ha indicado que envio su requerimiento");
+          }
         })
       })
     }
     else if(item.tipo===3){
-
-      this.item.oferta_Liquidacion_once(item.keyOferta).query.once('value').then( data => {
-        data.ref.update({
-          cancelado: 1
-        })
-      })
-      this.item.Liquidacion_once(item.id_requerimiento).query.once('value').then(data =>{
-        this.item.ordenCompra_once(data.child('ordencompra').val()).query.once('value').then( data2 => {
-          data2.ref.update({
-            cancelado:1,
-            estado:2,
-            fechaCancelar: this.datePipe.transform(this.myDate,'dd-MM-yyyy').toString()
-          })
-          alert("Orden de compra cancelada");
+      this.item.Liquidacion_once(item.id_requerimiento).query.once('value').then(snap => {
+        this.item.ordenCompra_once(snap.child('ordencompra').val()).query.once('value').then(snap2 => {
+          if(snap2.child('confirmacionProveedor').val()===0){
+            this.item.oferta_Liquidacion_once(item.keyOferta).query.once('value').then( data => {
+              data.ref.update({
+                cancelado: 1
+              })
+            })
+            this.item.Liquidacion_once(item.id_requerimiento).query.once('value').then(data =>{
+              this.item.ordenCompra_once(data.child('ordencompra').val()).query.once('value').then( data2 => {
+                data2.ref.update({
+                  cancelado:1,
+                  estado:2,
+                  fechaCancelar: this.datePipe.transform(this.myDate,'dd-MM-yyyy').toString()
+                })
+                alert("Orden de compra cancelada");
+              })
+            })
+          }
+          if(snap2.child('confirmacionProveedor').val()===1){
+            alert("Su proveedor ha indicado que envio su requerimiento");
+          }
         })
       })
     }
   }
   cancelarRequerimiento(item){
-    console.log(item);
-    if(item.estado===2){
-      this.item.oferta_Requerimiento_once(item.oferta).query.once('value').then( data => {
-        data.ref.update({
-          cancelado: 1
+    this.item.ordenCompra_once(item.ordencompra).query.once('value').then(snap => {
+      if(snap.child('confirmacionProveedor').val()===0){
+        if(item.estado===2){
+          this.item.oferta_Requerimiento_once(item.oferta).query.once('value').then( data => {
+            data.ref.update({
+              cancelado: 1
+            })
+          });
+          this.item.ordenCompra_once(item.ordencompra).query.once('value').then( data2 => {
+            data2.ref.update({
+              cancelado:1,
+              estado:2,
+              fechaCancelar: this.datePipe.transform(this.myDate,'dd-MM-yyyy').toString()
+            })
+          })
+        }
+        this.item.Requerimiento_once(item.key).query.once('value').then(data =>{
+          data.ref.update({
+            estado: 6
+          })
         })
-      });
-      this.item.ordenCompra_once(item.ordencompra).query.once('value').then( data2 => {
-        data2.ref.update({
-          cancelado:1,
-          estado:2,
-          fechaCancelar: this.datePipe.transform(this.myDate,'dd-MM-yyyy').toString()
+        alert("Tu requerimiento "+item.nombre+" fue cancelado");
+      }if(snap.child('confirmacionProveedor').val()===1){
+        alert("Su proveedor ha indicado que envio su requerimiento");
+      }
+      if(snap.val()===null){
+        if(item.estado===2){
+          this.item.oferta_Requerimiento_once(item.oferta).query.once('value').then( data => {
+            data.ref.update({
+              cancelado: 1
+            })
+          });
+          this.item.ordenCompra_once(item.ordencompra).query.once('value').then( data2 => {
+            data2.ref.update({
+              cancelado:1,
+              estado:2,
+              fechaCancelar: this.datePipe.transform(this.myDate,'dd-MM-yyyy').toString()
+            })
+          })
+        }
+        this.item.Requerimiento_once(item.key).query.once('value').then(data =>{
+          data.ref.update({
+            estado: 6
+          })
         })
-      })
-    }
-    this.item.Requerimiento_once(item.key).query.once('value').then(data =>{
-      data.ref.update({
-        estado: 6
-      })
-    })
-    alert("Tu requerimiento "+item.nombre+" fue cancelado");
+        alert("Tu requerimiento "+item.nombre+" fue cancelado");
+      }
+  })
   }
 
   cancelarLiquidacion(item){
     console.log(item);
-    if(item.estado===2){
-      this.item.oferta_Liquidacion_once(item.oferta).query.once('value').then( data => {
-        data.ref.update({
-          cancelado: 1
+    this.item.ordenCompra_once(item.ordencompra).query.once('value').then(snap => {
+      if(snap.child('confirmacionProveedor').val()===0){
+        if(item.estado===2){
+          this.item.oferta_Liquidacion_once(item.oferta).query.once('value').then( data => {
+            data.ref.update({
+              cancelado: 1
+            })
+          });
+          this.item.ordenCompra_once(item.ordencompra).query.once('value').then( data2 => {
+            data2.ref.update({
+              cancelado:1,
+              estado:2,
+              fechaCancelar: this.datePipe.transform(this.myDate,'dd-MM-yyyy').toString()
+            })
+          })
+        }
+        this.item.Liquidacion_once(item.key).query.once('value').then(data =>{
+          data.ref.update({
+            estado: 6
+          })
         })
-      });
-      this.item.ordenCompra_once(item.ordencompra).query.once('value').then( data2 => {
-        data2.ref.update({
-          cancelado:1,
-          estado:2,
-          fechaCancelar: this.datePipe.transform(this.myDate,'dd-MM-yyyy').toString()
+        alert("Tu liquidacion "+item.nombre+" fue cancelado");
+      }if(snap.child('confirmacionProveedor').val()===1){
+        alert("Su proveedor ha indicado que envio su requerimiento");
+      }
+      if(snap.val()===null){
+        if(item.estado===2){
+          this.item.oferta_Liquidacion_once(item.oferta).query.once('value').then( data => {
+            data.ref.update({
+              cancelado: 1
+            })
+          });
+          this.item.ordenCompra_once(item.ordencompra).query.once('value').then( data2 => {
+            data2.ref.update({
+              cancelado:1,
+              estado:2,
+              fechaCancelar: this.datePipe.transform(this.myDate,'dd-MM-yyyy').toString()
+            })
+          })
+        }
+        this.item.Liquidacion_once(item.key).query.once('value').then(data =>{
+          data.ref.update({
+            estado: 6
+          })
         })
-      })
-    }
-    this.item.Liquidacion_once(item.key).query.once('value').then(data =>{
-      data.ref.update({
-        estado: 6
-      })
+        alert("Tu liquidacion "+item.nombre+" fue cancelado");
+      }
     })
-    alert("Tu requerimiento "+item.nombre+" fue cancelado");
   }
 
   culminarRequerimiento(item){
     console.log(item);
+    if(item.tipo ===1 || item.tipo ===2){
+      this.item.Requerimiento_once(item.key).query.once('value').then(data => {
+        data.ref.update({estado: 3});
+      })
+      this.item.oferta_Requerimiento_once(item.oferta).query.once('value').then(data =>{
+        data.ref.update({estado: 1})
+      })
+    }
+    if(item.tipo===3){
+      this.item.Liquidacion_once(item.key).query.once('value').then(data =>{
+        data.ref.update({estado: 3});
+      })
+      this.item.oferta_Liquidacion_once(item.oferta).query.once('value').then(data =>{
+        data.ref.update({estado: 1})
+      })
+    }
+
+    this.item.ordenCompra_once(item.ordencompra).query.once('value').then(data => {
+      data.child('confirmacionCliente')
+      data.ref.update({
+        confirmacionCliente: 1,
+        estado: 1
+      })
+    })
+
+    this.itemCulminar = item;
+
   }
   generarCitaModal(item){
     //console.log(item);
     this.citaSeleccionada = item;
   }
+
   generarCita(){
     if(this.fechaCita.nativeElement.value===""){
       alert("Por favor ingrese una fecha");
@@ -1657,6 +1936,10 @@ export class PanelComponent implements OnInit {
   }
   cancelarMiOferta(item){
     console.log(item);
+    if(item.confirmacionPro===1){
+      alert("Su oferta no puede ser cancelada por que ha sido culminado");
+      return '';
+    }
     if(item.tipo===1 || item.tipo===2){
 
       this.item.oferta_Requerimiento_once(item.key).query.once('value').then( data => {
@@ -1694,9 +1977,155 @@ export class PanelComponent implements OnInit {
       })
     }
   }
-  setValue(){
-    console.log("entro funcion");
-    this.calificacionCliente = (this.usuario.calificacionClienteBien+ this.usuario.calificacionClienteMal)/2;
+
+  caliProveedorBien(event,item){
+    event.readonly = false;
+    event.value = item.calificacionProveedorBien;
+    event.readonly = true;
+  }
+
+  caliProveedorMal(event,item){
+    event.readonly = false;
+    event.value = item.calificacionProveedorMal;
+    event.readonly = true;
+  }
+  verResumen(item){
+    console.log(item);
+      this.item.ordenCompra_once(item.ordencompra).query.once('value').then(data => {
+        if(data.child('tipoProveedor').val()===0){
+          this.item.Empresa_once(data.child('idProveedor').val()).query.once('value').then(data2 => {
+            this.resumenGanador = {
+              nombre: data2.child('nombre').val(),
+              antiguedad: this.findAntiguedad(data2.child('antiguedad').val()).data.nombre,
+              ruc: data2.child('ruc').val(),
+              telefono:data2.child('telefono').val(),
+              email: data2.child('email').val(),
+              calificacionProveedorBien: data2.child('calificacionProveedorBien').val(),
+              calificacionProveedorMal: data2.child('calificacionProveedorMal').val(),
+              tipo: data.child('tipoProveedor').val()
+              
+            }
+
+          })
+        }else{
+          this.item.Persona_once(data.child('idProveedor').val()).query.once('value').then(data2 => {
+            this.resumenGanador = {
+              nombre: data2.child('nombre').val(),
+              //antiguedad: this.findAntiguedad(data2.child('antiguedad').val()).data.nombre,
+              direccion: data2.child('direccion').val(),
+              dni: data2.child('dni').val(),
+              telefono:data2.child('telefono').val(),
+              email: data2.child('email').val(),
+              calificacionProveedorBien: data2.child('calificacionProveedorBien').val(),
+              calificacionProveedorMal: data2.child('calificacionProveedorMal').val(),
+              tipo: data.child('tipoProveedor').val()
+            }
+
+          })
+        }
+      })
+
+      if(item.tipo===1 || item.tipo ===2){
+        this.resumenOfertas = [];
+        this.item.oferta_Requerimiento_once_SN().query.once('value').then(snap =>{
+          snap.forEach(data => {
+            if(data.child('id_requerimiento').val()===item.key){
+              let data_temp = {
+                nombre: data.child('nombre').val(),
+                departamento:  this.findDepartamento(data.child('ubicacion').val()).data.nombre,
+                entrega: this.findEntrega(data.child('entrega').val()).data.nombre,
+                //antiguedad: this.findAntiguedad(data.child('antiguedad').val()).data.nombre,
+                documento: data.child('documento').val(),
+                presupuesto: data.child('presupuesto').val()
+              }
+              this.resumenOfertas.push(data_temp);
+            }
+          })
+        })
+      }
+      if(item.tipo===3){
+        this.resumenOfertas = [];
+        this.item.oferta_Liquidacion_once_SN().query.once('value').then(snap =>{
+          snap.forEach(data => {
+            if(data.child('id_requerimiento').val()===item.key){
+              let data_temp = {
+                nombre: data.child('nombre').val(),
+                departamento:  this.findDepartamento(data.child('ubicacion').val()).data.nombre,
+                entrega: this.findEntrega(data.child('entrega').val()).data.nombre,
+                //antiguedad: this.findAntiguedad(data.child('antiguedad').val()).data.nombre,
+                documento: 'default',
+                presupuesto: data.child('presupuesto').val()
+              }
+              this.resumenOfertas.push(data_temp);
+            }
+          })
+        })
+      }
+    
+  }
+
+  enviarCalificacion(select,c1,c2,c3){
+    if(select.value==="NA"){
+      alert("Seleccione si recibio el producto");
+      return '';
+    }
+    if(c1.value===0 || c2.value===0 || c3.value===0){
+      alert("Por favor califique a su proveedor..!!")
+    }
+    this.registroReq.culminarReqCliente(this.itemCulminar,select,c1,c2,c3);
+    this.modalCulminar.nativeElement.click();
+  }
+
+  culminarOferta(item){
+    if(item.tipo===1 || item.tipo===2){
+      this.item.oferta_Requerimiento_once(item.key).query.once('value').then(data => {
+        data.ref.update({
+          estado: 1
+        });
+      })
+      this.item.Requerimiento_once(item.id_requerimiento).query.once('value').then(data2 => {
+        this.item.ordenCompra_once(data2.child('ordencompra').val()).query.once('value').then(data2 => {
+          this.itemCulminarPro = data2.val();
+          data2.ref.update({
+            confirmacionProveedor: 1
+          })
+        })
+      })
+    }
+    if(item.tipo===3){
+      this.item.oferta_Liquidacion_once(item.key).query.once('value').then(data => {
+        data.ref.update({
+          estado: 1
+        })
+      })
+      this.item.Liquidacion_once(item.id_requerimiento).query.once('value').then(data2 => {
+        this.item.ordenCompra_once(data2.child('ordencompra').val()).query.once('value').then(data2 => {
+          this.itemCulminarPro = data2.val();
+          data2.ref.update({
+            confirmacionProveedor: 1
+          })
+        })
+      })
+    }
+  }
+  enviarCalificacionPro(select,c1,c2,c3){
+    if(select.value==="NA"){
+      alert("Seleccione si envio el producto");
+      return '';
+    }
+    if(c1.value===0 || c2.value===0 || c3.value===0){
+      alert("Por favor califique a su cliente..!!")
+    }
+    //console.log(this.itemCulminarPro);
+    this.registroReq.culminarOfertaProveedor(this.itemCulminarPro,select,c1,c2,c3);
+    this.modalCulminar2.nativeElement.click();
+  }
+  detalleOferta(item){
+    console.log(item);
+    this.deOferta = item;
+  }
+  culminarOrdenCompra(item){
+    console.log(item);
   }
 
 }

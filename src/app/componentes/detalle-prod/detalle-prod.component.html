@@ -16,8 +16,9 @@
 							
 							<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 								
-								<div class="edufair-cart" >
-									<div class="box" >
+								<div class="edufair-cart">
+									<app-login></app-login>
+									<!--<div class="box" >
 										<a href="#"  *ngIf="!isLogin" data-toggle="modal" data-target="#Login" style="margin-right: 15px;"><i class="fas fa-lock"></i><b class="op-menu"> Iniciar Sesión</b></a>
 										<a href="#" *ngIf="!isLogin" data-toggle="modal" data-target="#Registrar" id="popup"><i class="fas fa-user"></i><b class="op-menu"> Registrar</b></a>
 									</div> 
@@ -38,7 +39,7 @@
 													<a class="dropdown-item" type="button"  (click)="SalirSesion()"><i class="fas fa-door-open" style="margin: 0;padding: 0;color: #262626;font-size: 1rem;margin-right: 1rem;vertical-align: -17%;"></i> Salir</a>
 												</div>
 											</li>
-									</ul>
+									</ul>-->
 								</div>
 
 							</div>
@@ -50,14 +51,20 @@
 				<div id="carousel-example-generic" class="carousel slide edufair-slide carousel-fade" data-ride="carousel">
 					<div class="carousel-inner edufair-inner single-inner" role="listbox">
 						<div class="edufair-overlay">
-							<img src="assets/images/slider/slider-01.jpg" alt="slide 1" class="edufair-slider-image edufair-single-image">
+							<img *ngIf="tipoProducto==='1'" src="assets/images/slider/slider-01.jpg" alt="slide 1" class="edufair-slider-image edufair-single-image">
+							<img *ngIf="tipoProducto==='2'" src="assets/images/slider/slider-02.jpg" alt="slide 2" class="edufair-slider-image edufair-single-image">
+							<img *ngIf="tipoProducto==='3'" src="assets/images/slider/slider-03.jpg" alt="slide 3" class="edufair-slider-image edufair-single-image">
+							<img *ngIf="tipoProducto==='4'" src="assets/images/slider/slider-04.jpg" alt="slide 4" class="edufair-slider-image edufair-single-image">
 							<div class="carousel-caption edufair-caption edufair-single-caption">
 								<div class="container edufair-slider-text" style="top: 48%;left: -6.6%;position: absolute;">
 									<h2 style="white-space: nowrap;text-overflow: ellipsis;overflow: hidden;" >{{producto?.nombre}}</h2>
 									<ol class="breadcrumb edufair-single-breadcrumbs" style="width: 100%;">
 										<li class="breadcrumb-item"><a routerLink="/" routerLinkActive="active">Inicio</a></li>
-										<li class="breadcrumb-item active"><a routerLink="/" routerLinkActive="active">Bienes</a></li>
-										<li class="breadcrumb-item active"><a href="#">{{producto?.nombre}}</a></li>
+										<li *ngIf="tipoProducto==='1'" class="breadcrumb-item active"><a routerLink="/detalle-prod/{{tipoProducto}}/{{idProducto}}" routerLinkActive="active">Bienes</a></li>
+										<li *ngIf="tipoProducto==='2'" class="breadcrumb-item active"><a routerLink="/detalle-prod/{{tipoProducto}}/{{idProducto}}" routerLinkActive="active">Servicios</a></li>
+										<li *ngIf="tipoProducto==='3'" class="breadcrumb-item active"><a routerLink="/detalle-prod/{{tipoProducto}}/{{idProducto}}" routerLinkActive="active">Liquidación</a></li>
+										<li *ngIf="tipoProducto==='4'" class="breadcrumb-item active"><a routerLink="/detalle-prod/{{tipoProducto}}/{{idProducto}}" routerLinkActive="active">R.R.H.H.</a></li>
+										<li class="breadcrumb-item active"><a routerLink="/detalle-prod/tipoProducto/idProducto" routerLinkActive="active">{{producto?.nombre}}</a></li>
 									</ol>										
 								</div>
 							</div>				  
@@ -102,13 +109,16 @@
 									</div>
 									<ng-container *ngIf="!mostrarIMG">
 									<div class="carousel-item active carousel-inner">
-										<img src="assets/images/productos/prod-01.jpg" class="d-block w-100" alt="Producto">
+										<img src="assets/images/slider/slider-01.jpg" class="d-block w-100" alt="Producto">
 									</div>
 									<div class="carousel-item carousel-inner">
-										<img src="assets/images/productos/prod-02.jpg" class="d-block w-100" alt="Producto">
+										<img src="assets/images/slider/slider-02.jpg" class="d-block w-100" alt="Producto">
 									</div>
 									<div class="carousel-item carousel-inner">
-										<img src="assets/images/productos/prod-03.jpg" class="d-block w-100" alt="Producto">
+										<img src="assets/images/slider/slider-03.jpg" class="d-block w-100" alt="Producto">
+									</div>
+									<div class="carousel-item carousel-inner">
+										<img src="assets/images/slider/slider-04.jpg" class="d-block w-100" alt="Producto">
 									</div>
 									</ng-container>
 									
@@ -158,38 +168,43 @@
 							<h2 class="edufair-main-title">Archivos Adjuntos</h2>
 							<div class="row" style="margin-bottom: 22px;">
 								<div class="col-md-6">
-									<a href="#" class="edufair-component-button button-large btn-block">
+									<a (click)="descargarImagen(producto)" target="_self" type="button" class="edufair-component-button button-large btn-block text-white" >
 										<i class="fas fa-images" style="font-size: 24px;"></i><br>
 										Descargar Imagen
 									</a>
 								</div>
 								<div class="col-md-6">
-									<a (click)="descargarArchivo()"  type="button"  class="edufair-component-button button-large btn-block text-white" download>
+									<a (click)="descargarDocumento(producto)"  type="button"  class="edufair-component-button button-large btn-block text-white">
 										<i class="fas fa-file-invoice" style="font-size: 24px;"></i><br>
 										Descargar Documento
 									</a>
 								</div>
 							</div>
-
-							<ng-container *ngIf="isOfertaste">
+						<ng-container *ngIf="uidUsuario!=producto?.usuario && producto?.estado===1">
+							<ng-container *ngIf="isOfertaste && tipoProducto==='1' || isOfertaste && tipoProducto==='2' || isOfertaste && tipoProducto==='3' || isOfertaste && tipoProducto==='4'">
 								<h2 class="edufair-main-title">Ofertar</h2>
-								<div *ngIf="tipoProducto==='1' || tipoProducto==='2'" class="edufair-subscription-form-1x" style="background: #f5f5f5;padding: 30px 10px;border-radius: 6px;">
+								<div class="edufair-subscription-form-1x" style="background: #f5f5f5;padding: 30px 10px;border-radius: 6px;">
 									<p style="text-align: center;">
 										<i class="fas fa-clipboard-check fa-5x" style="color: #0B9A96;"></i>
 									</p>
 									<p style="text-align: center;margin-bottom: 1em;">
-										<b style="color: #000;font-size: 28px;">Ya ofertaste este requerimiento</b>
+										<b *ngIf="tipoProducto==='1' || tipoProducto==='2'" style="color: #000;font-size: 28px;">Ya ofertaste este requerimiento</b>
+										<b *ngIf="tipoProducto==='3'" style="color: #000;font-size: 28px;">Ya ofertaste esta Liquidación</b>
+										<b *ngIf="tipoProducto==='4'" style="color: #000;font-size: 28px;">Ya postulaste a este Puesto de Trabajo</b>
 									</p>
-									<p style="text-align: center;">
+									<p *ngIf="tipoProducto==='1' || tipoProducto==='2' || tipoProducto==='3'" style="text-align: center;">
 										Si quieres borrar tu oferta pulsa eliminar.
+									</p>
+									<p  *ngIf="tipoProducto==='4'" style="text-align: center;">
+										Si quieres borrar tu Postulación pulsa eliminar.
 									</p> 
-									<p style="text-align: center;margin-bottom: 0em;" *ngIf="isOfertaste && tipoProducto==='1' || tipoProducto==='2' || tipoProducto==='3'">
-										<a href="#" (click)="eliminarOferta(tipoProducto)" class="edufair-component-button button-medium"><i class="fas fa-trash" style="top: 0;padding-left: 0;padding-right: 4px;"></i> Eliminar mi Oferta</a>
+									<p style="text-align: center;margin-bottom: 0em;">
+										<a type="button" (click)="eliminarOferta(tipoProducto)" class="edufair-component-button button-medium text-white"><i class="fas fa-columns" style="top: 0;padding-left: 0;padding-right: 4px;"></i> Eliminar mi Oferta</a>
 									</p>
 								</div>
-								<!-- <h2  *ngIf="tipoProducto==='1' || tipoProducto==='2'" class="edufair-main-title"><img src="assets/images/productos/check.png" class="img-fluid" style="width: 80px ;height: 80px">  Ya Ofertaste este requerimiento</h2> -->
+								<!-- <h2  *ngIf="tipoProducto==='1' || tipoProducto==='2'" class="edufair-main-title"><img src="assets/images/productos/check.png" class="img-fluid" style="width: 80px ;height: 80px">  Ya Ofertaste este requerimiento</h2> 
 								<h2  *ngIf="tipoProducto==='3'" class="edufair-main-title"><img src="assets/images/productos/check.png" class="img-fluid" style="width: 80px ;height: 80px">  Ya Ofertaste esta liquidación</h2>
-								<h2  *ngIf="tipoProducto==='4'" class="edufair-main-title"><img src="assets/images/productos/check.png" class="img-fluid" style="width: 80px ;height: 80px">  Ya postulaste a este puesto de trabajo </h2>
+								<h2  *ngIf="tipoProducto==='4'" class="edufair-main-title"><img src="assets/images/productos/check.png" class="img-fluid" style="width: 80px ;height: 80px">  Ya postulaste a este puesto de trabajo </h2>-->
 							</ng-container>
 
 							<ng-container *ngIf="!isOfertaste">
@@ -249,6 +264,7 @@
 												</div>
 											</div>
 										</ng-container>
+
 											<div class="col-md-12" style="text-align: center;margin: 15px 0 25px 0;">
 												<div class="custom-control custom-checkbox custom-control-inline" *ngIf="tipoProducto==='2' || tipoProducto==='1' || tipoProducto==='4'">
 													<input type="checkbox" class="custom-control-input" id="customCheck1" (change)="validarBox($event,1)">
@@ -271,13 +287,70 @@
 								</form>	
 							</div>	
 							
+							</ng-container>
 						</ng-container>
-						<!-- <div class="col-md-12" style="text-align: center;" *ngIf="isOfertaste && tipoProducto==='1' || tipoProducto==='2' || tipoProducto==='3'">
-							<a type="button" (click)="eliminarOferta(tipoProducto)" class="edufair-component-button button-medium btn-block btn-danger active text-white">Eliminar mi Oferta</a>
-						</div> -->
-						<div class="col-md-12" style="text-align: center;" *ngIf="isOfertaste && tipoProducto==='4'">
-							<a type="button" (click)="eliminarOferta(tipoProducto)" class="edufair-component-button button-medium btn-block btn-danger active text-white">Eliminar mi Postulación</a>
-						</div>
+						<ng-container *ngIf="uidUsuario===producto?.usuario && producto?.estado===1">
+							<h2 *ngIf="tipoProducto==='1' || tipoProducto==='2'" class="edufair-main-title">Mi Requerimiento</h2>
+							<h2 *ngIf="tipoProducto==='3'" class="edufair-main-title">Mi Liquidación</h2>
+							<h2 *ngIf="tipoProducto==='4'" class="edufair-main-title">Mi Puesto de Trabajo</h2>
+								<div class="edufair-subscription-form-1x" style="background: #f5f5f5;padding: 30px 10px;border-radius: 6px;">
+									<p style="text-align: center;">
+										<i class="fas fa-clipboard-check fa-5x" style="color: #0B9A96;"></i>
+									</p>
+									<p style="text-align: center;margin-bottom: 1em;">
+										<b *ngIf="tipoProducto==='1' || tipoProducto==='2'" style="color: #000;font-size: 28px;">Tu Requerimiento tiene ({{producto?.cant_ofertas}}) ofertas</b>
+										<b *ngIf="tipoProducto==='3'" style="color: #000;font-size: 28px;">Tu Liquidación tiene ({{producto?.cant_ofertas}}) ofertas</b>
+										<b *ngIf="tipoProducto==='4'" style="color: #000;font-size: 28px;">Tu Puesto de Trabajo tiene ({{producto?.cant_ofertas}}) postulantes</b>
+									</p>
+									<p *ngIf="tipoProducto==='1' || tipoProducto==='2' || tipoProducto==='3'" style="text-align: center;">
+										Si quieres ver, borrar o cancelar tu requerimiento pulsa Panel de Control.
+									</p>
+									<p  *ngIf="tipoProducto==='4'" style="text-align: center;">
+										Si quieres ver,  borrar o cancelar tu Puesto de Trabajo pulsa Panel de Control.
+									</p> 
+									<p style="text-align: center;margin-bottom: 0em;">
+										<a type="button" routerLink="/panel" routerLinkActive="active" class="edufair-component-button button-medium text-white"><i class="fas fa-columns" style="top: 0;padding-left: 0;padding-right: 4px;"></i> Panel de Control</a>
+									</p>
+								</div>
+						</ng-container>
+							
+						<ng-container *ngIf="uidUsuario===producto?.usuario && producto?.estado!=1 || uidUsuario!=producto?.usuario && producto?.estado!=1">
+							<h2 *ngIf="tipoProducto==='1' && producto?.estado===2 || tipoProducto==='2' && producto?.estado===2" class="edufair-main-title">Requerimiento Atendido</h2>
+							<h2 *ngIf="tipoProducto==='1' && producto?.estado===3 || tipoProducto==='2' && producto?.estado===3" class="edufair-main-title">Requerimiento Culminado</h2>
+							<h2 *ngIf="tipoProducto==='1' && producto?.estado===4 || tipoProducto==='2' && producto?.estado===4" class="edufair-main-title">Requerimiento Sin Ofertas</h2>
+							<h2 *ngIf="tipoProducto==='1' && producto?.estado===5 || tipoProducto==='2' && producto?.estado===5" class="edufair-main-title">Requerimiento Expirado</h2>
+							<h2 *ngIf="tipoProducto==='1' && producto?.estado===6 || tipoProducto==='2' && producto?.estado===6" class="edufair-main-title">Requerimiento Cancelado</h2>
+							<h2 *ngIf="tipoProducto==='1' && producto?.estado===7 || tipoProducto==='2' && producto?.estado===7" class="edufair-main-title">Requerimiento Cancelado</h2>
+							<h2 *ngIf="tipoProducto==='3' && producto?.estado===2" class="edufair-main-title">Liquidación Atendido</h2>
+							<h2 *ngIf="tipoProducto==='3' && producto?.estado===3" class="edufair-main-title">Liquidación Culminado</h2>
+							<h2 *ngIf="tipoProducto==='3' && producto?.estado===4" class="edufair-main-title">Liquidación Sin Ofertas</h2>
+							<h2 *ngIf="tipoProducto==='3' && producto?.estado===5" class="edufair-main-title">Liquidación Expirado</h2>
+							<h2 *ngIf="tipoProducto==='3' && producto?.estado===6" class="edufair-main-title">Liquidación Cancelado</h2>
+							<h2 *ngIf="tipoProducto==='3' && producto?.estado===7" class="edufair-main-title">Liquidación Cancelado</h2>
+							<h2 *ngIf="tipoProducto==='4' && producto?.estado===2" class="edufair-main-title">Puesto de Trabajo Atendido</h2>
+							<h2 *ngIf="tipoProducto==='4' && producto?.estado===3" class="edufair-main-title">Puesto de Trabajo Culminado</h2>
+							<h2 *ngIf="tipoProducto==='4' && producto?.estado===4" class="edufair-main-title">Puesto de Trabajo Sin Ofertas</h2>
+							<h2 *ngIf="tipoProducto==='4' && producto?.estado===5" class="edufair-main-title">Puesto de Trabajo Expirado</h2>
+							<h2 *ngIf="tipoProducto==='4' && producto?.estado===6" class="edufair-main-title">Puesto de Trabajo Cancelado</h2>
+							<h2 *ngIf="tipoProducto==='4' && producto?.estado===7" class="edufair-main-title">Puesto de Trabajo Cancelado</h2>
+								<div class="edufair-subscription-form-1x" style="background: #f5f5f5;padding: 30px 10px;border-radius: 6px;">
+									<p style="text-align: center;">
+										<i class="fas fa-calendar-times fa-5x" style="color: #0B9A96;"></i>
+									</p>
+									<p style="text-align: center;margin-bottom: 1em;">
+										<b *ngIf="tipoProducto==='1' || tipoProducto==='2'" style="color: #000;font-size: 28px;">Este Requerimiento tuvo ({{producto?.cant_ofertas}}) ofertas</b>
+										<b *ngIf="tipoProducto==='3'" style="color: #000;font-size: 28px;">Esta Liquidación tuvo ({{producto?.cant_ofertas}}) ofertas</b>
+										<b *ngIf="tipoProducto==='4'" style="color: #000;font-size: 28px;">Este Puesto de Trabajo tuvo ({{producto?.cant_ofertas}}) postulantes</b>
+									</p>
+
+									<p style="text-align: center;margin-bottom: 0em;">
+										<a type="button" routerLink="/" routerLinkActive="active" class="edufair-component-button button-medium text-white"><i class="fas fa-home" style="top: 0;padding-left: 0;padding-right: 4px;"></i> Pagina Principal</a>   
+										<!--<a type="button" (click)="eliminarOferta(tipoProducto)" class="edufair-component-button button-medium text-white"><i class="fas fa-columns" style="top: 0;padding-left: 0;padding-right: 4px;"></i> Panel de Control</a>-->
+									</p>
+									
+								</div>
+						</ng-container>
+
 
 						</div>
 						<div class="col-md-4 sticky-sidebar">
@@ -288,18 +361,16 @@
 										<li>
 											<a><i class="fas fa-angle-right datos_col2"></i> Calificación:
 												<span class="detalle_col2">
-													<i class="fas fa-star" style="color: #a11a70;"></i>
-													<i class="fas fa-star" style="color: #a11a70;"></i>
-													<i class="fas fa-star" style="color: #a11a70;"></i>
-													<i class="fas fa-star" style="color : #a11a70;"></i>
-													<i class="fas fa-star" style="color: #a11a70;"></i>
+													<star-rating value="0" totalstars="5" checkedcolor="green" uncheckedcolor="black" size="24px" readonly="false"  #caliClienteBien2></star-rating>
+													<star-rating value="0" totalstars="5" checkedcolor="red" uncheckedcolor="black" size="24px" readonly="false"  #caliClienteMal2></star-rating>
 												</span>
 											</a>
-										</li>
-										<li><a><i class="fas fa-angle-right datos_col2"></i> Empresa: <span class="detalle_col2">{{usuario?.nombre}}</span></a> </li>																																											
+										</li><br><br>
+										<li *ngIf="tipoUsuario===0"><a><i class="fas fa-angle-right datos_col2"></i> Empresa: <span class="detalle_col2">{{usuario?.nombre}}</span></a> </li>
+										<li *ngIf="tipoUsuario===1"><a><i class="fas fa-angle-right datos_col2"></i> Persona: <span class="detalle_col2">{{usuario?.nombre}}</span></a> </li>																																												
 										<li><a><i class="fas fa-angle-right datos_col2"></i> Creado: <span class="detalle_col2">{{producto?.fecha_publicacion}}</span></a> </li>																																											
 										<li><a><i class="fas fa-angle-right datos_col2"></i> Ubicación: <span class="detalle_col2">{{departamento?.nombre}}</span></a> </li>																																											
-										<li><a><i class="fas fa-angle-right datos_col2"></i> Tipo: <span class="detalle_col2">{{tipo?.nombre}}</span></a> </li>
+										<li *ngIf="tipo?.nombre!=''"><a><i class="fas fa-angle-right datos_col2"></i> Tipo: <span class="detalle_col2">{{tipo?.nombre}}</span></a> </li>
 										<li><a><i class="fas fa-angle-right datos_col2"></i> Rubro: <span class="detalle_col2"	>{{rubro?.nombre}}</span></a> </li>																																											
 									</ul>
 								</div>
