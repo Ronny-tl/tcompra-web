@@ -278,6 +278,9 @@
 													<input type="checkbox" class="custom-control-input" id="customCheck3" (change)="validarBox($event,3)">
 													<label class="custom-control-label" for="customCheck3">Incluye Envio</label>
 												</div>
+												<div class="custom-control custom-checkbox custom-control-inline" style="margin: 0;padding: 0;">
+													<a href="#" class="edufair-component-button button-medium btn-block" data-toggle="modal" data-target="#enviar_mensaje"><i class="fas fa-comment" style="padding: 0;top: 0;right: 3px;"></i> Enviar Mensaje</a>
+												</div>
 											</div>
 										
 										<div class="col-md-12" style="text-align: center;">
@@ -406,3 +409,34 @@
 
 			<div class="margin-bottom-large"></div>
 		</div>
+
+
+<!-- Modal Enviar Mensaje -->
+<div class="modal fade" id="enviar_mensaje" tabindex="-1" role="dialog" aria-hidden="true" style="padding: 0px 20px;">
+	<div class="modal-dialog modal-sm" role="document" id="persona" name="persona">
+		<div class="modal-content" style="background: transparent;">
+
+			<div class="modal-body">
+				<div class="edufair-subscription-1x" style="padding-bottom: 20px;background: #FAFAFA;border-radius: 6px;">
+					<h4 style="padding: 35px 30px 20px 30px;margin: 0;">
+						<b style="font-size: 26px;">Comunicate</b><br>
+						<b style="font-size: 18px;font-weight: 400;">Facil y Rapido</b>
+					</h4>
+					
+					<div class="edufair-subscription-form-1x" style="padding: 10px 15px;">
+
+						<div class="col-md-12">
+							<label for="exampleInputEmail1" style="margin-bottom: 0rem;margin-top: .5rem;">Escriba su Mensaje</label>
+							<textarea class="form-control" rows="3"></textarea>
+						</div>
+						<div class="col-md-12">
+							<button class="edufair-btn-larg btn-block boton_login" id="btnPersona" type="button">Enviar</button>
+						</div>
+					</div>
+
+				</div>
+			</div>
+
+		</div>
+	</div>
+</div>
