@@ -100,6 +100,11 @@
 											<div class="card-body">
 												<img *ngIf="logoUsuario" src="{{usuario.imagen}}" class="img-thumbnail" alt="Imagen" style="width: 150px;height: 150px;background-size: cover;border-radius: 50%;">
 												<img *ngIf="!logoUsuario" src="assets/images/avatar.jpg" class="img-thumbnail" alt="Imagen" style="width: 150px;height: 150px;background-size: cover;border-radius: 50%;">
+												<!-- <div style="display: flex;justify-content: center;">
+													<div class="avatar_panel">
+														<b style="font-size: 90px;font-weight: 400;text-transform: uppercase;">m</b>
+													</div>
+												</div> -->
 												<div class="single-file-input">
 													<input type="file" id="user_image" name="user_image" (change)="updateImageUsuario($event)" accept="image/*" >
 													<div>Subir Imagen<i class="fa fa-upload"></i></div>
@@ -1804,7 +1809,7 @@
 		<div class="modal-content" style="background: transparent;">
 
 			<div class="modal-body">
-				<div class="edufair-subscription-1x" style="padding-bottom: 20px;background: #FAFAFA;border-radius: 6px;">
+				<div class="edufair-subscription-1x" style="padding-bottom: 20px;background: #FAFAFA;border-radius: 6px;font-weight: bold;">
 
 					<h4 style="padding: 35px 30px 20px 30px;margin: 0;">
 						<b style="font-size: 26px;color: #212529">
@@ -1823,18 +1828,25 @@
 							</div>
 							<div class="col-md-9">
 								<div class="card-body">
-									<h4 style="margin-bottom: .75rem;margin-top: .12em;">
+									<h4 style="margin-bottom: .75rem;margin-top: .12em;display: flex;align-items: center;">
 										<span *ngIf="mi_req_ofertas?.tipo===1" class="badge badge-secondary" style="background-color: #A11A70;border-radius: 50px;padding: .4em .8em;font-size: 65%;">Bienes</span>
 										<span *ngIf="mi_req_ofertas?.tipo===2" class="badge badge-secondary" style="background-color: #A11A70;border-radius: 50px;padding: .4em .8em;font-size: 65%;">Servicios</span>
 										<span *ngIf="mi_req_ofertas?.tipo===3" class="badge badge-secondary" style="background-color: #A11A70;border-radius: 50px;padding: .4em .8em;font-size: 65%;">Liquidación</span>
 										<span *ngIf="mi_req_ofertas?.tipo===4" class="badge badge-secondary" style="background-color: #A11A70;border-radius: 50px;padding: .4em .8em;font-size: 65%;">Recurso Humano</span>
 										
-										<div>Calificacion Positiva<star-rating value="0" totalstars="5" checkedcolor="green" uncheckedcolor="black" size="28px" readonly="true"  #calificacionClienteBien></star-rating></div>
-										<div>Calificacion Negativa<star-rating value="0" totalstars="5" checkedcolor="red" uncheckedcolor="black" size="28px" readonly="true" #calificacionClienteMal></star-rating></div>
+										<b style="font-size: 18px;margin-left: 10px;">
+											<star-rating value="0" totalstars="5" checkedcolor="#39b54a" uncheckedcolor="#bbbbbb" readonly="true" #calificacionClienteBien></star-rating>
+										</b>
+										<b style="font-size: 18px;margin-left: 10px;">
+											<star-rating value="0" totalstars="5" checkedcolor="#ec1c24" uncheckedcolor="#bbbbbb" readonly="true" #calificacionClienteMal></star-rating>
+										</b>
+
+										<!-- <div><star-rating value="0" totalstars="5" checkedcolor="green" uncheckedcolor="black" size="28px" readonly="true"  #calificacionClienteBien></star-rating></div>
+										<div><star-rating value="0" totalstars="5" checkedcolor="red" uncheckedcolor="black" size="28px" readonly="true" #calificacionClienteMal></star-rating></div> -->
 										
 									</h4>
 									<h5 class="card-title" style="color: #212529;font-weight: 600;margin-bottom: .40rem;">{{mi_req_ofertas?.descripcion}}</h5>
-									<p class="card-text" style="margin-bottom: .75rem; text-transform: uppercase">{{usuario?.nombre}}</p>
+									<p class="card-text" style="margin-bottom: .75rem;">{{usuario?.nombre}}</p>
 									<p *ngIf="mi_req_ofertas?.tipo!=4" class="card-text"><small style="font-size: 26px;color: #a11a70;font-weight: 600; ">S/. {{mi_req_ofertas?.presupuesto}}</small></p>
 									<p *ngIf="mi_req_ofertas?.tipo===4"class="card-text"><small style="font-size: 26px;color: #a11a70;font-weight: 600; ">S/. {{mi_req_ofertas?.sueldo}}</small></p>
 								</div>
@@ -2004,8 +2016,10 @@
 								</div>
 								<div class="col-6">
 									Calificación<br>
-									Calificacion Positiva<star-rating [value]="caliProveedorBien(caliBien,item)" totalstars="5" checkedcolor="green" uncheckedcolor="black" size="28px" readonly="false" #caliBien></star-rating>
-									Calificacion Negativa<star-rating [value]="caliProveedorMal(caliMal,item)" totalstars="5" checkedcolor="red" uncheckedcolor="black" size="28px" readonly="false" #caliMal></star-rating>
+										<star-rating [value]="caliProveedorBien(caliBien,item)" totalstars="5" checkedcolor="#39b54a" uncheckedcolor="#bbbbbb" readonly="true" #caliBien></star-rating>
+										<star-rating [value]="caliProveedorMal(caliMal,item)" totalstars="5" checkedcolor="#ec1c24" uncheckedcolor="#bbbbbb" readonly="true" #caliMal></star-rating>
+									<!-- Calificacion Positiva<star-rating [value]="caliProveedorBien(caliBien,item)" totalstars="5" checkedcolor="green" uncheckedcolor="black" size="28px" readonly="false" #caliBien></star-rating>
+									Calificacion Negativa<star-rating [value]="caliProveedorMal(caliMal,item)" totalstars="5" checkedcolor="red" uncheckedcolor="black" size="28px" readonly="false" #caliMal></star-rating> -->
 								</div>
 							</div>
 							<h5 class="card-title card-oferta-title">

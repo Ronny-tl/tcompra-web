@@ -5751,6 +5751,13 @@ a.edufair-component-button:hover:before {
     font-weight: bold;
 }
 
+.avatar_letra{
+	background: #a11a70;
+    border-radius: 50px;
+    justify-content: center;
+    align-items: center;
+}
+
 /******************** Panel ************************/
 
 .media-img-wrap {
@@ -5809,7 +5816,7 @@ a.edufair-component-button:hover:before {
 	padding-top: 25px;
 	margin-left: -50px;
     position: absolute;
-    /* width: 100%; */
+    width: 10%;
     cursor: pointer;
     outline: none;
 	z-index: 1;
@@ -5924,6 +5931,19 @@ a.edufair-component-button:hover:before {
 .card_detalle{
 	flex-grow: 1;
     text-align: right;
+}
+
+.avatar_panel{
+	height: 150px;
+	width: 150px;
+	padding: .25rem;
+	background-color: #a11a70;
+	border: 1px solid #dee2e6;
+	border-radius: 50%;
+	color:#fff;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 
 /************** Loading *******************/
@@ -6216,6 +6236,15 @@ a.edufair-component-button:hover:before {
     border-radius: .65rem!important;
 	box-shadow: 0 0px 18px rgba(0, 0, 0, 0.1);
 	margin: 5px 0px 5px 5px;
+}
+
+.imagen_mensaje_2{
+	object-fit: cover;
+	width: auto;
+    height: 120px;
+    border-radius: .65rem!important;
+	box-shadow: 0 0px 18px rgba(0, 0, 0, 0.1);
+	margin: 3px;
 }
 
 .mensaje_img_t2{
