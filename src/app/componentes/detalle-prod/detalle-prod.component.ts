@@ -7,7 +7,7 @@ import {Router,ActivatedRoute} from '@angular/router';
 import {AngularFireList } from 'angularfire2/database';
 import { saveAs } from 'file-saver';
 import { Subscription, Observable } from 'rxjs';
-import { HttpClient, HttpHandler } from '@angular/common/http';
+import { HttpClient, HttpHandler, HttpHeaders } from '@angular/common/http';
 import { NgForm } from '@angular/forms';
 import { ofertaRequerimiento } from '../../models/ofertaRequerimientos'
 import {AngularFireStorage} from '@angular/fire/storage'
@@ -16,6 +16,9 @@ import { DatePipe } from '@angular/common';
 import {RegistroOfertasService} from '../../servicios/registro-ofertas.service';
 import { ofertaLiquidacion } from 'src/app/models/ofertaLiquidacion';
 import { ofertaTrabajo } from 'src/app/models/ofertaTrabajo';
+import { Observer } from 'rxjs/observer';
+declare var require: any
+const FileSaver = require('file-saver');
 
 @Component({
   selector: 'app-detalle-prod',
@@ -67,6 +70,9 @@ export class DetalleProdComponent implements OnInit {
   formaPago:any;
   tipoMoneda:any;
   tiempoEntrega:any;
+  //////////////////27/02/2020
+  @ViewChild('caliClienteBien2', { static: false }) caliClienteBien2: ElementRef;
+  @ViewChild('caliClienteMal2', { static: false }) caliClienteMal2: ElementRef;
 
   constructor(
     private register: RegistroUsuarioService,
@@ -86,6 +92,10 @@ export class DetalleProdComponent implements OnInit {
     //}
     //alert('DETALLE PRODUCTO: '+this.register.getId());
     //this.estadoProducto();
+    this.getEntrega();
+    this.allDepartamento();
+    this.allMoneda();
+    this.getFormapago();
     this.verificarAutenticacion();
     this.idProducto = this.route.snapshot.paramMap.get('id');
     this.tipoProducto = this.route.snapshot.paramMap.get('tipo');
@@ -104,10 +114,6 @@ export class DetalleProdComponent implements OnInit {
       this.mostrarPuestoTrabajo();
     }
 
-    this.getEntrega();
-    this.allDepartamento();
-    this.allMoneda();
-    this.getFormapago();
 }
 iniciarUsuario(){
   this.authService.getUsuario_Empresa().subscribe(data => {
@@ -198,6 +204,7 @@ mostrarRequerimientos(){
     this.getMoneda(this.producto.moneda);
     this.getFormaPago2(this.producto.formapago);
     this.getEntrega2(this.producto.entrega);
+
   });
 }
 mostrarLiquidacion(){
@@ -218,6 +225,7 @@ mostrarLiquidacion(){
     this.getMoneda(this.producto.moneda);
     this.getFormaPago2(this.producto.formapago);
     this.getEntrega2(this.producto.entrega);
+
   });
 }
 
@@ -239,6 +247,7 @@ mostrarPuestoTrabajo(){
     this.getMoneda(this.producto.moneda);
     this.getFormaPago2(this.producto.formapago);
     this.getEntrega2(this.producto.entrega);
+
   });
 }
 
@@ -276,11 +285,15 @@ mostrarPuestoTrabajo(){
     if(tipo===0){
       this.items.getUsuarioEmpresa(uid).subscribe(data =>{
         this.usuario = data.payload.val();
+        this.caliClienteBien();
+        this.caliClienteMal();
       })
     }
     if(tipo===1){
       this.items.getUsuarioPersona(uid).subscribe(data =>{
         this.usuario = data.payload.val();
+        this.caliClienteBien();
+        this.caliClienteMal();
       })
     }
   }
@@ -314,6 +327,7 @@ mostrarPuestoTrabajo(){
 
   getEntrega(){
     this.items.getEntrega().subscribe(data => {
+      this.entrega = [];
       data.forEach(x =>{
         this.entrega.push({
           key: x.key,
@@ -342,6 +356,7 @@ mostrarPuestoTrabajo(){
 
   allMoneda(){
     this.items.getMoneda().subscribe(data => {
+      this.all_moneda =[];
       data.forEach(x =>{
         this.all_moneda.push({
           key: x.key,
@@ -361,8 +376,8 @@ mostrarPuestoTrabajo(){
         if(this.selectedMoneda==='-LjS7G05dji2dWV2Gft1'){alert("Seleccione un tipo de moneda"); return '';}
 
         if(id==="1" || id==="2"){
-          if(this.garantiaAnio.nativeElement.value===""){alert("Ingrese garantia en años"); return '';}
-          if(this.soporteMeses.nativeElement.value===""){alert("Ingrese Soporte en meses"); return '';}
+          //if(this.garantiaAnio.nativeElement.value===""){alert("Ingrese garantia en años"); return '';}
+          //if(this.soporteMeses.nativeElement.value===""){alert("Ingrese Soporte en meses"); return '';}
           if(this.selectedEntrega==='-LjS6ygVTMvasGPrdtqp'){alert("Seleccione un tiempo de entrega"); return '';}
           //this.subirImage();
           const dataOferta = new ofertaRequerimiento(
@@ -575,5 +590,42 @@ mostrarPuestoTrabajo(){
   SalirSesion(){
     this.authService.logout();
   }
-  
+
+  caliClienteBien(){
+    //console.log(this.usuario);
+    this.caliClienteBien2['readonly']= false;
+    this.caliClienteBien2['value'] = this.usuario.calificacionClienteBien;
+    this.caliClienteBien2['readonly']= true;
+  }
+
+  caliClienteMal(){
+    this.caliClienteMal2['readonly']= false;
+    this.caliClienteMal2['value'] = this.usuario.calificacionClienteMal;
+    this.caliClienteMal2['readonly']= true;
+  }
+  getBase64ImageFromURL() {
+    let url ="https://firebasestorage.googleapis.com/v0/b/tcompra-c2bc0.appspot.com/o/Requerimiento%2FDocumentos%2F-M17qTWjq7ad2TVcUlu-?alt=media&token=338d300b-87fb-40f4-ba91-0327dd351bea";
+
+    const pdfName = 'your_pdf_file';
+    FileSaver.saveAs(url, pdfName);
+ }
+
+ descargarImagen(pro){
+  if(pro.imagenprincipal==="default"){
+    alert("Este requerimiento no contiene una imagen");
+    return '';
+  }
+  window.open(pro.imagenprincipal,'TCompraDocument.pdf', 'width=720,height=750,toolbar=0,location=0, directories=0, status=0,location=no,menubar=0,resize=no');
+ }
+
+ descargarDocumento(pro){
+  if(pro.documento==="default"){
+    alert("Este requerimiento no cuenta con un documento")
+    return '';
+  }
+  window.open(pro.documento,'TCompraDocument.pdf', 'width=7200,height=750,toolbar=0,scrollbars=no,location=0, directories=0, status=0,location=no,menubar=0,resize=no');
+ }
+
+   
+
 }

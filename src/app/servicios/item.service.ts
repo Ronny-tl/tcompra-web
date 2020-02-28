@@ -99,6 +99,10 @@ productList: any;
     this.markersRef = this.db.list('Formapago');
     return this.editMarkers(this.markersRef);
   }
+  ordenCompra_id(id) {
+    this.markersRef = this.db.list('OrdenCompra/'+id);
+    return this.editMarkers(this.markersRef);
+  }
   getRubros() {
     this.markersRef = this.db.list('Rubros');
     return this.editMarkers(this.markersRef);
@@ -151,12 +155,20 @@ productList: any;
     this.markersRef = this.db.list('Oferta_Requerimiento/'+id);
     return this.markersRef;
   }
+  oferta_Requerimiento_once_SN(){ //// LISTA SOLO UNA VEZ
+    this.markersRef = this.db.list('Oferta_Requerimiento/');
+    return this.markersRef;
+  }
   Requerimiento_once(id){ //// LISTA SOLO UNA VEZ
     this.markersRef = this.db.list('Requerimientos/'+id);
     return this.markersRef;
   }
   oferta_Liquidacion_once(id){ //// LISTA SOLO UNA VEZ
     this.markersRef = this.db.list('Oferta_Liquidacion/'+id);
+    return this.markersRef;
+  }
+  oferta_Liquidacion_once_SN(){ //// LISTA SOLO UNA VEZ
+    this.markersRef = this.db.list('Oferta_Liquidacion/');
     return this.markersRef;
   }
   Liquidacion_once(id){ //// LISTA SOLO UNA VEZ
@@ -173,6 +185,14 @@ productList: any;
   }
   Trabajo_once(id){ //// LISTA SOLO UNA VEZ
     this.markersRef = this.db.list('Puesto_Trabajo/'+id);
+    return this.markersRef;
+  }
+  Empresa_once(id){ //// LISTA SOLO UNA VEZ
+    this.markersRef = this.db.list('Empresa/'+id);
+    return this.markersRef;
+  }
+  Persona_once(id){ //// LISTA SOLO UNA VEZ
+    this.markersRef = this.db.list('Persona/'+id);
     return this.markersRef;
   }
   citas_once(){ //// LISTA SOLO UNA VEZ

@@ -162,6 +162,7 @@ export class LoginComponent implements OnInit {
               this.iniciarUsuario();
               this.loginModal.nativeElement.click();
               this.authService.setPass(this.pass.nativeElement.value);
+              this.loginForm.reset();
             }
         
         }).catch((err)=>{
@@ -541,18 +542,20 @@ export class LoginComponent implements OnInit {
             if(this.tipoRegistro==="Empresa"){
               this.rEmpresa['email'] = this.registerEmail.nativeElement.value;
               this.addDB.addUsuario(this.rEmpresa,res.user.uid,this.tipoRegistro);
-              alert("Gracias por registrarte en TCompra Empresa, Para poder Iniciar Sesión es necesario verificar tu correo");
               //this.EmpresaModal.nativeElement.click();
               this.clearInputEmpresa();
               document.getElementById("validarhide").click();
+              this.registerForm.reset();
+              alert("Gracias por registrarte en TCompra Empresa, Para poder Iniciar Sesión es necesario verificar tu correo");
             }
             if(this.tipoRegistro==="Persona"){
               this.rPersona['email'] = this.registerEmail.nativeElement.value;
               this.addDB.addUsuario(this.rPersona,res.user.uid,this.tipoRegistro);
-              alert("Gracias por registrarte en TCompra Persona, Para poder Iniciar Sesión es necesario verificar tu correo");
               //his.PersonaModal.nativeElement.click();
               this.clearInputPersona()
               document.getElementById("validarhide").click();
+              this.registerForm.reset();
+              alert("Gracias por registrarte en TCompra Persona, Para poder Iniciar Sesión es necesario verificar tu correo");
             }
             //this.EmpresaModal.nativeElement.click();
             //this.PersonaModal.nativeElement.click();

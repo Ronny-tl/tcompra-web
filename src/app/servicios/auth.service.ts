@@ -47,7 +47,10 @@ export class AuthService {
   registerUser(email: string, pass: string) {
     return new Promise((resolve, reject) => {
       this.afAuth.auth.createUserWithEmailAndPassword(email, pass)
-      .then( userData =>  resolve(userData),
+      .then( userData => {
+        userData.user.sendEmailVerification();
+        resolve(userData);
+      }, 
       err => reject (err));
     });
   }
@@ -108,6 +111,12 @@ export class AuthService {
       }
     });
 
+  }
+  SendVerificationMail() {
+    return this.afAuth.auth.currentUser.sendEmailVerification()
+    .then(() => {
+      //this.router.navigate(['<!-- enter your route name here -->']);
+    })
   }
 
   getUsuario_Empresa() {
