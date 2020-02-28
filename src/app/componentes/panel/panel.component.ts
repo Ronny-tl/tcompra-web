@@ -643,7 +643,8 @@ export class PanelComponent implements OnInit {
                 tipoRequerimiento: snap.data.tipo,
                 cancelado: snap.data.cancelado,
                 calificacionProveedorBien: snap.data.calificacionProveedorBien,
-                calificacionProveedorMal: snap.data.calificacionProveedorMal
+                calificacionProveedorMal: snap.data.calificacionProveedorMal,
+                documento: snap.data.documento
               }
               this.ordenCompraEmitidos.push(temp);
             })
@@ -668,7 +669,8 @@ export class PanelComponent implements OnInit {
                 tipoRequerimiento: snap.data.tipo,
                 cancelado: snap.data.cancelado,
                 calificacionClienteBien: snap.data.calificacionClienteBien,
-                calificacionClienteMal: snap.data.calificacionClienteMal
+                calificacionClienteMal: snap.data.calificacionClienteMal,
+                documento: snap.data.documento
               }
               this.ordenCompraRecibidos.push(temp);
             })
@@ -2126,6 +2128,28 @@ export class PanelComponent implements OnInit {
   }
   culminarOrdenCompra(item){
     console.log(item);
+  }
+  descargarDocumento(item){
+    if(item.tipo===3){
+      alert("Esta liquidación no contiene un documento");
+      return'';
+    }
+    if(item.documento==="default"){
+      alert("La oferta no contiene un documento");
+      return'';
+    }
+    window.open(item.documento,'TCompraDocument.pdf', 'width=720,height=750,toolbar=0,scrollbars=no,location=0, directories=0, status=0,location=no,menubar=0,resize=no');
+  }
+  descargarOrdenCompra(item){
+    console.log(item.documento);
+    const ref = this.storage.ref(item.documento);
+    ref.getDownloadURL().subscribe(downloadURL => {
+      window.open(downloadURL,'TCompraDocument.pdf', 'width=720,height=750,toolbar=0,scrollbars=no,location=0, directories=0, status=0,location=no,menubar=0,resize=no');
+    });
+
+  }
+  enviarMensaje(){
+    alert("Falta el chat");
   }
 
 }

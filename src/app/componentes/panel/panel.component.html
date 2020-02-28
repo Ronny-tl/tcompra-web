@@ -1075,9 +1075,9 @@
 																<td><div class="dropdown show">
 																	<a type="button" class="edufair-component-button button-small text-white dropdown-toggle" data-toggle="dropdown">Seleccione  <span class="caret"></span></a>
 																	<ul class="dropdown-menu" role="menu">
-																	  <li><a type="button" (click)="eliminarReq(item)"><i class="fas fa-file-pdf" style="padding: 0;top: 0px;"></i> Descargar Orden Compra</a></li>
-																	  <li><a type="button"  (click)="cancelarRequerimiento(item)"><i class="fas fa-envelope-square" style="padding: 0;top: 0px;"></i> Mensaje</a></li>
-																	  <li *ngIf="item.cancelado!=1 && item.confirmacionCli!=0 && item.confirmacionPro !=1 || item.cancelado!=1 && item.confirmacionCli!=1 && item.confirmacionPro !=0 || item.cancelado!=1 && item.confirmacionCli!=1 && item.confirmacionPro !=1"><a type="button"  (click)="culminarOrdenCompra(item)" data-toggle="modal" data-target="#culminar"><i class="fas fa-clipboard-list-check" style="padding: 0;top: 0px;"></i> Culminar</a></li>
+																	  <li><a type="button" (click)="descargarOrdenCompra(item)"><i class="fas fa-file-pdf" style="padding: 0;top: 0px;"></i> Descargar Orden Compra</a></li>
+																	  <li><a type="button" (click)="enviarMensaje()"><i class="fas fa-envelope-square" style="padding: 0;top: 0px;"></i> Mensaje</a></li>
+																	  <!--<li *ngIf="item.cancelado!=1 && item.confirmacionCli!=0 && item.confirmacionPro !=1 || item.cancelado!=1 && item.confirmacionCli!=1 && item.confirmacionPro !=0 || item.cancelado!=1 && item.confirmacionCli!=1 && item.confirmacionPro !=1"><a type="button"  (click)="culminarOrdenCompra(item)" data-toggle="modal" data-target="#culminar"><i class="fas fa-clipboard-list-check" style="padding: 0;top: 0px;"></i> Culminar</a></li>-->
 																	</ul>
 																</div>
 																</td>
@@ -1146,9 +1146,9 @@
 																<td><div class="dropdown show">
 																	<a type="button" class="edufair-component-button button-small text-white dropdown-toggle" data-toggle="dropdown">Seleccione  <span class="caret"></span></a>
 																	<ul class="dropdown-menu" role="menu">
-																	  <li><a type="button" (click)="eliminarReq(item)"><i class="fas fa-file-pdf" style="padding: 0;top: 0px;"></i> Descargar Orden Compra</a></li>
-																	  <li><a type="button"  (click)="cancelarRequerimiento(item)"><i class="fas fa-envelope-square" style="padding: 0;top: 0px;"></i> Mensaje</a></li>
-																	  <li *ngIf="item.cancelado!=1 && item.confirmacionCli!=0 && item.confirmacionPro !=1 || item.cancelado!=1 && item.confirmacionCli!=1 && item.confirmacionPro !=0 || item.cancelado!=1 && item.confirmacionCli!=1 && item.confirmacionPro !=1"><a type="button"  (click)="culminarOrdenCompra(item)" data-toggle="modal" data-target="#culminar"><i class="fas fa-clipboard-list-check" style="padding: 0;top: 0px;"></i> Culminar</a></li>
+																	  <li><a type="button" (click)="descargarOrdenCompra(item)"><i class="fas fa-file-pdf" style="padding: 0;top: 0px;"></i> Descargar Orden Compra</a></li>
+																	  <li><a type="button"  (click)="enviarMensaje()"><i class="fas fa-envelope-square" style="padding: 0;top: 0px;"></i> Mensaje</a></li>
+																	  <!--<li *ngIf="item.cancelado!=1 && item.confirmacionCli!=0 && item.confirmacionPro !=1 || item.cancelado!=1 && item.confirmacionCli!=1 && item.confirmacionPro !=0 || item.cancelado!=1 && item.confirmacionCli!=1 && item.confirmacionPro !=1"><a type="button"  (click)="culminarOrdenCompra(item)" data-toggle="modal" data-target="#culminar"><i class="fas fa-clipboard-list-check" style="padding: 0;top: 0px;"></i> Culminar</a></li>-->
 																	</ul>
 																</div>
 																</td>
@@ -1980,7 +1980,7 @@
 								</p>
 							</div>
 							<div class="col-3" style="text-align: right;">
-								<a href="#" class="edufair-component-button button-small" style="padding: 10px 15px;border-radius: 10px;margin-bottom: 1.2em;"><i class="fas fa-file-pdf" style="padding: 0;top: 3px;left: 1px;font-size: 28px;"></i></a>
+								<a (click)="descargarDocumento(item)" type="button" class="edufair-component-button button-small text-white" style="padding: 10px 15px;border-radius: 10px;margin-bottom: 1.2em;"><i class="fas fa-file-pdf" style="padding: 0;top: 3px;left: 1px;font-size: 28px;"></i></a>
 								<p class="card-text"><small style="font-size: 22px;color: #a11a70;font-weight: 600; ">S/. {{item.presupuesto}}</small></p>
 							</div>
 						</div>
