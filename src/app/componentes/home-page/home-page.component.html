@@ -63,7 +63,7 @@
 								<div class="col-md-6 offset-md-3">
 									<form>
 										<div class="input-group">
-											<input type="text" class="form-control" placeholder="¿Que Buscas...?">
+											<input type="text" class="form-control" placeholder="¿Que Buscas...?" #busqAll>
 											<span class="input-group-btn">
 												<button class="btn btn-search" type="button"><i class="fas fa-search"></i></button>
 											</span>
@@ -246,14 +246,14 @@
 												</select>Entradas
 											</label>
 										<table class="table table-hover">
-											<thead class="thead-light">
-												<tr>
-													<th>Titulo <i class="fad fa-sort-up"></i></th>
-													<th>Ubicación <i class="fad fa-sort-up"></i></th>
-													<th>Rubro <i class="fad fa-sort-up"></i></th>
-													<th>Expira <i class="fad fa-sort-up"></i></th>
-													<th>Ver <i class="fad fa-sort-up"></i></th>
-												</tr> 
+											<thead>
+												<tr style="background: #a11a70;color: #fff;text-align: center;">
+													<th>Titulo</th>
+													<th>Ubicación</th>
+													<th>Rubro</th>
+													<th>Expira</th>
+													<th>Ver</th>
+												</tr>  
 											</thead> 
 											<tbody> 
 												<tr *ngFor="let item of requerimientos_bien?.reverse() | paginate:{itemsPerPage: cantListBienes, currentPage:pageActual, id:'pagination'}"> 

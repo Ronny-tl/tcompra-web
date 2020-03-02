@@ -623,7 +623,7 @@ mostrarPuestoTrabajo(){
     alert("Este requerimiento no cuenta con un documento")
     return '';
   }
-  window.open(pro.documento,'TCompraDocument.pdf', 'width=7200,height=750,toolbar=0,scrollbars=no,location=0, directories=0, status=0,location=no,menubar=0,resize=no');
+  window.open(pro.documento,'TCompraDocument.pdf', 'width=720,height=750,toolbar=0,scrollbars=no,location=0, directories=0, status=0,location=no,menubar=0,resize=no');
  }
 
    

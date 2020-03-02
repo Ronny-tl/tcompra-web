@@ -802,4 +802,41 @@ export class HomePageComponent implements OnInit {
     }
   }
 
+  buscarAll(busq){
+    console.log(busq.value.toUpperCase());
+    this.busquedaBien = true;
+    this.busquedaServicio = true;
+    this.busquedaLiquidacion = true;
+    this.busquedaTrabajo = true;
+    var temp1 = [];
+    var temp2 = [];
+    var temp3 = [];
+    var temp4 = [];
+    for(let x of this.requerimientos_bien){
+      if(x.nombre.toUpperCase().includes(busq.value.toUpperCase())){
+        temp1.push(x);
+      }
+    }
+    for(let x of this.requerimientos_servicio){
+      if(x.nombre.toUpperCase().includes(busq.value.toUpperCase())){
+        temp2.push(x);
+      }
+    }
+    for(let x of this.liquidacion){
+      if(x.nombre.toUpperCase().includes(busq.value.toUpperCase())){
+        temp3.push(x);
+      }
+    }
+    for(let x of this.pTrabajo){
+      if(x.nombre.toUpperCase().includes(busq.value.toUpperCase())){
+        temp4.push(x);
+      }
+    }
+    this.requerimientos_bien = temp1;
+    this.requerimientos_servicio = temp2;
+    this.liquidacion = temp3;
+    this.pTrabajo = temp4;
+
+  }
+
 }

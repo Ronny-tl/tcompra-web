@@ -8,12 +8,12 @@
                 <li class="nav-item dropdown">
                     <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                         <div class="media-img-wrap" style="float: left;margin-top: -6px;">
-                            <div class="avatar">
+                            <div *ngIf="imagenUsuario!='default'" class="avatar">
                                 <img src="{{imagenUsuario}}" alt="user" class="avatar-img rounded-circle">
                             </div>
-                            <!-- <div class="avatar avatar_letra">
-                                <b style="color: #fff;text-transform: uppercase;">M</b>
-                            </div> -->
+                             <div *ngIf="imagenUsuario==='default'" class="avatar avatar_letra">
+                                <b style="color: #fff;text-transform: uppercase; font-size:20px">{{nombreUsuario[0]}}</b>
+                            </div> 
                         </div>
                         <b>{{nombreUsuario}}</b>
                     </a>
@@ -111,7 +111,7 @@
                                     </div>
                                     <div class="col-md-12" style="margin-bottom: 0;">
                                         <div class="form-group">
-                                            <input *ngIf="isRadio" type="number"  oninput="this.value = this.value.replace(/[^0-9.]/g, ''); this.value = this.value.replace(/(\..*)\./g, '$1');" onKeyDown="if(this.value.length==12 && event.keyCode!=8) return false;" max="999999999999" class="form-control" name="var_registro"  placeholder="Introducir RUC" (input)="validarDoc=$event.target.value" required #ruc>
+                                            <input *ngIf="isRadio" type="number"  oninput="this.value = this.value.replace(/[^0-9.]/g, ''); this.value = this.value.replace(/(\..*)\./g, '$1');" onKeyDown="if(this.value.length==11 && event.keyCode!=8) return false;" max="99999999999" class="form-control" name="var_registro"  placeholder="Introducir RUC" (input)="validarDoc=$event.target.value" required #ruc>
                                             <input *ngIf="!isRadio" type="number"  oninput="this.value = this.value.replace(/[^0-9.]/g, ''); this.value = this.value.replace(/(\..*)\./g, '$1');" onKeyDown="if(this.value.length==8 && event.keyCode!=8) return false;" max="99999999" class="form-control" name="var_registro"  placeholder="Introducir DNI" (input)="validarDoc=$event.target.value" required #dni>
                                         </div>
                                     </div>

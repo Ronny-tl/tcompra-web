@@ -175,7 +175,7 @@ export class PanelComponent implements OnInit {
   @ViewChild('calificacionProveedorBien', { static: false }) calificacionProveedorBien: ElementRef;
   @ViewChild('calificacionProveedorMal', { static: false }) calificacionProveedorMal: ElementRef;
   //modalReference: NgbModalRef; para el modal
-  resumenGanador = {};
+  resumenGanador:any;
   resumenOfertas = [];
   itemCulminar: any;
   itemCulminarPro: any;
@@ -334,7 +334,7 @@ export class PanelComponent implements OnInit {
       this.cot_requerimiento_bien=[];
       this.cot_requerimiento_servicio=[];
       data.forEach(x =>{
-        if(x.data.usuario===this.uidUsuario){
+        if(x.data.usuario===this.uidUsuario && x.data.estado != 7){
           if(x.data.tipo===1){
             const datareq = {
               key: x.key,
@@ -374,7 +374,7 @@ export class PanelComponent implements OnInit {
           }
       }
       if(x.data.tipo===1){
-        if(x.data.estado===1 || x.data.estado===2){
+        if(x.data.estado===1){
             const dataAll = {
               key: x.key,
               keyUsuario: x.data.usuario,
@@ -390,7 +390,7 @@ export class PanelComponent implements OnInit {
         }
       }
       if(x.data.tipo===2){
-        if(x.data.estado===1 || x.data.estado===2){
+        if(x.data.estado===1){
           const dataAll = {
             key: x.key,
             keyUsuario: x.data.usuario,
@@ -412,7 +412,7 @@ export class PanelComponent implements OnInit {
       this.requerimiento_liquidacion =[];
       this.cot_requerimiento_liquidacion=[];
       data.forEach(x => {
-        if(x.data.usuario === this.uidUsuario){
+        if(x.data.usuario === this.uidUsuario && x.data.estado != 7){
           const datareq = {
             key: x.key,
             keyUsuario: x.data.usuario,
@@ -430,7 +430,7 @@ export class PanelComponent implements OnInit {
           this.requerimiento_liquidacion.push(datareq);
 
         }
-        if(x.data.estado===1 || x.data.estado===2){
+        if(x.data.estado===1){
           const dataAll = {
             key: x.key,
             keyUsuario: x.data.usuario,
@@ -451,7 +451,7 @@ export class PanelComponent implements OnInit {
       this.requerimiento_trabajo =[];
       this.cot_requerimiento_trabajo = [];
       data.forEach(x => {
-        if(x.data.usuario === this.uidUsuario){
+        if(x.data.usuario === this.uidUsuario && x.data.estado != 7){
           const datareq = {
             key: x.key,
             keyUsuario: x.data.usuario,
@@ -467,7 +467,7 @@ export class PanelComponent implements OnInit {
           this.requerimiento_trabajo.push(datareq);
 
         }
-        if(x.data.estado===1 || x.data.estado===2){
+        if(x.data.estado===1){
           const dataAll = {
             key: x.key,
             keyUsuario: x.data.usuario,
@@ -610,7 +610,9 @@ export class PanelComponent implements OnInit {
             cancelado: x.data.cancelado,
             fecha_entrega: x.data.fecha_entrega,
             fecha_atencion: x.data.fecha_atencion,
-            id_requerimiento: x.data.id_requerimiento
+            id_requerimiento: x.data.id_requerimiento,
+            keyUsuario: x.data.usuario
+
           }
           this.oferta_requerimiento_trabajo.push(dataOferta);
         }
@@ -643,7 +645,8 @@ export class PanelComponent implements OnInit {
                 tipoRequerimiento: snap.data.tipo,
                 cancelado: snap.data.cancelado,
                 calificacionProveedorBien: snap.data.calificacionProveedorBien,
-                calificacionProveedorMal: snap.data.calificacionProveedorMal
+                calificacionProveedorMal: snap.data.calificacionProveedorMal,
+                documento: snap.data.documento
               }
               this.ordenCompraEmitidos.push(temp);
             })
@@ -668,7 +671,8 @@ export class PanelComponent implements OnInit {
                 tipoRequerimiento: snap.data.tipo,
                 cancelado: snap.data.cancelado,
                 calificacionClienteBien: snap.data.calificacionClienteBien,
-                calificacionClienteMal: snap.data.calificacionClienteMal
+                calificacionClienteMal: snap.data.calificacionClienteMal,
+                documento: snap.data.documento
               }
               this.ordenCompraRecibidos.push(temp);
             })
@@ -1285,7 +1289,7 @@ export class PanelComponent implements OnInit {
     this.passNuevo2.nativeElement.value="";
   }
 
-  cantOfertas(cant,key,tipo,cali){
+  cantOfertas(cant,key,tipo){
 
     if(cant<1){
       if(tipo!=4){
@@ -1565,7 +1569,7 @@ export class PanelComponent implements OnInit {
   }
  
 
-  comprarOferta(item,tipo){
+  comprarOferta(item){
     //console.log(item);
     if(item.estado===3){
       alert("Este requerimiento ha culminado");
@@ -1861,25 +1865,31 @@ export class PanelComponent implements OnInit {
     alert("Cita cancelada satisfactoriamente");
   }
 
-  cancelarTrabajo(item){
-    //console.log(item);
-    //if(item.cant_citas>0){
-      //this.item.citas_once().query.once('value').then(data => {
-        //data.forEach(x => {
-          //if(x.child('idRecurso').val()===item.key){
-            //x.ref.update({
-              //cancelado: 1
-            //});
-            //this.item.oferta_Trabajo_once(x.child('idOferta').val()).query.once('value').then(r => {
-              //r.ref.update({
-                //cancelado: 1
-              //})
-            //})
-          //}
-        //});
-      //})
-    //}
+  cancelarCitaOferta(item){
+    this.item.oferta_Trabajo_once(item.key).query.once('value').then(data => {
+      data.ref.update({
+        cancelado: 1
+      })
+    })
+    this.item.citas_once().query.once('value').then(data => {
+      data.forEach( x => {
+        if(x.child('idOferta').val()===item.key && x.child('idPostulante').val()===item.keyUsuario && x.child('idRecurso').val()===item.id_requerimiento){
+          x.ref.update({
+            cancelado: 1
+          })
+        }
+      })
+    });
+    this.item.Trabajo_once(item.id_requerimiento).query.once('value').then(data => {
+      data.ref.update({
+        cant_citas: data.child('cant_citas').val()-1
+      })
+    })
 
+    alert("Cita cancelada satisfactoriamente");
+  }
+
+  cancelarTrabajo(item){
     this.item.Trabajo_once(item.key).query.once('value').then(data => {
       data.ref.update({
         estado: 6
@@ -1979,18 +1989,26 @@ export class PanelComponent implements OnInit {
   }
 
   caliProveedorBien(event,item){
+    if(item ===undefined){
+      return 0;
+    }
     event.readonly = false;
     event.value = item.calificacionProveedorBien;
     event.readonly = true;
   }
 
   caliProveedorMal(event,item){
+    if(item ===undefined){
+      return 0;
+    }
     event.readonly = false;
     event.value = item.calificacionProveedorMal;
     event.readonly = true;
   }
+
+
   verResumen(item){
-    console.log(item);
+    //console.log(item);
       this.item.ordenCompra_once(item.ordencompra).query.once('value').then(data => {
         if(data.child('tipoProveedor').val()===0){
           this.item.Empresa_once(data.child('idProveedor').val()).query.once('value').then(data2 => {
@@ -2126,6 +2144,32 @@ export class PanelComponent implements OnInit {
   }
   culminarOrdenCompra(item){
     console.log(item);
+  }
+  descargarDocumento(item){
+    if(item.tipo===3){
+      alert("Esta liquidación no contiene un documento");
+      return'';
+    }
+    if(item.documento==="default"){
+      alert("La oferta no contiene un documento");
+      return'';
+    }
+    window.open(item.documento,'TCompraDocument.pdf', 'width=720,height=750,toolbar=0,scrollbars=no,location=0, directories=0, status=0,location=no,menubar=0,resize=no');
+  }
+  descargarOrdenCompra(item){
+    //console.log(item.documento);
+    if(item.documento==="default"){
+      alert("Por favor espere su documento esta siendo generado");
+      return '';
+    }
+    const ref = this.storage.ref(item.documento);
+    ref.getDownloadURL().subscribe(downloadURL => {
+      window.open(downloadURL,'TCompraDocument.pdf', 'width=720,height=750,toolbar=0,scrollbars=no,location=0, directories=0, status=0,location=no,menubar=0,resize=no');
+    });
+
+  }
+  enviarMensaje(){
+    alert("Falta el chat");
   }
 
 }

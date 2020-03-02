@@ -56,8 +56,8 @@ export class LoginComponent implements OnInit {
   requerimientos_servicio: requerimientos[];
   pTrabajo: puestoTrabajo[];
   liquidacion: liquidacion[];
-  rEmpresa ={nombre:'',ruc:'',razonSocial:'',direccion:'',departamento:0,tipo:0,especialidad:'',rubro1:undefined,rubro2:undefined,rubro3:undefined,antiguedad:0,email:'',imagen:'default',fec_creacion:'',fec_modificacion:'',telefono:'',tokenWeb:'',tokenMovil:'',ultima_sesion:'',conectado:0,calificacionClienteBien:0,calificacionClienteMal:0,calificacionProveedorBien:0,calificacionProveedorMal:0};
-  rPersona={nombre:'',dni:'',direccion:'',departamento:0,tipo:0,imagen:'default',fec_creacion:'',fec_modificacion:'',rubro1:undefined,rubro2:undefined,rubro3:undefined,email:'',telefono:'',tokenWeb:'',tokenMovil:'',ultima_sesion:'',conectado:0,calificacionClienteBien:0,calificacionClienteMal:0,calificacionProveedorBien:0,calificacionProveedorMal:0}
+  rEmpresa ={nombre:'',ruc:'',razonSocial:'',direccion:'',departamento:0,tipo:0,tipo_empresa:0,tutorial:0,especialidad:'',rubro1:undefined,rubro2:undefined,rubro3:undefined,antiguedad:0,email:'',imagen:'default',fec_creacion:'',fec_modificacion:'',telefono:'',tokenWeb:'',tokenMovil:'',ultima_sesion:'',conectado:0,calificacionClienteBien:0,calificacionClienteMal:0,calificacionProveedorBien:0,calificacionProveedorMal:0};
+  rPersona={nombre:'',dni:'',direccion:'',departamento:0,tipo:1,tutorial:0,imagen:'default',fec_creacion:'',fec_modificacion:'',rubro1:undefined,rubro2:undefined,rubro3:undefined,email:'',telefono:'',tokenWeb:'',tokenMovil:'',ultima_sesion:'',conectado:0,calificacionClienteBien:0,calificacionClienteMal:0,calificacionProveedorBien:0,calificacionProveedorMal:0}
   tipoRegistro: string;
   persona = [];
   empresa = [];
@@ -188,9 +188,9 @@ export class LoginComponent implements OnInit {
           data.forEach(item =>{
           if(item.key == this.uid){
             this.nombreUsuario = item.data.nombre;
-            if(item.data.imagen != "default"){
+            //if(item.data.imagen != "default"){
               this.imagenUsuario = item.data.imagen;
-            }
+            //}
           }
           });
         });
@@ -198,9 +198,9 @@ export class LoginComponent implements OnInit {
           data.forEach(item =>{
           if(item.key == this.uid){
             this.nombreUsuario = item.data.nombre;
-            if(item.data.imagen != "default"){
+            //if(item.data.imagen != "default"){
               this.imagenUsuario = item.data.imagen;
-            }
+            //}
           }
           });
         });
@@ -334,8 +334,8 @@ export class LoginComponent implements OnInit {
         alert("Ingrese su RUC");
         return '';
       }
-      if(this.validarDoc.length < 12){
-        alert("Su RUC tiene menos de 12 digitos");
+      if(this.validarDoc.length < 11){
+        alert("Su RUC tiene menos de 11 digitos");
         return '';
       }
       const v1 = this.authService.getUsuario_Empresa().subscribe(data => {
@@ -413,7 +413,7 @@ export class LoginComponent implements OnInit {
       return'';
     }
       this.rEmpresa['departamento'] = Number(this.selectedDepaEmpresa);
-      this.rEmpresa['tipo'] = Number(this.selectedTipoEmpresa);
+      this.rEmpresa['tipo_empresa'] = Number(this.selectedTipoEmpresa);
       this.rEmpresa['rubro1'] = this.selectedRubro1;
       this.rEmpresa['rubro2'] = this.selectedRubro2;
       this.rEmpresa['rubro3'] = this.selectedRubro3;
@@ -579,7 +579,7 @@ export class LoginComponent implements OnInit {
     }
   }
 
-  validarBox(values:any,id:number){
+  validarBox(values:any){
     this.aceptoTerminosRegistro = values.currentTarget.checked
     }
   recuperarPass(){
