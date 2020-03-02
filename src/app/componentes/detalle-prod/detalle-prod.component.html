@@ -362,13 +362,18 @@
 								<div class="single-post-category">						
 									<ul>
 										<li>
-											<a><i class="fas fa-angle-right datos_col2"></i> Calificación:
-												<span class="detalle_col2">
+											<a style="align-items: center;display: flex;">
+												<i class="fas fa-angle-right datos_col2"></i> Calificación:
+												<div style="line-height: 1;font-size: 24px;width: 100%;text-align: right;">
+													<star-rating value="0" totalstars="5" checkedcolor="#39b54a" uncheckedcolor="#bbbbbb" readonly="false" #caliClienteBien2></star-rating>
+													<star-rating value="0" totalstars="5" checkedcolor="#ec1c24" uncheckedcolor="#bbbbbb" readonly="false" #caliClienteMal2></star-rating>
+												</div>
+												<!-- <span class="detalle_col2">
 													<star-rating value="0" totalstars="5" checkedcolor="green" uncheckedcolor="black" size="24px" readonly="false"  #caliClienteBien2></star-rating>
 													<star-rating value="0" totalstars="5" checkedcolor="red" uncheckedcolor="black" size="24px" readonly="false"  #caliClienteMal2></star-rating>
-												</span>
+												</span> -->
 											</a>
-										</li><br><br>
+										</li>
 										<li *ngIf="tipoUsuario===0"><a><i class="fas fa-angle-right datos_col2"></i> Empresa: <span class="detalle_col2">{{usuario?.nombre}}</span></a> </li>
 										<li *ngIf="tipoUsuario===1"><a><i class="fas fa-angle-right datos_col2"></i> Persona: <span class="detalle_col2">{{usuario?.nombre}}</span></a> </li>																																												
 										<li><a><i class="fas fa-angle-right datos_col2"></i> Creado: <span class="detalle_col2">{{producto?.fecha_publicacion}}</span></a> </li>																																											
