@@ -2014,10 +2014,11 @@
 								</div>
 								<div class="col-6">
 									Calificación<br>
-										<!--<star-rating [value]="caliProveedorBien(item)" totalstars="5" checkedcolor="#39b54a" uncheckedcolor="#bbbbbb" readonly="true" #caliBien></star-rating>
-										<star-rating [value]="caliProveedorMal(item)" totalstars="5" checkedcolor="#ec1c24" uncheckedcolor="#bbbbbb" readonly="true" #caliMal></star-rating>-->
-									Calificacion Positiva<star-rating [value]="caliProveedorBien(caliBien,item)" totalstars="5" checkedcolor="green" uncheckedcolor="black" size="28px" readonly="false" #caliBien></star-rating>
-									Calificacion Negativa<star-rating [value]="caliProveedorMal(caliMal,item)" totalstars="5" checkedcolor="red" uncheckedcolor="black" size="28px" readonly="false" #caliMal></star-rating>
+									<star-rating [value]="caliProveedorBien(caliBien,item)" totalstars="5" checkedcolor="#39b54a" uncheckedcolor="#bbbbbb" readonly="false" #caliBien></star-rating>
+									<star-rating [value]="caliProveedorMal(caliMal,item)" totalstars="5" checkedcolor="#ec1c24" uncheckedcolor="#bbbbbb" readonly="false" #caliMal></star-rating>
+
+									<!-- Calificacion Positiva<star-rating [value]="caliProveedorBien(caliBien,item)" totalstars="5" checkedcolor="green" uncheckedcolor="black" size="28px" readonly="false" #caliBien></star-rating>
+									Calificacion Negativa<star-rating [value]="caliProveedorMal(caliMal,item)" totalstars="5" checkedcolor="red" uncheckedcolor="black" size="28px" readonly="false" #caliMal></star-rating> -->
 								</div>
 							</div>
 							<h5 class="card-title card-oferta-title">
