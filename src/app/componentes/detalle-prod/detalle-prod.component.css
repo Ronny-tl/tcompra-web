@@ -6,3 +6,20 @@
 .carousel-inner{
  height: 370;
 }
+
+::ng-deep.star {
+    width: 25px !important;
+  }
+  
+  ::ng-deep.star:before {
+    content: "\f005" !important;
+    font-family: "Font Awesome 5 Pro";
+    font-weight: 900;
+  }
+  
+  ::ng-deep.star.half:after {
+    content: "\f089" !important;
+    font-family: "Font Awesome 5 Pro";
+    font-weight: 900;
+    margin-left: -20px !important;
+  }
