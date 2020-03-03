@@ -24,6 +24,7 @@
                     </div>
                 </li>
         </ul>
+
         <button id="empresahide" [hidden]="true" data-toggle="modal" data-dismiss="modal" aria-label="Close" data-target="#Empresa"></button>
         <button id="personahide" [hidden]="true" data-toggle="modal" data-dismiss="modal" aria-label="Close" data-target="#Persona"></button>
         <button id="validarhide" [hidden]="true" data-toggle="modal" data-dismiss="modal" aria-label="Close" data-target="#ValidarCuenta"></button>
@@ -31,7 +32,8 @@
 		<button id="modalEmpresa" [hidden]="true" data-toggle="modal" data-target="#Empresa"></button>
 		<button id="modalPersona" [hidden]="true" data-toggle="modal" data-target="#Persona"></button>
 		<button id="validarCuenta" [hidden]="true" data-toggle="modal" data-target="#ValidarCuenta"></button>
-<!--modales-->
+    
+        <!--modales-->
         <div class="modal fade" id="Login" tabindex="-1" role="dialog" #Login >
             <div class="modal-dialog modal-sm" role="document">
                 <div class="modal-content">
@@ -128,7 +130,7 @@
         </div>
             
         <!-- Tipo de registro como Persona Natural -->
-        <div class="modal fade" id="Persona" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal fade" id="Persona" tabindex="-1" role="dialog" aria-hidden="true" style="overflow-y: auto;">
             <div class="modal-dialog modal-lg" role="document" id="persona" name="persona" style="width: 500px;">
                 <div class="modal-content">
         
@@ -222,7 +224,7 @@
         </div>
             
         <!-- Tipo de registro como Empresa -->
-        <div class="modal fade" id="Empresa" tabindex="-1" role="dialog" aria-hidden="true" #Empresa>
+        <div class="modal fade" id="Empresa" tabindex="-1" role="dialog" aria-hidden="true" #Empresa style="overflow-y: auto;">
             <div class="modal-dialog modal-lg" role="document" style="width: 500px;">
                 <div class="modal-content">
         

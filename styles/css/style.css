@@ -36,6 +36,16 @@ License URI: https://banyanthemes.com/
 /*--------------------------------------------------------------
 # Normalize
 --------------------------------------------------------------*/
+
+/* ::-webkit-scrollbar {
+    width: 8px;
+}
+::-webkit-scrollbar-track {}
+::-webkit-scrollbar-thumb {
+	background: rgb(0, 0, 0,0.5);
+	border-radius: 8px;
+} */
+
 html {
 	-webkit-text-size-adjust: 100%;
 	-ms-text-size-adjust:     100%;
@@ -1076,7 +1086,7 @@ a.edufair-btn-larg-round:hover:before {
 .edufair-cart i{
 	padding-left: 15px;
 	padding-right: 5px;
-	color: #f1f1f1;
+	/* color: #f1f1f1; */
 }
 .edufair-cart a>span{
 	/* margin-top: -12px;
@@ -5756,6 +5766,13 @@ a.edufair-component-button:hover:before {
     border-radius: 50px;
     justify-content: center;
     align-items: center;
+}
+
+#Empresa::-webkit-scrollbar {
+	display: none;
+}
+#Persona::-webkit-scrollbar {
+	display: none;
 }
 
 /******************** Panel ************************/
