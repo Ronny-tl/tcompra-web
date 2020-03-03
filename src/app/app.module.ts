@@ -48,6 +48,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatDatepickerModule, MatFormFieldModule, MatInputModule,MatNativeDateModule,MatDialogModule} from '@angular/material';
 import { NgbDate, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import {RatingModule} from 'ng-starrating';
+import {SimpleNotificationsModule} from 'angular2-notifications';
+import {HashLocationStrategy, LocationStrategy} from "@angular/common";
+
 
 @NgModule({
   declarations: [
@@ -93,11 +96,12 @@ import {RatingModule} from 'ng-starrating';
     MatNativeDateModule,
     MatDialogModule,
     NgbModule,
-    RatingModule
+    RatingModule,
+    SimpleNotificationsModule.forRoot({position : [ 'top' , 'right' ]})
 
 
   ],
-  providers: [AuthService, ItemService, AngularFireDatabase, ModalServiceService,FormBuilder,RegistroUsuarioService,DatePipe,AuthGuard],
+  providers: [AuthService, ItemService, AngularFireDatabase, ModalServiceService,FormBuilder,RegistroUsuarioService,DatePipe,AuthGuard,{provide: LocationStrategy, useClass: HashLocationStrategy}],
   bootstrap: [AppComponent],
   exports: [BsDropdownModule, TooltipModule, ModalModule]
 })

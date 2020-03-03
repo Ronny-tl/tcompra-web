@@ -45,8 +45,8 @@ export class HomePageComponent implements OnInit {
   cantListTrabajo:number= 10;
   cantBienes: number = 0;
   cantServicios: number =0;
-  cantLiquidacion: number;
-  cantTrabajo: number;
+  cantLiquidacion: number = 0;
+  cantTrabajo: number = 0;
   selectTest: string ="-LjS65S0NtwAABX-VuOg";
   myDate = new Date();
   loginForm: FormGroup;
@@ -803,11 +803,11 @@ export class HomePageComponent implements OnInit {
   }
 
   buscarAll(busq){
-    console.log(busq.value.toUpperCase());
     this.busquedaBien = true;
     this.busquedaServicio = true;
     this.busquedaLiquidacion = true;
     this.busquedaTrabajo = true;
+
     var temp1 = [];
     var temp2 = [];
     var temp3 = [];

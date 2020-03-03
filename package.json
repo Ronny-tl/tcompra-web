@@ -28,6 +28,7 @@
     "angular-font-awesome": "^3.1.2",
     "angular-form-builder": "^0.1.9",
     "angular-modal-service": "^0.15.3",
+    "angular2-notifications": "^3.0.0",
     "angularfire2": "^5.3.0",
     "bootstrap": "^4.4.1",
     "file-saver": "^2.0.2",

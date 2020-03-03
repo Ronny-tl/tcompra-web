@@ -18,6 +18,8 @@ import {ItemService} from '../../servicios/item.service';
 import {RegistroUsuarioService} from '../../servicios/registro-usuario.service';
 //bootstrap
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+import {NotificationsService} from 'angular2-notifications';
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -123,7 +125,8 @@ export class LoginComponent implements OnInit {
     public addDB: RegistroUsuarioService,
     private datePipe: DatePipe,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private message: NotificationsService
   ) { 
     this.loginForm = this.createFormGroup();
     this.registerForm = this.registerFormGroup();
@@ -159,6 +162,7 @@ export class LoginComponent implements OnInit {
               alert("Para poder iniciar sesion debe verificar su correo");
               this.authService.logout();
             }else{
+              this.onSuccess('Login','Bienvenido '+this.email.nativeElement.value+' a TCompra');
               this.iniciarUsuario();
               this.loginModal.nativeElement.click();
               this.authService.setPass(this.pass.nativeElement.value);
@@ -168,15 +172,18 @@ export class LoginComponent implements OnInit {
         }).catch((err)=>{
           console.log(err.message);
           if(err.message ==="The password is invalid or the user does not have a password."){
-            alert("La contraseña es incorrecta!!");
+            //alert("La contraseña es incorrecta!!");
+            this.onError('Login','La contraseña es incorrecta!!')
           }
           if(err.message ==="There is no user record corresponding to this identifier. The user may have been deleted."){
-            alert("El usuario no existe!!");
+            //alert("El usuario no existe!!");
+            this.onError('Login','El usuario no existe!!')
           }
       });
     } else {
-      console.log('Not Valid');
+      //console.log('Not Valid');
       alert("Ingrese los campos requeridos con el formato correcto!!");
+      this.onError('Login','Ingrese los campos requeridos con el formato correcto!!')
     }
   }
   SalirSesion(){
@@ -188,6 +195,7 @@ export class LoginComponent implements OnInit {
           data.forEach(item =>{
           if(item.key == this.uid){
             this.nombreUsuario = item.data.nombre;
+            //this.onSuccess('Login Correcto','Bienvenido '+item.data.nombre+' a TCompra EMPRESA');
             //if(item.data.imagen != "default"){
               this.imagenUsuario = item.data.imagen;
             //}
@@ -198,6 +206,7 @@ export class LoginComponent implements OnInit {
           data.forEach(item =>{
           if(item.key == this.uid){
             this.nombreUsuario = item.data.nombre;
+            //this.onSuccess('Login Correcto','Bienvenido '+item.data.nombre+' a TCompra PERSONA');
             //if(item.data.imagen != "default"){
               this.imagenUsuario = item.data.imagen;
             //}
@@ -540,22 +549,24 @@ export class LoginComponent implements OnInit {
           if(res.user.emailVerified==false){
             //this.rEmpresa['email'] = this.registerEmail.nativeElement.value;
             if(this.tipoRegistro==="Empresa"){
+              this.onInfo('Registro Empresa','Gracias por registrarte en TCompra Empresa, Para poder Iniciar Sesión es necesario verificar tu correo')
               this.rEmpresa['email'] = this.registerEmail.nativeElement.value;
               this.addDB.addUsuario(this.rEmpresa,res.user.uid,this.tipoRegistro);
               //this.EmpresaModal.nativeElement.click();
               this.clearInputEmpresa();
               document.getElementById("validarhide").click();
               this.registerForm.reset();
-              alert("Gracias por registrarte en TCompra Empresa, Para poder Iniciar Sesión es necesario verificar tu correo");
+
             }
             if(this.tipoRegistro==="Persona"){
+              this.onInfo('Registro Persona','Gracias por registrarte en TCompra Persona, Para poder Iniciar Sesión es necesario verificar tu correo')
               this.rPersona['email'] = this.registerEmail.nativeElement.value;
               this.addDB.addUsuario(this.rPersona,res.user.uid,this.tipoRegistro);
               //his.PersonaModal.nativeElement.click();
               this.clearInputPersona()
               document.getElementById("validarhide").click();
               this.registerForm.reset();
-              alert("Gracias por registrarte en TCompra Persona, Para poder Iniciar Sesión es necesario verificar tu correo");
+
             }
             //this.EmpresaModal.nativeElement.click();
             //this.PersonaModal.nativeElement.click();
@@ -586,6 +597,35 @@ export class LoginComponent implements OnInit {
     this.authService.resetPassword(this.EmailRec.nativeElement.value);
     this.modalRecuperar.nativeElement.click();
     this.EmailRec.nativeElement.value = "";
+  }
+  onSuccess(title,msg){
+    this.message.success(title,msg, {
+      position: ['bottom','center'],
+      timeOut: 4000,
+      animate: 'fade',
+      showProgressBar: true,
+      preventDuplicates: true
+    });
+  }
+  onError(title, msg){
+    this.message.error(title,msg, {
+      position: ['bottom','center'],
+      timeOut: 4000,
+      animate: 'fade',
+      showProgressBar: true,
+      preventDuplicates: true
+
+    });
+  }
+  onInfo(title, msg){
+    this.message.info(title,msg, {
+      position: ['bottom','center'],
+      timeOut: 4000,
+      animate: 'fade',
+      showProgressBar: true,
+      preventDuplicates: true
+
+    });
   }
 
 }
