@@ -297,7 +297,7 @@ export class RegistroRequerimientosService {
             select.value = "NA";
           })
         }
-      }else{ /// PERSONA
+      }if(item.tipoCliente===1){ /// PERSONA
         if(Number(select.value)===0){
           this.af.list('Persona/'+item.idCliente+'/CalificacionClienteMal/').query.ref.push({
             calificacion: (c1.value+c2.value+c3.value)/3,
@@ -328,7 +328,7 @@ export class RegistroRequerimientosService {
             data.forEach(x => {
               total = total + x.child('calificacion').val()
             })
-            this.af.list('Persona/'+item.comprador).query.ref.update({
+            this.af.list('Persona/'+item.idCliente).query.ref.update({
               calificacionClienteBien: total/data.numChildren()
             })
             c1.value = 0;

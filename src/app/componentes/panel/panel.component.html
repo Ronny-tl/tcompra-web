@@ -1509,7 +1509,7 @@
 													</div>
 													<div class="col-md-4">
 														<label for="exampleInputEmail1" style="margin-bottom: 0rem;margin-top: .5rem;">Presupuesto</label>
-														<input name="" type="text" class="form-control" placeholder="S/. 00.00" required #presupuestoBien>
+														<input name="" type="number" max="999999999999" oninput="this.value = this.value.replace(/[^0-9.]/g, ''); this.value = this.value.replace(/(\..*)\./g, '$1');" onKeyPress="if(this.value.length==12) return false;" class="form-control" placeholder="S/. 00.00" required #presupuestoBien>
 													</div>
 													<div class="col-md-4">
 														<label for="exampleInputEmail1" style="margin-bottom: 0rem;margin-top: .5rem;">Moneda</label>
@@ -1525,7 +1525,7 @@
 													</div>
 													<div class="col-md-6">
 														<label for="exampleInputEmail1" style="margin-bottom: 0rem;margin-top: .5rem;">Fecha Final</label>
-														<input name="" type="date" class="form-control" placeholder="00/00/2020" required #fecha_finalBien>
+														<input name="" type="date" class="form-control" [min]="getDateActual()" placeholder="00/00/2020" required #fecha_finalBien>
 													</div>
 													<div class="col-md-6">
 														<label for="exampleInputEmail1" style="margin-bottom: 0rem;margin-top: .5rem;">Tiempo de Entrega</label>
@@ -1586,7 +1586,7 @@
 													</div>
 													<div class="col-md-4">
 														<label for="exampleInputEmail1" style="margin-bottom: 0rem;margin-top: .5rem;">Presupuesto</label>
-														<input name="" type="text" class="form-control" placeholder="S/. 00.00" required #presupuestoServicio>
+														<input name="" type="number" max="999999999999" oninput="this.value = this.value.replace(/[^0-9.]/g, ''); this.value = this.value.replace(/(\..*)\./g, '$1');" onKeyPress="if(this.value.length==12) return false;" class="form-control" placeholder="S/. 00.00" required #presupuestoServicio>
 													</div>
 													<div class="col-md-4">
 														<label for="exampleInputEmail1" style="margin-bottom: 0rem;margin-top: .5rem;">Moneda</label>
@@ -1602,7 +1602,7 @@
 													</div>
 													<div class="col-md-6">
 														<label for="exampleInputEmail1" style="margin-bottom: 0rem;margin-top: .5rem;">Fecha Final</label>
-														<input name="" type="date" class="form-control" placeholder="00/00/2020" required #fecha_finalServicio> 
+														<input name="" type="date" [min]="getDateActual()" class="form-control" placeholder="00/00/2020" required #fecha_finalServicio> 
 													</div>
 													<div class="col-md-6">
 														<label for="exampleInputEmail1" style="margin-bottom: 0rem;margin-top: .5rem;">Tiempo de Entrega</label>
@@ -1663,7 +1663,7 @@
 													</div>
 													<div class="col-md-4">
 														<label for="exampleInputEmail1" style="margin-bottom: 0rem;margin-top: .5rem;">Presupuesto</label>
-														<input name="" type="text" class="form-control" placeholder="S/. 00.00" required #presupuestoLiq>
+														<input name="" type="number" max="999999999999" oninput="this.value = this.value.replace(/[^0-9.]/g, ''); this.value = this.value.replace(/(\..*)\./g, '$1');" onKeyPress="if(this.value.length==12) return false;" class="form-control" placeholder="S/. 00.00" required #presupuestoLiq>
 													</div>
 													<div class="col-md-4">
 														<label for="exampleInputEmail1" style="margin-bottom: 0rem;margin-top: .5rem;">Moneda</label>
@@ -1679,7 +1679,7 @@
 													</div>
 													<div class="col-md-6">
 														<label for="exampleInputEmail1" style="margin-bottom: 0rem;margin-top: .5rem;">Fecha Final</label>
-														<input name="" type="date" class="form-control" placeholder="00/00/2020" required #fecha_finalLiq> 
+														<input name="" type="date" [min]="getDateActual()" class="form-control" placeholder="00/00/2020" required #fecha_finalLiq> 
 													</div>
 													<div class="col-md-6">
 														<label for="exampleInputEmail1" style="margin-bottom: 0rem;margin-top: .5rem;">Tiempo de Entrega</label>
@@ -1740,7 +1740,7 @@
 													</div>
 													<div class="col-md-4">
 														<label for="exampleInputEmail1" style="margin-bottom: 0rem;margin-top: .5rem;">Sueldo</label>
-														<input name="" type="text" class="form-control" placeholder="S/. 00.00" required #presupuestoPT>
+														<input name="" type="number" max="999999999999" oninput="this.value = this.value.replace(/[^0-9.]/g, ''); this.value = this.value.replace(/(\..*)\./g, '$1');" onKeyPress="if(this.value.length==12) return false;" class="form-control" placeholder="S/. 00.00" required #presupuestoPT>
 													</div>
 													<div class="col-md-4">
 														<label for="exampleInputEmail1" style="margin-bottom: 0rem;margin-top: .5rem;">Moneda</label>
@@ -1756,7 +1756,7 @@
 													</div>
 													<div class="col-md-6">
 														<label for="exampleInputEmail1" style="margin-bottom: 0rem;margin-top: .5rem;">Fecha Final</label>
-														<input name="" type="date" class="form-control" placeholder="00/00/2020" required #fecha_finalPT> 
+														<input name="" type="date" [min]="getDateActual()" class="form-control" placeholder="00/00/2020" required #fecha_finalPT> 
 													</div>
 													<div class="col-md-6">
 														<label for="exampleInputEmail1" style="margin-bottom: 0rem;margin-top: .5rem;">Disponibilidad</label>

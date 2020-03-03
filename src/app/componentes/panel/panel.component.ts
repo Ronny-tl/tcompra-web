@@ -2172,4 +2172,10 @@ export class PanelComponent implements OnInit {
     alert("Falta el chat");
   }
 
+  getDateActual(){
+    return this.datePipe.transform(this.myDate,'yyyy-dd-MM').toString();
+  }
+
+
+
 }
