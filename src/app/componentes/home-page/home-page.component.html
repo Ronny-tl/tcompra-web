@@ -2,20 +2,17 @@
 		
 <div class="edufair-container">
 	
-	<div class="edufair-header edufair-course-header">	
+	<div class="edufair-header edufair-course-header">
+		
 		<nav class="navbar navbar-expand-lg edufair-nav">
 			<div class="container">	
 				<div class="container-fluid">
 					<div class="navbar-header">
-						<button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false" style="float: right;margin-top: 10px;">
-							<span class="sr-only">Toggle navigation</span>				
-							<i class="fas fa-align-right fa-2"></i>
-						</button>
 						<a class="navbar-brand edufair-brand edufair-light" routerLink="/" routerLinkActive="active"><img src="assets/images/logo-white.svg" alt="Logo"></a>
 						<a class="navbar-brand edufair-brand edufair-dark" routerLink="/" routerLinkActive="active"><img src="assets/images/logo-black.svg" alt="Logo"></a>
 					</div>
 					
-					<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+					<div style="justify-content: flex-end;flex-grow: 1;display: flex;align-items: center;">
 						
 						<div class="edufair-cart">
 							<app-login></app-login>
@@ -56,14 +53,14 @@
 					<div class="online-course-new-middle">
 						<div class="online-course-new-text">
 
-							<h3 style="font-size: 28px;line-height:  1.7;">La primera plataforma de Requerimientos y Ofertas<br>B2B del Perú</h3>
+							<h3 style="font-size: 28px;line-height:  1.7;margin-bottom: 15px;">La primera plataforma de Requerimientos y Ofertas<br>B2B del Perú</h3>
 
 							<div class="col-md-6 offset-md-3">
 								<form>
 									<div class="input-group">
-										<input type="text" class="form-control" placeholder="¿Que Buscas...?" #busqAll>
+										<input type="text" class="form-control" placeholder="¿Que Buscas...?" #busqAll style="margin-top: 0;">
 										<span class="input-group-btn">
-											<button class="btn btn-search" (click)="buscarAll(busqAll)" type="button"><i class="fas fa-search"></i></button>
+											<button class="btn btn-search" (click)="buscarAll(busqAll)" type="button" style="margin-top: 0;"><i class="fas fa-search"></i></button>
 										</span>
 									</div>
 								</form>

@@ -31,14 +31,16 @@
               "styles/css/animate.css",
               "styles/css/fakeLoader.css",
               "styles/css/responsive.css",
-              "styles/css/style.css"
+              "styles/css/style.css",
+              "styles/css/enjoyhint.css"
             ],
             "scripts": [
               "styles/js/jquery.min.js",
               "styles/js/bootstrap.min.js",
               "styles/js/fakeLoader.min.js",
               "styles/js/jquery.counterup.min.js",
-              "styles/js/custom.js"
+              "styles/js/custom.js",
+              "styles/js/enjoyhint.min.js"
             ]
           },
           "configurations": {

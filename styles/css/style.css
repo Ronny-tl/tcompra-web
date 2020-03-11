@@ -37,14 +37,14 @@ License URI: https://banyanthemes.com/
 # Normalize
 --------------------------------------------------------------*/
 
-/* ::-webkit-scrollbar {
+::-webkit-scrollbar {
     width: 8px;
 }
 ::-webkit-scrollbar-track {}
 ::-webkit-scrollbar-thumb {
-	background: rgb(0, 0, 0,0.5);
-	border-radius: 8px;
-} */
+	background: rgb(0, 0, 0,0.7);
+	border-radius: 0px;
+}
 
 html {
 	-webkit-text-size-adjust: 100%;
@@ -915,10 +915,9 @@ a.edufair-btn-larg-round:hover:before {
 .edufair-nav > .container .navbar-brand{
 	font-size: 20px;
 	font-weight: 900;
-	
-	margin-left: -15px;
+	/* margin-left: -15px; */
 	/* margin-left: -32px; */
-	margin-top: -5px;
+	/* margin-top: -5px; */
 }
 
 .edufair-nav .navbar-nav > li > a:focus,
@@ -1078,8 +1077,8 @@ a.edufair-btn-larg-round:hover:before {
 --------------------------------------------------------------*/
 .edufair-cart {
     position: absolute;
-    right: 12%;
-    margin-top: 15px;
+    /* right: 12%; */
+    /* margin-top: 15px; */
     clear: both;
     display: inline-flex;
 }
@@ -1095,8 +1094,8 @@ a.edufair-btn-larg-round:hover:before {
 	color: #f1f1f1; */
 }
 .box{
-  right: 15px;
-  height: 40px;
+  /* right: 15px; */
+  /* height: 40px; */
 }
 
 .container-2{
@@ -4841,8 +4840,7 @@ span.heading-divider:after{
 .online-course-1x .edufair-cart,
 .online-course-2x .edufair-cart {
 	color: #f1f1f1; 
-
-    margin-top: -20px;
+    /* margin-top: -20px; */
     /* margin-top: 10px; */
 }
 .online-course-1x .edufair-nav .navbar-right,
@@ -5558,7 +5556,7 @@ a.edufair-component-button:hover:before {
 	object-fit: cover;
 }
 
-/********************************************/
+/******************* Nuevos Estilos *************************/
 
 .titulo-foo:before {
     content: "";
@@ -5589,12 +5587,28 @@ a.edufair-component-button:hover:before {
   border-radius: .25rem;
 }
 
+.boton_login_p{
+	margin-top: 10px;
+	background: #EE8B20;
+	padding: 13px 0px;
+	color: #f1f1f1;
+	border: 1px solid #EE8B20;
+	border-radius: .25rem;
+  }
+
 .boton_login:hover{
   text-decoration: none;
   color: #f1f1f1;
   background-color: #A11A70;
-  border: 1px solid #262626;
+  border: 0px solid #262626;
 }
+
+.boton_login_p:hover{
+	text-decoration: none;
+	color: #f1f1f1;
+	background-color: #EE8B20;
+	border: 0px solid #262626;
+  }
 
 .breadcrumb-item+.breadcrumb-item::before {
     display: inline-block;
@@ -5603,6 +5617,31 @@ a.edufair-component-button:hover:before {
     content: "/";
 }
 
+.titulo_st2{
+	color: #fff;
+    font-size: 50px;
+    font-weight: 700;
+}
+
+.header_detalles{
+	position: absolute;
+    bottom: 14%;
+	width: 100%;
+	z-index: 9;
+}
+
+.container-fluid {
+    display: flex;
+    align-content: center;
+}
+
+.navbar-collapse{
+	justify-content: flex-end;
+}
+
+.edufair-nav .container{
+	padding: 0;
+}
 /*******************************************/
 
 .datos_col2{
@@ -5773,6 +5812,52 @@ a.edufair-component-button:hover:before {
 }
 #Persona::-webkit-scrollbar {
 	display: none;
+}
+
+.avatar_notificacion{
+	height: 2.625rem;
+    width: 2.625rem;
+    display: flex;
+    background: #a11a70;
+    border-radius: 50px;
+    justify-content: center;
+    align-items: center;
+}
+
+.nuevas_toficaciones{
+	width: 9px;
+	height: 9px;
+	background: #0b9a96;
+	position: absolute;
+	top: 0;
+	border-radius: 10px;
+}
+
+.menu_notificaciones{
+	padding: 0;
+}
+
+.notificacion_titulo{
+	padding: 1.1rem 1.5rem;
+}
+
+.item_notificacion{
+	padding: .75rem 1.25rem;
+	display: flex;
+	align-items: center;
+}
+
+.item_notificacion .cuerpo{
+	margin-left: 10px;
+	line-height: 1.4;
+	font-size: 14px;
+	font-weight: 500;
+	color: #7a7a7a;
+}
+
+.item_notificacion .hora{
+	font-size: 12px;
+	color: #262626;
 }
 
 /******************** Panel ************************/
@@ -6183,6 +6268,14 @@ a.edufair-component-button:hover:before {
 .img_usuario{
 	height: 32px;
 	width: 32px;
+	object-fit: cover;
+    border-radius: 50%;
+    box-shadow: 0 0px 16px rgba(0, 0, 0, 0.1);
+}
+
+.img_notificacion{
+	height: 2.625rem;
+	width: 2.625rem;
 	object-fit: cover;
     border-radius: 50%;
     box-shadow: 0 0px 16px rgba(0, 0, 0, 0.1);

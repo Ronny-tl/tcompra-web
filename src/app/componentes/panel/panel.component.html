@@ -9,22 +9,64 @@
 						<div class="container">	
 							<div class="container-fluid">
 								<div class="navbar-header">
-									<button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false" style="float: right;margin-top: 10px;">
-										<span class="sr-only">Toggle navigation</span>				
-										<i class="fas fa-align-right fa-2"></i>
-									</button>
 									<a class="navbar-brand edufair-brand edufair-light" routerLink="/" routerLinkActive="active"><img src="assets/images/logo-white.svg" alt="Logo"></a>
 									<a class="navbar-brand edufair-brand edufair-dark" routerLink="/" routerLinkActive="active"><img src="assets/images/logo-black.svg" alt="Logo"></a>
 								</div>
-								<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+
+								<div style="justify-content: flex-end;flex-grow: 1;display: flex;align-items: center;">
 									
 									<div class="edufair-cart">
 										<!-- <div class="box">
 											<a href="#" data-toggle="modal" data-target="#Login" style="margin-right: 15px;"><i class="fas fa-lock"></i><b class="op-menu"> Iniciar Sesión</b></a>
 											<a href="#" data-toggle="modal" data-target="#Registrar" id="popup"><i class="fas fa-user"></i><b class="op-menu"> Registrar</b></a>
 										</div> -->
-										<ul class="nav navbar-nav justify-content-end" style="margin-right: 0px;text-align: right;margin-bottom: 10px;">
+										<ul class="nav navbar-nav justify-content-end" style="margin-right: 0px;text-align: right;">
 											<li class="nav-item"><a class="nav-link"><i class="fas fa-business-time"></i> Cuenta: {{user?.tipoNombre}}</a></li>
+											<li class="nav-item tipo_cuenta" style="margin-right: 4px;">
+												<a href="" class="nav-link" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+													<i class="fas fa-bell" style="padding: 0;font-size: 18px;"></i>
+													<b class="nuevas_toficaciones"></b>
+												</a>
+												<div class="dropdown-menu menu_notificaciones">
+													<h6 class="dropdown-header notificacion_titulo">Notificaciones</h6>
+	
+													<div class="dropdown-divider" style="margin: 0;"></div>
+													<a class="dropdown-item item_notificacion" href="#">
+														<img src="assets/images/users/avatar2.jpg" class="img_notificacion">
+														<div class="cuerpo">
+															Tienes 1 oferta a tu requerimiento<br>
+															<b class="hora">11:30 p.m</b>
+														</div>
+													</a>
+													<div class="dropdown-divider" style="margin: 0;"></div>
+													<a class="dropdown-item item_notificacion" href="#">
+														<img src="assets/images/users/avatar1.jpg" class="img_notificacion">
+														<div class="cuerpo">
+															Tiene más muebles de Oficina?<br>
+															<b class="hora">10:22 a.m</b>
+														</div>
+													</a>
+													<div class="dropdown-divider" style="margin: 0;"></div>
+													<a class="dropdown-item item_notificacion" href="#">
+														<img src="assets/images/users/avatar3.jpg" class="img_notificacion">
+														<div class="cuerpo">
+															1 Oferta fue Cancelada<br>
+															<b class="hora">10:12 a.m</b>
+														</div>
+													</a>
+													<div class="dropdown-divider" style="margin: 0;"></div>
+													<a class="dropdown-item item_notificacion" href="#">
+														<div class="avatar_notificacion">
+															<b style="color: #fff;text-transform: uppercase;">C</b>
+														</div>
+														<div class="cuerpo">
+															Orden de Compra Generado<br>
+															<b class="hora">08:10 a.m</b>
+														</div>
+													</a>
+	
+												</div>
+											</li>
 											<li class="nav-item dropdown">
 												<a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
 													<div class="media-img-wrap" style="float: left;margin-top: -6px;">
@@ -33,7 +75,7 @@
 															<!--<img *ngIf="!logoUsuario" src="assets/images/avatar.jpg" alt="user" class="avatar-img rounded-circle">-->
 														</div>
 														<div *ngIf="imagenPerfil==='default'" class="avatar avatar_letra">
-															<b style="color: #fff;text-transform: uppercase; font-size:20px">{{user?.nombre[0]}}</b>
+															<b style="color: #fff;text-transform: uppercase;">{{user?.nombre[0]}}</b>
 														</div> 
 													</div>
 													<b>{{user?.nombre}}</b>
