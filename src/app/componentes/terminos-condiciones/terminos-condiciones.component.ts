@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {NgbModal, ModalDismissReasons,NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
 import { StarRatingComponent } from 'ng-starrating';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import {MessagingService} from '../../servicios/messaging.service';
 @Component({
   selector: 'app-terminos-condiciones',
   templateUrl: './terminos-condiciones.component.html',
@@ -12,8 +13,11 @@ export class TerminosCondicionesComponent implements OnInit {
   prueba: number= 1;
   closeResult: string;
   modalReference: NgbModalRef;
+  message;
   constructor(private modalService: NgbModal,
-    private http: HttpClient) { }
+    private http: HttpClient,
+    private msg: MessagingService
+    ) { }
 
   ngOnInit() {
   }
@@ -58,7 +62,7 @@ export class TerminosCondicionesComponent implements OnInit {
     const body = {
         email: 'myemail@xyz.com',
         user_password: 'mypasss',
-        token: 'c-NAbPwzqb0:APA91bF4LaZzow4BMk78YElKbqfo9KXyt4VaLWX9YfPjxlrN9wOqts7e762x3cJKFT-gl1FLWCzYWMMfTb2NO9Jgrcqcbv72yXax-oKwflWoxyXM25MeHW5w94h1QL8QZ6TGy8_hpeXh'
+        token: 'dfiUfrFzSvvyHgGf3IFWbY:APA91bH51VAiVpvBaQa7M2lthBoistNPqG1J6C7kAaM68eNe_Bk7e4NUjqzEIng9PoM0gpXJdhVKAQgVvFFv0-kGqeYaNX_05f5d9cxkggKSzGlDlZttasBrz_xTXXDbhRfhqPS2ME9N'
     }
 
     return this.http
@@ -68,33 +72,8 @@ export class TerminosCondicionesComponent implements OnInit {
                });
     }
     
-    sendPushMessage(title, message){
-      let data = {
-          notification: {
-              "title": title,
-              "body": message,
-              "click_action": "http://localhost:3000/",
-              "icon": "http://url-to-an-icon/icon.png",
-              "sound" : "default"
-          },
-          "to": "c-NAbPwzqb0:APA91bF4LaZzow4BMk78YElKbqfo9KXyt4VaLWX9YfPjxlrN9wOqts7e762x3cJKFT-gl1FLWCzYWMMfTb2NO9Jgrcqcbv72yXax-oKwflWoxyXM25MeHW5w94h1QL8QZ6TGy8_hpeXh"
-      }
-  
-      let postData = JSON.stringify(data);    
-      let url ="https://fcm.googleapis.com/fcm/send" ;
-      this.http.post(url,  postData, {
-        headers: new HttpHeaders()
-        // put the server key here
-            .set('Authorization', 'key=AAAA942C7-o:APA91bESjDSzDMUagst6NMu12duQHnenmdnU6XsDuTi3BNuIJUEZDnzBNkaYcjQUOgmq16wz2cbSVWU9jh31-HtGlurCgP3VTPBSJNN0wzyiFDHWw6ZTuV-yvK851yMKkP-HKmYlAnPs')
-            .set('Content-Type', 'application/json'),
-       })
-       .subscribe((response: Response) => {
-          console.log(response)
-        },
-        (error: Response) => {
-          console.log(error);
-          console.log("error" + error);
-        });
+    sendPushMessage2(title, message){
+      this.msg.sendPushMessage(title);
     }
   
 

@@ -1,13 +1,14 @@
 import { Component, OnInit,ViewChild,ElementRef } from '@angular/core';
 import { AuthService } from '../../servicios/auth.service';
 import { FormGroup, FormBuilder, Validators, FormControl,FormsModule } from '@angular/forms';
-import { Subscription } from 'rxjs';
+import { Subscription, iif } from 'rxjs';
 import { ModalServiceService } from '../../servicios/modal-service.service';
 import { DatePipe } from '@angular/common';
 import {Router, ActivatedRoute} from '@angular/router';
+import {MessagingService} from '../../servicios/messaging.service';
 ///firebase
 import {AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from 'angularfire2/firestore';
-import {Observable} from 'rxjs/observable';
+import {Observable} from 'rxjs/Observable';
 import {requerimientos} from '../../models/requerimientos';
 import {liquidacion} from '../../models/liquidacion';
 import {puestoTrabajo} from '../../models/puesto_trabajo';
@@ -126,19 +127,29 @@ export class LoginComponent implements OnInit {
     private datePipe: DatePipe,
     private router: Router,
     private route: ActivatedRoute,
-    private message: NotificationsService
+    private message: NotificationsService,
+    private messagingService: MessagingService
   ) { 
     this.loginForm = this.createFormGroup();
     this.registerForm = this.registerFormGroup();
   }
 
   ngOnInit() {
+    if(localStorage.getItem("usuarioActivo") != null) {
+      this.isLogin = true;
+      let user = JSON.parse(localStorage.getItem('usuarioActivo'));
+      this.nombreUsuario = user.nombre;
+      this.imagenUsuario = user.imagen;
+      
+    }
     this.authService.getAuth().subscribe(auth =>{
       if(auth){
         this.isLogin= true;
         this.emailUsuario = auth.email;
         this.uid = auth.uid;
+        //console.log(localStorage.getItem("usuarioActivo"));
         this.iniciarUsuario();
+        ////this.iniciarUsuario();
       }else{
         this.isLogin=false;
       }
@@ -167,6 +178,8 @@ export class LoginComponent implements OnInit {
               this.loginModal.nativeElement.click();
               this.authService.setPass(this.pass.nativeElement.value);
               this.loginForm.reset();
+              //this.messagingService.receiveMessage();
+              localStorage.setItem('notificacion','0');
             }
         
         }).catch((err)=>{
@@ -187,34 +200,62 @@ export class LoginComponent implements OnInit {
     }
   }
   SalirSesion(){
+    localStorage.clear();
     this.authService.logout();
+    localStorage.clear();
+    this.messagingService.ngOnDestroy();
   }
 
   iniciarUsuario(){
         this.authService.getUsuario_Empresa().subscribe(data => {
           data.forEach(item =>{
-          if(item.key == this.uid){
+          if(item.key === this.uid){
             this.nombreUsuario = item.data.nombre;
             //this.onSuccess('Login Correcto','Bienvenido '+item.data.nombre+' a TCompra EMPRESA');
             //if(item.data.imagen != "default"){
               this.imagenUsuario = item.data.imagen;
             //}
+            let usuario = {
+              nombre: item.data.nombre,
+              imagen: item.data.imagen,
+              tipo: 0,
+              tipoNombre: 'EMPRESA',
+              uid: item.key
+            }
+            localStorage.setItem("usuarioActivo",JSON.stringify(usuario));
+            this.updateTokenWeb(item.key,0,item);
           }
           });
         });
         this.authService.getUsuario_Persona().subscribe(data => {
           data.forEach(item =>{
-          if(item.key == this.uid){
+          if(item.key === this.uid){
             this.nombreUsuario = item.data.nombre;
             //this.onSuccess('Login Correcto','Bienvenido '+item.data.nombre+' a TCompra PERSONA');
             //if(item.data.imagen != "default"){
               this.imagenUsuario = item.data.imagen;
             //}
+            let usuario = {
+              nombre: item.data.nombre,
+              imagen: item.data.imagen,
+              tipo: 0,
+              tipoNombre: 'PERSONA',
+              uid: item.key
+            }
+            localStorage.setItem("usuarioActivo",JSON.stringify(usuario));
+            this.updateTokenWeb(item.key,1,item);
           }
           });
         });
     
   }
+  updateTokenWeb(uid,tipo,item){
+    console.log("ENTRO");
+    this.messagingService.ngOnDestroy();
+    this.messagingService.requestPermission(uid,tipo,item);
+    this.messagingService.receiveMessage();
+  }
+
   getDepartamento(){
     this.itemService.getDepartamento().subscribe(data => {
       this.departamentos = data;
@@ -599,13 +640,16 @@ export class LoginComponent implements OnInit {
     this.EmailRec.nativeElement.value = "";
   }
   onSuccess(title,msg){
-    this.message.success(title,msg, {
+    const pr = this.message.success(title,msg, {
       position: ['bottom','center'],
       timeOut: 4000,
       animate: 'fade',
       showProgressBar: true,
       preventDuplicates: true
     });
+    pr.click.subscribe(event => {
+      console.log("HIZO CLICK A LA NOTIFICACION");
+    })
   }
   onError(title, msg){
     this.message.error(title,msg, {

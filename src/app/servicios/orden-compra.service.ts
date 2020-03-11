@@ -43,6 +43,8 @@ export class OrdenCompraService {
       ordencompra: x.key
     })
     alert("Orden de compra generada");
+    return x.key;
+
   }
   generarOrdenCompraLiquidacion(itemProveedor,itemCliente,fecha_compra){
     var t_fecha_e = fecha_compra.split('-');
@@ -76,7 +78,9 @@ export class OrdenCompraService {
       oferta: itemProveedor.keyOferta,
       ordencompra: x.key
     })
+    
     alert("Orden de compra generada");
+    return x.key;
   }
 generarCitaTrabajo(item,itemReq,fecha_cita,hora_cita,mensaje_cita,fecha_actual){
   var t_fecha_e = fecha_actual.split('-');
@@ -97,6 +101,7 @@ generarCitaTrabajo(item,itemReq,fecha_cita,hora_cita,mensaje_cita,fecha_actual){
       cant_citas: itemReq.cant_citas+1
     })
     alert("Cita generada satisfactoriamente");
+    return x.key;
 }
 
   calcularFechaEntrega(entrega,fecha_compra){

@@ -16,7 +16,10 @@ import { DatePipe } from '@angular/common';
 import {RegistroOfertasService} from '../../servicios/registro-ofertas.service';
 import { ofertaLiquidacion } from 'src/app/models/ofertaLiquidacion';
 import { ofertaTrabajo } from 'src/app/models/ofertaTrabajo';
-import { Observer } from 'rxjs/observer';
+import { Observer } from 'rxjs/Observer';
+import { MessagingService} from '../../servicios/messaging.service';
+import {AlertService} from '../../servicios/alert.service';
+
 declare var require: any
 const FileSaver = require('file-saver');
 
@@ -83,7 +86,9 @@ export class DetalleProdComponent implements OnInit {
     private storage: AngularFireStorage,
     public authService: AuthService,
     private datePipe: DatePipe,
-    private registroOferta: RegistroOfertasService
+    private registroOferta: RegistroOfertasService,
+    private msgService: MessagingService,
+    private alertService: AlertService
   ) { }
   ngOnInit() {
     //alert(post.id);
@@ -369,16 +374,16 @@ mostrarPuestoTrabajo(){
   ofertar(id){
     if(this.isLogin){
     //alert(id+' - '+ this.selectedDepartamento);
-        if(this.nombreUsuario.nativeElement.value===""){alert("Ingrese el nombre de la oferta"); return '';}
-        if(this.emailUsuario.nativeElement.value===""){alert("Ingrese correo"); return'';}
-        if(this.presupuestoUsuario.nativeElement.value===""){alert("Ingrese un presupuesto"); return '';}
-        if(this.selectedDepartamento===0){alert("Seleccione un departamento"); return '';}
-        if(this.selectedMoneda==='-LjS7G05dji2dWV2Gft1'){alert("Seleccione un tipo de moneda"); return '';}
+        if(this.nombreUsuario.nativeElement.value===""){this.alertService.onError2("Error","Ingrese el nombre de la oferta"); return '';}
+        if(this.emailUsuario.nativeElement.value===""){this.alertService.onError2("Error","Ingrese su correo"); return'';}
+        if(this.presupuestoUsuario.nativeElement.value===""){this.alertService.onError2("Error","Ingrese un presupuesto"); return '';}
+        if(this.selectedDepartamento===0){this.alertService.onError2("Error","Seleccione un departamento"); return '';}
+        if(this.selectedMoneda==='-LjS7G05dji2dWV2Gft1'){this.alertService.onError2("Error","Seleccione un tipo de moneda"); return '';}
 
         if(id==="1" || id==="2"){
           //if(this.garantiaAnio.nativeElement.value===""){alert("Ingrese garantia en años"); return '';}
           //if(this.soporteMeses.nativeElement.value===""){alert("Ingrese Soporte en meses"); return '';}
-          if(this.selectedEntrega==='-LjS6ygVTMvasGPrdtqp'){alert("Seleccione un tiempo de entrega"); return '';}
+          if(this.selectedEntrega==='-LjS6ygVTMvasGPrdtqp'){this.alertService.onError2("Error","Seleccione un tiempo de entrega"); return '';}
           //this.subirImage();
           const dataOferta = new ofertaRequerimiento(
             this.emailUsuario.nativeElement.value,
@@ -402,11 +407,14 @@ mostrarPuestoTrabajo(){
             var key = this.registroOferta.addOferta(dataOferta,this.tipoProducto,this.idProducto);
             this.subirImage(key);
             this.subirFile(key);
+            this.enviarNotificacion("Requerimiento: "+this.nombreUsuario.nativeElement.value,"Tienes una oferta de "+this.usuarioAutenticado+" revisalo ahora!!","oferta","bien",key,this.usuario.tokenMovil);
+            this.enviarNotificacion("Requerimiento: "+this.nombreUsuario.nativeElement.value,"Tienes una oferta de "+this.usuarioAutenticado+" revisalo ahora!!","oferta","bien",key,this.usuario.tokenWeb);
             this.verificarOferta();
-            alert("Su oferta ha sido registrado satisfactoriamente");
+            //alert("Su oferta ha sido registrado satisfactoriamente");
+            this.alertService.onSuccess2("Oferta Completado","Su oferta ha sido registrado satisfactoriamente");
         }
         if(id==="3"){
-          if(this.selectedEntrega==='-LjS6ygVTMvasGPrdtqp'){alert("Seleccione un tiempo de entrega"); return '';}
+          if(this.selectedEntrega==='-LjS6ygVTMvasGPrdtqp'){this.alertService.onError2("Error","Seleccione un tiempo de entrega"); return '';}
           const dataOfertaLiqui = new ofertaLiquidacion(
             this.emailUsuario.nativeElement.value,
             this.selectedEntrega,
@@ -422,8 +430,11 @@ mostrarPuestoTrabajo(){
             this.uidUsuario
           );
             var key = this.registroOferta.addOferta(dataOfertaLiqui,this.tipoProducto,this.idProducto);
+            this.enviarNotificacion("Liquidación: "+this.nombreUsuario.nativeElement.value,"Tienes una oferta de "+this.usuarioAutenticado+" revisalo ahora!!","oferta","liquidacion",key,this.usuario.tokenMovil);
+            this.enviarNotificacion("Liquidación: "+this.nombreUsuario.nativeElement.value,"Tienes una oferta de "+this.usuarioAutenticado+" revisalo ahora!!","oferta","liquidacion",key,this.usuario.tokenWeb);
             this.verificarOferta();
-            alert("Su oferta ha sido registrado satisfactoriamente");
+            //alert("Su oferta ha sido registrado satisfactoriamente");
+            this.alertService.onSuccess2("Oferta Completado","Su oferta ha sido registrado satisfactoriamente");
         }
         if(id==="4"){
           if(this.selectedEntrega==='-LjS6ygVTMvasGPrdtqp'){alert("Seleccione la Disponibilidad"); return '';}
@@ -445,12 +456,16 @@ mostrarPuestoTrabajo(){
             var key = this.registroOferta.addOferta(dataOfertaTrabajo,this.tipoProducto,this.idProducto);
             this.subirImage(key);
             this.subirFile(key);
+            this.enviarNotificacion("Nuevo Postulante: "+this.nombreUsuario.nativeElement.value,this.usuarioAutenticado+" acaba de postular a tu puesto de trabajo!!","oferta","Oferta_Trabajo",key,this.usuario.tokenMovil);
+            this.enviarNotificacion("Nuevo Postulante: "+this.nombreUsuario.nativeElement.value,this.usuarioAutenticado+" acaba de postular a tu puesto de trabajo!!","oferta","Oferta_Trabajo",key,this.usuario.tokenWeb);
             this.verificarOferta();
-            alert("Se ha postulado satisfactoriamente");
+            //alert("Se ha postulado satisfactoriamente");
+            this.alertService.onSuccess2("Postulación Completado","Se ha postulado satisfactoriamente");
         }
       }
     else{
-      alert("Necesitas estar logueado para ofertar");
+      //alert("Necesitas estar logueado para ofertar");
+      this.alertService.onWarn2("Login","Necesitas Iniciar Sesion para ofertar/postular");
     }
 
   }
@@ -485,7 +500,8 @@ mostrarPuestoTrabajo(){
     //console.log(data.path[0].files);
     this.cantImagenes = data.path[0].files.length;
     if(data.path[0].files.length>5){
-      alert("Cantidad de imagenes permitidas son 5");
+      //alert("Cantidad de imagenes permitidas son 5");
+      this.alertService.onError2("Error Imagen","Cantidad de imagenes permitidas son 5");
       return '';
     }
     this.imagenesCargadas = data.target.files;
@@ -494,7 +510,8 @@ mostrarPuestoTrabajo(){
     //console.log(data.path[0].files);
     this.cantFile = data.path[0].files.length;
     if(data.path[0].files.length>1){
-      alert("Maximo de archivos es 1");
+      //alert("Maximo de archivos es 1");
+      this.alertService.onError2("Error Archivo","Maximo de archivos es 1")
       return '';
     }
     //console.log(data.path[0].files)
@@ -612,7 +629,8 @@ mostrarPuestoTrabajo(){
 
  descargarImagen(pro){
   if(pro.imagenprincipal==="default"){
-    alert("Este requerimiento no contiene una imagen");
+    //alert("Este requerimiento no contiene una imagen");
+    this.alertService.onWarn2("Sin Imagen","Este requerimiento no contiene una imagen");
     return '';
   }
   window.open(pro.imagenprincipal,'TCompraDocument.pdf', 'width=720,height=750,toolbar=0,location=0, directories=0, status=0,location=no,menubar=0,resize=no');
@@ -620,10 +638,37 @@ mostrarPuestoTrabajo(){
 
  descargarDocumento(pro){
   if(pro.documento==="default"){
-    alert("Este requerimiento no cuenta con un documento")
+    //alert("Este requerimiento no cuenta con un documento")
+    this.alertService.onWarn2("Sin Documento","Este requerimiento no cuenta con un documento");
     return '';
   }
   window.open(pro.documento,'TCompraDocument.pdf', 'width=720,height=750,toolbar=0,scrollbars=no,location=0, directories=0, status=0,location=no,menubar=0,resize=no');
+ }
+
+ enviarNotificacion(title,body,noti,tipo,id,token){
+   //console.log(id);
+   //console.log(token);
+  let payload = {
+    notification:{
+      title: title,
+      body: body,
+      click_action: "http://127.0.0.1:4200/#/panel"
+
+    },
+    data: {
+      title: title,
+      body: body,
+      notificacion: noti,
+      tipo: tipo.toString(),
+      id : id,
+      click_action: "http://127.0.0.1:4200/#/panel"
+    },
+    to: token
+
+  }
+
+  this.msgService.sendPushMessage(payload);
+
  }
 
    

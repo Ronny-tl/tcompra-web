@@ -6,8 +6,11 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomePageComponent } from './componentes/home-page/home-page.component';
 ///firebase
-import {AngularFireModule} from 'angularfire2';
-import {AngularFireAuthModule} from 'angularfire2/auth';
+//import {AngularFireModule} from 'angularfire2';
+import { AngularFireModule } from '@angular/fire';
+//import {AngularFireAuthModule} from 'angularfire2/auth';
+import { AngularFireAuthModule } from '@angular/fire/auth';
+import { AngularFireMessagingModule } from '@angular/fire/messaging';
 import {environment} from '../environments/environment';
 import {AngularFirestoreModule} from 'angularfire2/firestore';
 import { AngularFireDatabase} from 'angularfire2/database';
@@ -50,7 +53,10 @@ import { NgbDate, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import {RatingModule} from 'ng-starrating';
 import {SimpleNotificationsModule} from 'angular2-notifications';
 import {HashLocationStrategy, LocationStrategy} from "@angular/common";
-
+import { AsyncPipe } from '../../node_modules/@angular/common';
+import {MessagingService} from '../../src/app/servicios/messaging.service';
+import * as firebase from 'firebase';
+import { AngularFireDatabaseModule } from '@angular/fire/database';
 
 @NgModule({
   declarations: [
@@ -78,7 +84,7 @@ import {HashLocationStrategy, LocationStrategy} from "@angular/common";
     BrowserModule,
     AppRoutingModule,
     AngularFireAuthModule,
-    AngularFireModule.initializeApp(environment.firebaseConfig, 'angularfs'),
+    AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFirestoreModule,
     BsDropdownModule.forRoot(),
     TooltipModule.forRoot(),
@@ -97,11 +103,13 @@ import {HashLocationStrategy, LocationStrategy} from "@angular/common";
     MatDialogModule,
     NgbModule,
     RatingModule,
-    SimpleNotificationsModule.forRoot({position : [ 'top' , 'right' ]})
+    SimpleNotificationsModule.forRoot({position : [ 'bottom' , 'right' ]}),
+    AngularFireMessagingModule,
+    AngularFireDatabaseModule
 
 
   ],
-  providers: [AuthService, ItemService, AngularFireDatabase, ModalServiceService,FormBuilder,RegistroUsuarioService,DatePipe,AuthGuard,{provide: LocationStrategy, useClass: HashLocationStrategy}],
+  providers: [AuthService, ItemService, AngularFireDatabase, ModalServiceService,FormBuilder,RegistroUsuarioService,DatePipe,AuthGuard,{provide: LocationStrategy, useClass: HashLocationStrategy},MessagingService, AsyncPipe],
   bootstrap: [AppComponent],
   exports: [BsDropdownModule, TooltipModule, ModalModule]
 })

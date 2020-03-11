@@ -182,7 +182,8 @@
 							</div>
 						<ng-container *ngIf="uidUsuario!=producto?.usuario && producto?.estado===1">
 							<ng-container *ngIf="isOfertaste && tipoProducto==='1' || isOfertaste && tipoProducto==='2' || isOfertaste && tipoProducto==='3' || isOfertaste && tipoProducto==='4'">
-								<h2 class="edufair-main-title">Ofertar</h2>
+								<h2 *ngIf="tipoProducto!='4'" class="edufair-main-title">Ofertar</h2>
+								<h2 *ngIf="tipoProducto==='4'" class="edufair-main-title">Postular</h2>
 								<div class="edufair-subscription-form-1x" style="background: #f5f5f5;padding: 30px 10px;border-radius: 6px;">
 									<p style="text-align: center;">
 										<i class="fas fa-clipboard-check fa-5x" style="color: #0B9A96;"></i>
@@ -199,7 +200,8 @@
 										Si quieres borrar tu Postulación pulsa eliminar.
 									</p> 
 									<p style="text-align: center;margin-bottom: 0em;">
-										<a type="button" (click)="eliminarOferta()" class="edufair-component-button button-medium text-white"><i class="fas fa-columns" style="top: 0;padding-left: 0;padding-right: 4px;"></i> Eliminar mi Oferta</a>
+										<a *ngIf="tipoProducto!='4'" type="button" (click)="eliminarOferta()" class="edufair-component-button button-medium text-white"><i class="fas fa-columns" style="top: 0;padding-left: 0;padding-right: 4px;"></i> Eliminar mi Oferta</a>
+										<a *ngIf="tipoProducto==='4'" type="button" (click)="eliminarOferta()" class="edufair-component-button button-medium text-white"><i class="fas fa-columns" style="top: 0;padding-left: 0;padding-right: 4px;"></i> Eliminar mi Postulación</a>
 									</p>
 								</div>
 								<!-- <h2  *ngIf="tipoProducto==='1' || tipoProducto==='2'" class="edufair-main-title"><img src="assets/images/productos/check.png" class="img-fluid" style="width: 80px ;height: 80px">  Ya Ofertaste este requerimiento</h2> 
@@ -284,7 +286,8 @@
 											</div>
 										
 										<div class="col-md-12" style="text-align: center;">
-											<a type="button" (click)="ofertar(tipoProducto)" class="edufair-component-button button-medium btn-block active text-white">Ofertar</a>
+											<a *ngIf="tipoProducto!='4'" type="button" (click)="ofertar(tipoProducto)" class="edufair-component-button button-medium btn-block active text-white">Ofertar</a>
+											<a *ngIf="tipoProducto==='4'" type="button" (click)="ofertar(tipoProducto)" class="edufair-component-button button-medium btn-block active text-white">Postular</a>
 										</div>
 									</div>
 								</form>	
@@ -374,11 +377,11 @@
 												</span> -->
 											</a>
 										</li>
-										<li *ngIf="tipoUsuario===0"><a><i class="fas fa-angle-right datos_col2"></i> Empresa: <span class="detalle_col2">{{usuario?.nombre}}</span></a> </li>
-										<li *ngIf="tipoUsuario===1"><a><i class="fas fa-angle-right datos_col2"></i> Persona: <span class="detalle_col2">{{usuario?.nombre}}</span></a> </li>																																												
+										<li *ngIf="usuario?.tipo===0"><a><i class="fas fa-angle-right datos_col2"></i> Empresa: <span class="detalle_col2">{{usuario?.nombre}}</span></a> </li>
+										<li *ngIf="usuario?.tipo===1"><a><i class="fas fa-angle-right datos_col2"></i> Persona: <span class="detalle_col2">{{usuario?.nombre}}</span></a> </li>																																												
 										<li><a><i class="fas fa-angle-right datos_col2"></i> Creado: <span class="detalle_col2">{{producto?.fecha_publicacion}}</span></a> </li>																																											
 										<li><a><i class="fas fa-angle-right datos_col2"></i> Ubicación: <span class="detalle_col2">{{departamento?.nombre}}</span></a> </li>																																											
-										<li *ngIf="tipo?.nombre!=''"><a><i class="fas fa-angle-right datos_col2"></i> Tipo: <span class="detalle_col2">{{tipo?.nombre}}</span></a> </li>
+										<li *ngIf="usuario?.tipo===0"><a><i class="fas fa-angle-right datos_col2"></i> Tipo: <span class="detalle_col2">{{tipo?.nombre}}</span></a> </li>
 										<li><a><i class="fas fa-angle-right datos_col2"></i> Rubro: <span class="detalle_col2"	>{{rubro?.nombre}}</span></a> </li>																																											
 									</ul>
 								</div>
