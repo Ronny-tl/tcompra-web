@@ -13,7 +13,8 @@ import {crearTrabajo} from '../../models/crearTrabajo';
 import {OrdenCompraService} from '../../servicios/orden-compra.service';
 import {NgbModal, ModalDismissReasons,NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
 import {usuario} from '../../models/usuario';
-
+import { AlertService } from '../../servicios/alert.service';
+import {MessagingService} from '../../servicios/messaging.service';
 @Component({
   selector: 'app-panel',
   templateUrl: './panel.component.html',
@@ -160,7 +161,8 @@ export class PanelComponent implements OnInit {
   allAntiguedad = [];
   mi_liq_ofertas: any;
   list_ofertantes_liq = [];
-
+  user: any;
+  imagenPerfil: string;
   @ViewChild('modalCita', { static: false }) modalCita: ElementRef;
   @ViewChild('fechaCita', { static: false }) fechaCita: ElementRef;
   @ViewChild('horaCita', { static: false }) horaCita: ElementRef;
@@ -192,12 +194,17 @@ export class PanelComponent implements OnInit {
     private datePipe: DatePipe,
     private registroReq: RegistroRequerimientosService,
     private ordenCompra: OrdenCompraService,
+    private alertService: AlertService,
+    private msgService: MessagingService
     //private modalService: NgbModal //para el modal
   ) {
    
    }
 
   ngOnInit() {
+    this.user = JSON.parse(localStorage.getItem('usuarioActivo'));
+    this.uidUsuario = this.user.uid;
+    this.imagenPerfil = this.user.imagen;
     this.getUsuario();
     this.getEntrega();
     this.getMoneda();
@@ -219,13 +226,14 @@ export class PanelComponent implements OnInit {
         if(item.key === auth.uid){
           //alert(auth.uid);
           this.usuario = item.data;
-          this.tipoUsuario = "EMPRESA";
+          this.imagenPerfil = item.data.imagen;
+          this.updateTokenWeb(item.key,0,item)
+         
+          //this.tipoUsuario = "EMPRESA";
           this.hideRRHH = true;
           this.tipoUsuarioNumber = 0,
           this.datosComplementariosUsuario();
-          if(item.data.imagen != "default"){
-            this.logoUsuario = true;
-          }
+
         }
         });
       });
@@ -234,17 +242,23 @@ export class PanelComponent implements OnInit {
         if(item.key == auth.uid){
           //alert("persona");
           this.usuario = item.data;
-          this.tipoUsuario = "PERSONA";
+          this.imagenPerfil = item.data.imagen;
+          this.updateTokenWeb(item.key,1,item)
+          //this.tipoUsuario = "PERSONA";
           this.hideRRHH = false;
           this.tipoUsuarioNumber = 1,
           this.datosComplementariosUsuario();
-          if(item.data.imagen != "default"){
-            this.logoUsuario = true;
-          }
+
         }
         });
       });
     })
+  }
+  updateTokenWeb(uid,tipo,item){
+    console.log("ENTRO panel");
+    this.msgService.ngOnDestroy();
+    this.msgService.requestPermission(uid,tipo,item);
+    this.msgService.receiveMessage();
   }
   datosComplementariosUsuario(){
     this.getRubroUsuario(this.usuario.rubro1);
@@ -325,7 +339,10 @@ export class PanelComponent implements OnInit {
     }
   }
   SalirSesion(){
+    localStorage.clear();
     this.authService.logout();
+    localStorage.clear();
+    this.msgService.ngOnDestroy();
   }
   get_mis_requerimientos(){
     this.item.getRequerimientosPanel().subscribe(data =>{
@@ -1344,7 +1361,9 @@ export class PanelComponent implements OnInit {
                   calificacionClienteBien: ue.child('calificacionClienteBien').val(),
                   calificacionClienteMal: ue.child('calificacionClienteMal').val(),
                   calificacionProveedorBien: ue.child('calificacionProveedorBien').val(),
-                  calificacionProveedorMal: ue.child('calificacionProveedorMal').val()
+                  calificacionProveedorMal: ue.child('calificacionProveedorMal').val(),
+                  tokenMovil: ue.child('tokenMovil').val(),
+                  tokenWeb: ue.child('tokenWeb').val()
                 }
 
                 this.list_ofertantes.push(ofe_temp);
@@ -1378,7 +1397,9 @@ export class PanelComponent implements OnInit {
                   calificacionClienteBien: ue.child('calificacionClienteBien').val(),
                   calificacionClienteMal: ue.child('calificacionClienteMal').val(),
                   calificacionProveedorBien: ue.child('calificacionProveedorBien').val(),
-                  calificacionProveedorMal: ue.child('calificacionProveedorMal').val()
+                  calificacionProveedorMal: ue.child('calificacionProveedorMal').val(),
+                  tokenMovil: ue.child('tokenMovil').val(),
+                  tokenWeb: ue.child('tokenWeb').val()
                 }
                 //console.log(ofe_temp);
                 this.list_ofertantes.push(ofe_temp);
@@ -1429,7 +1450,9 @@ export class PanelComponent implements OnInit {
                   calificacionClienteBien: ue.child('calificacionClienteBien').val(),
                   calificacionClienteMal: ue.child('calificacionClienteMal').val(),
                   calificacionProveedorBien: ue.child('calificacionProveedorBien').val(),
-                  calificacionProveedorMal: ue.child('calificacionProveedorMal').val()
+                  calificacionProveedorMal: ue.child('calificacionProveedorMal').val(),
+                  tokenMovil: ue.child('tokenMovil').val(),
+                  tokenWeb: ue.child('tokenWeb').val()
                 }
   
                 this.list_ofertantes.push(ofe_temp);
@@ -1462,7 +1485,9 @@ export class PanelComponent implements OnInit {
                   calificacionClienteBien: ue.child('calificacionClienteBien').val(),
                   calificacionClienteMal: ue.child('calificacionClienteMal').val(),
                   calificacionProveedorBien: ue.child('calificacionProveedorBien').val(),
-                  calificacionProveedorMal: ue.child('calificacionProveedorMal').val()
+                  calificacionProveedorMal: ue.child('calificacionProveedorMal').val(),
+                  tokenMovil: ue.child('tokenMovil').val(),
+                  tokenWeb: ue.child('tokenWeb').val()
                 }
 
                 this.list_ofertantes.push(ofe_temp);
@@ -1516,7 +1541,9 @@ export class PanelComponent implements OnInit {
                   calificacionClienteBien: ue.child('calificacionClienteBien').val(),
                   calificacionClienteMal: ue.child('calificacionClienteMal').val(),
                   calificacionProveedorBien: ue.child('calificacionProveedorBien').val(),
-                  calificacionProveedorMal: ue.child('calificacionProveedorMal').val()
+                  calificacionProveedorMal: ue.child('calificacionProveedorMal').val(),
+                  tokenMovil: ue.child('tokenMovil').val(),
+                  tokenWeb: ue.child('tokenWeb').val()
                 }
   
                 this.list_ofertantes.push(ofe_temp);
@@ -1550,7 +1577,9 @@ export class PanelComponent implements OnInit {
                   calificacionClienteBien: ue.child('calificacionClienteBien').val(),
                   calificacionClienteMal: ue.child('calificacionClienteMal').val(),
                   calificacionProveedorBien: ue.child('calificacionProveedorBien').val(),
-                  calificacionProveedorMal: ue.child('calificacionProveedorMal').val()
+                  calificacionProveedorMal: ue.child('calificacionProveedorMal').val(),
+                  tokenMovil: ue.child('tokenMovil').val(),
+                  tokenWeb: ue.child('tokenWeb').val()
                 }
 
                 this.list_ofertantes.push(ofe_temp);
@@ -1572,32 +1601,41 @@ export class PanelComponent implements OnInit {
   comprarOferta(item){
     //console.log(item);
     if(item.estado===3){
-      alert("Este requerimiento ha culminado");
+      //alert("Este requerimiento ha culminado");
+      this.alertService.onError2("Error","Este requerimiento ha culminado")
       return '';
     }
     if(item.estado===5){
-      alert("Tiempo de vigencia del requerimiento ha expirado");
+      //alert("Tiempo de vigencia del requerimiento ha expirado");
+      this.alertService.onError2("Error","Tiempo de vigencia del requerimiento ha expirado")
       return '';
     }
     if(item.estado===6){
-      alert("Este requerimiento fue cancelado");
+      //alert("Este requerimiento fue cancelado");
+      this.alertService.onError2("Error","Este requerimiento fue cancelado")
       return '';
     }
     if(item.estado===7){
-      alert("Este requerimiento fue eliminado");
+      //alert("Este requerimiento fue eliminado");
+      this.alertService.onError2("Error","Este requerimiento fue eliminado")
       return '';
     }
     if(item.tipo===1 || item.tipo===2){
       this.item.Requerimiento_once(item.id_requerimiento).query.once('value').then(data =>{
         if(data.child('ordencompra').val()==="default"){
           console.log(data.child('ordencompra').val());
-          this.ordenCompra.generarOrdenCompraRequerimiento(item,this.mi_req_ofertas,this.datePipe.transform(this.myDate,'yyyy-MM-dd').toString());
+          let key = this.ordenCompra.generarOrdenCompraRequerimiento(item,this.mi_req_ofertas,this.datePipe.transform(this.myDate,'yyyy-MM-dd').toString());
+          this.enviarNotificacionMovil("Felicitaciones",this.user.nombre+" te ha generado una orden de compra.","ordencompra","ordencompra",key,item.tokenMovil)
+          this.enviarNotificacionWeb("Felicitaciones",this.user.nombre+" te ha generado una orden de compra.","ordencompra","ordencompra",key,item.tokenWeb)
         }else{
           this.item.ordenCompra_once(data.child('ordencompra').val()).query.once('value').then( data2 => {
             if(data2.child('cancelado').val()===1){
-              this.ordenCompra.generarOrdenCompraRequerimiento(item,this.mi_req_ofertas,this.datePipe.transform(this.myDate,'yyyy-MM-dd').toString());
+              let key = this.ordenCompra.generarOrdenCompraRequerimiento(item,this.mi_req_ofertas,this.datePipe.transform(this.myDate,'yyyy-MM-dd').toString());
+              this.enviarNotificacionMovil("Felicitaciones",this.user.nombre+" te ha generado una orden de compra.","ordencompra","ordencompra",key,item.tokenMovil)
+              this.enviarNotificacionWeb("Felicitaciones",this.user.nombre+" te ha generado una orden de compra.","ordencompra","ordencompra",key,item.tokenWeb)
             }else{
-              alert("Ya compraste una oferta");
+              //alert("Ya compraste una oferta");
+              this.alertService.onWarn2("Aviso!!","Ya compraste una oferta")
             }
           })
         }
@@ -1606,13 +1644,18 @@ export class PanelComponent implements OnInit {
       this.item.Liquidacion_once(item.id_requerimiento).query.once('value').then(data =>{
         if(data.child('ordencompra').val()==="default"){
           console.log(data.child('ordencompra').val());
-          this.ordenCompra.generarOrdenCompraLiquidacion(item,this.mi_req_ofertas,this.datePipe.transform(this.myDate,'yyyy-MM-dd').toString());
+          let key = this.ordenCompra.generarOrdenCompraLiquidacion(item,this.mi_req_ofertas,this.datePipe.transform(this.myDate,'yyyy-MM-dd').toString());
+          this.enviarNotificacionMovil("Felicitaciones",this.user.nombre+" te ha generado una orden de compra.","ordencompra","ordencompra",key,item.tokenMovil)
+          this.enviarNotificacionWeb("Felicitaciones",this.user.nombre+" te ha generado una orden de compra.","ordencompra","ordencompra",key,item.tokenWeb)
         }else{
           this.item.ordenCompra_once(data.child('ordencompra').val()).query.once('value').then( data2 => {
             if(data2.child('cancelado').val()===1){
-              this.ordenCompra.generarOrdenCompraLiquidacion(item,this.mi_req_ofertas,this.datePipe.transform(this.myDate,'yyyy-MM-dd').toString());
+              let key = this.ordenCompra.generarOrdenCompraLiquidacion(item,this.mi_req_ofertas,this.datePipe.transform(this.myDate,'yyyy-MM-dd').toString());
+              this.enviarNotificacionMovil("Felicitaciones",this.user.nombre+" te ha generado una orden de compra.","ordencompra","ordencompra",key,item.tokenMovil)
+              this.enviarNotificacionWeb("Felicitaciones",this.user.nombre+" te ha generado una orden de compra.","ordencompra","ordencompra",key,item.tokenWeb)
             }else{
-              alert("Ya compraste una oferta");
+              //alert("Ya compraste una oferta");
+              this.alertService.onWarn2("Aviso!!","Ya compraste una oferta")
             }
           })
         }
@@ -1620,8 +1663,48 @@ export class PanelComponent implements OnInit {
     }
   }
 
+  enviarNotificacionWeb(title,body,noti,tipo,id,token){
+   let payload = {
+     notification:{
+       title: title,
+       body: body,
+       click_action: "http://127.0.0.1:4200/#/panel"
+ 
+     },
+     data: {
+       title: title,
+       body: body,
+       notificacion: noti,
+       tipo: tipo.toString(),
+       id : id,
+       click_action: "http://127.0.0.1:4200/#/panel"
+     },
+     to: token
+ 
+   }
+ 
+   this.msgService.sendPushMessage(payload);
+ 
+  }
+  enviarNotificacionMovil(title,body,noti,tipo,id,token){
+   let payload = {
+     data: {
+       title: title,
+       body: body,
+       notificacion: noti,
+       tipo: tipo.toString(),
+       id : id,
+       click_action: "http://127.0.0.1:4200/#/panel"
+     },
+     to: token
+ 
+   }
+ 
+   this.msgService.sendPushMessage(payload);
+ 
+  }
   cancelarOferta(item){
-    console.log(item);////FALTA VALIDAR QUE REVISE CUANDO ESTE CULMINADO
+    //console.log(item);////FALTA VALIDAR QUE REVISE CUANDO ESTE CULMINADO
     if(item.tipo===1 || item.tipo===2){
       this.item.Requerimiento_once(item.id_requerimiento).query.once('value').then(snap => {
         this.item.ordenCompra_once(snap.child('ordencompra').val()).query.once('value').then(snap2 => {
@@ -1638,12 +1721,17 @@ export class PanelComponent implements OnInit {
                   estado:2,
                   fechaCancelar: this.datePipe.transform(this.myDate,'dd-MM-yyyy').toString()
                 })
-                alert("Orden de compra cancelada");
+                //alert("Orden de compra cancelada");
+                
+                this.alertService.onSuccess2("Orden de Compra","Orden de compra cancelada satisfactoriamente!!");
               })
             })
+            this.enviarNotificacionMovil("Orden de Compra Cancelado","La orden de compra fue cancelada.","cancelarordencompra","bien",item.keyOferta,item.tokenMovil);
+            this.enviarNotificacionWeb("Orden de Compra Cancelado","La orden de compra fue cancelada.","cancelarordencompra","bien",item.keyOferta,item.tokenWeb);
           }
           if(snap2.child('confirmacionProveedor').val()===1){
-            alert("Su proveedor ha indicado que envio su requerimiento");
+            //alert("Su proveedor ha indicado que envio su requerimiento");
+            this.alertService.onWarn2("Requerimiento","Su proveedor ha indicado que envio su requerimiento");
           }
         })
       })
@@ -1664,17 +1752,21 @@ export class PanelComponent implements OnInit {
                   estado:2,
                   fechaCancelar: this.datePipe.transform(this.myDate,'dd-MM-yyyy').toString()
                 })
-                alert("Orden de compra cancelada");
+              
               })
             })
+            this.enviarNotificacionMovil("Orden de Compra Cancelado","La orden de compra fue cancelada.","cancelarordencompra","liquidacion",item.keyOferta,item.tokenMovil);
+            this.enviarNotificacionWeb("Orden de Compra Cancelado","La orden de compra fue cancelada.","cancelarordencompra","liquidacion",item.keyOferta,item.tokenWeb);
+            this.alertService.onSuccess2("Orden de Compra","Orden de compra cancelada satisfactoriamente!!");
           }
           if(snap2.child('confirmacionProveedor').val()===1){
-            alert("Su proveedor ha indicado que envio su requerimiento");
+            this.alertService.onWarn2("Liquidación","Su proveedor ha indicado que envio su requerimiento");
           }
         })
       })
     }
   }
+
   cancelarRequerimiento(item){
     this.item.ordenCompra_once(item.ordencompra).query.once('value').then(snap => {
       if(snap.child('confirmacionProveedor').val()===0){
@@ -1690,6 +1782,12 @@ export class PanelComponent implements OnInit {
               estado:2,
               fechaCancelar: this.datePipe.transform(this.myDate,'dd-MM-yyyy').toString()
             })
+
+            this.getTipoUsuario(data2.child('tipoProveedor').val(),data2.child('idProveedor').val()).then(x => {
+              this.enviarNotificacionMovil("Requerimiento Cancelado","Tu oferta y orden de compra fueron canceladas.","cancelarordencliente","bien",data2.child('idOferta').val(),x.child('tokenMovil').val())
+              this.enviarNotificacionWeb("Requerimiento Cancelado","Tu oferta y orden de compra fueron canceladas.","cancelarordencliente","bien",data2.child('idOferta').val(),x.child('tokenWeb').val())
+            });
+
           })
         }
         this.item.Requerimiento_once(item.key).query.once('value').then(data =>{
@@ -1697,9 +1795,12 @@ export class PanelComponent implements OnInit {
             estado: 6
           })
         })
-        alert("Tu requerimiento "+item.nombre+" fue cancelado");
+
+        //alert("Tu requerimiento "+item.nombre+" fue cancelado");
+        this.alertService.onSuccess2("Requerimiento Cancelado","Tu requerimiento "+item.nombre+" fue cancelado");
       }if(snap.child('confirmacionProveedor').val()===1){
-        alert("Su proveedor ha indicado que envio su requerimiento");
+        //alert("Su proveedor ha indicado que envio su requerimiento");
+        this.alertService.onWarn2("Requerimiento","Su proveedor ha indicado que envio su requerimiento")
       }
       if(snap.val()===null){
         if(item.estado===2){
@@ -1721,7 +1822,8 @@ export class PanelComponent implements OnInit {
             estado: 6
           })
         })
-        alert("Tu requerimiento "+item.nombre+" fue cancelado");
+        //alert("Tu requerimiento "+item.nombre+" fue cancelado");
+        this.alertService.onSuccess2("Requerimiento Cancelado","Tu requerimiento "+item.nombre+" fue cancelado");
       }
   })
   }
@@ -1742,6 +1844,11 @@ export class PanelComponent implements OnInit {
               estado:2,
               fechaCancelar: this.datePipe.transform(this.myDate,'dd-MM-yyyy').toString()
             })
+            this.getTipoUsuario(data2.child('tipoProveedor').val(),data2.child('idProveedor').val()).then(x => {
+              this.enviarNotificacionMovil("Liquidación Cancelada","Tu oferta y orden de compra fueron canceladas.","cancelarordencliente","liquidacion",data2.child('idOferta').val(),x.child('tokenMovil').val())
+              this.enviarNotificacionWeb("Liquidación Cancelada","Tu oferta y orden de compra fueron canceladas.","cancelarordencliente","liquidacion",data2.child('idOferta').val(),x.child('tokenWeb').val())
+            });
+
           })
         }
         this.item.Liquidacion_once(item.key).query.once('value').then(data =>{
@@ -1749,9 +1856,11 @@ export class PanelComponent implements OnInit {
             estado: 6
           })
         })
-        alert("Tu liquidacion "+item.nombre+" fue cancelado");
+        //alert("Tu liquidacion "+item.nombre+" fue cancelado");
+        this.alertService.onSuccess2("Liquidación Cancelada","Tu liquidación "+item.nombre+" fue cancelado");
       }if(snap.child('confirmacionProveedor').val()===1){
-        alert("Su proveedor ha indicado que envio su requerimiento");
+        //alert("Su proveedor ha indicado que envio su requerimiento");
+        this.alertService.onWarn2("Liquidación","Su proveedor ha indicado que envio su requerimiento")
       }
       if(snap.val()===null){
         if(item.estado===2){
@@ -1773,7 +1882,8 @@ export class PanelComponent implements OnInit {
             estado: 6
           })
         })
-        alert("Tu liquidacion "+item.nombre+" fue cancelado");
+        //alert("Tu liquidacion "+item.nombre+" fue cancelado");
+        this.alertService.onSuccess2("Liquidación Cancelada","Tu liquidación "+item.nombre+" fue cancelado");
       }
     })
   }
@@ -1798,13 +1908,18 @@ export class PanelComponent implements OnInit {
     }
 
     this.item.ordenCompra_once(item.ordencompra).query.once('value').then(data => {
-      data.child('confirmacionCliente')
+      //data.child('confirmacionCliente')
       data.ref.update({
         confirmacionCliente: 1,
         estado: 1
+      });
+      this.getTipoUsuario(data.child('tipoProveedor').val(),data.child('idProveedor').val()).then(noti => {
+        this.enviarNotificacionMovil(item.nombre+": ha sido culminado!!","Tu envío ha sido recibido con exito","culminarordencompra","1",item.oferta,noti.child('tokenMovil').val());
+        this.enviarNotificacionWeb(item.nombre+": ha sido culminado!!","Tu envío ha sido recibido con exito","culminarordencompra","1",item.oferta,noti.child('tokenWeb').val());
       })
-    })
+    });
 
+    
     this.itemCulminar = item;
 
   }
@@ -1815,23 +1930,28 @@ export class PanelComponent implements OnInit {
 
   generarCita(){
     if(this.fechaCita.nativeElement.value===""){
-      alert("Por favor ingrese una fecha");
+      this.alertService.onError2("Error","Por favor ingrese una fecha");
+      //alert("Por favor ingrese una fecha");
       return '';
     }
     if(this.horaCita.nativeElement.value==="00:00"){
-      alert("Por favor ingrese una hora");
+      this.alertService.onError2("Error","Por favor ingrese una hora");
+      //alert("Por favor ingrese una hora");
       return '';
     }
     if(this.mensajeCita.nativeElement.value===""){
-      alert("Por favor ingrese un mensaje");
+      this.alertService.onError2("Error","Por favor ingrese un mensaje");
+      //alert("Por favor ingrese un mensaje");
       return '';
     }
-    this.ordenCompra.generarCitaTrabajo(
+    let key = this.ordenCompra.generarCitaTrabajo(
       this.citaSeleccionada,this.mi_req_ofertas,
       this.datePipe.transform(this.fechaCita.nativeElement.value,'dd-MM-yyyy').toString(),
       this.horaCita.nativeElement.value,
       this.mensajeCita.nativeElement.value,
       this.datePipe.transform(this.myDate,'yyyy-MM-dd').toString());
+    this.enviarNotificacionMovil("Felicitaciones",this.user.nombre+" le ha citado para una entrevista.","entrevista","bien",key,this.citaSeleccionada.tokenMovil)
+    this.enviarNotificacionWeb("Felicitaciones",this.user.nombre+" le ha citado para una entrevista.","entrevista","bien",key,this.citaSeleccionada.tokenWeb)
     this.modalCita.nativeElement.click();
     this.clearModalCita();
   }
@@ -1842,6 +1962,7 @@ export class PanelComponent implements OnInit {
   }
 
   cancelarCita(item){
+    console.log(item);
     this.item.oferta_Trabajo_once(item.keyOferta).query.once('value').then(data => {
       data.ref.update({
         cancelado: 1
@@ -1860,12 +1981,16 @@ export class PanelComponent implements OnInit {
       data.ref.update({
         cant_citas: data.child('cant_citas').val()-1
       })
+      this.enviarNotificacionMovil("Cita Cancelada: "+data.child('nombre').val(),"Su cita y postulacion fue cancelado.","cancelarcita","recurso",item.keyOferta,item.tokenMovil);
+      this.enviarNotificacionWeb("Cita Cancelada: "+data.child('nombre').val(),"Su cita y postulacion fue cancelado.","cancelarcita","recurso",item.keyOferta,item.tokenWeb);
     })
 
-    alert("Cita cancelada satisfactoriamente");
+    //alert("Cita cancelada satisfactoriamente");
+    this.alertService.onSuccess2("Citas","Cita cancelada satisfactoriamente");
   }
 
   cancelarCitaOferta(item){
+    console.log(item);
     this.item.oferta_Trabajo_once(item.key).query.once('value').then(data => {
       data.ref.update({
         cancelado: 1
@@ -1877,6 +2002,11 @@ export class PanelComponent implements OnInit {
           x.ref.update({
             cancelado: 1
           })
+          console.log("123");
+          this.getTipoUsuario(1,x.child('idPostulante').val()).then(noti => {
+            this.enviarNotificacionMovil("Cita Cancelada: "+item.nombre,"Su cita y postulacion fue cancelado.","cancelarcita","recurso",data.child('idOferta').val(),noti.child('tokenMovil').val());
+            this.enviarNotificacionWeb("Cita Cancelada: "+item.nombre,"Su cita y postulacion fue cancelado.","cancelarcita","recurso",data.child('idOferta').val(),noti.child('tokenWeb').val());
+          })
         }
       })
     });
@@ -1886,7 +2016,8 @@ export class PanelComponent implements OnInit {
       })
     })
 
-    alert("Cita cancelada satisfactoriamente");
+    //alert("Cita cancelada satisfactoriamente");
+    this.alertService.onSuccess2("Citas","Cita cancelada satisfactoriamente");
   }
 
   cancelarTrabajo(item){
@@ -1895,7 +2026,19 @@ export class PanelComponent implements OnInit {
         estado: 6
       })
     })
-    alert("Puesto de trabajo "+item.nombre+" cancelado satisfactoriamente");
+    this.item.citas_once().query.once('value').then(data => {
+      data.forEach( x => {
+        if(item.key===x.child('idRecurso').val()){
+          this.getTipoUsuario(1,x.child('idPostulante').val()).then(noti => {
+            this.enviarNotificacionMovil("Cita Cancelada: "+item.nombre,"Su cita y postulacion fue cancelado.","cancelarcita","recurso",data.child('idOferta').val(),noti.child('tokenMovil').val());
+            this.enviarNotificacionWeb("Cita Cancelada: "+item.nombre,"Su cita y postulacion fue cancelado.","cancelarcita","recurso",data.child('idOferta').val(),noti.child('tokenWeb').val());
+          })
+        }
+      })
+    })
+
+    //alert("Puesto de trabajo "+item.nombre+" cancelado satisfactoriamente");
+    this.alertService.onSuccess2("Puesto de Trabajo","Puesto de trabajo "+item.nombre+" cancelado satisfactoriamente")
   }
   republicarRequerimientoModal(item){
     //this.modalReference = this.modalService.open(modal);
@@ -2171,5 +2314,11 @@ export class PanelComponent implements OnInit {
   enviarMensaje(){
     alert("Falta el chat");
   }
+
+  getDateActual(){
+    return this.datePipe.transform(this.myDate,'yyyy-dd-MM').toString();
+  }
+
+
 
 }

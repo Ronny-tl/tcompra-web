@@ -7,7 +7,7 @@ import { DatePipe } from '@angular/common';
 import {Router, ActivatedRoute} from '@angular/router';
 ///firebase
 import {AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from 'angularfire2/firestore';
-import {Observable} from 'rxjs/observable';
+import {Observable} from 'rxjs/Observable';
 import {requerimientos} from '../../models/requerimientos';
 import {liquidacion} from '../../models/liquidacion';
 import {puestoTrabajo} from '../../models/puesto_trabajo';

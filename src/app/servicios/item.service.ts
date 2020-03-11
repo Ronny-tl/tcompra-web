@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from 'angularfire2/firestore';
 import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
-import {Observable} from 'rxjs/observable';
+import {Observable} from 'rxjs/Observable';
 import {usuario} from '../models/usuario'; 
 import { requerimientos } from '../models/requerimientos';
 import { map } from 'rxjs/operators';

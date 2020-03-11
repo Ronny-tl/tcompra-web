@@ -11,6 +11,7 @@ import { error } from 'protractor';
 import { cpus } from 'os';
 
 
+
 @Injectable({
   providedIn: 'root'
 })
@@ -25,11 +26,13 @@ export class AuthService {
   ) {
   
    }
+
    setPass(pass){
     this.passChange = pass;
    }
    getPass(){
      return this.passChange;
+
    }
 
    loginTwitter () {
