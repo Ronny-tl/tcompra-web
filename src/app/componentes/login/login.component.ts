@@ -21,6 +21,7 @@ import {RegistroUsuarioService} from '../../servicios/registro-usuario.service';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { NotificationsService } from 'angular2-notifications';
 
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -129,7 +130,7 @@ export class LoginComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private message: NotificationsService,
-    private messagingService: MessagingService
+    private messagingService: MessagingService,
   ) { 
     this.loginForm = this.createFormGroup();
     this.registerForm = this.registerFormGroup();
@@ -251,7 +252,7 @@ export class LoginComponent implements OnInit {
     
   }
   updateTokenWeb(uid,tipo,item){
-    this.messagingService.ngOnDestroy();
+    this.getNotificaciones(tipo,uid);
     this.messagingService.requestPermission(uid,tipo,item);
     this.messagingService.receiveMessage();
   }
@@ -671,15 +672,32 @@ export class LoginComponent implements OnInit {
 
     });
   }
-  getNotificaciones(){
-    let user = JSON.parse(localStorage.getItem('usuarioActivo'));
-    this.messagingService.getNotificaciones(user.tipo,user.uid).query.once('value').then(data => {
+  getNotificaciones(tipo,uid){
+    this.messagingService.getNotificaciones(tipo,uid).query.once('value').then(data => {
       this.misNotificaciones = [];
       data.forEach(data2 => {
         console.log(data2.val());
         this.misNotificaciones.push(data2.val());
+        this.getTipoUsuario(Number(data2.child('tipousuario').val()),data2.child('idusuario').val()).then(data3 =>{
+          let dic = {
+            key: data2.key,
+            title: data3.child('title').val(),
+            body: data3.child('body').val(),
+            estado: data3.child('estado').val(),
+            timestamp: data3.child('timestamp').val(),
+            
+          }
+        })
       })
     })
+  }
+
+  getTipoUsuario(tipo,id){
+    if(tipo===0){
+      return this.itemService.Empresa_once(id).query.once('value');
+    }else if(tipo===1){
+      return this.itemService.Persona_once(id).query.once('value');
+    }
   }
   
 }
