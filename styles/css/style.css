@@ -5825,12 +5825,17 @@ a.edufair-component-button:hover:before {
 }
 
 .nuevas_toficaciones{
-	width: 9px;
-	height: 9px;
-	background: #0b9a96;
-	position: absolute;
-	top: 0;
-	border-radius: 10px;
+	width: 22px;
+    height: 22px;
+    background: #0b9a96;
+    position: absolute;
+    top: -10px;
+    margin-left: 12px;
+    border-radius: 50px;
+    font-size: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .menu_notificaciones{
