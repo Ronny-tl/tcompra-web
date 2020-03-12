@@ -19,7 +19,7 @@ import {ItemService} from '../../servicios/item.service';
 import {RegistroUsuarioService} from '../../servicios/registro-usuario.service';
 //bootstrap
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
-import {NotificationsService} from 'angular2-notifications';
+import { NotificationsService } from 'angular2-notifications';
 
 @Component({
   selector: 'app-login',
@@ -117,6 +117,7 @@ export class LoginComponent implements OnInit {
  @ViewChild('EmailRec',{static: false}) EmailRec: ElementRef;
  @ViewChild('RecuperarPass',{static: false}) modalRecuperar: ElementRef;
 
+  misNotificaciones = [];
 
   constructor(
     public authService: AuthService,
@@ -238,7 +239,7 @@ export class LoginComponent implements OnInit {
             let usuario = {
               nombre: item.data.nombre,
               imagen: item.data.imagen,
-              tipo: 0,
+              tipo: 1,
               tipoNombre: 'PERSONA',
               uid: item.key
             }
@@ -250,7 +251,6 @@ export class LoginComponent implements OnInit {
     
   }
   updateTokenWeb(uid,tipo,item){
-    console.log("ENTRO");
     this.messagingService.ngOnDestroy();
     this.messagingService.requestPermission(uid,tipo,item);
     this.messagingService.receiveMessage();
@@ -671,5 +671,15 @@ export class LoginComponent implements OnInit {
 
     });
   }
-
+  getNotificaciones(){
+    let user = JSON.parse(localStorage.getItem('usuarioActivo'));
+    this.messagingService.getNotificaciones(user.tipo,user.uid).query.once('value').then(data => {
+      this.misNotificaciones = [];
+      data.forEach(data2 => {
+        console.log(data2.val());
+        this.misNotificaciones.push(data2.val());
+      })
+    })
+  }
+  
 }

@@ -75,6 +75,11 @@ export class TerminosCondicionesComponent implements OnInit {
     sendPushMessage2(title, message){
       this.msg.sendPushMessage(title);
     }
+    pruebaTest(){
+      var d = new Date();
+      alert(d.getTime());
+    }
+
   
 
 }

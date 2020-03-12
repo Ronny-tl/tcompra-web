@@ -409,6 +409,16 @@ mostrarPuestoTrabajo(){
             this.subirFile(key);
             this.enviarNotificacion("Requerimiento: "+this.nombreUsuario.nativeElement.value,"Tienes una oferta de "+this.usuarioAutenticado+" revisalo ahora!!","oferta","bien",key,this.usuario.tokenMovil);
             this.enviarNotificacion("Requerimiento: "+this.nombreUsuario.nativeElement.value,"Tienes una oferta de "+this.usuarioAutenticado+" revisalo ahora!!","oferta","bien",key,this.usuario.tokenWeb);
+            this.msgService.guardarNotificacion(
+              this.producto.tipoUsuario,this.producto.usuario,
+              "Requerimiento: "+this.nombreUsuario.nativeElement.value,
+              "Tienes una oferta de "+this.usuarioAutenticado+" revisalo ahora!!",
+              this.usuario.imagen,
+              "oferta",
+              "bien",
+              this.idProducto,
+              "127.0.0.1:4200/#/panel"
+              );
             this.verificarOferta();
             //alert("Su oferta ha sido registrado satisfactoriamente");
             this.alertService.onSuccess2("Oferta Completado","Su oferta ha sido registrado satisfactoriamente");
@@ -432,6 +442,16 @@ mostrarPuestoTrabajo(){
             var key = this.registroOferta.addOferta(dataOfertaLiqui,this.tipoProducto,this.idProducto);
             this.enviarNotificacion("Liquidación: "+this.nombreUsuario.nativeElement.value,"Tienes una oferta de "+this.usuarioAutenticado+" revisalo ahora!!","oferta","liquidacion",key,this.usuario.tokenMovil);
             this.enviarNotificacion("Liquidación: "+this.nombreUsuario.nativeElement.value,"Tienes una oferta de "+this.usuarioAutenticado+" revisalo ahora!!","oferta","liquidacion",key,this.usuario.tokenWeb);
+            this.msgService.guardarNotificacion(
+              this.producto.tipoUsuario,this.producto.usuario,
+              "Requerimiento: "+this.nombreUsuario.nativeElement.value,
+              "Tienes una oferta de "+this.usuarioAutenticado+" revisalo ahora!!",
+              this.usuario.imagen,
+              "oferta",
+              "liquidacion",
+              this.idProducto,
+              "127.0.0.1:4200/#/panel"
+            );
             this.verificarOferta();
             //alert("Su oferta ha sido registrado satisfactoriamente");
             this.alertService.onSuccess2("Oferta Completado","Su oferta ha sido registrado satisfactoriamente");
@@ -458,6 +478,16 @@ mostrarPuestoTrabajo(){
             this.subirFile(key);
             this.enviarNotificacion("Nuevo Postulante: "+this.nombreUsuario.nativeElement.value,this.usuarioAutenticado+" acaba de postular a tu puesto de trabajo!!","oferta","Oferta_Trabajo",key,this.usuario.tokenMovil);
             this.enviarNotificacion("Nuevo Postulante: "+this.nombreUsuario.nativeElement.value,this.usuarioAutenticado+" acaba de postular a tu puesto de trabajo!!","oferta","Oferta_Trabajo",key,this.usuario.tokenWeb);
+            this.msgService.guardarNotificacion(
+              this.producto.tipoUsuario,this.producto.usuario,
+              "Requerimiento: "+this.nombreUsuario.nativeElement.value,
+              "Tienes una oferta de "+this.usuarioAutenticado+" revisalo ahora!!",
+              this.usuario.imagen,
+              "oferta",
+              "Oferta_Trabajo",
+              this.idProducto,
+              "127.0.0.1:4200/#/panel"
+            );
             this.verificarOferta();
             //alert("Se ha postulado satisfactoriamente");
             this.alertService.onSuccess2("Postulación Completado","Se ha postulado satisfactoriamente");
@@ -469,7 +499,6 @@ mostrarPuestoTrabajo(){
     }
 
   }
-
 
  validarBox(values:any,id:number){
   //console.log(values.currentTarget.checked);
