@@ -417,7 +417,7 @@ mostrarPuestoTrabajo(){
               "oferta",
               "bien",
               this.idProducto,
-              "127.0.0.1:4200/#/panel"
+              "http://127.0.0.1:4200/#/panel"
               );
             this.verificarOferta();
             //alert("Su oferta ha sido registrado satisfactoriamente");
@@ -450,7 +450,7 @@ mostrarPuestoTrabajo(){
               "oferta",
               "liquidacion",
               this.idProducto,
-              "127.0.0.1:4200/#/panel"
+              "http://127.0.0.1:4200/#/panel"
             );
             this.verificarOferta();
             //alert("Su oferta ha sido registrado satisfactoriamente");
@@ -486,7 +486,7 @@ mostrarPuestoTrabajo(){
               "oferta",
               "Oferta_Trabajo",
               this.idProducto,
-              "127.0.0.1:4200/#/panel"
+              "http://127.0.0.1:4200/#/panel"
             );
             this.verificarOferta();
             //alert("Se ha postulado satisfactoriamente");

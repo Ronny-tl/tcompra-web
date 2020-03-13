@@ -6,21 +6,26 @@
         <ul class="nav navbar-nav justify-content-end" style="margin-right: 0px;text-align: right;" *ngIf="isLogin">
             <li class="nav-item"><a class="nav-link" routerLink="/panel" routerLinkActive="active"><i class="fas fa-window-restore"></i> Panel de Control</a></li>
             <li class="nav-item tipo_cuenta" style="margin-right: 4px;">
-                <a type="button" class="nav-link" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <a (click)="verNotificaciones()" type="button" class="nav-link" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <i class="fas fa-bell" style="padding: 0;font-size: 18px;"></i>
-                    <b class="nuevas_toficaciones">10</b>
+                    <b *ngIf="contNotificaciones>0" class="nuevas_toficaciones">{{contNotificaciones}}</b>
                 </a>
                 <div class="dropdown-menu menu_notificaciones">
                     <h6 class="dropdown-header notificacion_titulo">Notificaciones</h6>
 
                     <div *ngFor="let noti of misNotificaciones">
                         <div class="dropdown-divider" style="margin: 0;"></div>
-                        <a  class="dropdown-item item_notificacion" href="#">
-                            <img src="assets/images/users/avatar2.jpg" class="img_notificacion">
+                        <a  class="dropdown-item item_notificacion" [href]="noti.click_action">
+                            <div *ngIf="noti.imagen != 'default' ">
+                                <img src="{{noti.imagen}}" class="img_notificacion">
+                            </div>
+                            <div *ngIf="noti.imagen === 'default' " class ="img_notificacion avatar_letra">
+                                <b style="color: rgb(255, 255, 255);text-transform: uppercase;" >{{noti.nombreUsuario[0]}}</b>
+                            </div>
                             <div class="cuerpo">
                                 <b>{{noti.title}}</b><br>
                                 {{noti.body}}<br>
-                                <b class="hora">11:30 p.m</b>
+                                <b class="hora">{{noti.timestamp}}</b>
                             </div>
                         </a>
                     </div>
@@ -59,7 +64,7 @@
                         <div *ngIf="imagenUsuario!='default'" class="avatar">
                             <img src="{{imagenUsuario}}" alt="user" class="avatar-img rounded-circle">
                         </div>
-                            <div *ngIf="imagenUsuario==='default'" class="avatar avatar_letra">
+                        <div *ngIf="imagenUsuario==='default'" class="avatar avatar_letra">
                             <b style="color: #fff;text-transform: uppercase;">{{nombreUsuario[0]}}</b>
                         </div> 
                     </div>

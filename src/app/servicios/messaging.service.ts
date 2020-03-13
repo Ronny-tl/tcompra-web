@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
 import { AngularFireAuth } from 'angularfire2/auth';
-import  * as firebase from 'firebase/app';
+//import  * as firebase from 'firebase/app';
 import 'rxjs/add/operator/take';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { AngularFireMessaging } from '@angular/fire/messaging';
@@ -21,7 +21,7 @@ import { map } from 'rxjs/operators';
 })
 export class MessagingService {
   markersRef: AngularFireList<any>;
-  public messaging = firebase.messaging();
+  //public messaging = firebase.messaging();
   currentMessage = new BehaviorSubject(null);
   private subscription: Subscription;
 
@@ -187,7 +187,7 @@ export class MessagingService {
       click_action: click_action,
       estado: 'NoVisto',
       hora: d.getHours()+":"+d.getMinutes()+" del "+this.datePipe.transform(d,'dd-MM-yyyy').toString(),
-      id_requerimiento: id_requerimiento
+      idRequerimiento: id_requerimiento
     }
     if(tipoUsuario===0){
       let key = this.angularFireDB.list('Empresa/'+idUsuario+'/Notificacion/').query.ref.push(data);

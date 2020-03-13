@@ -119,7 +119,7 @@ export class LoginComponent implements OnInit {
  @ViewChild('RecuperarPass',{static: false}) modalRecuperar: ElementRef;
 
   misNotificaciones = [];
-
+  contNotificaciones: number = 0;
   constructor(
     public authService: AuthService,
     private itemService: ItemService,
@@ -675,22 +675,70 @@ export class LoginComponent implements OnInit {
   getNotificaciones(tipo,uid){
     this.messagingService.getNotificaciones(tipo,uid).query.once('value').then(data => {
       this.misNotificaciones = [];
+      this.contNotificaciones = 0;
       data.forEach(data2 => {
-        console.log(data2.val());
-        this.misNotificaciones.push(data2.val());
         this.getTipoUsuario(Number(data2.child('tipousuario').val()),data2.child('idusuario').val()).then(data3 =>{
           let dic = {
             key: data2.key,
-            title: data3.child('title').val(),
-            body: data3.child('body').val(),
-            estado: data3.child('estado').val(),
-            timestamp: data3.child('timestamp').val(),
-            
+            title: data2.child('title').val(),
+            body: data2.child('body').val(),
+            estado: data2.child('estado').val(),
+            timestamp: this.getTimestamp(data2.child('hora').val()),
+            id_requerimiento: data2.child('id_requerimiento').val(),
+            click_action: data2.child('click_action').val(),
+            imagen: data2.child('imagen').val(),
+            nombreUsuario: data3.child('nombre').val(),
+            tipoUsuario: data2.child('tipousuario').val()
+          }
+          this.misNotificaciones.push(dic);
+        })
+        if(data2.child('estado').val()==="NoVisto"){
+          this.contNotificaciones = this.contNotificaciones + 1;
+        }
+
+      })
+    }).catch(err =>{
+      console.log(err);
+    });
+
+  }
+  getTimestamp(rece){
+    var data = rece.toString().replace(" del ","/");
+    var d = data.split('/');
+    var hora = d[0].split(':');
+    var fecha = d[1].split('-');
+
+    //var a = new Date(data * 1000);
+    var months = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Setiembre','Octubre','Noviembre','Diciembre'];
+    var year = fecha[2];
+    var month = months[Number(fecha[1])-1];
+    var date = fecha[0];
+    var hour = hora[0];
+    var min = hora[1];
+    if(hour>=12){
+      var time = date + ' ' + month + ' ' + year + ' ' + hour + ':' + min + ' PM';
+    }else{
+      var time = date + ' ' + month + ' ' + year + ' ' + hour + ':' + min + ' AM';
+    }
+    return time;
+  }
+
+  verNotificaciones(){
+    if(localStorage.getItem("usuarioActivo") != null) {
+      let user = JSON.parse(localStorage.getItem('usuarioActivo'));
+      this.messagingService.getNotificaciones(user.tipo,user.uid).query.once('value').then(data => {
+        data.forEach(data2 => {
+          if(data2.child('estado').val()==="NoVisto"){
+            data2.ref.update({
+              estado: 'Visto'
+            })
           }
         })
       })
-    })
+    }
+    
   }
+
 
   getTipoUsuario(tipo,id){
     if(tipo===0){

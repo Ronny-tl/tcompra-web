@@ -1643,7 +1643,7 @@ export class PanelComponent implements OnInit {
             "ordencompra",
             "ordencompra",
             item.keyOferta,
-            "127.0.0.1:4200/#/panel"
+            "http://127.0.0.1:4200/#/panel"
           );
           this.alertService.onSuccess2('Orden de Compra','Orden de compra generado satisfactoriamente!!');
         }else{
@@ -1662,7 +1662,7 @@ export class PanelComponent implements OnInit {
                 "ordencompra",
                 "ordencompra",
                 item.keyOferta,
-                "127.0.0.1:4200/#/panel"
+                "http://127.0.0.1:4200/#/panel"
               );
             }else{
               //alert("Ya compraste una oferta");
@@ -1687,7 +1687,7 @@ export class PanelComponent implements OnInit {
             "ordencompra",
             "ordencompra",
             item.keyOferta,
-            "127.0.0.1:4200/#/panel"
+            "http://127.0.0.1:4200/#/panel"
           );
           this.alertService.onSuccess2('Orden de Compra','Orden de compra generado satisfactoriamente!!');
 
@@ -1706,7 +1706,7 @@ export class PanelComponent implements OnInit {
                 "ordencompra",
                 "ordencompra",
                 item.keyOferta,
-                "127.0.0.1:4200/#/panel"
+                "http://127.0.0.1:4200/#/panel"
               );
               this.alertService.onSuccess2('Orden de Compra','Orden de compra generado satisfactoriamente!!');
             }else{
@@ -1793,7 +1793,7 @@ export class PanelComponent implements OnInit {
               "cancelarordencompra",
               "bien",
               item.keyOferta,
-              "127.0.0.1:4200/#/panel"
+              "http://127.0.0.1:4200/#/panel"
             );
           }
           if(snap2.child('confirmacionProveedor').val()===1){
@@ -1833,7 +1833,7 @@ export class PanelComponent implements OnInit {
               "cancelarordencompra",
               "liquidacion",
               item.keyOferta,
-              "127.0.0.1:4200/#/panel"
+              "http://127.0.0.1:4200/#/panel"
             );
             this.alertService.onSuccess2("Orden de Compra","Orden de compra cancelada satisfactoriamente!!");
           }
@@ -1873,7 +1873,7 @@ export class PanelComponent implements OnInit {
                 "cancelarordencliente",
                 "bien",
                 data2.child('idOferta').val(),
-                "127.0.0.1:4200/#/panel"
+                "http://127.0.0.1:4200/#/panel"
               );
             });
 
@@ -1945,7 +1945,7 @@ export class PanelComponent implements OnInit {
                 "cancelarordencliente",
                 "liquidacion",
                 data2.child('idOferta').val(),
-                "127.0.0.1:4200/#/panel"
+                "http://127.0.0.1:4200/#/panel"
               );
             });
 
@@ -2025,7 +2025,7 @@ export class PanelComponent implements OnInit {
           "culminarordencompra",
           item.tipo.toString(),
           item.oferta,
-          "127.0.0.1:4200/#/panel"
+          "http://127.0.0.1:4200/#/panel"
         );
       })
     });
@@ -2073,7 +2073,7 @@ export class PanelComponent implements OnInit {
       "entrevista",
       "bien",
       this.citaSeleccionada.id_requerimiento,
-      "127.0.0.1:4200/#/panel"
+      "http://127.0.0.1:4200/#/panel"
     );
     this.clearModalCita();
   }
@@ -2114,7 +2114,7 @@ export class PanelComponent implements OnInit {
         "cancelarcita",
         "recurso",
         item.keyOferta,
-        "127.0.0.1:4200/#/panel"
+        "http://127.0.0.1:4200/#/panel"
       );
     })
 
@@ -2154,7 +2154,7 @@ export class PanelComponent implements OnInit {
           "cancelarcita",
           "recurso",
           item.key,
-          "127.0.0.1:4200/#/panel"
+          "http://127.0.0.1:4200/#/panel"
         );
       })
     })
@@ -2184,7 +2184,7 @@ export class PanelComponent implements OnInit {
               "cancelarcita",
               "recurso",
               data.child('idOferta').val(),
-              "127.0.0.1:4200/#/panel"
+              "http://127.0.0.1:4200/#/panel"
             );
           })
         }
@@ -2279,7 +2279,7 @@ export class PanelComponent implements OnInit {
               "cancelarordencompra",
               "bien",
               data2.child('idOferta').val(),
-              "127.0.0.1:4200/#/panel"
+              "http://127.0.0.1:4200/#/panel"
             );
           })
           this.alertService.onSuccess2('Mis Ofertas','Orden de compra cancelada!!');
@@ -2312,7 +2312,7 @@ export class PanelComponent implements OnInit {
               "cancelarordencompra",
               "liquidacion",
               data2.child('idOferta').val(),
-              "127.0.0.1:4200/#/panel"
+              "http://127.0.0.1:4200/#/panel"
             );
           })
           //alert("Orden de compra cancelada");
@@ -2456,7 +2456,7 @@ export class PanelComponent implements OnInit {
               "culminarordencompra",
               "bien",
               data2.key,
-              "127.0.0.1:4200/#/panel"
+              "http://127.0.0.1:4200/#/panel"
             );
           })
         })
@@ -2486,7 +2486,7 @@ export class PanelComponent implements OnInit {
               "culminarordencompra",
               "liquidacion",
               data2.key,
-              "127.0.0.1:4200/#/panel"
+              "http://127.0.0.1:4200/#/panel"
             );
           })
         })
