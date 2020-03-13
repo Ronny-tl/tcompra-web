@@ -1,4 +1,328 @@
-
 <!--<iframe src="https://firebasestorage.googleapis.com/v0/b/tcompra-c2bc0.appspot.com/o/Requerimiento%2FDocumentos%2F-M17qTWjq7ad2TVcUlu-?alt=media&token=338d300b-87fb-40f4-ba91-0327dd351bea" style="position:fixed; top:0; left:0; bottom:0; right:0; width:100%; height:100%; border:none; margin:0; padding:0; overflow:hidden; z-index:999999;" type="application/pdf"></iframe>-->
-<button (click)="pruebaTest()" >Prueba</button>
+<div id="fakeloader"></div>
+		
+		<div class="edufair-container">
+			
+			<div class="edufair-header edufair-course-header">	
+				<nav class="navbar navbar-expand-lg edufair-nav">
+					<div class="container">	
+						<div class="container-fluid">
+							<div class="navbar-header">
+								<button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false" style="float: right;margin-top: 10px;">
+									<span class="sr-only">Toggle navigation</span>				
+									<i class="fas fa-align-right fa-2"></i>
+								</button>
+								<a class="navbar-brand edufair-brand edufair-light" routerLink="/" routerLinkActive="active"><img src="assets/images/logo-white.svg" alt="Logo"></a>
+								<a class="navbar-brand edufair-brand edufair-dark" routerLink="/" routerLinkActive="active"><img src="assets/images/logo-black.svg" alt="Logo"></a>
+							</div>
+							
+							<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+								
+								<div class="edufair-cart">
+									<!--<div class="box">
+										<a href="#" data-toggle="modal" data-target="#Login" style="margin-right: 15px;"><i class="fas fa-lock"></i><b class="op-menu"> Iniciar Sesión</b></a>
+										<a href="#" data-toggle="modal" data-target="#PersonaContacto" id="popup"><i class="fas fa-user"></i><b class="op-menu"> Registrar</b></a>
+                                    </div>
+                                    -->
+                                    <app-login></app-login>
+								</div>
+
+							</div>
+
+						</div>
+					</div>
+				</nav>
+
+				<div id="carousel-example-generic" class="carousel slide edufair-slide carousel-fade" data-ride="carousel">
+					<div class="carousel-inner edufair-inner single-inner" role="listbox">
+
+						<div class="header_detalles">
+							<div class="container">
+								<div class="row" style="margin: 0;">
+									<h2 class="titulo_st2">Terminos y Condiciones</h2>
+									<ol class="breadcrumb edufair-single-breadcrumbs" style="width: 100%;margin: 0;">
+										<li class="breadcrumb-item"><a routerLink="/" routerLinkActive="active" style="opacity: 0.7;">Inicio</a></li>
+										<li class="breadcrumb-item active"><a routerLink="/terminos-condiciones" routerLinkActive="active">Terminos y Condiciones</a></li>
+									</ol>
+								</div>
+							</div>
+						</div>
+						
+						<div class="edufair-overlay">
+							<img src="assets/images/online-course/online-course-01.jpg" alt="slide 1" class="edufair-slider-image edufair-single-image">
+						</div>
+					</div>
+				</div>
+		
+			</div>
+
+			<div class="edufair-blog-1x">
+				<div class="container">
+					<div class="row">
+
+						<div class="col-md-8 sticky-body">
+							<div class="row">				
+			
+								<div class="col-md-12">
+									<h2 class="edufair-main-title">Datos de Identificación</h2>
+									<div class="accordion" id="accordionExample">
+
+										<div class="card">
+											<div class="card-header" id="collapse1">
+												<h6 class="mb-0"><a role="button" href="#collapse1" data-toggle="collapse" data-target="#collapse1" aria-expanded="true">1. DATOS DE IDENTIFICACIÓN</a></h6>
+											</div>
+											<div id="collapse1" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+												<div class="card-body">
+													El portal web Tcompra.com (en adelante TCOMPRA), es propiedad de la empresa SOLUCIONESONLINE S.A.C. (en adelante SOLUCIONESONLINE), ubicado en Calle Peral N° 103, Cercado, provincia y departamento de Arequipa, Perú.<br><br>
+													TCOMPRA es un portal web para Usuarios como ofertante o demandante pueda publicar y recibir anuncios de bienes, servicios y personal (RRHH). TCOMPRA no es propietaria de los bienes y/o servicios ofrecidos en sus portal web.
+												</div>
+											</div>
+										</div>
+										
+										<div class="card">
+											<div class="card-header" id="headingTwo">
+												<h6 class="mb-0"><a role="button" href="#collapse2" data-toggle="collapse" data-target="#collapse2" aria-expanded="true">2. ACCESO Y ACEPTACIÓN DEL USUARIO</a></h6>
+											</div>
+											<div id="collapse2" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+												<div class="card-body">
+													Estos Términos y Condiciones regulan el acceso y utilización de TCOMPRA por parte del Usuario.<br><br>
+													La condición de “Usuario” es adquirida por la navegación y/o utilización de TCOMPRA ya sea como vendedor o comprador. El acceso y utilización de TCOMPRA por parte del Usuario tiene carácter libre y gratuito, con excepción de algunos servicios suministrados TCOMPRA o por terceros a través de TCOMPRA que están sujetos a condiciones específicas.<br><br>
+													Asimismo, el acceso y navegación por parte del Usuario en TCOMPRA implica la aceptación sin reservas de todas las disposiciones incluidas en los presentes Términos y Condiciones.
+												</div>
+											</div>
+										</div>
+										
+										<div class="card">
+											<div class="card-header" id="headingThree">
+												<h6 class="mb-0"><a role="button" href="#collapse3" data-toggle="collapse" data-target="#collapse3" aria-expanded="true">3. MODIFICACIÓN DE LOS TÉRMINOS Y CONDICIONES</a></h6>
+											</div>
+											<div id="collapse3" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+												<div class="card-body">
+													TCOMPRA se reserva expresamente el derecho a modificar, actualizar o ampliar en cualquier momento los presentes Términos y Condiciones sin previo aviso.<br><br>
+													Cualquier modificación, actualización o ampliación producida en los presentes Términos y Condiciones será inmediatamente publicada siendo responsabilidad del Usuario revisar los Términos y Condiciones vigentes al momento de la navegación.
+												</div>
+											</div>
+										</div>
+
+										<div class="card">
+											<div class="card-header" id="headingThree">
+												<h6 class="mb-0"><a role="button" href="#collapse4" data-toggle="collapse" data-target="#collapse4" aria-expanded="true">4. USO DE EL PORTAL</a></h6>
+											</div>
+											<div id="collapse4" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+												<div class="card-body">
+													Al acceder a TCOMPRA, el Usuario declara ser mayor de 18 años de edad y encontrarse facultado a asumir obligaciones vinculantes con respecto a cualquier tipo de responsabilidad que se produzca por el uso y/o la contratación de servicios que se ofrecen a través de TCOMPRA.
+													<br><br>
+													El Usuario se compromete a utilizar TCOMPRA de conformidad con la Ley, los presentes Términos y Condiciones, la moral, las buenas costumbres y el orden público. En este sentido, la utilización por parte del Usuario de TCOMPRA se realizará de conformidad con las siguientes directivas:
+													<br><br>
+													• El Usuario declara la veracidad de sus datos publicados en TCOMPRA.<br>
+													• El Usuario se obliga a no utilizar TCOMPRA con fines o efectos ilícitos o contrarios al contenido de los presentes Términos y Condiciones, lesivos de los intereses o derechos de terceros, o que de cualquier forma pueda dañar, inutilizar, deteriorar la plataforma o impedir un normal disfrute de TCOMPRA por otros Usuarios.<br>
+													• El Usuario se compromete expresamente a no destruir, alterar, inutilizar o, de cualquier otra forma, dañar los datos, programas o documentos electrónicos y demás que se encuentren en TCOMPRA.<br>
+													• El Usuario se compromete a no intentar penetrar o probar la vulnerabilidad de un sistema o de una red propia de TCOMPRA, así como quebrantar las medidas de seguridad o de autenticación del mismo.<br>
+													• El Usuario se compromete a hacer un uso adecuado de los contenidos que se ofrecen en TCOMPRA y a no emplearlos para incurrir en actividades ilícitas, así como a no publicar ningún tipo de contenido ilícito.
+													<br><br>
+													TCOMPRA se reserva la potestad de determinar a su libre criterio, cuándo se produce la vulneración de cualquiera de los preceptos enunciados en el presente apartado por parte de los contenidos publicados por algún Usuario, así como la potestad de eliminar dichos contenidos de TCOMPRA. Asimismo, todo Usuario tiene la posibilidad de denunciar cualquier conducta o contenido de otros Usuarios que considere vulneran sus derechos o los preceptos establecidos anteriormente. En el caso en que un Usuario infrinja lo establecido en el presente apartado, TCOMPRA procederá a realizar alguna de las siguientes acciones, dependiendo de la gravedad o reiteración de la infracción:
+													<br><br>
+													• Amonestación al Usuario.<br>
+													• Suspensión temporal de la cuenta del Usuario.<br>
+													• Cancelación definitiva de la cuenta del Usuario.<br>
+													• Acciones por responsabilidades civiles o penales.
+													<br><br>
+													TCOMPRA no realizará solicitud alguna de dinero o datos personales a través de correos electrónicos o cuentas de correos a través de TCOMPRA. Por lo que TCOMPRA no se hace responsable por desembolsos realizados por Usuarios o por Usuarios que solicitan dinero a través de TCOMPRA.
+												</div>
+											</div>
+										</div>
+
+										<div class="card">
+											<div class="card-header" id="headingThree">
+												<h6 class="mb-0"><a role="button" href="#collapse5" data-toggle="collapse" data-target="#collapse5" aria-expanded="true">5. REGISTRO Y RESPONSABILIDAD POR CONTRASEÑAS</a></h6>
+											</div>
+											<div id="collapse5" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+												<div class="card-body">
+													El Usuario podrá navegar por TCOMPRA sin necesidad de registrarse en una cuenta, sin embargo, para determinados servicios que ofrece TCOMPRA, deberá completar el formulario de registro ingresando sus datos. El registro es gratuito. La cuenta de Usuario no debe incluir el nombre de otra persona con la intención de hacerse pasar por esa persona, ni ser ofensivo, vulgar, obsceno o contrario a la moral y las buenas costumbres.<br><br>
+													Los Usuarios registrados contarán con una contraseña con el cual podrán acceder a su cuenta en TCOMPRA. Cada Usuario es responsable de su propia contraseña y es confidencial y no debe revelarla o compartirla con terceros.<br><br>
+													Cada Usuario es responsable de su cuenta personal y cada acción que registre TCOMPRA se presume realizada por el Usuario titular de dicha cuenta.<br><br>
+													En el caso de que un Usuario identificara que un tercero conociera y usara su contraseña y su cuenta personal, deberá notificarlo de manera inmediata a TCOMPRA.<br><br>
+													TCOMPRA no será responsable de cualquier daño relacionado con la divulgación del nombre de un Usuario o de su contraseña, o del uso que cualquier persona de al nombre de un Usuario o contraseña.<br><br>
+													TCOMPRA puede requerir el cambio de un nombre de Usuario y contraseña cuando considere que la cuenta ya no es segura, o si se recibe alguna queja o denuncia respecto al nombre de un Usuario que viole derechos de terceros.<br><br>
+													Asimismo, puede rechazar el registro de un Usuario, cancelar su cuenta o no permitir el acceso a los servicios que ofrece TCOMPRA, en caso se incumpla con los presentes Términos y Condiciones o se incurra en posibles infracciones de carácter legal o se efectúe un uso inadecuado de TCOMPRA.
+												</div>
+											</div>
+										</div>
+
+										<div class="card">
+											<div class="card-header" id="headingThree">
+												<h6 class="mb-0"><a role="button" href="#collapse6" data-toggle="collapse" data-target="#collapse6" aria-expanded="true">6. PROPIEDAD INTELECTUAL</a></h6>
+											</div>
+											<div id="collapse6" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+												<div class="card-body">
+													Todos los derechos de propiedad intelectual de TCOMPRA y de sus contenidos y diseños pertenecen a TCOMPRA o, en su caso, a terceras personas. En aquellos casos en que sean propiedad de terceros contamos con las licencias necesarias para su utilización.<br><br>
+													Quedan expresamente prohibidas la reproducción, la distribución, la transformación, la comunicación pública y puesta a disposición, de la totalidad o parte de los contenidos de TCOMPRA, en cualquier soporte y por cualquier medio técnico, sin la autorización de TCOMPRA. El Usuario se compromete a respetar los derechos de propiedad industrial e intelectual de titularidad de TCOMPRA y de terceros.<br><br>
+													Asimismo, queda expresamente prohibido la utilización o reproducción de cualquier marca registrada, nombre o logotipo que figure en TCOMPRA sin la autorización previa y por escrito de TCOMPRA, así como la utilización del software que opera TCOMPRA con excepción de aquellos usos permitidos bajo estos Términos y Condiciones.
+												</div>
+											</div>
+										</div>
+
+										<div class="card">
+											<div class="card-header" id="headingThree">
+												<h6 class="mb-0"><a role="button" href="#collapse7" data-toggle="collapse" data-target="#collapse7" aria-expanded="true">7. CONTENIDOS PUBLICADOS POR LOS USUARIOS</a></h6>
+											</div>
+											<div id="collapse7" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+												<div class="card-body">
+													TCOMPRA no garantiza la veracidad, exactitud, exhaustividad y actualidad de los contenidos publicados por los Usuarios en TCOMPRA. Es responsabilidad del Usuario garantizar la autenticidad, veracidad y actualización de la información que publica en TCOMPRA. En cualquier caso el Usuario será el único responsable de las manifestaciones falsas o inexactas que realice y de los perjuicios que pudiera causar al sitio o a terceros por la información que facilite.<br><br>
+													TCOMPRA no se hace responsable por los contenidos ya sean estos, imágenes, fotos, textos o cualquier otro tipo de material digital, publicados por terceros en TCOMPRA y traslada toda responsabilidad a cada Usuario proveedor de dichos contenidos, puesto que son ellos quienes publicitan los anuncios de los bienes y servicios.<br><br>
+													El Usuario deberá ofrecer los bienes y servicios en la categoría y subcategorías apropiadas. Las publicaciones podrán incluir textos descriptivos, gráficos, fotografías y otros contenidos, siempre que no violen ninguna disposición de los presentes Términos y Condiciones o la Política de Publicación TCOMPRA. El bien o servicio ofrecido por el Usuario debe ser exactamente descrito en cuanto a sus condiciones y características relevantes. En el caso de que se incluya una fotografía, esta deberá corresponder específicamente al artículo que se ofrece, salvo que se trate de bienes o servicios que por su naturaleza no lo permitan.<br><br>
+													Se entiende que mediante la publicación de un bien o servicio en TCOMPRA, el Usuario tiene la intención y el derecho de vender el bien o servicio, o está facultado para ello por su titular y lo tiene disponible para su entrega inmediata.<br><br>
+													Los servicios de TCOMPRA son facturados mensualmente, que podrá ser renovado siempre y cuando el mismo Usuario lo solicite a través de TCOMPRA.<br><br>
+													TCOMPRA no interviene en la transacción realizada entre vendedores y compradores, por tanto no recibe comisión alguna, TCOMPRA se deslinda de toda responsabilidad sobre los resultados o controversias resultantes de una transacción al no intervenir en lo absoluto en la misma.<br><br>
+													En ningún caso TCOMPRA será responsable por lucro cesante, o por cualquier otro daño y/o perjuicio que haya podido sufrir el Usuario o terceros, debido a las operaciones realizadas o no realizadas por bienes y/o servicios anunciados a través de los portales de TCOMPRA.
+												</div>
+											</div>
+										</div>
+
+										<div class="card">
+											<div class="card-header" id="headingThree">
+												<h6 class="mb-0"><a role="button" href="#collapse8" data-toggle="collapse" data-target="#collapse8" aria-expanded="true">8. ENLACES DE TERCEROS</a></h6>
+											</div>
+											<div id="collapse8" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+												<div class="card-body">
+													En el supuesto de que en TCOMPRA se dispusieran enlaces o hipervínculos hacia otros sitios de Internet, TCOMPRA declara que no ejerce ningún tipo de control sobre dichos sitios y contenidos. En ningún caso TCOMPRA asumirá responsabilidad alguna por los contenidos de algún enlace perteneciente a una web ajena, ni garantizará la disponibilidad técnica, calidad, fiabilidad, exactitud, veracidad, validez y constitucionalidad de cualquier material o información contenida en cabeza de los hipervínculos u otros lugares de Internet.<br><br>
+													Estos enlaces se proporcionan únicamente para informar al Usuario sobre la existencia de otras fuentes de información sobre un tema concreto, y la inclusión de un enlace no implica la aprobación de la página web enlazada por parte de TCOMPRA.
+												</div>
+											</div>
+										</div>
+
+										<div class="card">
+											<div class="card-header" id="headingThree">
+												<h6 class="mb-0"><a role="button" href="#collapse9" data-toggle="collapse" data-target="#collapse9" aria-expanded="true">9. LIMITACIÓN DE RESPONSABILIDAD E INDEMNIDAD</a></h6>
+											</div>
+											<div id="collapse9" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+												<div class="card-body">
+													Salvo que así lo establezca la legislación aplicable de obligado cumplimiento, el uso que el Usuario haga de TCOMPRA o de todas las funcionalidades que TCOMPRA ofrece, incluyendo cualquier contenido, publicación o herramienta contenida en la misma, se ofrece “tal cual” y “según su disponibilidad” sin declaraciones o garantías de ningún tipo, tanto explícitas como implícitas, incluidas entre otras, las garantías de comerciabilidad, adecuación a un fin particular y no incumplimiento. SOLUCIONESONLINE no garantiza que TCOMPRA sea siempre seguro o esté libre de errores, ni que funcione siempre sin interrupciones, retrasos o imperfecciones.<br><br>
+													SOLUCIONESONLINE no se hace responsable de los posibles daños o perjuicios en TCOMPRA, que se puedan derivar de interferencias, omisiones, interrupciones, virus informáticos, averías o desconexiones en el funcionamiento operativo de este sistema electrónico, motivado por causas ajenas a TCOMPRA, de retrasos o bloqueos en el uso de este sistema electrónico causados por deficiencias o sobrecargas en el sistema de Internet o en otros sistemas electrónicos, así como también de daños que puedan ser causados por terceras personas mediante intromisiones ilegítimas fuera del control de SOLUCIONESONLINE.
+												</div>
+											</div>
+										</div>
+
+										<div class="card">
+											<div class="card-header" id="headingThree">
+												<h6 class="mb-0"><a role="button" href="#collapse10" data-toggle="collapse" data-target="#collapse10" aria-expanded="true">10. DATOS DE CARÁCTER PERSONAL</a></h6>
+											</div>
+											<div id="collapse10" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+												<div class="card-body">
+													Los distintos tratamientos de datos personales que TCOMPRA realiza a través del sitio, así como las finalidades de dichos tratamientos serán detallados específicamente en la Política de Privacidad de TCOMPRA a la que el Usuario podrá acceder a través del siguiente enlace: Política de Privacidad.
+												</div>
+											</div>
+										</div>
+
+										<div class="card">
+											<div class="card-header" id="headingThree">
+												<h6 class="mb-0"><a role="button" href="#collapse11" data-toggle="collapse" data-target="#collapse11" aria-expanded="true">11. COMUNICACIONES</a></h6>
+											</div>
+											<div id="collapse11" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+												<div class="card-body">
+													El Usuario acepta expresamente que la dirección de correo electrónico consignada en el formulario de registro será el medio de contacto oficial entre TCOMPRA y el Usuario, siendo absoluta responsabilidad de este último verificar que dicho correo electrónico esté siempre activo y funcional para poder recibir todas las comunicaciones procedentes de TCOMPRA.<br><br>
+													Los mensajes o comunicaciones de TCOMPRA a los Usuarios sólo pueden provenir de las páginas, mensajes de texto, correo electrónico y cuentas oficiales en redes sociales u otros medios. En caso se detectara que algún Usuario está enviando comunicaciones o realizando publicaciones en nombre de TCOMPRA, SOLUCIONESONLINE iniciará las acciones correctivas y legales pertinentes a fin de proteger al resto de Usuarios del de posibles riesgos de confusión.<br><br>
+													De otro lado, toda comunicación que el Usuario desee dirigir al Portal deberá realizarla a través de la siguiente dirección de correo electrónico, info@TCOMPRA.com
+												</div>
+											</div>
+										</div>
+
+										<div class="card">
+											<div class="card-header" id="headingThree">
+												<h6 class="mb-0"><a role="button" href="#collapse12" data-toggle="collapse" data-target="#collapse12" aria-expanded="true">12. FUERZA MAYOR</a></h6>
+											</div>
+											<div id="collapse12" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+												<div class="card-body">
+													TCOMPRA no será responsable por cualquier retraso o falla en el rendimiento o la interrupción en la prestación de los servicios que pueda resultar directa o indirectamente de cualquier causa o circunstancia más allá de su control razonable, incluyendo, pero sin limitarse a fallas en los equipos o las líneas de comunicación electrónica o mecánica, robo, errores del operador, clima severo, terremotos o desastres naturales, huelgas u otros problemas laborales, guerras, o restricciones gubernamentales.
+												</div>
+											</div>
+										</div>
+
+										<div class="card">
+											<div class="card-header" id="headingThree">
+												<h6 class="mb-0"><a role="button" href="#collapse13" data-toggle="collapse" data-target="#collapse13" aria-expanded="true">13. AUTORIDADES Y REQUERIMIENTOS LEGALES</a></h6>
+											</div>
+											<div id="collapse13" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+												<div class="card-body">
+													TCOMPRA coopera con las autoridades competentes y con terceros para garantizar el cumplimiento de las leyes en materia de protección de derechos de propiedad industrial e intelectual, prevención del fraude, protección al consumidor y otras materias.<br><br>
+													TCOMPRA podrá revelar la información personal de Usuarios de TCOMPRA bajo requerimiento de las autoridades judiciales o gubernamentales competentes, en la medida en que discrecionalmente lo entienda necesario, para efectos de investigaciones conducidas por ellas, cuando se trate de investigaciones de carácter penal o de fraude, o las relacionadas con piratería informática, la violación de derechos de autor, infracción de derechos de propiedad intelectual u otra actividad ilícita o ilegal que pueda exponer al Portal o a sus Usuarios a cualquier responsabilidad legal.<br><br>
+													Asimismo, TCOMPRA se reserva el derecho de comunicar información sobre sus Usuarios a otros Usuarios, a entidades o a terceros, cuando haya motivos suficientes para considerar que la actividad de un Usuario sea sospechosa de intentar o cometer un delito o intentar perjudicar a otras personas. Este derecho será utilizado por TCOMPRA a su entera discreción cuando lo considere apropiado o necesario para mantener la integridad y seguridad de TCOMPRA y la de sus Usuarios, para hacer cumplir los presentes Términos y Condiciones, y a efectos de cooperar con la ejecución y cumplimiento de la ley.
+												</div>
+											</div>
+										</div>
+
+										<div class="card">
+											<div class="card-header" id="headingThree">
+												<h6 class="mb-0"><a role="button" href="#collapse14" data-toggle="collapse" data-target="#collapse14" aria-expanded="true">14. LEY APLICABLE Y JURISDICCIÓN</a></h6>
+											</div>
+											<div id="collapse14" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+												<div class="card-body">
+													Los presentes Términos y Condiciones se rigen por la ley peruana y cualquier disputa que se produzca con relación a la validez, aplicación o interpretación de los mismos, incluyendo la Política de Privacidad, será resuelta en los tribunales del Perú.
+												</div>
+											</div>
+										</div>
+
+									</div>
+								</div>
+			
+							</div>
+						</div>
+						<div class="col-md-4 sticky-sidebar">
+							<div class="latest-post-right-sidebar">
+								<h2>App</h2>
+			
+								<img src="assets/images/app.jpg" class="img-fluid">
+							</div>
+			
+							<div class="latest-post-right-sidebar">
+								<h3>Como?</h3>
+			
+								<div class="media edufair-single-features edufair-single-features-1x wow fadeInDown" style="visibility: visible;">
+									<div class="media-body">
+										<h4 class="media-heading edufair-subtitle">¿Como Comprar?</h4>
+										<a href="#" class="" style="border: 2px solid;padding:  4px 10px;border-radius: 2px;">Ver</a>
+									</div>
+								</div>
+
+								<div class="media edufair-single-features edufair-single-features-5x wow fadeInDown" style="visibility: visible;">
+									<div class="media-body">
+										<h4 class="media-heading edufair-subtitle">¿Como Vender?</h4>
+										<a href="#" class="" style="border: 2px solid;padding:  4px 10px;border-radius: 2px;">Ver</a>
+									</div>
+								</div>
+
+								<div class="media edufair-single-features edufair-single-features-2x wow fadeInDown" style="visibility: visible;">
+									<div class="media-body">
+										<h4 class="media-heading edufair-subtitle">¿Necesitas Comprar?</h4>
+										<p style="color: #fff;margin-bottom: 15px;">Más de 10 mil proveedores en linea estan atentos a tus requerimientos de Bienes, Servicios y RRHH</p>
+										<a href="#" class="" style="border: 2px solid;padding:  4px 10px;border-radius: 2px;">Ver</a>
+									</div>
+								</div>
+
+								<div class="media edufair-single-features edufair-single-features-3x wow fadeInDown" style="visibility: visible;">
+									<div class="media-body">
+										<h4 class="media-heading edufair-subtitle">¿Buscas Trabajo?</h4>
+										<p style="color: #fff;margin-bottom: 0px;">Ingresa tu curriculum y encuentra trabajo <b>Gratis</b></p>
+										<i class="far fa-file-alt" style="display:  block;color:  #fff;padding: 15px 10px;font-size: 40px;"></i>
+										<a href="#" class="" style="border: 2px solid;padding:  4px 10px;border-radius: 2px;">Ingresar</a>
+									</div>
+								</div>
+
+							</div>
+			
+							<div class="latest-post-right-sidebar">
+								<h2>Publicidad</h2>
+			
+								<img src="assets/images/tcompra-suscripcion.jpg" class="img-fluid" style="margin-bottom: 15px;">
+									<a href="https://servicio.indecopi.gob.pe/appCPCBuscador/" target="indecopi"><img src="assets/images/tcompra-indecopi.jpg" class="img-fluid" style="margin-top:  10px;"></a>
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</div>
+
+			<div class="margin-bottom-large"></div>
+			
+		</div>
 

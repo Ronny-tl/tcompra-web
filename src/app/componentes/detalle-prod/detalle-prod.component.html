@@ -50,25 +50,30 @@
 
 				<div id="carousel-example-generic" class="carousel slide edufair-slide carousel-fade" data-ride="carousel">
 					<div class="carousel-inner edufair-inner single-inner" role="listbox">
+
+						<div class="header_detalles">
+							<div class="container">
+								<div class="row" style="margin: 0;">
+									<h2 class="titulo_st2">{{producto?.nombre}}</h2>
+									<ol class="breadcrumb edufair-single-breadcrumbs" style="width: 100%;margin: 0;">
+										<li class="breadcrumb-item"><a routerLink="/" routerLinkActive="active" style="opacity: 0.7;">Inicio</a></li>
+										<li *ngIf="tipoProducto==='1'" class="breadcrumb-item active"><a routerLink="/detalle-prod/{{tipoProducto}}/{{idProducto}}" routerLinkActive="active" style="opacity: 0.7;">Bienes</a></li>
+										<li *ngIf="tipoProducto==='2'" class="breadcrumb-item active"><a routerLink="/detalle-prod/{{tipoProducto}}/{{idProducto}}" routerLinkActive="active" style="opacity: 0.7;">Servicios</a></li>
+										<li *ngIf="tipoProducto==='3'" class="breadcrumb-item active"><a routerLink="/detalle-prod/{{tipoProducto}}/{{idProducto}}" routerLinkActive="active" style="opacity: 0.7;">Liquidación</a></li>
+										<li *ngIf="tipoProducto==='4'" class="breadcrumb-item active"><a routerLink="/detalle-prod/{{tipoProducto}}/{{idProducto}}" routerLinkActive="active" style="opacity: 0.7;">R.R.H.H.</a></li>
+										<li class="breadcrumb-item active"><a routerLink="/detalle-prod/tipoProducto/idProducto" routerLinkActive="active">{{producto?.nombre}}</a></li>
+									</ol>
+								</div>
+							</div>
+						</div>
+						
 						<div class="edufair-overlay">
 							<img *ngIf="tipoProducto==='1'" src="assets/images/slider/slider-01.jpg" alt="slide 1" class="edufair-slider-image edufair-single-image">
 							<img *ngIf="tipoProducto==='2'" src="assets/images/slider/slider-02.jpg" alt="slide 2" class="edufair-slider-image edufair-single-image">
 							<img *ngIf="tipoProducto==='3'" src="assets/images/slider/slider-03.jpg" alt="slide 3" class="edufair-slider-image edufair-single-image">
 							<img *ngIf="tipoProducto==='4'" src="assets/images/slider/slider-04.jpg" alt="slide 4" class="edufair-slider-image edufair-single-image">
-							<div class="carousel-caption edufair-caption edufair-single-caption">
-								<div class="container edufair-slider-text" style="top: 48%;left: -6.6%;position: absolute;">
-									<h2 style="white-space: nowrap;text-overflow: ellipsis;overflow: hidden;" >{{producto?.nombre}}</h2>
-									<ol class="breadcrumb edufair-single-breadcrumbs" style="width: 100%;">
-										<li class="breadcrumb-item"><a routerLink="/" routerLinkActive="active">Inicio</a></li>
-										<li *ngIf="tipoProducto==='1'" class="breadcrumb-item active"><a routerLink="/detalle-prod/{{tipoProducto}}/{{idProducto}}" routerLinkActive="active">Bienes</a></li>
-										<li *ngIf="tipoProducto==='2'" class="breadcrumb-item active"><a routerLink="/detalle-prod/{{tipoProducto}}/{{idProducto}}" routerLinkActive="active">Servicios</a></li>
-										<li *ngIf="tipoProducto==='3'" class="breadcrumb-item active"><a routerLink="/detalle-prod/{{tipoProducto}}/{{idProducto}}" routerLinkActive="active">Liquidación</a></li>
-										<li *ngIf="tipoProducto==='4'" class="breadcrumb-item active"><a routerLink="/detalle-prod/{{tipoProducto}}/{{idProducto}}" routerLinkActive="active">R.R.H.H.</a></li>
-										<li class="breadcrumb-item active"><a routerLink="/detalle-prod/tipoProducto/idProducto" routerLinkActive="active">{{producto?.nombre}}</a></li>
-									</ol>										
-								</div>
-							</div>				  
 						</div>
+
 					</div>
 				</div>
 
