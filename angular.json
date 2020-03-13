@@ -27,20 +27,21 @@
               
             ],
             "styles": [
-              "styles/css/bootstrap.min.css",
-              "styles/css/animate.css",
-              "styles/css/fakeLoader.css",
+              "styles/css/enjoyhint.css",
               "styles/css/responsive.css",
               "styles/css/style.css",
-              "styles/css/enjoyhint.css"
+              "styles/css/fakeLoader.css",
+              "styles/css/animate.css",
+              "styles/css/bootstrap.min.css"
             ],
             "scripts": [
-              "styles/js/jquery.min.js",
-              "styles/js/bootstrap.min.js",
-              "styles/js/fakeLoader.min.js",
-              "styles/js/jquery.counterup.min.js",
+              "styles/js/tc-scripts.js",
+              "styles/js/enjoyhint.min.js",
               "styles/js/custom.js",
-              "styles/js/enjoyhint.min.js"
+              "styles/js/jquery.counterup.min.js",
+              "styles/js/fakeLoader.min.js",
+              "styles/js/bootstrap.min.js",
+              "styles/js/jquery.min.js"
             ]
           },
           "configurations": {

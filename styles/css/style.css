@@ -578,7 +578,8 @@ a:active {
 	outline: 0;
 }
 .modal{
-	z-index: 999999;
+	z-index: 9999;
+	/* z-index: 999999; */
 }
 /*--------------------------------------------------------------
 ## Common CSS code
@@ -5827,7 +5828,8 @@ a.edufair-component-button:hover:before {
 .nuevas_toficaciones{
 	width: 22px;
     height: 22px;
-    background: #0b9a96;
+	background: #0b9a96;
+	color: #fff;
     position: absolute;
     top: -10px;
     margin-left: 12px;
@@ -5945,6 +5947,10 @@ a.edufair-component-button:hover:before {
 	color: #a11a70;
     background-color: #fcf6fb;
     border: none;
+}
+
+.table td, .table th {
+    vertical-align: middle;
 }
 
 .page-item.active .page-link {
